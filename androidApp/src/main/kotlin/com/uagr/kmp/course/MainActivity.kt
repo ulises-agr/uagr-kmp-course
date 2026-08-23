@@ -1,19 +1,27 @@
+/*
+ * MainActivity.kt
+ * Copyright (c) 2026. All rights reserved
+ */
 package com.uagr.kmp.course
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.fragment.app.FragmentActivity
+import com.uagr.kmp.course.presentation.controller.NavigationController
 
-class MainActivity : ComponentActivity() {
+class MainActivity : FragmentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = installSplashScreen()
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
-
+        splashScreen.setKeepOnScreenCondition { false }
         setContent {
-            App()
+            NavigationController()
         }
     }
 }
@@ -21,5 +29,5 @@ class MainActivity : ComponentActivity() {
 @Preview
 @Composable
 fun AppAndroidPreview() {
-    App()
+    NavigationController()
 }

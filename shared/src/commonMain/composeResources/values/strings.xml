@@ -1,0 +1,16 @@
+<resources>
+
+    <!-- None -->
+    <string name="example">Example</string>
+
+    <!-- Welcome -->
+    <string name="hello">¡Hello!</string>
+    <string name="explore_our_multiplatform_platform">Explore our multi platform</string>
+    <string name="go_to_login">Go to login</string>
+
+    <!-- Login -->
+    <string name="login">Login</string>
+    <string name="welcome_to_login_enter_your_credentials">Welcome to login enter your credentials</string>
+    <string name="go_back">Go back</string>
+
+</resources>
