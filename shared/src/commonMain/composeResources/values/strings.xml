@@ -12,5 +12,14 @@
     <string name="login">Login</string>
     <string name="welcome_to_login_enter_your_credentials">Welcome to login enter your credentials</string>
     <string name="go_back">Go back</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="email_example">user@gmail</string>
+    <string name="password_example">Password123</string>
+    <string name="email_empty">Email empty</string>
+    <string name="password_empty">Password empty</string>
+
+    <!-- Welcome -->
+    <string name="welcome">Welcome</string>
 
 </resources>
