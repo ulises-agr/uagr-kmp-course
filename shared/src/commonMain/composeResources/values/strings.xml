@@ -1,7 +1,14 @@
 <resources>
 
     <!-- None -->
+    <string name="idle">Idle</string>
     <string name="example">Example</string>
+
+    <!-- Error -->
+    <string name="email_arg">Email: %1$s</string>
+
+    <!-- Error -->
+    <string name="please_try_again_later">Something went wrong, please try again later</string>
 
     <!-- Welcome -->
     <string name="hello">¡Hello!</string>
@@ -18,8 +25,10 @@
     <string name="password_example">Password123</string>
     <string name="email_empty">Email empty</string>
     <string name="password_empty">Password empty</string>
+    <string name="warning">Warning</string>
+    <string name="accept">Accept</string>
 
-    <!-- Welcome -->
+    <!-- Dashboard -->
     <string name="welcome">Welcome</string>
 
 </resources>

@@ -24,10 +24,20 @@ lib-splashscreen = "1.2.0"
 lib-material = "1.14.0"
 lib-voyager = "2.2.21-1.10.3"
 lib-napier = "2.7.1"
+lib-koin = "4.2.2"
+lib-ktor = "3.5.2"
+lib-ktor-okhttp = "3.5.2"
+lib-ktor-darwin = "3.5.2"
+lib-ktor-auth = "3.5.2"
+lib-sqlite = "2.7.0"
+lib-okhttp-profiler = "1.1.1"
+lib-room = "2.8.4"
+lib-datastore = "1.2.1"
 # Plugins
 lib-agp = "9.2.1"
 lib-composeMultiplatform = "1.11.1"
 lib-kotlin = "2.4.10"
+lib-ksp = "2.3.10"
 # Test
 junit = "1.3.0"
 espressoCore = "3.7.0"
@@ -65,6 +75,31 @@ voyager-tab-navigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", 
 # Logs
 napier = { module = "io.github.aakira:napier", version.ref = "lib-napier" }
 
+# Koin
+koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "lib-koin" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "lib-koin" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "lib-koin" }
+
+# Ktor
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "lib-ktor" }
+ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "lib-ktor" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "lib-ktor" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "lib-ktor" }
+ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "lib-ktor-okhttp" }
+ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "lib-ktor-darwin" }
+ktor-auth = { module = "io.ktor:ktor-client-auth", version.ref = "lib-ktor-auth" }
+
+# Room
+androidx-sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "lib-sqlite" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "lib-room" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "lib-room" }
+
+# Okhttp
+okhttp-profiler = { module = "io.nerdythings:okhttp-profiler", version.ref = "lib-okhttp-profiler" }
+
+# Data store
+androidx-datastore = { module = "androidx.datastore:datastore-preferences", version.ref = "lib-datastore" }
+
 # Test
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "lib-kotlin" }
 junit = { module = "junit:junit", version.ref = "lib-junit" }
@@ -93,12 +128,36 @@ sharedUI-commons-libs = [
     'voyager-screenmodel',
     'voyager-transitions',
     'voyager-tab-navigator',
+    # Koin
+    'koin-core',
+    'koin-compose-viewmodel',
+    # Ktor
+    'ktor-client-core',
+    'ktor-client-logging',
+    'ktor-client-content-negotiation',
+    'ktor-serialization-kotlinx-json',
+    'ktor-auth',
+    # Okhttp
+    'okhttp-profiler',
+    # Room
+    'androidx-room-runtime',
+    'androidx-sqlite-bundled',
+    # Persistence
+    'androidx-datastore',
 ]
 sharedUI-android-libs = [
     'androidx-core-ktx',
     'androidx-appcompat',
     # Logs
     'napier',
+    # Koin Android
+    'koin-android',
+    # Ktor OkHttp
+    'ktor-client-okhttp',
+]
+sharedUI-ios-libs = [
+    # Ktor Darwin
+    'ktor-client-darwin',
 ]
 sharedUI-commonsTest-libs = [
     'kotlin-test',
@@ -109,6 +168,8 @@ androidApp-libs = [
     'androidx-splashscreen',
     # Logs
     'napier',
+    # Koin
+    'koin-android',
 ]
 
 [plugins]
@@ -118,3 +179,6 @@ composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "lib-compos
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "lib-kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "lib-kotlin" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "lib-kotlin" }
+androidx-room = { id = "androidx.room", version.ref = "lib-room" }
+kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "lib-kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "lib-ksp" }
