@@ -7,7 +7,7 @@ package com.uagr.kmp.course.data.local.datastore
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
-import com.uagr.kmp.course.utils.contant.Constants
+import com.uagr.kmp.course.util.constant.Constants
 import kotlinx.cinterop.ExperimentalForeignApi
 import okio.Path.Companion.toPath
 import platform.Foundation.NSApplicationSupportDirectory

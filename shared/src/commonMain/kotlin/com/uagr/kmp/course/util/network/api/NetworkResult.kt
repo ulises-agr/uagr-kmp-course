@@ -2,7 +2,7 @@
  * NetworkResult.kt
  * Copyright (c) 2026. All rights reserved
  */
-package com.uagr.kmp.course.utils.network.api
+package com.uagr.kmp.course.util.network.api
 
 sealed class NetworkResult<out T> {
     data class Success<T>(val response: T) : NetworkResult<T>()

@@ -12,9 +12,9 @@ import com.uagr.kmp.course.domain.usecase.login.ValidateLoginUseCase
 import com.uagr.kmp.course.domain.usecase.login.ValidationResult
 import com.uagr.kmp.course.domain.usecase.user.ClearAndInsertUserUseCase
 import com.uagr.kmp.course.domain.usecase.user.SaveUserTokenUseCase
-import com.uagr.kmp.course.utils.enums.StatusLoading
-import com.uagr.kmp.course.utils.network.NetworkClient
-import com.uagr.kmp.course.utils.network.api.NetworkResult
+import com.uagr.kmp.course.util.enums.StatusLoading
+import com.uagr.kmp.course.util.network.NetworkClient
+import com.uagr.kmp.course.util.network.api.NetworkResult
 import course.shared.generated.resources.Res
 import course.shared.generated.resources.email_empty
 import course.shared.generated.resources.password_empty

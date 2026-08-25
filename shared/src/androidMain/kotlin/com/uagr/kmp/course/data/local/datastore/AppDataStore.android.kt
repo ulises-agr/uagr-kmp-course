@@ -8,7 +8,7 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
-import com.uagr.kmp.course.utils.contant.Constants
+import com.uagr.kmp.course.util.constant.Constants
 import okio.Path.Companion.toPath
 import org.koin.mp.KoinPlatform.getKoin
 

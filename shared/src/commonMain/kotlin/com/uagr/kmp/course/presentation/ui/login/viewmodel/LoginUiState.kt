@@ -4,7 +4,7 @@
  */
 package com.uagr.kmp.course.presentation.ui.login.viewmodel
 
-import com.uagr.kmp.course.utils.enums.StatusLoading
+import com.uagr.kmp.course.util.enums.StatusLoading
 
 data class LoginUiState(
     val isLoading: StatusLoading = StatusLoading.DISMISS_LOADING,

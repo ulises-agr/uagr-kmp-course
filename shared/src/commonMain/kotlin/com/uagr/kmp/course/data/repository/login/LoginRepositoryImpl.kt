@@ -8,7 +8,7 @@ import com.uagr.kmp.course.data.network.datasource.login.LoginRemoteDataSource
 import com.uagr.kmp.course.domain.model.login.LoginCredentialsModel
 import com.uagr.kmp.course.domain.model.login.LoginDataModel
 import com.uagr.kmp.course.domain.repository.login.LoginRepository
-import com.uagr.kmp.course.utils.network.api.NetworkResult
+import com.uagr.kmp.course.util.network.api.NetworkResult
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

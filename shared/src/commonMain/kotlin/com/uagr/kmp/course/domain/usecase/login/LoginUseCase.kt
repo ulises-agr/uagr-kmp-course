@@ -4,7 +4,7 @@
  */
 package com.uagr.kmp.course.domain.usecase.login
 
-import com.uagr.kmp.course.utils.network.api.NetworkResult
+import com.uagr.kmp.course.util.network.api.NetworkResult
 import com.uagr.kmp.course.domain.model.login.LoginCredentialsModel
 import com.uagr.kmp.course.domain.model.login.LoginDataModel
 import com.uagr.kmp.course.domain.repository.login.LoginRepository

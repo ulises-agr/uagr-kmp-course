@@ -2,7 +2,7 @@
  * Animation.kt
  * Copyright (c) 2026. All rights reserved
  */
-package com.uagr.kmp.course.utils.animation
+package com.uagr.kmp.course.util.animation
 
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition

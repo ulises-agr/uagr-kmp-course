@@ -17,7 +17,7 @@ import com.uagr.kmp.course.presentation.component.loader.Loader
 import com.uagr.kmp.course.presentation.theme.AppTheme
 import com.uagr.kmp.course.presentation.ui.dashboard.viewmodel.DashboardUiEvent
 import com.uagr.kmp.course.presentation.ui.dashboard.viewmodel.DashboardViewModel
-import com.uagr.kmp.course.utils.animation.Animation
+import com.uagr.kmp.course.util.animation.Animation
 import course.shared.generated.resources.Res
 import course.shared.generated.resources.accept
 import course.shared.generated.resources.warning

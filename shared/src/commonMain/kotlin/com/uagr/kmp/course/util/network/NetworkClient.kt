@@ -2,7 +2,7 @@
  * NetworkClient.kt
  * Copyright (c) 2026. All rights reserved
  */
-package com.uagr.kmp.course.utils.network
+package com.uagr.kmp.course.util.network
 
 object NetworkClient {
     // Base url

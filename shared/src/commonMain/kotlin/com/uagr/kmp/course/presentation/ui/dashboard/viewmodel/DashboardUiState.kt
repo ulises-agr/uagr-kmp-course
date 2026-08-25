@@ -4,7 +4,7 @@
  */
 package com.uagr.kmp.course.presentation.ui.dashboard.viewmodel
 
-import com.uagr.kmp.course.utils.enums.StatusLoading
+import com.uagr.kmp.course.util.enums.StatusLoading
 
 data class DashboardUiState(
     val isLoading: StatusLoading = StatusLoading.DISMISS_LOADING,

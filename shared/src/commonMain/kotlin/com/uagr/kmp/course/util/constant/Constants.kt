@@ -2,7 +2,7 @@
  * Constants.kt
  * Copyright (c) 2026. All rights reserved
  */
-package com.uagr.kmp.course.utils.contant
+package com.uagr.kmp.course.util.constant
 
 object Constants {
     const val REQUEST_TIMEOUT_MILLIS = 15000L

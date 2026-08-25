@@ -9,8 +9,8 @@ import com.uagr.kmp.course.domain.mappers.login.toDomain
 import com.uagr.kmp.course.domain.mappers.login.toRequest
 import com.uagr.kmp.course.domain.model.login.LoginCredentialsModel
 import com.uagr.kmp.course.domain.model.login.LoginDataModel
-import com.uagr.kmp.course.utils.network.api.NetworkResult
-import com.uagr.kmp.course.utils.network.api.safeApiCall
+import com.uagr.kmp.course.util.network.api.NetworkResult
+import com.uagr.kmp.course.util.network.api.safeApiCall
 import io.ktor.client.HttpClient
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody

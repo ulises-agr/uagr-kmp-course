@@ -144,6 +144,8 @@ sharedUI-commons-libs = [
     'androidx-sqlite-bundled',
     # Persistence
     'androidx-datastore',
+    # Logs
+    'napier',
 ]
 sharedUI-android-libs = [
     'androidx-core-ktx',

@@ -5,8 +5,10 @@
 package com.uagr.kmp.course.data.network.client
 
 import com.uagr.kmp.course.data.local.datastore.AppDataStore
-import com.uagr.kmp.course.utils.contant.Constants
-import com.uagr.kmp.course.utils.network.NetworkClient
+import com.uagr.kmp.course.util.constant.Constants
+import com.uagr.kmp.course.util.logging.logCustom
+import com.uagr.kmp.course.util.logs.TypeLog
+import com.uagr.kmp.course.util.network.NetworkClient
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.darwin.Darwin
 import io.ktor.client.plugins.HttpTimeout
@@ -16,6 +18,7 @@ import io.ktor.client.plugins.auth.providers.bearer
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.http.ContentType
 import io.ktor.serialization.kotlinx.json.json
@@ -48,6 +51,15 @@ actual fun createHttpClient(appDataStore: AppDataStore): HttpClient = HttpClient
 
     install(plugin = Logging) {
         level = LogLevel.BODY
+        logger = object : Logger {
+            override fun log(message: String) {
+                logCustom(
+                    message = message,
+                    tag = Constants.SERVICES_IOS_LOG,
+                    typeLog = TypeLog.NETWORK,
+                )
+            }
+        }
     }
 
     install(plugin = ContentNegotiation) {

@@ -2,7 +2,7 @@
  * NetworkApiHelper.kt
  * Copyright (c) 2026. All rights reserved
  */
-package com.uagr.kmp.course.utils.network.api
+package com.uagr.kmp.course.util.network.api
 
 import com.uagr.kmp.course.data.network.model.response.base.BaseResponse
 import io.ktor.client.call.body

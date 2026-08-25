@@ -1,8 +1,10 @@
 import UIKit
 import SwiftUI
+import PulseUI
 import Shared
 
 struct ComposeView: UIViewControllerRepresentable {
+    
     func makeUIViewController(context: Self.Context) -> UIViewController {
         MainViewControllerKt.MainViewController()
     }
@@ -11,8 +13,33 @@ struct ComposeView: UIViewControllerRepresentable {
 }
 
 struct ContentView: View {
+    @State private var showPulse = false
+    
     var body: some View {
-        ComposeView()
-            .ignoresSafeArea()
+        ZStack {
+            ComposeView().ignoresSafeArea()
+            #if DEBUG
+            VStack {
+                Button(action: { showPulse = true }) {
+                    Text("⚙️ Show logs")
+                        .padding(10)
+                        .background(.ultraThinMaterial)
+                        .cornerRadius(8)
+                }.padding(.bottom, 50)
+                Spacer()
+            }
+            #endif
+        }
+        .sheet(isPresented: $showPulse) {
+            NavigationView {
+                ConsoleView()
+                    .navigationTitle("Logs console")
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button("Close") { showPulse = false }
+                        }
+                    }
+            }
+        }
     }
 }

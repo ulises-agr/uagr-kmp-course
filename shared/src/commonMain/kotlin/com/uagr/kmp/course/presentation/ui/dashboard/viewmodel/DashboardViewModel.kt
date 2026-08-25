@@ -7,7 +7,7 @@ package com.uagr.kmp.course.presentation.ui.dashboard.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uagr.kmp.course.domain.usecase.user.GetFirstUserUseCase
-import com.uagr.kmp.course.utils.enums.StatusLoading
+import com.uagr.kmp.course.util.enums.StatusLoading
 import course.shared.generated.resources.Res
 import course.shared.generated.resources.please_try_again_later
 import kotlinx.coroutines.flow.MutableStateFlow
