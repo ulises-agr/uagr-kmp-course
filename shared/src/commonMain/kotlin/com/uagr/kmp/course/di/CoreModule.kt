@@ -7,7 +7,6 @@ package com.uagr.kmp.course.di
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import com.uagr.kmp.course.data.local.datasource.user.UsersLocalDataSourceImpl
-import com.kmp.presentation.welcome.viewmodel.WelcomeViewModel
 import com.uagr.kmp.course.data.local.database.AppDatabase
 import com.uagr.kmp.course.data.local.database.dao.users.UsersDao
 import com.uagr.kmp.course.data.local.database.getDatabaseBuilder
@@ -83,7 +82,6 @@ val useCaseModule = module {
 }
 
 val viewmodelModule = module {
-    viewModelOf(constructor = ::WelcomeViewModel)
     viewModelOf(constructor = ::LoginViewModel)
     viewModelOf(constructor = ::DashboardViewModel)
 }
