@@ -17,7 +17,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.uagr.kmp.course.component.button.ButtonPrimary
 import com.uagr.kmp.course.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.component.text.TextBigBold
 import com.uagr.kmp.course.component.text.TextMedium
@@ -25,14 +24,11 @@ import com.uagr.kmp.course.theme.AppTheme
 import com.uagr.kmp.course.theme.Dimens
 import course.shared.generated.resources.Res
 import course.shared.generated.resources.explore_our_multiplatform_platform
-import course.shared.generated.resources.go_to_login
 import course.shared.generated.resources.hello
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun WelcomeContainer(
-    onNavigateToLogin: () -> Unit = {},
-) {
+fun WelcomeContainer() {
     val scrollState = rememberScrollState()
 
     Column(
@@ -55,13 +51,6 @@ fun WelcomeContainer(
             modifier = Modifier.fillMaxWidth(),
             color = AppTheme.colors.text.black,
             text = stringResource(Res.string.explore_our_multiplatform_platform),
-        )
-        ButtonPrimary(
-            modifier = Modifier.padding(start = Dimens.padding16, end = Dimens.padding16),
-            backgroundColor = AppTheme.colors.primary,
-            textColors = AppTheme.colors.text.white,
-            text = Res.string.go_to_login,
-            onClick = onNavigateToLogin,
         )
         Spacer(modifier = Modifier.height(Dimens.height16))
     }
