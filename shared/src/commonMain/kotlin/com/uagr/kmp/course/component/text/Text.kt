@@ -95,7 +95,7 @@ fun TextSmall(
         modifier = modifier,
         text = text,
         textAlign = textAlign,
-        style = MaterialTheme.typography.bodySmall.copy(
+        style = MaterialTheme.typography.titleSmall.copy(
             fontSize = fontSize,
             fontWeight = FontWeight.Normal,
         ),
@@ -115,7 +115,7 @@ fun TextSmallBold(
         modifier = modifier,
         text = text,
         textAlign = textAlign,
-        style = MaterialTheme.typography.bodySmall.copy(
+        style = MaterialTheme.typography.titleSmall.copy(
             fontSize = fontSize,
             fontWeight = FontWeight.Bold,
         ),
@@ -155,7 +155,7 @@ fun TextNormalBold(
         modifier = modifier,
         text = text,
         textAlign = textAlign,
-        style = MaterialTheme.typography.bodySmall.copy(
+        style = MaterialTheme.typography.titleMedium.copy(
             fontSize = fontSize,
             fontWeight = FontWeight.Bold,
         ),
@@ -175,7 +175,7 @@ fun TextMedium(
         modifier = modifier,
         text = text,
         textAlign = textAlign,
-        style = MaterialTheme.typography.bodySmall.copy(
+        style = MaterialTheme.typography.titleMedium.copy(
             fontSize = fontSize,
             fontWeight = FontWeight.Normal,
         ),
@@ -215,7 +215,7 @@ fun TextBig(
         modifier = modifier,
         text = text,
         textAlign = textAlign,
-        style = MaterialTheme.typography.bodySmall.copy(
+        style = MaterialTheme.typography.titleLarge.copy(
             fontSize = fontSize,
             fontWeight = FontWeight.Normal,
         ),
@@ -235,7 +235,7 @@ fun TextBigBold(
         modifier = modifier,
         text = text,
         textAlign = textAlign,
-        style = MaterialTheme.typography.bodySmall.copy(
+        style = MaterialTheme.typography.titleLarge.copy(
             fontSize = fontSize,
             fontWeight = FontWeight.Bold,
         ),
