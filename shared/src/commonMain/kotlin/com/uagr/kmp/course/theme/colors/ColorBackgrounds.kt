@@ -9,6 +9,8 @@ import androidx.compose.ui.graphics.Color
 
 @Immutable
 data class ColorBackgrounds(
+    val backgroundColor : Color = Color.Unspecified,
+    val transparentBlackBackground : Color = Color.Unspecified,
     val black: Color = Color.Unspecified,
     val white: Color = Color.Unspecified,
     val yellow: Color = Color.Unspecified,

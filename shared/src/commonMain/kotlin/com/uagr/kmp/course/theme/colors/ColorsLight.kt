@@ -53,11 +53,22 @@ val statusSuccessContainerLight = Color(0xFFEBF8F3)
 // --- Light Texts Colors ---
 val textBlackLight = Color(0xFF000000)
 val textWhiteLight = Color(0xFFFFFFFF)
+val textDisableLight = Color(0xFF393939)
 val textLinkLight = Color(0xFF1470D1)
+val textSubtitleCardLight = Color(0xFF6C6C6C)
+// --- Light Buttons Colors  ---
+val buttonEnabledLight = Color(0xFFDA291C)
+val buttonDisabledLight = Color(0xFFE66E6E)
+val buttonContentEnabledLight = Color(0xFFFFFFFF)
+val buttonContentDisabledLight = Color(0xFF424848)
 // --- Dark Backgrounds Colors ---
+val backgroundColorLight = Color(0xFFFFFFFF)
+val transparentLightBackground = Color(0x66000000)
 val backgroundBlackLight = Color(0xFF000000)
 val backgroundWhiteLight = Color(0xFFFFFFFF)
 val backgroundYellowLight = Color(0xFFFFB700)
+// --- Light Buttons Colors  ---
+val cardDividerLight = Color(0xFFB9B9B9)
 
 // --- Light color group ---
 val lightModeAppColors = AppColors(
@@ -109,9 +120,25 @@ val lightModeAppColors = AppColors(
     text = ColorTexts(
         black = textBlackLight,
         white = textWhiteLight,
+        textDisabled = textDisableLight,
         link = textLinkLight,
+        cardsTitle = textBlackLight,
+        cardsSubtitle = textSubtitleCardLight,
+    ),
+    button = ColorButton(
+        enable = buttonEnabledLight,
+        disable = buttonDisabledLight,
+        contentEnabled = buttonContentEnabledLight,
+        contentDisabled = buttonContentDisabledLight,
+    ),
+    cards = ColorCards(
+        cardDivider = cardDividerLight,
+        cardsTitle = textBlackLight,
+        cardsSubtitle = textSubtitleCardLight,
     ),
     backgrounds = ColorBackgrounds(
+        backgroundColor = backgroundColorLight,
+        transparentBlackBackground = transparentLightBackground,
         black = backgroundBlackLight,
         white = backgroundWhiteLight,
         yellow = backgroundYellowLight,

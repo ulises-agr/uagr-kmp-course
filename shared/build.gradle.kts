@@ -41,6 +41,8 @@ kotlin {
         commonMain.dependencies {
             // Bundle
             implementation(dependencyNotation = libs.bundles.sharedUI.commons.libs)
+            // Bundle
+            implementation(dependencyNotation = libs.bundles.sharedLogic.commons.libs)
         }
         // Android
         androidMain.dependencies {

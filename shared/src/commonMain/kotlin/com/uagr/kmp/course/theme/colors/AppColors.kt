@@ -28,7 +28,7 @@ data class AppColors(
     val onError: Color = Color.Unspecified,
     val errorContainer: Color = Color.Unspecified,
     val onErrorContainer: Color = Color.Unspecified,
-    val background: Color = Color.Unspecified,
+    val background: Color = Color.White,
     val onBackground: Color = Color.Unspecified,
     val surface: Color = Color.Unspecified,
     val onSurface: Color = Color.Unspecified,
@@ -49,7 +49,9 @@ data class AppColors(
     val surfaceContainerHighest: Color = Color.Unspecified,
     val status: ColorStatus = ColorStatus(),
     val text: ColorTexts = ColorTexts(),
+    val button: ColorButton = ColorButton(),
     val backgrounds: ColorBackgrounds = ColorBackgrounds(),
+    val cards: ColorCards = ColorCards(),
 ) {
     fun asMaterialColorScheme(isDark: Boolean): ColorScheme =
         if (isDark) {

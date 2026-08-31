@@ -24,6 +24,8 @@ lib-splashscreen = "1.2.0"
 lib-material = "1.14.0"
 lib-voyager = "2.2.21-1.10.3"
 lib-napier = "2.7.1"
+lib-koin = "4.2.2"
+lib-ktoast = "1.0.5"
 # Plugins
 lib-agp = "9.2.1"
 lib-composeMultiplatform = "1.11.1"
@@ -62,6 +64,14 @@ voyager-screenmodel = { module = "cafe.adriel.voyager:voyager-screenmodel", vers
 voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "lib-voyager" }
 voyager-tab-navigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "lib-voyager" }
 
+# Koin
+koin-compose-viewmodel  = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "lib-koin" }
+koin-core               = { module = "io.insert-koin:koin-core", version.ref = "lib-koin" }
+koin-android            = { module = "io.insert-koin:koin-android", version.ref = "lib-koin" }
+
+# KToast
+k-toast = { module = "com.tarifchakder:ktoast", version.ref = "lib-ktoast" }
+
 # Logs
 napier = { module = "io.github.aakira:napier", version.ref = "lib-napier" }
 
@@ -93,7 +103,17 @@ sharedUI-commons-libs = [
     'voyager-screenmodel',
     'voyager-transitions',
     'voyager-tab-navigator',
+    # DI Compose
+    'koin-compose-viewmodel',
+    # KToast
+    'k-toast',
 ]
+
+sharedLogic-commons-libs = [
+    # DI Core
+    'koin-core',
+]
+
 sharedUI-android-libs = [
     'androidx-core-ktx',
     'androidx-appcompat',
@@ -109,6 +129,8 @@ androidApp-libs = [
     'androidx-splashscreen',
     # Logs
     'napier',
+    # Koin
+    'koin-android',
 ]
 
 [plugins]

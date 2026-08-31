@@ -51,13 +51,24 @@ val statusInfoContainerDark = Color(0xFF1E3A8A)
 val statusSuccessDark = Color(0xFF34D399)
 val statusSuccessContainerDark = Color(0xFF064E3B)
 // --- Dark Texts Colors ---
-val textBlackDark = Color(0xFF000000)
+val textBlackDark = Color(0xFFFFFFFF)
 val textWhiteDark = Color(0xFFFFFFFF)
+val textDisableDark = Color(0xFF393939)
+val textSubtitleCardDark = Color(0xFF546161)
 val textLinkDark = Color(0xFF83CEF6)
+// --- Dark Buttons Colors  ---
+val buttonEnabledDark = Color(0xFF000000)
+val buttonDisabledDark = Color(0xFF393939)
+val buttonContentEnabledDark = Color(0xFFFFFFFF)
+val buttonContentDisabledDark = Color(0xFF424848)
 // --- Dark Backgrounds Colors ---
+val backgroundColorDark = Color(0xFF424848)
+val transparentBlackBackground = Color(0x66000000)
 val backgroundBlackDark = Color(0xFF000000)
 val backgroundWhiteDark = Color(0xFFFFFFFF)
 val backgroundYellowDark = Color(0xFFFFB700)
+// --- Light Buttons Colors  ---
+val cardDividerDark = Color(0xFF424848)
 
 // --- Dark color group ---
 val darkModeAppColors = AppColors(
@@ -109,9 +120,25 @@ val darkModeAppColors = AppColors(
     text = ColorTexts(
         black = textBlackDark,
         white = textWhiteDark,
+        textDisabled = textDisableDark,
         link = textLinkDark,
+        cardsTitle = textBlackDark,
+        cardsSubtitle = textSubtitleCardDark,
+    ),
+    button = ColorButton(
+        enable = buttonEnabledDark,
+        disable = buttonDisabledDark,
+        contentEnabled = buttonContentEnabledDark,
+        contentDisabled = buttonContentDisabledDark,
+    ),
+    cards = ColorCards(
+        cardDivider = cardDividerDark,
+        cardsTitle = textBlackDark,
+        cardsSubtitle = textSubtitleCardDark,
     ),
     backgrounds = ColorBackgrounds(
+        backgroundColor = backgroundColorDark,
+        transparentBlackBackground = transparentBlackBackground,
         black = backgroundBlackDark,
         white = backgroundWhiteDark,
         yellow = backgroundYellowDark,

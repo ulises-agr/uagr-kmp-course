@@ -8,11 +8,8 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
 
 @Immutable
-data class ColorTexts(
-    val black: Color = Color.Unspecified,
-    val white: Color = Color.Unspecified,
+data class ColorCards(
     val cardsTitle: Color = Color.Unspecified,
     val cardsSubtitle: Color = Color.Unspecified,
-    val textDisabled: Color = Color.Unspecified,
-    val link: Color = Color.Unspecified,
+    val cardDivider: Color = Color.Unspecified,
 )

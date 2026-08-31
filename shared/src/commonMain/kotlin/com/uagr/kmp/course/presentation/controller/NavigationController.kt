@@ -6,7 +6,7 @@ package com.uagr.kmp.course.presentation.controller
 
 import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.navigator.Navigator
-import cafe.adriel.voyager.transitions.ScaleTransition
+import cafe.adriel.voyager.transitions.SlideTransition
 import com.uagr.kmp.course.presentation.welcome.navigation.WelcomeScreenInstance
 import com.uagr.kmp.course.theme.AppTheme
 
@@ -14,7 +14,7 @@ import com.uagr.kmp.course.theme.AppTheme
 fun NavigationController() {
     AppTheme {
         Navigator(screen = WelcomeScreenInstance) { navigator ->
-            ScaleTransition(navigator)
+            SlideTransition(navigator)
         }
     }
 }

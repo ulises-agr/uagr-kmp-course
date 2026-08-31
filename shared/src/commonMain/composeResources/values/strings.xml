@@ -21,5 +21,15 @@
 
     <!-- Welcome -->
     <string name="welcome">Welcome</string>
+    <string name="welcomeButton">Continuar</string>
+
+    <!--  Card -->
+    <string name="cardTitle">Internet Full</string>
+    <string name="cardSubtitle">Paquete: Ilimitado</string>
+    <string name="cardQuantity">508</string>
+    <string name="cardQuantityUnit">MB</string>
+    <string name="cardUsed">Usados</string>
+    <string name="cardUntilDate">Renueva en 27 Días / 5 Abril - 4 Mayo</string>
+    <string name="cardButton">Activar Paquete</string>
 
 </resources>
