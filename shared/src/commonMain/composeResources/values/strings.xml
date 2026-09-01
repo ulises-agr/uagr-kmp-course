@@ -22,4 +22,7 @@
     <!-- Welcome -->
     <string name="welcome">Welcome</string>
 
+    <!-- Card -->
+    <string name="activar_paquete">Activar paquete</string>
+
 </resources>
