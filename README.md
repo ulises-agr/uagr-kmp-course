@@ -21,4 +21,36 @@ Use the run configurations provided by the run widget in your IDE's toolbar. You
 
 ---
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+com.uagr.kmp.course/
+│
+├── core/                       # Código global reutilizable (Cross-cutting concerns)
+│   ├── network/                # Ktor client, DTOs compartidos, Network Result wrappers, Interceptors, Serializadores JSON, Headers.
+│   ├── database/               # Room / SQLDelight, Drivers, Database Builder
+│   ├── datastore/              # Preferences / Key-Value storage
+│   ├── designsystem/           # UI reutilizable base (Theme, Color, Type, Atomic Components) (Botones custom, TopBars, Spinners de carga)
+│   └── model/                  # Modelos de datos globales / Enums comunes
+│
+├── data/                       # Repositorios globales o compartidos entre varias features
+│   └── repository/             # Ej. UserRepositoryImpl.kt
+│
+├── feature/                    # Pantallado o flujos de usuario aislados (logica de UI)
+│   ├── auth/                   # Ejemplo de Feature: Login / Registro
+│   │   ├── data/               # AuthRepositoryImpl, mappers y datasources específicos de Auth
+│   │   ├── domain/             # AuthUseCase, AuthModel
+│   │   └── ui/                 # AuthScreen.kt, AuthViewModel.kt, AuthState.kt (mantener la estructura estándar de Compose UDF -> State, Event, Effect y viewModel)
+│   │
+│   └── home/                   # Ejemplo de Feature: Home / Dashboard
+│       ├── data/
+│       ├── domain/
+│       └── ui/
+│           ├── components/
+│           ├── model/
+│           ├── state/
+│           ├── viewmodel/
+│           └── AuthScreen.kt       # En lugar de 'activity'
+│
+├── di/                         # Inyección de dependencias (Koin / Hilt / Metro)
+│   └── AppModule.kt            # Módulos de Koin: networkModule, databaseModule, featureModules
+│
+└── App.kt                      # Entry point de Compose Multiplatform (NavHost base)
+
