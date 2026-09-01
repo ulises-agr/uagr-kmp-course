@@ -58,6 +58,7 @@ val textLinkDark = Color(0xFF83CEF6)
 val backgroundBlackDark = Color(0xFF000000)
 val backgroundWhiteDark = Color(0xFFFFFFFF)
 val backgroundYellowDark = Color(0xFFFFB700)
+val backgroundBlueDark = Color(0xFF0048FF)
 
 // --- Dark color group ---
 val darkModeAppColors = AppColors(
@@ -115,5 +116,6 @@ val darkModeAppColors = AppColors(
         black = backgroundBlackDark,
         white = backgroundWhiteDark,
         yellow = backgroundYellowDark,
+        blue = backgroundBlueDark,
     ),
 )

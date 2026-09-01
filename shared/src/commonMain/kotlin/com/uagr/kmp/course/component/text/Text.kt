@@ -22,6 +22,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withLink
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
+import com.uagr.kmp.course.theme.AppTheme
 import com.uagr.kmp.course.theme.Dimens
 import course.shared.generated.resources.Res
 import course.shared.generated.resources.example
@@ -297,53 +298,53 @@ private fun TextPreview() {
     ) {
         // TextSmallExtra
         TextSmallExtra(
-            color = Color.Black,
+            color = AppTheme.colors.backgrounds.black,
             text = stringResource(Res.string.example),
         )
         TextSmallExtraBold(
-            color = Color.Black,
+            color = AppTheme.colors.backgrounds.black,
             text = stringResource(Res.string.example),
         )
         // TextSmall
         TextSmall(
-            color = Color.Black,
+            color = AppTheme.colors.backgrounds.black,
             text = stringResource(Res.string.example),
         )
         TextSmallBold(
-            color = Color.Black,
+            color = AppTheme.colors.backgrounds.black,
             text = stringResource(Res.string.example),
         )
         // TextNormal
         TextNormal(
-            color = Color.Black,
+            color = AppTheme.colors.backgrounds.black,
             text = stringResource(Res.string.example),
         )
         TextNormalBold(
-            color = Color.Black,
+            color = AppTheme.colors.backgrounds.black,
             text = stringResource(Res.string.example),
         )
         // TextMedium
         TextMedium(
-            color = Color.Black,
+            color = AppTheme.colors.backgrounds.black,
             text = stringResource(Res.string.example),
         )
         TextMediumBold(
-            color = Color.Black,
+            color = AppTheme.colors.backgrounds.black,
             text = stringResource(Res.string.example),
         )
         // TextBig
         TextBig(
-            color = Color.Black,
+            color = AppTheme.colors.backgrounds.black,
             text = stringResource(Res.string.example),
         )
         TextBigBold(
-            color = Color.Black,
+            color = AppTheme.colors.backgrounds.black,
             text = stringResource(Res.string.example),
         )
         // TextUrlLink
         TextUrlLink(
-            textColor = Color.Black,
-            linkColor = Color.Blue,
+            textColor = AppTheme.colors.backgrounds.black,
+            linkColor = AppTheme.colors.backgrounds.blue,
             text = stringResource(Res.string.example),
             linkText = stringResource(Res.string.example),
             url = stringResource(Res.string.example),

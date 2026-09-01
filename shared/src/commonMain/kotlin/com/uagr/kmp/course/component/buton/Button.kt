@@ -31,6 +31,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import com.uagr.kmp.course.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.component.text.TextNormalBold
+import com.uagr.kmp.course.theme.AppTheme
 import com.uagr.kmp.course.theme.Dimens
 import course.shared.generated.resources.Res
 import course.shared.generated.resources.activar_paquete
@@ -100,7 +101,7 @@ fun CircularIconButtonCustom(
 }
 
 @Preview(
-    showBackground = true
+    showBackground = true,
 )
 @Composable
 private fun ButtonCustomPreview() {
@@ -109,18 +110,18 @@ private fun ButtonCustomPreview() {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(all = Dimens.padding16),
-            verticalArrangement = Arrangement.spacedBy(Dimens.padding16)
+            verticalArrangement = Arrangement.spacedBy(Dimens.padding16),
         ) {
             ButtonCustom(
-                backgroundButton = Color.Red,
-                textColor = Color.White,
+                backgroundButton = AppTheme.colors.primary,
+                textColor = AppTheme.colors.backgrounds.white,
                 text = stringResource(Res.string.activar_paquete),
             )
             CircularIconButtonCustom(
                 backgroundButton = Color.Transparent,
-                borderColor = Color.Red,
-                iconColor = Color.Red,
-                icon = painterResource(Res.drawable.ic_example)
+                borderColor = AppTheme.colors.primary,
+                iconColor = AppTheme.colors.primary,
+                icon = painterResource(Res.drawable.ic_example),
             )
         }
     }
