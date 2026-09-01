@@ -70,7 +70,7 @@ private fun SimpleCardPreview() {
                         color = AppTheme.colors.backgrounds.black,
                         text = stringResource(Res.string.example),
                     )
-                }
+                },
             )
         }
     }
