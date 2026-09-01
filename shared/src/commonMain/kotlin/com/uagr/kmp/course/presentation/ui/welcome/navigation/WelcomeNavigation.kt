@@ -6,11 +6,19 @@ package com.uagr.kmp.course.presentation.ui.welcome.navigation
 
 import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
+import com.uagr.kmp.course.presentation.ui.packages.navigation.PackagesScreenInstance
 import com.uagr.kmp.course.presentation.ui.welcome.ui.WelcomeScreen
 
 data object WelcomeScreenInstance : Screen {
     @Composable
     override fun Content() {
-        WelcomeScreen()
+        val navigator = LocalNavigator.currentOrThrow
+        WelcomeScreen(
+            navigateToPackages = {
+                navigator.push(item = PackagesScreenInstance)
+            },
+        )
     }
 }

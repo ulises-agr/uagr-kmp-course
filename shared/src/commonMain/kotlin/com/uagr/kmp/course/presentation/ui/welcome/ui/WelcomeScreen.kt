@@ -10,9 +10,13 @@ import com.uagr.kmp.course.presentation.component.container.SafeScreenContainer
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 
 @Composable
-fun WelcomeScreen() {
+fun WelcomeScreen(
+    navigateToPackages: () -> Unit = {},
+) {
     SafeScreenContainer {
-        WelcomeContainer()
+        WelcomeContainer(
+            navigateToPackages = navigateToPackages,
+        )
     }
 }
 

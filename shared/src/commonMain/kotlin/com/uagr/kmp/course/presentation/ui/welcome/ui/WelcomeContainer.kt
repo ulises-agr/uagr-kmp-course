@@ -19,16 +19,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.uagr.kmp.course.component.text.TextBigBold
 import com.uagr.kmp.course.component.text.TextMedium
+import com.uagr.kmp.course.presentation.component.buton.ButtonCustom
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.presentation.theme.AppTheme
 import com.uagr.kmp.course.presentation.theme.Dimens
 import course.shared.generated.resources.Res
+import course.shared.generated.resources.example
 import course.shared.generated.resources.explore_our_multiplatform_platform
 import course.shared.generated.resources.hello
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun WelcomeContainer() {
+fun WelcomeContainer(
+    navigateToPackages: () -> Unit = {},
+) {
     val scrollState = rememberScrollState()
 
     Column(
@@ -53,6 +57,13 @@ fun WelcomeContainer() {
             text = stringResource(Res.string.explore_our_multiplatform_platform),
         )
         Spacer(modifier = Modifier.height(Dimens.height16))
+        ButtonCustom(
+            onClick = navigateToPackages,
+            modifier = Modifier.fillMaxWidth(),
+            backgroundButton = AppTheme.colors.primary,
+            textColor = AppTheme.colors.backgrounds.white,
+            text = stringResource(Res.string.example),
+        )
     }
 }
 
