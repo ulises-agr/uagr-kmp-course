@@ -46,7 +46,7 @@ fun ButtonCustom(
     backgroundButton: Color = Color.Black,
     height: Dp = Dimens.height40,
     enabled: Boolean = true,
-    shape: Shape = RoundedCornerShape(size = Dimens.corner12),
+    shape: Shape = RoundedCornerShape(size = Dimens.corner20),
     textColor: Color = Color.White,
     text: String = "",
 ) {

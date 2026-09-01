@@ -75,6 +75,7 @@ object Dimens {
     val corner8: Dp = 8.dp
     val corner12: Dp = 12.dp
     val corner16: Dp = 16.dp
+    val corner20: Dp = 24.dp
     val corner24: Dp = 24.dp
     val corner28: Dp = 28.dp
     val corner32: Dp = 32.dp
