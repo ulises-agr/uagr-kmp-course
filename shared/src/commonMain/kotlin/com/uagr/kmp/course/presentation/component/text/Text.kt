@@ -2,13 +2,12 @@
  * Text.kt
  * Copyright (c) 2026. All rights reserved
  */
-package com.uagr.kmp.course.component.text
+package com.uagr.kmp.course.presentation.component.text
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -56,7 +55,7 @@ fun TextSmallExtra(
         modifier = modifier,
         text = text,
         textAlign = textAlign,
-        style = MaterialTheme.typography.bodySmall.copy(
+        style = AppTheme.typography.bodyExtraSmall.copy(
             fontSize = fontSize,
             fontWeight = FontWeight.Normal,
         ),
@@ -76,7 +75,7 @@ fun TextSmallExtraBold(
         modifier = modifier,
         text = text,
         textAlign = textAlign,
-        style = MaterialTheme.typography.bodySmall.copy(
+        style = AppTheme.typography.bodyExtraSmall.copy(
             fontSize = fontSize,
             fontWeight = FontWeight.Bold,
         ),
@@ -96,7 +95,7 @@ fun TextSmall(
         modifier = modifier,
         text = text,
         textAlign = textAlign,
-        style = MaterialTheme.typography.titleSmall.copy(
+        style = AppTheme.typography.bodySmall.copy(
             fontSize = fontSize,
             fontWeight = FontWeight.Normal,
         ),
@@ -116,7 +115,7 @@ fun TextSmallBold(
         modifier = modifier,
         text = text,
         textAlign = textAlign,
-        style = MaterialTheme.typography.titleSmall.copy(
+        style = AppTheme.typography.bodySmall.copy(
             fontSize = fontSize,
             fontWeight = FontWeight.Bold,
         ),
@@ -136,7 +135,7 @@ fun TextNormal(
         modifier = modifier,
         text = text,
         textAlign = textAlign,
-        style = MaterialTheme.typography.bodySmall.copy(
+        style = AppTheme.typography.bodyNormal.copy(
             fontSize = fontSize,
             fontWeight = FontWeight.Normal,
         ),
@@ -156,7 +155,7 @@ fun TextNormalBold(
         modifier = modifier,
         text = text,
         textAlign = textAlign,
-        style = MaterialTheme.typography.titleMedium.copy(
+        style = AppTheme.typography.bodyNormal.copy(
             fontSize = fontSize,
             fontWeight = FontWeight.Bold,
         ),
@@ -176,7 +175,7 @@ fun TextMedium(
         modifier = modifier,
         text = text,
         textAlign = textAlign,
-        style = MaterialTheme.typography.titleMedium.copy(
+        style = AppTheme.typography.bodyMedium.copy(
             fontSize = fontSize,
             fontWeight = FontWeight.Normal,
         ),
@@ -196,7 +195,7 @@ fun TextMediumBold(
         modifier = modifier,
         text = text,
         textAlign = textAlign,
-        style = MaterialTheme.typography.bodySmall.copy(
+        style = AppTheme.typography.bodyMedium.copy(
             fontSize = fontSize,
             fontWeight = FontWeight.Bold,
         ),
@@ -216,7 +215,7 @@ fun TextBig(
         modifier = modifier,
         text = text,
         textAlign = textAlign,
-        style = MaterialTheme.typography.titleLarge.copy(
+        style = AppTheme.typography.bodyLarge.copy(
             fontSize = fontSize,
             fontWeight = FontWeight.Normal,
         ),
@@ -236,7 +235,7 @@ fun TextBigBold(
         modifier = modifier,
         text = text,
         textAlign = textAlign,
-        style = MaterialTheme.typography.titleLarge.copy(
+        style = AppTheme.typography.bodyLarge.copy(
             fontSize = fontSize,
             fontWeight = FontWeight.Bold,
         ),
@@ -260,9 +259,9 @@ fun TextUrlLink(
         text = buildAnnotatedString {
             pushStyle(
                 SpanStyle(
-                    color = textColor,
                     fontSize = fontSize,
                     fontWeight = FontWeight.Normal,
+                    color = textColor,
                 )
             )
             append(text)
@@ -271,9 +270,9 @@ fun TextUrlLink(
                     url = url,
                     styles = TextLinkStyles(
                         style = SpanStyle(
-                            color = linkColor,
                             fontSize = fontSize,
                             fontWeight = FontWeight.Bold,
+                            color = linkColor,
                         ),
                     ),
                 )
@@ -281,7 +280,11 @@ fun TextUrlLink(
                 append(linkText)
             }
         },
-        style = MaterialTheme.typography.bodySmall.copy(textAlign = textAlign),
+        style = AppTheme.typography.bodyNormal.copy(
+            fontSize = fontSize,
+            fontWeight = FontWeight.Normal,
+            textAlign = textAlign,
+        ),
     )
 }
 

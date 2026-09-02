@@ -13,13 +13,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
-import com.uagr.kmp.course.component.text.TextSmallExtra
-import com.uagr.kmp.course.component.text.TextSmallExtraBold
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
+import com.uagr.kmp.course.presentation.component.text.TextSmallExtra
+import com.uagr.kmp.course.presentation.component.text.TextSmallExtraBold
 import com.uagr.kmp.course.presentation.theme.AppTheme
 import com.uagr.kmp.course.presentation.theme.Dimens
 import course.shared.generated.resources.Res
@@ -31,7 +32,9 @@ fun SimpleCard(
     onClick: () -> Unit = {},
     modifier: Modifier = Modifier,
     cardBackgroundColor: Color = Color.White,
-    cardElevation: Dp = Dimens.elevation4,
+    cardElevation: Dp = Dimens.elevation2,
+    horizontalAlignment: Alignment.Horizontal = Alignment.Start,
+    verticalArrangement: Arrangement.Vertical = Arrangement.Top,
     content: @Composable ColumnScope.() -> Unit = {},
 ) {
     Card(
@@ -41,7 +44,9 @@ fun SimpleCard(
         elevation = CardDefaults.cardElevation(defaultElevation = cardElevation),
     ) {
         Column(
-            modifier = Modifier.padding(Dimens.padding16),
+            modifier = Modifier.padding(all = Dimens.padding16),
+            horizontalAlignment = horizontalAlignment,
+            verticalArrangement = verticalArrangement,
             content = content,
         )
     }

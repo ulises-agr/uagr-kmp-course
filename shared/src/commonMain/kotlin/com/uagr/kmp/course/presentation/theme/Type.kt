@@ -92,6 +92,7 @@ data class AppTypography(
     val bodyMedium: TextStyle,
     val bodyNormal: TextStyle,
     val bodySmall: TextStyle,
+    val bodyExtraSmall: TextStyle,
 )
 
 val appTypography
@@ -100,6 +101,7 @@ val appTypography
         bodyMedium = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeMedium),
         bodyNormal = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeNormal),
         bodySmall = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeSmall),
+        bodyExtraSmall = TextStyle(fontFamily = fontFamily, fontSize = Dimens.textSizeExtraSmall),
     )
 
 @Immutable
