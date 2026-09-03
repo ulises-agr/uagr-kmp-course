@@ -1,5 +1,6 @@
 package com.uagr.kmp.course.component.card
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,6 +20,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.uagr.kmp.course.component.button.Button
@@ -62,12 +64,16 @@ fun Card(
             
             Row(verticalAlignment = Alignment.CenterVertically) {
                 TextNormalBold(
+                    modifier = Modifier
+                        .weight(9f)
+                        .fillMaxWidth(),
+                    textAlign = TextAlign.Start,
                     color = AppTheme.colors.cards.cardsTitle,
                     text = stringResource(Res.string.cardTitle),
                 )
-                Spacer(Modifier.weight(1f))
                 Icon(
                     modifier = Modifier
+                        .weight(1f)
                         .size(Dimens.height16)
                         .clickable{
                             onClickIcon()
