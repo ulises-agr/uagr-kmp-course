@@ -1,4 +1,4 @@
-package com.uagr.kmp.course.core.designsystem.theme
+package com.uagr.kmp.course.core.ui.theme
 
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
