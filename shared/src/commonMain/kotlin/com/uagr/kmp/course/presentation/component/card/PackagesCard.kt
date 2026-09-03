@@ -7,9 +7,12 @@ package com.uagr.kmp.course.presentation.component.card
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,7 +23,7 @@ import com.uagr.kmp.course.presentation.component.buton.ButtonCustom
 import com.uagr.kmp.course.presentation.component.buton.CircularIconButtonCustom
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.presentation.component.text.TextBigBold
-import com.uagr.kmp.course.presentation.component.text.TextNormal
+import com.uagr.kmp.course.presentation.component.text.TextNormalBold
 import com.uagr.kmp.course.presentation.component.text.TextSmall
 import com.uagr.kmp.course.presentation.component.text.TextSmallExtra
 import com.uagr.kmp.course.presentation.theme.AppTheme
@@ -53,7 +56,7 @@ fun PackagesCard(
                 modifier = Modifier.weight(1f),
                 verticalArrangement = Arrangement.spacedBy(Dimens.height4),
             ) {
-                TextNormal(
+                TextNormalBold(
                     modifier = Modifier.fillMaxWidth(),
                     color = AppTheme.colors.backgrounds.black,
                     text = nameText,
@@ -74,6 +77,8 @@ fun PackagesCard(
             )
         }
 
+        Spacer(modifier = Modifier.height(Dimens.height20))
+
         TextBigBold(
             modifier = Modifier.fillMaxWidth(),
             fontSize = Dimens.textSizeBigExtra,
@@ -88,11 +93,23 @@ fun PackagesCard(
             text = usedText,
         )
 
+        Spacer(modifier = Modifier.height(Dimens.height16))
+
+        HorizontalDivider(
+            modifier = Modifier.fillMaxWidth(),
+            thickness = Dimens.height2,
+            color = AppTheme.colors.divider,
+        )
+
+        Spacer(modifier = Modifier.height(Dimens.height12))
+
         TextSmallExtra(
             modifier = Modifier.fillMaxWidth(),
             color = Color.Gray,
             text = daysText,
         )
+
+        Spacer(modifier = Modifier.height(Dimens.height20))
 
         ButtonCustom(
             backgroundButton = AppTheme.colors.primary,
@@ -110,7 +127,7 @@ private fun PackagesCardPreview() {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(all = Dimens.padding16),
-            verticalArrangement = Arrangement.spacedBy(Dimens.padding16),
+            verticalArrangement = Arrangement.spacedBy(space = Dimens.padding16),
         ) {
             PackagesCard(
                 nameText = "Internet Full",

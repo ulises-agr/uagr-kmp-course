@@ -59,6 +59,7 @@ val backgroundBlackDark = Color(0xFF000000)
 val backgroundWhiteDark = Color(0xFFFFFFFF)
 val backgroundYellowDark = Color(0xFFFFB700)
 val backgroundBlueDark = Color(0xFF0048FF)
+val dividerDark = Color(0xFFEBEFF9)
 
 // --- Dark color group ---
 val darkModeAppColors = AppColors(
@@ -118,4 +119,5 @@ val darkModeAppColors = AppColors(
         yellow = backgroundYellowDark,
         blue = backgroundBlueDark,
     ),
+    divider = dividerDark,
 )

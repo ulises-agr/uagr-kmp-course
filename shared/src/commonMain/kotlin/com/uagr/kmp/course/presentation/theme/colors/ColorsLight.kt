@@ -59,6 +59,7 @@ val backgroundBlackLight = Color(0xFF000000)
 val backgroundWhiteLight = Color(0xFFFFFFFF)
 val backgroundYellowLight = Color(0xFFFFB700)
 val backgroundBlueLight = Color(0xFF0066FF)
+val dividerLight = Color(0xFFEBEFF9)
 
 // --- Light color group ---
 val lightModeAppColors = AppColors(
@@ -118,4 +119,5 @@ val lightModeAppColors = AppColors(
         yellow = backgroundYellowLight,
         blue = backgroundBlueLight,
     ),
+    divider = dividerLight,
 )

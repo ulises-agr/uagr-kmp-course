@@ -50,6 +50,7 @@ data class AppColors(
     val status: ColorStatus = ColorStatus(),
     val text: ColorTexts = ColorTexts(),
     val backgrounds: ColorBackgrounds = ColorBackgrounds(),
+    val divider: Color = Color.Unspecified,
 ) {
     fun asMaterialColorScheme(isDark: Boolean): ColorScheme =
         if (isDark) {
