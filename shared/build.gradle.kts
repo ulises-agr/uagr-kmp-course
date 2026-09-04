@@ -55,6 +55,8 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(libs.voyager.navigator)
             implementation(libs.voyager.transitions)
+            implementation(libs.material.icons.extended)
+
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

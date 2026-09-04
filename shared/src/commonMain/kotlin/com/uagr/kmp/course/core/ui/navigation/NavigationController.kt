@@ -9,7 +9,7 @@ import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.transitions.SlideTransition
 import com.uagr.kmp.course.core.ui.theme.AppTheme
-import com.uagr.kmp.course.feature.home.presentation.HomeContainer
+import com.uagr.kmp.course.feature.home.presentation.navigation.HomeContainer
 import com.uagr.kmp.course.feature.welcome.presentation.navigation.WelcomeContainer
 
 @Composable

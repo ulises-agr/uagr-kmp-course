@@ -7,7 +7,7 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.uagr.kmp.course.core.ui.components.MainContainerScreen
 import com.uagr.kmp.course.feature.welcome.presentation.WelcomeUiEffect
-import com.uagr.kmp.course.feature.welcome.presentation.WelcomeViewModel
+import com.uagr.kmp.course.feature.welcome.presentation.viewModel.WelcomeViewModel
 
 @Composable
 fun WelcomeContainer(

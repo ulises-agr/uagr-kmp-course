@@ -1,4 +1,4 @@
-package com.uagr.kmp.course.core.ui.theme
+package com.uagr.kmp.course.core.ui.theme.colors
 
 import androidx.compose.ui.graphics.Color
 

@@ -1,7 +1,10 @@
-package com.uagr.kmp.course.feature.welcome.presentation
+package com.uagr.kmp.course.feature.welcome.presentation.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.uagr.kmp.course.feature.welcome.presentation.WelcomeUiEffect
+import com.uagr.kmp.course.feature.welcome.presentation.WelcomeUiEvent
+import com.uagr.kmp.course.feature.welcome.presentation.WelcomeUiState
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
