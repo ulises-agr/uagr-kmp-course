@@ -20,7 +20,7 @@ import androidx.compose.ui.Alignment
 
 object Animation {
 
-    private const val DEFAULT_TRANSITION_DURATION = 1600
+    private const val DEFAULT_TRANSITION_DURATION = 300
     const val DEFAULT_ANIMATION_DURATION = 250
 
     fun scaleTransition(): ContentTransform =

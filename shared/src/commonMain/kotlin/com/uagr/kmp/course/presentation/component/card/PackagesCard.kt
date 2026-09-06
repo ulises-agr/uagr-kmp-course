@@ -39,8 +39,8 @@ fun PackagesCard(
     nameText: String = "",
     typeText: String = "",
     quantityText: String = "",
-    usedText: String = "",
-    daysText : String = "",
+    unit: String = "",
+    renewalText : String = "",
     buttonText: String = "",
 ) {
     SimpleCard(modifier = modifier) {
@@ -87,7 +87,7 @@ fun PackagesCard(
         TextSmall(
             modifier = Modifier.fillMaxWidth(),
             color = AppTheme.colors.backgrounds.black,
-            text = usedText,
+            text = unit,
         )
 
         Spacer(modifier = Modifier.height(Dimens.height16))
@@ -103,7 +103,7 @@ fun PackagesCard(
         TextSmallExtra(
             modifier = Modifier.fillMaxWidth(),
             color = Color.Gray,
-            text = daysText,
+            text = renewalText,
         )
 
         Spacer(modifier = Modifier.height(Dimens.height20))
@@ -131,8 +131,8 @@ private fun PackagesCardPreview() {
                 nameText = "Internet Full",
                 typeText = "Paquete Ilimitado",
                 quantityText = "580",
-                usedText = "MB Usados",
-                daysText = "Renueva en 27 Dias / 5 Abril - 4 Mayo",
+                unit = "MB Usados",
+                renewalText = "Renueva en 27 Dias / 5 Abril - 4 Mayo",
                 buttonText = "Activa Paquete",
             )
         }

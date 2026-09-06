@@ -17,15 +17,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.uagr.kmp.course.presentation.component.text.TextBigBold
-import com.uagr.kmp.course.presentation.component.text.TextMedium
 import com.uagr.kmp.course.presentation.component.buton.ButtonCustom
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
+import com.uagr.kmp.course.presentation.component.text.TextBigBold
+import com.uagr.kmp.course.presentation.component.text.TextMedium
 import com.uagr.kmp.course.presentation.theme.AppTheme
 import com.uagr.kmp.course.presentation.theme.Dimens
 import course.shared.generated.resources.Res
-import course.shared.generated.resources.example
 import course.shared.generated.resources.explore_our_multiplatform_platform
+import course.shared.generated.resources.go_to_packages
 import course.shared.generated.resources.hello
 import org.jetbrains.compose.resources.stringResource
 
@@ -62,7 +62,7 @@ fun WelcomeContainer(
             modifier = Modifier.fillMaxWidth(),
             backgroundButton = AppTheme.colors.primary,
             textColor = AppTheme.colors.backgrounds.white,
-            text = stringResource(Res.string.example),
+            text = stringResource(Res.string.go_to_packages),
         )
     }
 }
