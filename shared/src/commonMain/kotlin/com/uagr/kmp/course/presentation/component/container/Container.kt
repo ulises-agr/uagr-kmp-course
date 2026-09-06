@@ -7,6 +7,7 @@ package com.uagr.kmp.course.presentation.component.container
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -14,6 +15,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import com.uagr.kmp.course.presentation.theme.AppTheme
 import com.uagr.kmp.course.presentation.theme.SystemAppearance
 
@@ -65,6 +67,22 @@ fun SafeScreenContainerTest(
             ) {
                 content()
             }
+        }
+    }
+}
+
+@Composable
+fun AdaptiveScreenContainer(
+    modifier: Modifier = Modifier,
+    mobileContent: @Composable () -> Unit,
+    tabletContent: @Composable () -> Unit,
+) {
+    BoxWithConstraints(modifier = modifier.fillMaxSize()) {
+        val isTablet = maxWidth >= 600.dp
+        if (isTablet) {
+            tabletContent()
+        } else {
+            mobileContent()
         }
     }
 }

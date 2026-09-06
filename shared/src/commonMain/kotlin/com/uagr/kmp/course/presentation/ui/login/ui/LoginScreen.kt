@@ -10,6 +10,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.uagr.kmp.course.presentation.component.container.AdaptiveScreenContainer
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainer
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.presentation.component.dialog.ErrorDialog
@@ -38,22 +39,38 @@ fun LoginScreen(
             targetState = loginUiState.isLoading,
             transitionSpec = { Animation.scaleTransition() },
         ) { currentState ->
-            LoginContainer(
-                email = loginUiState.email,
-                password = loginUiState.password,
-                onEmailChange = { email ->
-                    viewModel.updateEmail(email = email)
-                },
-                onPasswordChange = { password ->
-                    viewModel.updatePassword(password = password)
-                },
-                onNavigateToDashboard = {
-                    viewModel.loginValidation(
+
+            AdaptiveScreenContainer(
+                mobileContent = {
+                    LoginContainerMobile(
                         email = loginUiState.email,
                         password = loginUiState.password,
+                        onEmailChange = { email -> viewModel.updateEmail(email) },
+                        onPasswordChange = { password -> viewModel.updatePassword(password) },
+                        onNavigateToDashboard = {
+                            viewModel.loginValidation(
+                                email = loginUiState.email,
+                                password = loginUiState.password,
+                            )
+                        },
+                        onNavigateToWelcome = onNavigateToWelcome,
                     )
                 },
-                onNavigateToWelcome = onNavigateToWelcome,
+                tabletContent = {
+                    LoginContainerTablet(
+                        email = loginUiState.email,
+                        password = loginUiState.password,
+                        onEmailChange = { email -> viewModel.updateEmail(email) },
+                        onPasswordChange = { password -> viewModel.updatePassword(password) },
+                        onNavigateToDashboard = {
+                            viewModel.loginValidation(
+                                email = loginUiState.email,
+                                password = loginUiState.password,
+                            )
+                        },
+                        onNavigateToWelcome = onNavigateToWelcome,
+                    )
+                },
             )
 
             Loader(
@@ -92,6 +109,6 @@ fun LoginScreen(
 @Composable
 private fun LoginScreenPreview() {
     SafeScreenContainerTest {
-        LoginContainer()
+        LoginContainerMobile()
     }
 }

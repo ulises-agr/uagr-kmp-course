@@ -1,5 +1,5 @@
 /*
- * DashboardContainer.kt
+ * LoginContainerMobile.kt
  * Copyright (c) 2026. All rights reserved
  */
 package com.uagr.kmp.course.presentation.ui.login.ui
@@ -45,7 +45,7 @@ import course.shared.generated.resources.welcome_to_login_enter_your_credentials
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun LoginContainer(
+fun LoginContainerMobile(
     email: String = "",
     password: String = "",
     onEmailChange: (String) -> Unit = {},
@@ -130,8 +130,8 @@ fun LoginContainer(
     showBackground = true,
 )
 @Composable
-private fun LoginContainerPreview() {
+private fun LoginContainerMobilePreview() {
     SafeScreenContainerTest {
-        LoginContainer()
+        LoginContainerMobile()
     }
 }
