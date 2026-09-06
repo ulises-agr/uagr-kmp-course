@@ -34,8 +34,8 @@ fun PackagesContainer(
             nameText = "Internet Full",
             typeText = "Paquete Ilimitado",
             quantityText = "580",
-            usedText = "MB Usados",
-            daysText = "Renueva en 27 Dias / 5 Abril - 4 Mayo",
+            unit = "MB Usados",
+            renewalText = "Renueva en 27 Dias / 5 Abril - 4 Mayo",
             buttonText = "Activa Paquete",
         )
     }
