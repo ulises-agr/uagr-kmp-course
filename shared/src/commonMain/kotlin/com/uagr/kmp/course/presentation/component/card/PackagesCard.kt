@@ -43,10 +43,7 @@ fun PackagesCard(
     daysText : String = "",
     buttonText: String = "",
 ) {
-    SimpleCard(
-        onClick = onClick,
-        modifier = modifier,
-    ) {
+    SimpleCard(modifier = modifier) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -112,6 +109,7 @@ fun PackagesCard(
         Spacer(modifier = Modifier.height(Dimens.height20))
 
         ButtonCustom(
+            onClick = onClick,
             backgroundButton = AppTheme.colors.primary,
             textColor = AppTheme.colors.backgrounds.white,
             text = buttonText,

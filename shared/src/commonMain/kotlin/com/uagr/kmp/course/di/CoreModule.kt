@@ -4,6 +4,7 @@
  */
 package com.uagr.kmp.course.di
 
+import com.uagr.kmp.course.presentation.ui.packages.viewmodel.PackagesViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -17,7 +18,7 @@ val dispatcherModule = module {
 }
 
 val viewmodelModule = module {
-//    viewModelOf(constructor = ::PackagesViewModel)
+    viewModelOf(constructor = ::PackagesViewModel)
 }
 
 fun initKoin(config: KoinAppDeclaration? = null){
