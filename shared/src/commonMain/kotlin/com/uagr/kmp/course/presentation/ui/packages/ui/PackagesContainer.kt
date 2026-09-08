@@ -7,17 +7,26 @@ package com.uagr.kmp.course.presentation.ui.packages.ui
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.uagr.kmp.course.domain.model.PackagesModel
 import com.uagr.kmp.course.presentation.component.card.PackagesCard
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
+import com.uagr.kmp.course.presentation.component.text.TextBigBold
+import com.uagr.kmp.course.presentation.theme.AppTheme
 import com.uagr.kmp.course.presentation.theme.Dimens
+import course.shared.generated.resources.Res
+import course.shared.generated.resources.empty_packages
+import course.shared.generated.resources.example
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun PackagesContainer(
+    packages: PackagesModel? = null,
     activePackagesClick: () -> Unit = {},
 ) {
     Column(
@@ -29,15 +38,23 @@ fun PackagesContainer(
             alignment = Alignment.CenterVertically,
         ),
     ) {
-        PackagesCard(
-            onClick = activePackagesClick,
-            nameText = "Internet Full",
-            typeText = "Paquete Ilimitado",
-            quantityText = "580",
-            unit = "MB Usados",
-            renewalText = "Renueva en 27 Dias / 5 Abril - 4 Mayo",
-            buttonText = "Activa Paquete",
-        )
+        packages?.let {
+            PackagesCard(
+                onClick = activePackagesClick,
+                nameText = packages.title,
+                typeText = packages.packageDescription,
+                quantityText = packages.usedAmount,
+                unit = packages.unit,
+                renewalText = packages.renewalText,
+                buttonText = packages.buttonText,
+            )
+        } ?: run {
+            TextBigBold(
+                modifier = Modifier.fillMaxWidth(),
+                color = AppTheme.colors.backgrounds.black,
+                text = stringResource(Res.string.empty_packages),
+            )
+        }
     }
 }
 
@@ -45,6 +62,16 @@ fun PackagesContainer(
 @Composable
 private fun PackagesContainerPreview() {
     SafeScreenContainerTest {
-        PackagesContainer()
+        PackagesContainer(
+            packages = PackagesModel(
+                title = "Internet Full",
+                packageDescription = stringResource(Res.string.example),
+                usedAmount = "580",
+                unit = "MB Usados",
+                renewalText = "Renueva en 27 Dias / 5 Abril - 4 Mayo",
+                buttonText = "Activa Paquete",
+                hasInfoIcon = true,
+            )
+        )
     }
 }

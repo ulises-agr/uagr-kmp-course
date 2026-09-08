@@ -4,6 +4,9 @@
  */
 package com.uagr.kmp.course.data.network.model.response
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class PackagesResponse(
     val title: String?,
     val packageDescription: String?,

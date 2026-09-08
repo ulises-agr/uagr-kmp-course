@@ -30,6 +30,7 @@ fun PackagesScreen(
             transitionSpec = { Animation.scaleTransition() },
         ) { currentState ->
             PackagesContainer(
+                packages = packagesUiState.packages,
                 activePackagesClick = {},
             )
             Loader(currentState = currentState)
@@ -39,6 +40,7 @@ fun PackagesScreen(
     when (packagesUiEvent) {
         is PackagesUiEvent.Idle -> {}
         is PackagesUiEvent.ShowErrorDialog -> {}
+        is PackagesUiEvent.ShowErrorStringDialog -> {}
     }
 }
 
