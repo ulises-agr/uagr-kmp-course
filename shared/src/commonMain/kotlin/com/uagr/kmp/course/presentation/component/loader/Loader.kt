@@ -25,9 +25,9 @@ fun Loader(
     modifier: Modifier = Modifier,
     backgroundColor: Color = AppTheme.colors.backgroundProgressIndicator,
     progressColor: Color = AppTheme.colors.primary,
-    currentState: StatusLoading = StatusLoading.DISMISS_LOADING,
+    isLoading: StatusLoading = StatusLoading.DISMISS_LOADING,
 ) {
-    if (currentState == StatusLoading.SHOW_LOADING) {
+    if (isLoading == StatusLoading.SHOW_LOADING) {
         Box(
             modifier = modifier
                 .fillMaxSize()
@@ -49,7 +49,7 @@ private fun LoaderPreview() {
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(Dimens.padding16),
         ) {
-            Loader(currentState = StatusLoading.SHOW_LOADING)
+            Loader(isLoading = StatusLoading.SHOW_LOADING)
         }
     }
 }

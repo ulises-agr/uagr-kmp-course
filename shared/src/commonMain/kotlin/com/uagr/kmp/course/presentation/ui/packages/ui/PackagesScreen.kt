@@ -4,7 +4,6 @@
  */
 package com.uagr.kmp.course.presentation.ui.packages.ui
 
-import androidx.compose.animation.AnimatedContent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -14,7 +13,6 @@ import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerT
 import com.uagr.kmp.course.presentation.component.loader.Loader
 import com.uagr.kmp.course.presentation.ui.packages.viewmodel.PackagesUiEvent
 import com.uagr.kmp.course.presentation.ui.packages.viewmodel.PackagesViewModel
-import com.uagr.kmp.course.utils.animation.Animation
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -25,16 +23,11 @@ fun PackagesScreen(
     val packagesUiEvent by viewmodel.packagesUiEvent.collectAsState()
 
     SafeScreenContainer {
-        AnimatedContent(
-            targetState = packagesUiState.isLoading,
-            transitionSpec = { Animation.scaleTransition() },
-        ) { currentState ->
-            PackagesContainer(
-                packages = packagesUiState.packages,
-                activePackagesClick = {},
-            )
-            Loader(currentState = currentState)
-        }
+        PackagesContainer(
+            packages = packagesUiState.packages,
+            activePackagesClick = {},
+        )
+        Loader(isLoading = packagesUiState.isLoading)
     }
 
     when (packagesUiEvent) {
