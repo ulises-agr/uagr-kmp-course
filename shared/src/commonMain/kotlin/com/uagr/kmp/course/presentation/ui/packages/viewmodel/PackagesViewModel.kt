@@ -6,7 +6,10 @@ package com.uagr.kmp.course.presentation.ui.packages.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.uagr.kmp.course.domain.usecase.GetPackagesUseCase
+import com.uagr.kmp.course.domain.model.PackagesModel
+import com.uagr.kmp.course.domain.usecase.ClearAndInsertPackagesUseCase
+import com.uagr.kmp.course.domain.usecase.GetLocalPackagesUseCase
+import com.uagr.kmp.course.domain.usecase.GetNetworkPackagesUseCase
 import com.uagr.kmp.course.utils.constant.NetworkUrl
 import com.uagr.kmp.course.utils.network.NetworkResult
 import com.uagr.kmp.course.utils.operators.StatusLoading
@@ -21,7 +24,9 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class PackagesViewModel(
-    private val getPackagesUseCase: GetPackagesUseCase,
+    private val getNetworkPackagesUseCase: GetNetworkPackagesUseCase,
+    private val clearAndInsertPackagesUseCase: ClearAndInsertPackagesUseCase,
+    private val getLocalPackagesUseCase: GetLocalPackagesUseCase,
 ): ViewModel() {
 
     private var _packagesUiState = MutableStateFlow(PackagesUiState())
@@ -35,21 +40,42 @@ class PackagesViewModel(
     }
 
     private fun getPackages() = viewModelScope.launch {
-        getPackagesUseCase(url = NetworkUrl.GET_PACKAGES_ENDPOINT)
+        getNetworkPackagesUseCase(url = NetworkUrl.GET_PACKAGES_ENDPOINT)
             .onStart {
                 _packagesUiState.update { state -> state.copy(isLoading = StatusLoading.SHOW_LOADING) }
             }.catch {
+                _packagesUiState.update { state -> state.copy(isLoading = StatusLoading.DISMISS_LOADING) }
                 _packagesUiEvent.emit(PackagesUiEvent.ShowErrorDialog(message = Res.string.please_try_again_later))
             }.collect { result ->
-                _packagesUiState.update { state -> state.copy(isLoading = StatusLoading.DISMISS_LOADING) }
                 when (result) {
                     is NetworkResult.Success -> {
-                        _packagesUiState.update { state -> state.copy(packages = result.response) }
+                        clearAndInsertPackages(packages = result.response)
                     }
                     is NetworkResult.Error -> {
+                        _packagesUiState.update { state -> state.copy(isLoading = StatusLoading.DISMISS_LOADING) }
                         _packagesUiEvent.emit(PackagesUiEvent.ShowErrorStringDialog(message = result.message))
                     }
                 }
+            }
+    }
+
+    private fun clearAndInsertPackages(packages: PackagesModel) = viewModelScope.launch {
+        clearAndInsertPackagesUseCase(packages = packages)
+            .catch {
+                _packagesUiState.update { state -> state.copy(isLoading = StatusLoading.DISMISS_LOADING) }
+                _packagesUiEvent.emit(PackagesUiEvent.ShowErrorDialog(message = Res.string.please_try_again_later))
+            }.collect {
+                getLocalPackages()
+            }
+    }
+
+    private fun getLocalPackages() = viewModelScope.launch {
+        getLocalPackagesUseCase()
+            .catch {
+                _packagesUiState.update { state -> state.copy(isLoading = StatusLoading.DISMISS_LOADING) }
+                _packagesUiEvent.emit(PackagesUiEvent.ShowErrorDialog(message = Res.string.please_try_again_later))
+            }.collect { result ->
+                _packagesUiState.update { state -> state.copy(isLoading = StatusLoading.DISMISS_LOADING, packages = result) }
             }
     }
 }
