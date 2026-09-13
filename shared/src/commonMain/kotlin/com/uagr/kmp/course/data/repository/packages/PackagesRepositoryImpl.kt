@@ -1,3 +1,7 @@
+/*
+ * PackagesRepositoryImpl.kt
+ * Copyright (c) 2026. All rights reserved
+ */
 package com.uagr.kmp.course.data.repository.packages
 
 import com.uagr.kmp.course.data.local.datasource.packages.PackagesLocalDataSource

@@ -26,10 +26,11 @@
     <!-- Welcome -->
     <string name="welcome">Welcome</string>
 
-    <!-- Card -->
-    <string name="activar_paquete">Activar paquete</string>
+    <!-- Login -->
+    <string name="accept">Accept</string>
 
     <!-- Packages -->
-    <string name="empty_packages">Empty Packages</string>
+    <string name="empty_packages">Empty packages</string>
+    <string name="active_packages">Active packages</string>
 
 </resources>

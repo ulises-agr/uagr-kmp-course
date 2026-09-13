@@ -16,6 +16,8 @@ import com.uagr.kmp.course.data.local.datasource.user.UsersLocalDataSourceImpl
 import com.uagr.kmp.course.data.local.datastore.AppDataStore
 import com.uagr.kmp.course.data.local.datastore.createDataStore
 import com.uagr.kmp.course.data.network.client.createHttpClient
+import com.uagr.kmp.course.data.network.datasource.login.LoginRemoteDataSource
+import com.uagr.kmp.course.data.network.datasource.login.LoginRemoteDataSourceImpl
 import com.uagr.kmp.course.data.network.datasource.packages.PackagesNetworkDataSource
 import com.uagr.kmp.course.data.network.datasource.packages.PackagesNetworkDataSourceImpl
 import com.uagr.kmp.course.data.repository.login.LoginRepositoryImpl
@@ -24,9 +26,13 @@ import com.uagr.kmp.course.data.repository.user.UserRepositoryImpl
 import com.uagr.kmp.course.domain.repository.login.LoginRepository
 import com.uagr.kmp.course.domain.repository.packages.PackagesRepository
 import com.uagr.kmp.course.domain.repository.user.UserRepository
+import com.uagr.kmp.course.domain.usecase.login.LoginUseCase
+import com.uagr.kmp.course.domain.usecase.login.ValidateLoginUseCase
 import com.uagr.kmp.course.domain.usecase.packages.ClearAndInsertPackagesUseCase
 import com.uagr.kmp.course.domain.usecase.packages.GetLocalPackagesUseCase
 import com.uagr.kmp.course.domain.usecase.packages.GetNetworkPackagesUseCase
+import com.uagr.kmp.course.domain.usecase.user.ClearAndInsertUserUseCase
+import com.uagr.kmp.course.domain.usecase.user.SaveUserTokenUseCase
 import com.uagr.kmp.course.presentation.ui.packages.viewmodel.PackagesViewModel
 import com.uagr.kmp.course.presentation.ui.welcome.viewmodel.WelcomeViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -67,6 +73,7 @@ val networkModule = module {
 
 val dataSourceRemoteModule = module {
     singleOf(constructor = ::PackagesNetworkDataSourceImpl) bind PackagesNetworkDataSource::class
+    singleOf(constructor = ::LoginRemoteDataSourceImpl) bind LoginRemoteDataSource::class
 }
 
 val dataSourceLocalModule = module {
@@ -84,6 +91,10 @@ val useCaseModule = module {
     factoryOf(constructor = ::GetNetworkPackagesUseCase)
     factoryOf(constructor = ::ClearAndInsertPackagesUseCase)
     factoryOf(constructor = ::GetLocalPackagesUseCase)
+    factoryOf(constructor = ::ValidateLoginUseCase)
+    factoryOf(constructor = ::LoginUseCase)
+    factoryOf(constructor = ::ClearAndInsertUserUseCase)
+    factoryOf(constructor = ::SaveUserTokenUseCase)
 }
 
 val viewmodelModule = module {
