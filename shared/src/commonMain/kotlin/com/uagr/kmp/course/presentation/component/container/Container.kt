@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.uagr.kmp.course.presentation.theme.AppTheme
@@ -23,6 +24,7 @@ fun SafeScreenContainer(
     systemColor: Color = AppTheme.colors.primary,
     backgroundColor: Color = AppTheme.colors.background,
     isSystemIconsDark: Boolean? = null,
+    contentAlignment: Alignment = Alignment.Center,
     content: @Composable BoxScope.() -> Unit,
 ) {
     isSystemIconsDark?.let {
@@ -38,6 +40,7 @@ fun SafeScreenContainer(
                 .statusBarsPadding()
                 .navigationBarsPadding()
                 .background(color = backgroundColor),
+            contentAlignment = contentAlignment,
         ) {
             content()
         }

@@ -35,7 +35,8 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun PackagesCard(
     onClick: () -> Unit = {},
-    modifier: Modifier = Modifier,
+    modifierCard: Modifier = Modifier,
+    modifierColum: Modifier = Modifier,
     nameText: String = "",
     typeText: String = "",
     quantityText: String = "",
@@ -43,7 +44,10 @@ fun PackagesCard(
     renewalText : String = "",
     buttonText: String = "",
 ) {
-    SimpleCard(modifier = modifier) {
+    SimpleCard(
+        modifierCard = modifierCard,
+        modifierColumn = modifierColum,
+    ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,

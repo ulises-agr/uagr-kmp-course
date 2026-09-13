@@ -30,21 +30,25 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun SimpleCard(
     onClick: () -> Unit = {},
-    modifier: Modifier = Modifier,
+    modifierCard: Modifier = Modifier,
+    modifierColumn: Modifier = Modifier,
     cardBackgroundColor: Color = Color.White,
     cardElevation: Dp = Dimens.elevation2,
     horizontalAlignment: Alignment.Horizontal = Alignment.Start,
     verticalArrangement: Arrangement.Vertical = Arrangement.Top,
+    paddingColumn: Dp = Dimens.padding16,
     content: @Composable ColumnScope.() -> Unit = {},
 ) {
     Card(
         onClick = onClick,
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifierCard.fillMaxWidth(),
         colors = CardDefaults.cardColors(containerColor = cardBackgroundColor),
         elevation = CardDefaults.cardElevation(defaultElevation = cardElevation),
     ) {
         Column(
-            modifier = Modifier.padding(all = Dimens.padding16),
+            modifier = modifierColumn
+                .fillMaxWidth()
+                .padding(all = paddingColumn),
             horizontalAlignment = horizontalAlignment,
             verticalArrangement = verticalArrangement,
             content = content,

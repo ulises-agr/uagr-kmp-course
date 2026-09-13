@@ -7,6 +7,7 @@ package com.uagr.kmp.course.presentation.ui.packages.ui
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainer
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
@@ -37,7 +38,10 @@ fun PackagesScreen(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(
+    showBackground = true,
+    device = Devices.PIXEL_9,
+)
 @Composable
 private fun PackagesScreenPreview() {
     SafeScreenContainerTest {
