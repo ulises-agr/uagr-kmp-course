@@ -2,10 +2,11 @@
  * WelcomeViewModel.kt
  * Copyright (c) 2026. All rights reserved
  */
-package com.kmp.presentation.welcome.viewmodel
+package com.uagr.kmp.course.presentation.ui.welcome.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kmp.presentation.welcome.viewmodel.WelcomeUiEvent
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

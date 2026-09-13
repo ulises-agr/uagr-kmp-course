@@ -18,6 +18,7 @@ import com.uagr.kmp.course.domain.usecase.ClearAndInsertPackagesUseCase
 import com.uagr.kmp.course.domain.usecase.GetLocalPackagesUseCase
 import com.uagr.kmp.course.domain.usecase.GetNetworkPackagesUseCase
 import com.uagr.kmp.course.presentation.ui.packages.viewmodel.PackagesViewModel
+import com.uagr.kmp.course.presentation.ui.welcome.viewmodel.WelcomeViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -69,6 +70,7 @@ val useCaseModule = module {
 
 val viewmodelModule = module {
     viewModelOf(constructor = ::PackagesViewModel)
+    viewModelOf(constructor = ::WelcomeViewModel)
 }
 
 fun initKoin(config: KoinAppDeclaration? = null) {
