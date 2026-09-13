@@ -4,7 +4,7 @@
  */
 package com.uagr.kmp.course.utils.network
 
-import com.uagr.kmp.course.data.network.model.response.BaseResponse
+import com.uagr.kmp.course.data.network.model.response.base.BaseResponse
 import io.ktor.client.call.body
 import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.plugins.ServerResponseException

@@ -2,10 +2,10 @@
  * GetNetworkPackagesUseCase.kt
  * Copyright (c) 2026. All rights reserved
  */
-package com.uagr.kmp.course.domain.usecase
+package com.uagr.kmp.course.domain.usecase.packages
 
-import com.uagr.kmp.course.domain.model.PackagesModel
-import com.uagr.kmp.course.domain.repository.PackagesRepository
+import com.uagr.kmp.course.domain.model.packages.PackagesModel
+import com.uagr.kmp.course.domain.repository.packages.PackagesRepository
 import com.uagr.kmp.course.utils.network.NetworkResult
 import kotlinx.coroutines.flow.Flow
 

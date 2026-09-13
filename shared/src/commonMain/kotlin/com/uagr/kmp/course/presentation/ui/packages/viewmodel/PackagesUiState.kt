@@ -4,7 +4,7 @@
  */
 package com.uagr.kmp.course.presentation.ui.packages.viewmodel
 
-import com.uagr.kmp.course.domain.model.PackagesModel
+import com.uagr.kmp.course.domain.model.packages.PackagesModel
 import com.uagr.kmp.course.utils.operators.StatusLoading
 
 data class PackagesUiState(

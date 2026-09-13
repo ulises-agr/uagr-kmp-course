@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.uagr.kmp.course.domain.model.PackagesModel
+import com.uagr.kmp.course.domain.model.packages.PackagesModel
 import com.uagr.kmp.course.presentation.component.card.PackagesCard
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.presentation.component.text.TextBigBold

@@ -2,11 +2,11 @@
  * PackagesMapper.kt
  * Copyright (c) 2026. All rights reserved
  */
-package com.uagr.kmp.course.domain.mapper
+package com.uagr.kmp.course.domain.mapper.packages
 
-import com.uagr.kmp.course.data.local.model.PackagesEntity
-import com.uagr.kmp.course.data.network.model.response.PackagesResponse
-import com.uagr.kmp.course.domain.model.PackagesModel
+import com.uagr.kmp.course.data.local.model.packages.PackagesEntity
+import com.uagr.kmp.course.data.network.model.response.packages.PackagesResponse
+import com.uagr.kmp.course.domain.model.packages.PackagesModel
 
 fun PackagesResponse.toDomain(): PackagesModel =
     PackagesModel(

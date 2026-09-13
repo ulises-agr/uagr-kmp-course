@@ -1,13 +1,9 @@
-/*
- * PackagesRepositoryImpl.kt
- * Copyright (c) 2026. All rights reserved
- */
-package com.uagr.kmp.course.data.repository
+package com.uagr.kmp.course.data.repository.packages
 
-import com.uagr.kmp.course.data.local.datasource.PackagesLocalDataSource
-import com.uagr.kmp.course.data.network.datasource.PackagesNetworkDataSource
-import com.uagr.kmp.course.domain.model.PackagesModel
-import com.uagr.kmp.course.domain.repository.PackagesRepository
+import com.uagr.kmp.course.data.local.datasource.packages.PackagesLocalDataSource
+import com.uagr.kmp.course.data.network.datasource.packages.PackagesNetworkDataSource
+import com.uagr.kmp.course.domain.model.packages.PackagesModel
+import com.uagr.kmp.course.domain.repository.packages.PackagesRepository
 import com.uagr.kmp.course.utils.network.NetworkResult
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow

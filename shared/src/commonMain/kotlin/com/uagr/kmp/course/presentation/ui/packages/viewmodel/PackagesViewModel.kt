@@ -6,10 +6,10 @@ package com.uagr.kmp.course.presentation.ui.packages.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.uagr.kmp.course.domain.model.PackagesModel
-import com.uagr.kmp.course.domain.usecase.ClearAndInsertPackagesUseCase
-import com.uagr.kmp.course.domain.usecase.GetLocalPackagesUseCase
-import com.uagr.kmp.course.domain.usecase.GetNetworkPackagesUseCase
+import com.uagr.kmp.course.domain.model.packages.PackagesModel
+import com.uagr.kmp.course.domain.usecase.packages.ClearAndInsertPackagesUseCase
+import com.uagr.kmp.course.domain.usecase.packages.GetLocalPackagesUseCase
+import com.uagr.kmp.course.domain.usecase.packages.GetNetworkPackagesUseCase
 import com.uagr.kmp.course.utils.constant.NetworkUrl
 import com.uagr.kmp.course.utils.network.NetworkResult
 import com.uagr.kmp.course.utils.operators.StatusLoading

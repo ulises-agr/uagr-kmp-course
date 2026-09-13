@@ -2,7 +2,7 @@
  * PackagesEntity.kt
  * Copyright (c) 2026. All rights reserved
  */
-package com.uagr.kmp.course.data.local.model
+package com.uagr.kmp.course.data.local.model.packages
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

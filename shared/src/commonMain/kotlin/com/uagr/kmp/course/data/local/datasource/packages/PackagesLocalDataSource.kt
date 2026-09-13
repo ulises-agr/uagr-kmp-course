@@ -2,9 +2,9 @@
  * PackagesLocalDataSource.kt
  * Copyright (c) 2026. All rights reserved
  */
-package com.uagr.kmp.course.data.local.datasource
+package com.uagr.kmp.course.data.local.datasource.packages
 
-import com.uagr.kmp.course.domain.model.PackagesModel
+import com.uagr.kmp.course.domain.model.packages.PackagesModel
 
 interface PackagesLocalDataSource {
     suspend fun clearAndInsertPackages(packages: PackagesModel)

@@ -10,5 +10,6 @@ object NetworkUrl {
     const val BASE_URL = "https://packages-course.free.beeceptor.com/"
 
     // Endpoint
-    const val GET_PACKAGES_ENDPOINT = "packages"
+    const val LOGIN_ENDPOINT = "api/v1/auth/login"
+    const val GET_PACKAGES_ENDPOINT = "api/v1/products"
 }

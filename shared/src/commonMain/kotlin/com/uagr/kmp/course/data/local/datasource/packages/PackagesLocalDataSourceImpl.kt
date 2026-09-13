@@ -2,12 +2,12 @@
  * PackagesDao.kt
  * Copyright (c) 2026. All rights reserved
  */
-package com.uagr.kmp.course.data.local.datasource
+package com.uagr.kmp.course.data.local.datasource.packages
 
-import com.uagr.kmp.course.data.local.database.dao.PackagesDao
-import com.uagr.kmp.course.domain.mapper.toDomain
-import com.uagr.kmp.course.domain.mapper.toEntity
-import com.uagr.kmp.course.domain.model.PackagesModel
+import com.uagr.kmp.course.data.local.database.dao.packages.PackagesDao
+import com.uagr.kmp.course.domain.mapper.packages.toDomain
+import com.uagr.kmp.course.domain.mapper.packages.toEntity
+import com.uagr.kmp.course.domain.model.packages.PackagesModel
 
 class PackagesLocalDataSourceImpl(
     private val packagesDao: PackagesDao
