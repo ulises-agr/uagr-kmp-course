@@ -25,7 +25,7 @@ import com.uagr.kmp.course.presentation.theme.AppTheme
 import com.uagr.kmp.course.presentation.theme.Dimens
 import course.shared.generated.resources.Res
 import course.shared.generated.resources.explore_our_multiplatform_platform
-import course.shared.generated.resources.go_to_packages
+import course.shared.generated.resources.go_to_login
 import course.shared.generated.resources.hello
 import org.jetbrains.compose.resources.stringResource
 
@@ -62,7 +62,7 @@ fun WelcomeContainer(
             modifier = Modifier.fillMaxWidth(),
             backgroundButton = AppTheme.colors.primary,
             textColor = AppTheme.colors.backgrounds.white,
-            text = stringResource(Res.string.go_to_packages),
+            text = stringResource(Res.string.go_to_login),
         )
     }
 }
