@@ -8,6 +8,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import com.uagr.kmp.course.data.local.database.AppDatabase
 import com.uagr.kmp.course.data.local.database.dao.packages.PackagesDao
+import com.uagr.kmp.course.data.local.database.dao.user.UsersDao
 import com.uagr.kmp.course.data.local.database.getDatabaseBuilder
 import com.uagr.kmp.course.data.local.datasource.packages.PackagesLocalDataSource
 import com.uagr.kmp.course.data.local.datasource.packages.PackagesLocalDataSourceImpl
@@ -33,6 +34,7 @@ import com.uagr.kmp.course.domain.usecase.packages.GetLocalPackagesUseCase
 import com.uagr.kmp.course.domain.usecase.packages.GetNetworkPackagesUseCase
 import com.uagr.kmp.course.domain.usecase.user.ClearAndInsertUserUseCase
 import com.uagr.kmp.course.domain.usecase.user.SaveUserTokenUseCase
+import com.uagr.kmp.course.presentation.ui.login.viewmodel.LoginViewModel
 import com.uagr.kmp.course.presentation.ui.packages.viewmodel.PackagesViewModel
 import com.uagr.kmp.course.presentation.ui.welcome.viewmodel.WelcomeViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -65,6 +67,7 @@ val dataStoreModule = module {
 
 val databaseDaoModule = module {
     single<PackagesDao> { get<AppDatabase>().packagesDao() }
+    single<UsersDao> { get<AppDatabase>().usersDao() }
 }
 
 val networkModule = module {
@@ -100,6 +103,7 @@ val useCaseModule = module {
 val viewmodelModule = module {
     viewModelOf(constructor = ::PackagesViewModel)
     viewModelOf(constructor = ::WelcomeViewModel)
+    viewModelOf(constructor = ::LoginViewModel)
 }
 
 fun initKoin(config: KoinAppDeclaration? = null) {
