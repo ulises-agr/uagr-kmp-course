@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.transitions.SlideTransition
 import com.uagr.kmp.course.presentation.welcome.navigation.WelcomeScreenInstance
-import com.uagr.kmp.course.theme.AppTheme
+import com.uagr.kmp.course.presentation.theme.AppTheme
 
 @Composable
 fun NavigationController() {

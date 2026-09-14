@@ -14,8 +14,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.uagr.kmp.course.theme.AppTheme
-import com.uagr.kmp.course.theme.SystemAppearance
+import com.uagr.kmp.course.presentation.theme.AppTheme
+import com.uagr.kmp.course.presentation.theme.SystemAppearance
 
 @Composable
 fun SafeScreenContainer(

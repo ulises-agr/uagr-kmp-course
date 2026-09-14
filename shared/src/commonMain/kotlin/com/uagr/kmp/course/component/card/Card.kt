@@ -1,6 +1,5 @@
 package com.uagr.kmp.course.component.card
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,7 +19,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.uagr.kmp.course.component.button.Button
@@ -28,8 +26,8 @@ import com.uagr.kmp.course.component.text.TextBigBold
 import com.uagr.kmp.course.component.text.TextNormal
 import com.uagr.kmp.course.component.text.TextNormalBold
 import com.uagr.kmp.course.component.text.TextSmallExtra
-import com.uagr.kmp.course.theme.AppTheme
-import com.uagr.kmp.course.theme.Dimens
+import com.uagr.kmp.course.presentation.theme.AppTheme
+import com.uagr.kmp.course.presentation.theme.Dimens
 import course.shared.generated.resources.Res
 import course.shared.generated.resources.cardButton
 import course.shared.generated.resources.cardQuantity
@@ -39,14 +37,20 @@ import course.shared.generated.resources.cardTitle
 import course.shared.generated.resources.cardUntilDate
 import course.shared.generated.resources.cardUsed
 import course.shared.generated.resources.ic_alert
-import course.shared.generated.resources.welcomeButton
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun Card(
+fun PackageCard(
     modifier: Modifier = Modifier,
     colors: CardColors,
+    title : String = "",
+    packageDescription : String = "",
+    usedAmount : String = "",
+    unit : String = "",
+    renewalText : String = "",
+    buttonText : String = "",
+    hasInfoIcon : Boolean = false,
     onClickButton: () -> Unit = { },
     onClickIcon: () -> Unit = { }
 ) {
@@ -69,26 +73,28 @@ fun Card(
                         .fillMaxWidth(),
                     textAlign = TextAlign.Start,
                     color = AppTheme.colors.cards.cardsTitle,
-                    text = stringResource(Res.string.cardTitle),
+                    text = title,
                 )
-                Icon(
-                    modifier = Modifier
-                        .weight(1f)
-                        .size(Dimens.height16)
-                        .clickable{
-                            onClickIcon()
-                        },
-                    painter = painterResource(Res.drawable.ic_alert),
-                    tint = AppTheme.colors.button.enable,
-                    contentDescription = null
-                )
+                if(hasInfoIcon){
+                    Icon(
+                        modifier = Modifier
+                            .weight(1f)
+                            .size(Dimens.height16)
+                            .clickable{
+                                onClickIcon()
+                            },
+                        painter = painterResource(Res.drawable.ic_alert),
+                        tint = AppTheme.colors.button.enable,
+                        contentDescription = null
+                    )
+                }
             }
             
             Spacer(modifier = Modifier.height(Dimens.height8))
             
             TextSmallExtra(
                 color = AppTheme.colors.cards.cardsSubtitle,
-                text = stringResource(Res.string.cardSubtitle),
+                text = packageDescription,
             )
             
             Spacer(modifier = Modifier.height(Dimens.height8))
@@ -97,7 +103,7 @@ fun Card(
                 modifier = Modifier.fillMaxWidth(),
                 color = AppTheme.colors.cards.cardsTitle,
                 fontSize = Dimens.textSizeExtraBig,
-                text = stringResource(Res.string.cardQuantity),
+                text = usedAmount,
             )
             
             Row(
@@ -105,13 +111,9 @@ fun Card(
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                TextNormalBold(
-                    color = AppTheme.colors.cards.cardsTitle,
-                    text = stringResource(Res.string.cardQuantityUnit),
-                )
                 TextNormal(
                     color = AppTheme.colors.text.cardsTitle,
-                    text = stringResource(Res.string.cardUsed),
+                    text = unit,
                 )
             }
             
@@ -127,7 +129,7 @@ fun Card(
             TextSmallExtra(
                 modifier = Modifier.fillMaxWidth(),
                 color = AppTheme.colors.cards.cardsSubtitle,
-                text = stringResource(Res.string.cardUntilDate),
+                text = renewalText,
             )
             
             Spacer(modifier = Modifier.height(Dimens.height16))
@@ -141,7 +143,7 @@ fun Card(
                     disabledContainerColor = AppTheme.colors.button.disable,
                     disabledContentColor = AppTheme.colors.button.contentDisabled
                 ),
-                text = stringResource(Res.string.cardButton),
+                text = buttonText,
                 textAlign = TextAlign.Center,
                 onClickButton = onClickButton
             )
@@ -158,7 +160,14 @@ private fun TextPreview() {
             .padding(all = Dimens.padding16),
         verticalArrangement = Arrangement.spacedBy(Dimens.padding16),
     ) {
-        Card(
+        PackageCard(
+            title = "Internet Full",
+            packageDescription = "Paquete: Ilimitado",
+            usedAmount = "528",
+            unit = "MB Usados",
+            renewalText = "Renueva en 27 Días / 5 Abril - 4 Mayo",
+            buttonText = "Activar Paquete",
+            hasInfoIcon = true,
             modifier = Modifier,
             colors = CardDefaults.cardColors(
                 containerColor = AppTheme.colors.backgrounds.backgroundColor,

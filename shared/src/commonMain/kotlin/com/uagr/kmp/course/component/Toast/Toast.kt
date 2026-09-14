@@ -9,19 +9,23 @@ import androidx.compose.ui.Modifier
 import com.tarifchakder.ktoast.ToastDefaults
 import com.tarifchakder.ktoast.ToastHost
 import com.tarifchakder.ktoast.ToastState
-import com.uagr.kmp.course.theme.Dimens
+import com.uagr.kmp.course.presentation.packages.viewmodel.PackageUiState
+import com.uagr.kmp.course.presentation.theme.Dimens
 
 @Composable
 fun Toast(
     modifier : Modifier,
-    toastState: ToastState
+    toastState: ToastState,
+    currentState: Boolean = false,
 ){
-    Box {
-        ToastHost(
-            modifier = modifier.fillMaxSize().padding(Dimens.height16),
-            alignment = Alignment.BottomCenter,
-            hostState = toastState,
-            transitionSpec = { ToastDefaults.SLIDE }
-        )
+    if(currentState){
+        Box {
+            ToastHost(
+                modifier = modifier.fillMaxSize().padding(Dimens.height16),
+                alignment = Alignment.BottomCenter,
+                hostState = toastState,
+                transitionSpec = { ToastDefaults.SLIDE }
+            )
+        }
     }
 }

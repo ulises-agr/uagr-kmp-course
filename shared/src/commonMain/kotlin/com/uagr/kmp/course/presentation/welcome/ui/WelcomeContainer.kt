@@ -23,8 +23,8 @@ import com.uagr.kmp.course.component.button.Button
 import com.uagr.kmp.course.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.component.text.TextBigBold
 import com.uagr.kmp.course.component.text.TextMedium
-import com.uagr.kmp.course.theme.AppTheme
-import com.uagr.kmp.course.theme.Dimens
+import com.uagr.kmp.course.presentation.theme.AppTheme
+import com.uagr.kmp.course.presentation.theme.Dimens
 import course.shared.generated.resources.Res
 import course.shared.generated.resources.explore_our_multiplatform_platform
 import course.shared.generated.resources.hello
@@ -33,7 +33,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun WelcomeContainer(
-    onClickButton: () -> Unit = { }
+    navigateToCard : () -> Unit = {},
 ) {
     val scrollState = rememberScrollState()
     Column(
@@ -69,7 +69,7 @@ fun WelcomeContainer(
             ),
             text = stringResource(Res.string.welcomeButton),
             textAlign = TextAlign.Center,
-            onClickButton = onClickButton
+            onClickButton = navigateToCard
         )
     }
 }
