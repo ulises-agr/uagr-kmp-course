@@ -2,7 +2,7 @@
  * PackagesContainer.kt
  * Copyright (c) 2026. All rights reserved
  */
-package com.uagr.kmp.course.presentation.ui.packages.ui
+package com.uagr.kmp.course.presentation.ui.packages.ui.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

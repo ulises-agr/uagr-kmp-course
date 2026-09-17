@@ -9,6 +9,7 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 
 @Immutable
 data class AppColors(
@@ -51,6 +52,7 @@ data class AppColors(
     val text: ColorTexts = ColorTexts(),
     val backgrounds: ColorBackgrounds = ColorBackgrounds(),
     val divider: Color = Color.Unspecified,
+    val backgroundProgressIndicator: Color = Color.Unspecified
 ) {
     fun asMaterialColorScheme(isDark: Boolean): ColorScheme =
         if (isDark) {

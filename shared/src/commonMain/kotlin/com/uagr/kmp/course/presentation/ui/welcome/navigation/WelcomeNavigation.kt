@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.uagr.kmp.course.presentation.ui.packages.navigation.PackagesScreenInstance
 import com.uagr.kmp.course.presentation.ui.welcome.ui.WelcomeScreen
 
 data object WelcomeScreenInstance : Screen {
@@ -16,7 +17,7 @@ data object WelcomeScreenInstance : Screen {
         val navigator = LocalNavigator.currentOrThrow
         WelcomeScreen(
             navigateToPackages = {
-//                navigator.push(item = PackagesScreenInstance)
+                navigator.push(item = PackagesScreenInstance)
             },
         )
     }
