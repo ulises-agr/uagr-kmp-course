@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.core.screen.Screen
 import com.uagr.kmp.course.presentation.ui.packages.ui.PackagesScreen
 
-data object PackagesScreenInstance : Screen {
+data object PackagesNavigation : Screen {
     @Composable
     override fun Content() {
         PackagesScreen()

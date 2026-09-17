@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import com.uagr.kmp.course.domain.model.base.ErrorDialogModel
 import com.uagr.kmp.course.presentation.component.buton.ButtonCustom
 import com.uagr.kmp.course.presentation.component.text.TextNormalBold
 import com.uagr.kmp.course.presentation.component.text.TextSmall
@@ -23,54 +24,55 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun DialogCustom(
+    modifier: Modifier = Modifier,
+    errorDialog: ErrorDialogModel?,
     titleTextColor: Color,
-    titleText: String,
     messageTextColor: Color,
-    messageText: String,
     primaryButtonBackgroundColor: Color,
     primaryButtonTextColor: Color,
-    primaryButtonText: String,
     secondaryButtonBackgroundColor: Color = Color.Gray,
     secondaryButtonTextColor: Color = Color.White,
-    secondaryButtonText: String = "",
     onPrimaryButtonClick: () -> Unit = {},
     onSecondaryButtonClick: () -> Unit = {},
 ) {
-    AlertDialog(
-        onDismissRequest = {},
-        title = {
-            TextNormalBold(
-                color = titleTextColor,
-                text = titleText,
-            )
-        },
-        text = {
-            TextSmall(
-                color = messageTextColor,
-                text = messageText,
-            )
-        },
-        confirmButton = {
-            if (primaryButtonText.isNotEmpty()) {
-                ButtonCustom(
-                    backgroundButton = primaryButtonBackgroundColor,
-                    textColor = primaryButtonTextColor,
-                    text = stringResource(Res.string.example),
-                    onClick = onPrimaryButtonClick,
+    errorDialog?.let { errorDialog ->
+        AlertDialog(
+            modifier = modifier,
+            onDismissRequest = {},
+            title = {
+                TextNormalBold(
+                    color = titleTextColor,
+                    text = errorDialog.title,
                 )
-            }
-        },
-        dismissButton = {
-            if (secondaryButtonText.isNotEmpty()) {
-                ButtonCustom(
-                    backgroundButton = secondaryButtonBackgroundColor,
-                    textColor = secondaryButtonTextColor,
-                    text = stringResource(Res.string.example),
-                    onClick = onSecondaryButtonClick,
+            },
+            text = {
+                TextSmall(
+                    color = messageTextColor,
+                    text = errorDialog.message,
                 )
-            }
-        },
-    )
+            },
+            confirmButton = {
+                if (errorDialog.primaryButtonText.isNotEmpty()) {
+                    ButtonCustom(
+                        backgroundButton = primaryButtonBackgroundColor,
+                        textColor = primaryButtonTextColor,
+                        text = errorDialog.primaryButtonText,
+                        onClick = onPrimaryButtonClick,
+                    )
+                }
+            },
+            dismissButton = {
+                if (errorDialog.secondaryButtonText.isNotEmpty()) {
+                    ButtonCustom(
+                        backgroundButton = secondaryButtonBackgroundColor,
+                        textColor = secondaryButtonTextColor,
+                        text = errorDialog.secondaryButtonText,
+                        onClick = onSecondaryButtonClick,
+                    )
+                }
+            },
+        )
+    }
 }
 
 @Preview(
@@ -85,16 +87,17 @@ private fun ErrorDialogPreview() {
         verticalArrangement = Arrangement.spacedBy(Dimens.padding16),
     ) {
         DialogCustom(
+            errorDialog = ErrorDialogModel(
+                title = stringResource(Res.string.example),
+                message = stringResource(Res.string.example),
+                primaryButtonText = stringResource(Res.string.example),
+            ),
             titleTextColor = Color.Black,
-            titleText = stringResource(Res.string.example),
             messageTextColor = Color.Black,
-            messageText = stringResource(Res.string.example),
             primaryButtonBackgroundColor = Color.Black,
             primaryButtonTextColor = Color.White,
-            primaryButtonText = stringResource(Res.string.example),
             secondaryButtonBackgroundColor = Color.Black,
             secondaryButtonTextColor = Color.White,
-            secondaryButtonText = stringResource(Res.string.example),
         )
     }
 }

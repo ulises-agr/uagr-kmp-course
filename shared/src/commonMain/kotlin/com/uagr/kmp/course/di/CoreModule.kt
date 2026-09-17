@@ -8,17 +8,17 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import com.uagr.kmp.course.data.local.database.AppDatabase
 import com.uagr.kmp.course.data.local.database.dao.packages.PackagesDao
-import com.uagr.kmp.course.data.local.database.dao.user.UsersDao
+import com.uagr.kmp.course.data.local.database.dao.user.UserDao
 import com.uagr.kmp.course.data.local.database.getDatabaseBuilder
 import com.uagr.kmp.course.data.local.datasource.packages.PackagesLocalDataSource
 import com.uagr.kmp.course.data.local.datasource.packages.PackagesLocalDataSourceImpl
-import com.uagr.kmp.course.data.local.datasource.user.UsersLocalDataSource
-import com.uagr.kmp.course.data.local.datasource.user.UsersLocalDataSourceImpl
+import com.uagr.kmp.course.data.local.datasource.user.UserLocalDataSource
+import com.uagr.kmp.course.data.local.datasource.user.UserLocalDataSourceImpl
 import com.uagr.kmp.course.data.local.datastore.AppDataStore
 import com.uagr.kmp.course.data.local.datastore.createDataStore
 import com.uagr.kmp.course.data.network.client.createHttpClient
-import com.uagr.kmp.course.data.network.datasource.login.LoginRemoteDataSource
-import com.uagr.kmp.course.data.network.datasource.login.LoginRemoteDataSourceImpl
+import com.uagr.kmp.course.data.network.datasource.login.LoginNetworkDataSource
+import com.uagr.kmp.course.data.network.datasource.login.LoginNetworkDataSourceImpl
 import com.uagr.kmp.course.data.network.datasource.packages.PackagesNetworkDataSource
 import com.uagr.kmp.course.data.network.datasource.packages.PackagesNetworkDataSourceImpl
 import com.uagr.kmp.course.data.repository.login.LoginRepositoryImpl
@@ -28,11 +28,9 @@ import com.uagr.kmp.course.domain.repository.login.LoginRepository
 import com.uagr.kmp.course.domain.repository.packages.PackagesRepository
 import com.uagr.kmp.course.domain.repository.user.UserRepository
 import com.uagr.kmp.course.domain.usecase.login.LoginUseCase
-import com.uagr.kmp.course.domain.usecase.login.ValidateLoginUseCase
 import com.uagr.kmp.course.domain.usecase.packages.ClearAndInsertPackagesUseCase
 import com.uagr.kmp.course.domain.usecase.packages.GetLocalPackagesUseCase
 import com.uagr.kmp.course.domain.usecase.packages.GetNetworkPackagesUseCase
-import com.uagr.kmp.course.domain.usecase.user.ClearAndInsertUserUseCase
 import com.uagr.kmp.course.domain.usecase.user.SaveUserTokenUseCase
 import com.uagr.kmp.course.presentation.ui.login.viewmodel.LoginViewModel
 import com.uagr.kmp.course.presentation.ui.packages.viewmodel.PackagesViewModel
@@ -67,7 +65,7 @@ val dataStoreModule = module {
 
 val databaseDaoModule = module {
     single<PackagesDao> { get<AppDatabase>().packagesDao() }
-    single<UsersDao> { get<AppDatabase>().usersDao() }
+    single<UserDao> { get<AppDatabase>().userDao() }
 }
 
 val networkModule = module {
@@ -76,12 +74,12 @@ val networkModule = module {
 
 val dataSourceRemoteModule = module {
     singleOf(constructor = ::PackagesNetworkDataSourceImpl) bind PackagesNetworkDataSource::class
-    singleOf(constructor = ::LoginRemoteDataSourceImpl) bind LoginRemoteDataSource::class
+    singleOf(constructor = ::LoginNetworkDataSourceImpl) bind LoginNetworkDataSource::class
 }
 
 val dataSourceLocalModule = module {
     singleOf(constructor = ::PackagesLocalDataSourceImpl) bind PackagesLocalDataSource::class
-    singleOf(constructor = ::UsersLocalDataSourceImpl) bind UsersLocalDataSource::class
+    singleOf(constructor = ::UserLocalDataSourceImpl) bind UserLocalDataSource::class
 }
 
 val repositoryModule = module {
@@ -94,9 +92,8 @@ val useCaseModule = module {
     factoryOf(constructor = ::GetNetworkPackagesUseCase)
     factoryOf(constructor = ::ClearAndInsertPackagesUseCase)
     factoryOf(constructor = ::GetLocalPackagesUseCase)
-    factoryOf(constructor = ::ValidateLoginUseCase)
     factoryOf(constructor = ::LoginUseCase)
-    factoryOf(constructor = ::ClearAndInsertUserUseCase)
+    factoryOf(constructor = ::ClearAndInsertPackagesUseCase)
     factoryOf(constructor = ::SaveUserTokenUseCase)
 }
 

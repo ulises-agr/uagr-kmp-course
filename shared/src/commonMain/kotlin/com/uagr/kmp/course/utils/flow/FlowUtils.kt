@@ -6,11 +6,11 @@ package com.uagr.kmp.course.utils.flow
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
-fun <T> SharedFlow<T>.CollectWithLifecycle(
+fun <T> StateFlow<T>.CollectWithLifecycle(
     vararg keys: Any?,
     action: suspend (T) -> Unit
 ) {

@@ -4,6 +4,7 @@
     <string name="example">Example</string>
 
     <!-- Error -->
+    <string name="error">Error</string>
     <string name="please_try_again_later">Please try again later</string>
 
     <!-- Welcome -->
@@ -28,6 +29,7 @@
 
     <!-- Login -->
     <string name="accept">Accept</string>
+    <string name="cancel">Cancel</string>
 
     <!-- Packages -->
     <string name="empty_packages">Empty packages</string>
