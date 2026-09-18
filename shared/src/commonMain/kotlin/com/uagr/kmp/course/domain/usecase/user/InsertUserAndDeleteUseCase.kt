@@ -12,9 +12,6 @@ class InsertUserAndDeleteUseCase(
     private val userRepository: UserRepository,
 ) {
     suspend operator fun invoke(user: UserModel?): Flow<Unit> =
-        user?.let {
-            userRepository.insertUserAndDelete(user = user)
-        } ?: run {
-            throw IllegalArgumentException()
-        }
+        userRepository.insertUserAndDelete(user = user!!)
+
 }

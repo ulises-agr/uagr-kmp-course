@@ -9,6 +9,8 @@ import androidx.lifecycle.viewModelScope
 import com.uagr.kmp.course.domain.model.base.ErrorDialogModel
 import com.uagr.kmp.course.domain.model.login.LoginDataModel
 import com.uagr.kmp.course.domain.usecase.login.LoginUseCase
+import com.uagr.kmp.course.domain.usecase.login.LoginValidationResult
+import com.uagr.kmp.course.domain.usecase.login.ValidateLoginFormUseCase
 import com.uagr.kmp.course.domain.usecase.user.InsertUserAndDeleteUseCase
 import com.uagr.kmp.course.domain.usecase.user.SaveUserTokenUseCase
 import com.uagr.kmp.course.utils.constant.NetworkUrl
@@ -16,7 +18,9 @@ import com.uagr.kmp.course.utils.network.NetworkResult
 import com.uagr.kmp.course.utils.operators.StatusLoading
 import course.shared.generated.resources.Res
 import course.shared.generated.resources.accept
+import course.shared.generated.resources.email_empty
 import course.shared.generated.resources.error
+import course.shared.generated.resources.password_empty
 import course.shared.generated.resources.please_try_again_later
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -28,6 +32,7 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.getString
 
 class LoginViewModel(
+    private val validateLoginFormUseCase: ValidateLoginFormUseCase,
     private val loginUseCase: LoginUseCase,
     private val insertUserAndDeleteUseCase: InsertUserAndDeleteUseCase,
     private val saveUserTokenUseCase: SaveUserTokenUseCase,
@@ -39,11 +44,39 @@ class LoginViewModel(
     private var _loginUiEvent = MutableStateFlow<LoginUiEvent>(LoginUiEvent.Idle)
     val loginUiEvent: StateFlow<LoginUiEvent> = _loginUiEvent.asStateFlow()
 
-    init {
-        login(
-            email = "",
-            password = "",
-        )
+    fun updateEmail(email: String) = viewModelScope.launch {
+        _loginUiState.update { state -> state.copy(email = email) }
+    }
+
+    fun updatePassword(password: String) = viewModelScope.launch {
+        _loginUiState.update { state -> state.copy(password = password) }
+    }
+
+    fun updatePasswordVisible(passwordVisible: Boolean) = viewModelScope.launch {
+        _loginUiState.update { state -> state.copy(passwordVisible = passwordVisible) }
+    }
+
+    fun validateLoginForm(
+        email: String,
+        password: String,
+    ) = viewModelScope.launch {
+        when (validateLoginFormUseCase(
+            email = email,
+            password = password,
+        )) {
+            is LoginValidationResult.EmailEmpty -> {
+                _loginUiState.update { state -> state.copy(errorDialog = setErrorDialog(message = getString(Res.string.email_empty))) }
+            }
+            is LoginValidationResult.PasswordEmpty -> {
+                _loginUiState.update { state -> state.copy(errorDialog = setErrorDialog(message = getString(Res.string.password_empty))) }
+            }
+            is LoginValidationResult.Success -> {
+                login(
+                    email = email,
+                    password = password,
+                )
+            }
+        }
     }
 
     private fun login(
@@ -117,10 +150,10 @@ class LoginViewModel(
         }
     }
 
-    private suspend fun setErrorDialog(): ErrorDialogModel =
+    private suspend fun setErrorDialog(message: String? = null): ErrorDialogModel =
         ErrorDialogModel(
             title = getString(resource = Res.string.error),
-            message = getString(resource = Res.string.please_try_again_later),
+            message = message ?: getString(resource = Res.string.please_try_again_later),
             primaryButtonText = getString(resource = Res.string.accept),
         )
 

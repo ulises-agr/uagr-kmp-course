@@ -36,7 +36,26 @@ fun LoginScreen(
     }
 
     SafeScreenContainer {
-        LoginContainer()
+        LoginContainer(
+            email = loginUiState.email,
+            onEmailChange = { email ->
+                viewModel.updateEmail(email =email)
+            },
+            password = loginUiState.password,
+            onPasswordChange = { password ->
+                viewModel.updatePassword(password = password)
+            },
+            passwordVisible = loginUiState.passwordVisible,
+            onPasswordVisibleChange = { passwordVisible ->
+                viewModel.updatePasswordVisible(passwordVisible = passwordVisible)
+            },
+            onLoginClick = {
+                viewModel.validateLoginForm(
+                    email = loginUiState.email,
+                    password = loginUiState.password
+                )
+            },
+        )
         Loader()
         DialogCustom(
             errorDialog = loginUiState.errorDialog,

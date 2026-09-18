@@ -12,9 +12,6 @@ class SaveUserTokenUseCase(
     private val userRepository: UserRepository,
 ) {
     suspend operator fun invoke(token: UserTokensModel?): Flow<Unit> =
-        if (!token?.access_token.isNullOrEmpty()) {
-            userRepository.saveUserToken(token = token.access_token)
-        } else {
-            throw IllegalArgumentException()
-        }
+        userRepository.saveUserToken(token = token?.access_token.orEmpty())
+
 }

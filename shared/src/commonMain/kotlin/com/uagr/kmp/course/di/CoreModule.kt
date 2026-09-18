@@ -28,9 +28,11 @@ import com.uagr.kmp.course.domain.repository.login.LoginRepository
 import com.uagr.kmp.course.domain.repository.packages.PackagesRepository
 import com.uagr.kmp.course.domain.repository.user.UserRepository
 import com.uagr.kmp.course.domain.usecase.login.LoginUseCase
+import com.uagr.kmp.course.domain.usecase.login.ValidateLoginFormUseCase
 import com.uagr.kmp.course.domain.usecase.packages.ClearAndInsertPackagesUseCase
 import com.uagr.kmp.course.domain.usecase.packages.GetLocalPackagesUseCase
 import com.uagr.kmp.course.domain.usecase.packages.GetNetworkPackagesUseCase
+import com.uagr.kmp.course.domain.usecase.user.InsertUserAndDeleteUseCase
 import com.uagr.kmp.course.domain.usecase.user.SaveUserTokenUseCase
 import com.uagr.kmp.course.presentation.ui.login.viewmodel.LoginViewModel
 import com.uagr.kmp.course.presentation.ui.packages.viewmodel.PackagesViewModel
@@ -93,8 +95,9 @@ val useCaseModule = module {
     factoryOf(constructor = ::ClearAndInsertPackagesUseCase)
     factoryOf(constructor = ::GetLocalPackagesUseCase)
     factoryOf(constructor = ::LoginUseCase)
-    factoryOf(constructor = ::ClearAndInsertPackagesUseCase)
     factoryOf(constructor = ::SaveUserTokenUseCase)
+    factoryOf(constructor = ::InsertUserAndDeleteUseCase)
+    factoryOf(constructor = ::ValidateLoginFormUseCase)
 }
 
 val viewmodelModule = module {

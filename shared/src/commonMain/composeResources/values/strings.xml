@@ -23,13 +23,11 @@
     <string name="email_empty">Email empty</string>
     <string name="password_empty">Password empty</string>
     <string name="go_to_packages">Go to packages</string>
+    <string name="accept">Accept</string>
+    <string name="cancel">Cancel</string>
 
     <!-- Welcome -->
     <string name="welcome">Welcome</string>
-
-    <!-- Login -->
-    <string name="accept">Accept</string>
-    <string name="cancel">Cancel</string>
 
     <!-- Packages -->
     <string name="empty_packages">Empty packages</string>

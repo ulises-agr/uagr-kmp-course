@@ -17,10 +17,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -33,6 +29,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
+import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.presentation.component.text.TextMedium
 import com.uagr.kmp.course.presentation.component.text.TextMediumBold
 import com.uagr.kmp.course.presentation.theme.Dimens
@@ -111,8 +108,10 @@ fun TextFieldCustom(
 @Composable
 fun TextFieldPassword(
     modifier: Modifier = Modifier,
-    value: String,
-    onValueChange: (String) -> Unit,
+    email: String,
+    onEmailChange: (String) -> Unit,
+    passwordVisible: Boolean,
+    onPasswordVisibleChange: (Boolean) -> Unit,
     fontSize: TextUnit = Dimens.textSizeNormal,
     labelColor: Color,
     label: String,
@@ -128,12 +127,10 @@ fun TextFieldPassword(
     capitalization: KeyboardCapitalization = KeyboardCapitalization.Words,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
 ) {
-    var passwordVisible by rememberSaveable { mutableStateOf(value = false) }
-
     OutlinedTextField(
         modifier = modifier.fillMaxWidth(),
-        value = value,
-        onValueChange = onValueChange,
+        value = email,
+        onValueChange = onEmailChange,
         textStyle = TextStyle(
             fontSize = fontSize,
             fontWeight = FontWeight.Normal,
@@ -168,7 +165,7 @@ fun TextFieldPassword(
         },
         visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
         trailingIcon = {
-            IconButton(onClick = { passwordVisible = !passwordVisible }) {
+            IconButton(onClick = { onPasswordVisibleChange(!passwordVisible) }) {
                 Icon(
                     painter = painterResource(if (passwordVisible) trailingIconActive else trailingIconInActive),
                     contentDescription = null,
@@ -191,38 +188,42 @@ fun TextFieldPassword(
 )
 @Composable
 private fun TextFieldPreview() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(all = Dimens.padding16),
-        verticalArrangement = Arrangement.spacedBy(Dimens.padding16),
-    ) {
+    SafeScreenContainerTest {
         Column(
-            modifier = Modifier.padding(all = Dimens.padding16),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(all = Dimens.padding16),
             verticalArrangement = Arrangement.spacedBy(Dimens.padding16),
         ) {
-            TextFieldCustom(
-                value = "",
-                onValueChange = {},
-                labelColor = Color.Black,
-                label = stringResource(Res.string.example),
-                placeholderColor = Color.Black,
-                placeholder = stringResource(Res.string.example),
-                leadingIcon = Res.drawable.ic_example,
-            )
-            TextFieldPassword(
-                value = "",
-                onValueChange = {},
-                labelColor = Color.Black,
-                label = stringResource(Res.string.example),
-                placeholderColor = Color.Black,
-                placeholder = stringResource(Res.string.example),
-                leadingIcon = Res.drawable.ic_example,
-                trailingIconActive = Res.drawable.ic_example,
-                trailingIconInActive = Res.drawable.ic_example,
-                keyboardType = KeyboardType.Password,
-                capitalization = KeyboardCapitalization.None,
-            )
+            Column(
+                modifier = Modifier.padding(all = Dimens.padding16),
+                verticalArrangement = Arrangement.spacedBy(Dimens.padding16),
+            ) {
+                TextFieldCustom(
+                    value = "",
+                    onValueChange = {},
+                    labelColor = Color.Black,
+                    label = stringResource(Res.string.example),
+                    placeholderColor = Color.Black,
+                    placeholder = stringResource(Res.string.example),
+                    leadingIcon = Res.drawable.ic_example,
+                )
+                TextFieldPassword(
+                    email = "",
+                    onEmailChange = {},
+                    passwordVisible = false,
+                    onPasswordVisibleChange = {},
+                    labelColor = Color.Black,
+                    label = stringResource(Res.string.example),
+                    placeholderColor = Color.Black,
+                    placeholder = stringResource(Res.string.example),
+                    leadingIcon = Res.drawable.ic_example,
+                    trailingIconActive = Res.drawable.ic_example,
+                    trailingIconInActive = Res.drawable.ic_example,
+                    keyboardType = KeyboardType.Password,
+                    capitalization = KeyboardCapitalization.None,
+                )
+            }
         }
     }
 }
