@@ -13,13 +13,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.presentation.theme.AppTheme
 import com.uagr.kmp.course.presentation.theme.Dimens
+import com.uagr.kmp.course.utils.operators.StatusLoading
 
 @Composable
 fun Loader(
     modifier: Modifier = Modifier,
-    currentState : Boolean,
+    currentState: StatusLoading = StatusLoading.HIDE_LOADING,
 ) {
-    if(currentState){
+    if(currentState == StatusLoading.SHOW_LOADING){
         Box(
             modifier = modifier
                 .fillMaxSize()
@@ -42,7 +43,7 @@ private fun LoaderPreview() {
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(Dimens.padding16),
         ) {
-            Loader(currentState = true)
+            Loader(currentState = StatusLoading.SHOW_LOADING)
         }
     }
 }

@@ -3,6 +3,10 @@
     <!-- None -->
     <string name="example">Example</string>
 
+    <!-- Error -->
+    <string name="error">Error</string>
+    <string name="please_try_again_later">Please try again later</string>
+
     <!-- Welcome -->
     <string name="hello">¡Hello!</string>
     <string name="explore_our_multiplatform_platform">Explore our multi platform</string>
@@ -17,7 +21,11 @@
     <string name="email_example">user@gmail</string>
     <string name="password_example">Password123</string>
     <string name="email_empty">Email empty</string>
+    <string name="email_format">Wrong email format</string>
     <string name="password_empty">Password empty</string>
+    <string name="go_to_packages">Go to packages</string>
+    <string name="accept">Accept</string>
+    <string name="cancel">Cancel</string>
 
     <!-- Welcome -->
     <string name="welcome">Welcome</string>

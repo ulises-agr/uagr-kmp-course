@@ -20,6 +20,7 @@ import com.uagr.kmp.course.domain.repository.login.LoginRepositoryImp
 import com.uagr.kmp.course.domain.repository.packages.PackageRepositoryImp
 import com.uagr.kmp.course.domain.repository.packages.PackagesRepository
 import com.uagr.kmp.course.domain.usecase.login.LoginUseCase
+import com.uagr.kmp.course.domain.usecase.login.ValidateLoginFormUseCase
 import com.uagr.kmp.course.domain.usecase.packages.ClearAndInsertPackagesUseCase
 import com.uagr.kmp.course.domain.usecase.packages.GetLocalPackagesUseCase
 import com.uagr.kmp.course.domain.usecase.packages.GetNetworkPackagesUseCase
@@ -63,6 +64,7 @@ val useCaseModule = module {
     factoryOf(constructor = ::ClearAndInsertPackagesUseCase)
     factoryOf(constructor = ::GetLocalPackagesUseCase)
     factoryOf(constructor = ::LoginUseCase)
+    factoryOf(constructor = ::ValidateLoginFormUseCase)
 }
 
 val dataSourceRemoteModule = module {

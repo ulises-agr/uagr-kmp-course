@@ -15,6 +15,7 @@ import com.uagr.kmp.course.domain.usecase.packages.GetLocalPackagesUseCase
 import com.uagr.kmp.course.domain.usecase.packages.GetNetworkPackagesUseCase
 import com.uagr.kmp.course.utils.constants.NetworkUrl
 import com.uagr.kmp.course.utils.network.NetworkResult
+import com.uagr.kmp.course.utils.operators.StatusLoading
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -42,9 +43,9 @@ class PackageViewModel(
     private fun getPackages() = viewModelScope.launch {
         getNetworkPackagesUseCase(url = NetworkUrl.GET_PACKAGES_ENDPOINT)
             .onStart {
-                _packageUiState.update { state -> state.copy(showLoader = true) }
+                _packageUiState.update { state -> state.copy(showLoader = StatusLoading.SHOW_LOADING) }
             }.catch {
-                _packageUiState.update { state -> state.copy(showLoader = false, showToast = true) }
+                _packageUiState.update { state -> state.copy(showLoader = StatusLoading.HIDE_LOADING, showToast = true) }
                 _packageUiEvent.emit(PackageUiEvent.ShowErrorDialog(message = "Error en el servicio"))
             }.collect { result ->
                 when(result){
@@ -52,7 +53,7 @@ class PackageViewModel(
                         clearAndInsertPackages(packageModel = result.response)
                     }
                     is NetworkResult.Error -> {
-                        _packageUiState.update { state -> state.copy(showLoader = false) }
+                        _packageUiState.update { state -> state.copy(showLoader = StatusLoading.HIDE_LOADING) }
                         _packageUiEvent.emit(PackageUiEvent.ShowErrorDialog(message = result.message))
                     }
                 }
@@ -62,7 +63,7 @@ class PackageViewModel(
     private fun clearAndInsertPackages(packageModel: PackageModel) = viewModelScope.launch{
         clearAndInsertPackagesUseCase(packageModel = packageModel)
             .catch {
-                _packageUiState.update { state -> state.copy(showLoader = false, showToast = true) }
+                _packageUiState.update { state -> state.copy(showLoader = StatusLoading.HIDE_LOADING, showToast = true) }
                 _packageUiEvent.emit(PackageUiEvent.ShowErrorDialog(message = "Error en el servicio"))
             }
             .collect {
@@ -73,11 +74,11 @@ class PackageViewModel(
     private fun getLocalPackages() = viewModelScope.launch{
         getLocalPackagesUseCase()
             .catch {
-                _packageUiState.update { state -> state.copy(showLoader = false, showToast = true) }
+                _packageUiState.update { state -> state.copy(showLoader = StatusLoading.HIDE_LOADING, showToast = true) }
                 _packageUiEvent.emit(PackageUiEvent.ShowErrorDialog(message = "Error en el servicio"))
             }
             .collect { result ->
-                _packageUiState.update { state -> state.copy(showLoader = false, packages = result) }
+                _packageUiState.update { state -> state.copy(showLoader = StatusLoading.HIDE_LOADING, packages = result) }
             }
     }
     
