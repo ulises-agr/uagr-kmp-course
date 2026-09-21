@@ -9,10 +9,10 @@ import androidx.lifecycle.viewModelScope
 import com.kmp.presentation.welcome.viewmodel.PackageUiEvent
 import com.tarifchakder.ktoast.ToastDuration
 import com.tarifchakder.ktoast.ToastState
-import com.uagr.kmp.course.domain.model.PackageModel
-import com.uagr.kmp.course.domain.usecase.ClearAndInsertPackagesUseCase
-import com.uagr.kmp.course.domain.usecase.GetLocalPackagesUseCase
-import com.uagr.kmp.course.domain.usecase.GetNetworkPackagesUseCase
+import com.uagr.kmp.course.domain.model.packages.PackageModel
+import com.uagr.kmp.course.domain.usecase.packages.ClearAndInsertPackagesUseCase
+import com.uagr.kmp.course.domain.usecase.packages.GetLocalPackagesUseCase
+import com.uagr.kmp.course.domain.usecase.packages.GetNetworkPackagesUseCase
 import com.uagr.kmp.course.utils.constants.NetworkUrl
 import com.uagr.kmp.course.utils.network.NetworkResult
 import kotlinx.coroutines.flow.MutableStateFlow

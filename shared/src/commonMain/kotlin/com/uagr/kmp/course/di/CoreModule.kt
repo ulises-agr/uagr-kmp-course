@@ -11,13 +11,19 @@ import com.uagr.kmp.course.data.local.database.getDatabaseBuilder
 import com.uagr.kmp.course.data.local.datasource.PackagesLocalDataSource
 import com.uagr.kmp.course.data.local.datasource.PackagesLocalDataSourceImp
 import com.uagr.kmp.course.data.network.client.createHttpClient
-import com.uagr.kmp.course.data.network.datasource.PackagesNetworkDataSource
-import com.uagr.kmp.course.data.network.datasource.PackagesNetworkDataSourceImp
-import com.uagr.kmp.course.domain.repository.PackageRepositoryImp
-import com.uagr.kmp.course.domain.repository.PackagesRepository
-import com.uagr.kmp.course.domain.usecase.ClearAndInsertPackagesUseCase
-import com.uagr.kmp.course.domain.usecase.GetLocalPackagesUseCase
-import com.uagr.kmp.course.domain.usecase.GetNetworkPackagesUseCase
+import com.uagr.kmp.course.data.network.datasource.login.LoginNetworkDataSource
+import com.uagr.kmp.course.data.network.datasource.login.LoginNetworkDataSourceImp
+import com.uagr.kmp.course.data.network.datasource.packages.PackagesNetworkDataSource
+import com.uagr.kmp.course.data.network.datasource.packages.PackagesNetworkDataSourceImp
+import com.uagr.kmp.course.domain.repository.login.LoginRepository
+import com.uagr.kmp.course.domain.repository.login.LoginRepositoryImp
+import com.uagr.kmp.course.domain.repository.packages.PackageRepositoryImp
+import com.uagr.kmp.course.domain.repository.packages.PackagesRepository
+import com.uagr.kmp.course.domain.usecase.login.LoginUseCase
+import com.uagr.kmp.course.domain.usecase.packages.ClearAndInsertPackagesUseCase
+import com.uagr.kmp.course.domain.usecase.packages.GetLocalPackagesUseCase
+import com.uagr.kmp.course.domain.usecase.packages.GetNetworkPackagesUseCase
+import com.uagr.kmp.course.presentation.login.viewmodel.LoginViewModel
 import com.uagr.kmp.course.presentation.packages.viewmodel.PackageViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -49,16 +55,19 @@ val databaseDaoModule = module {
 val viewmodelModule = module {
     viewModelOf(constructor = ::WelcomeViewModel)
     viewModelOf(constructor = ::PackageViewModel)
+    viewModelOf(constructor = ::LoginViewModel)
 }
 
 val useCaseModule = module {
     factoryOf(constructor = ::GetNetworkPackagesUseCase)
     factoryOf(constructor = ::ClearAndInsertPackagesUseCase)
     factoryOf(constructor = ::GetLocalPackagesUseCase)
+    factoryOf(constructor = ::LoginUseCase)
 }
 
 val dataSourceRemoteModule = module {
     singleOf(constructor = ::PackagesNetworkDataSourceImp) bind PackagesNetworkDataSource::class
+    singleOf(constructor = ::LoginNetworkDataSourceImp) bind LoginNetworkDataSource::class
 }
 
 val dataSourceLocalModule = module {
@@ -67,6 +76,7 @@ val dataSourceLocalModule = module {
 
 val repositoryModule = module {
     singleOf(constructor = ::PackageRepositoryImp) bind PackagesRepository::class
+    singleOf(constructor = ::LoginRepositoryImp) bind LoginRepository::class
 }
 
 val networkModule = module {

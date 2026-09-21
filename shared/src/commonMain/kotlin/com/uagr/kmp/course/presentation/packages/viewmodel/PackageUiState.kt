@@ -4,7 +4,7 @@
  */
 package com.uagr.kmp.course.presentation.packages.viewmodel
 
-import com.uagr.kmp.course.domain.model.PackageModel
+import com.uagr.kmp.course.domain.model.packages.PackageModel
 
 data class PackageUiState(
     val showLoader: Boolean = false,

@@ -11,10 +11,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kmp.presentation.welcome.viewmodel.PackageUiEvent
 import com.tarifchakder.ktoast.ToastState
-import com.uagr.kmp.course.component.Loader.Loader
-import com.uagr.kmp.course.component.Toast.Toast
-import com.uagr.kmp.course.component.container.SafeScreenContainer
-import com.uagr.kmp.course.component.container.SafeScreenContainerTest
+import com.uagr.kmp.course.presentation.component.Loader.Loader
+import com.uagr.kmp.course.presentation.component.Toast.Toast
+import com.uagr.kmp.course.presentation.component.container.SafeScreenContainer
+import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
+import com.uagr.kmp.course.presentation.packages.viewmodel.PackageUiState
 import com.uagr.kmp.course.presentation.packages.viewmodel.PackageViewModel
 import com.uagr.kmp.course.presentation.theme.AppTheme
 import org.koin.compose.viewmodel.koinViewModel
@@ -51,15 +52,12 @@ fun PackageScreen(
                 modifier = Modifier,
                 toastState = toastState,
                 currentState = packageUiState.showToast)
-                
-            if(packageUiState.showToast)
-                viewModel.showToast(toastState = toastState, toastMessage = "Error")
-            
-        
         
         when(packageUiEvent){
             is PackageUiEvent.Idle -> {}
-            is PackageUiEvent.ShowErrorDialog -> {}
+            is PackageUiEvent.ShowErrorDialog -> {
+                viewModel.showToast(toastState = toastState, toastMessage = (packageUiEvent as PackageUiEvent.ShowErrorDialog).message)
+            }
         }
     }
 }

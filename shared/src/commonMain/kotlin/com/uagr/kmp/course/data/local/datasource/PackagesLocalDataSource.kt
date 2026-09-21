@@ -4,7 +4,7 @@
  */
 package com.uagr.kmp.course.data.local.datasource
 
-import com.uagr.kmp.course.domain.model.PackageModel
+import com.uagr.kmp.course.domain.model.packages.PackageModel
 
 interface PackagesLocalDataSource {
     suspend fun clearAndInsertPackages(packageModel: PackageModel)

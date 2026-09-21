@@ -17,10 +17,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.uagr.kmp.course.component.card.PackageCard
-import com.uagr.kmp.course.component.container.SafeScreenContainerTest
-import com.uagr.kmp.course.component.text.TextBigBold
-import com.uagr.kmp.course.domain.model.PackageModel
+import com.uagr.kmp.course.presentation.component.card.PackageCard
+import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
+import com.uagr.kmp.course.presentation.component.text.TextBigBold
+import com.uagr.kmp.course.domain.model.packages.PackageModel
 import com.uagr.kmp.course.presentation.theme.AppTheme
 import com.uagr.kmp.course.presentation.theme.Dimens
 

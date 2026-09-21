@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.uagr.kmp.course.presentation.login.navigation.LoginNavigation
 import com.uagr.kmp.course.presentation.packages.navigation.PackageNavigation
 import com.uagr.kmp.course.presentation.welcome.ui.WelcomeScreen
 
@@ -18,6 +19,9 @@ data object WelcomeScreenInstance : Screen {
         WelcomeScreen(
             navigateToCard = {
                 navigator.push(item = PackageNavigation(param = 0))
+            },
+            navigateToLogin = {
+                navigator.push(item = LoginNavigation)
             }
         )
     }

@@ -21,7 +21,8 @@
 
     <!-- Welcome -->
     <string name="welcome">Welcome</string>
-    <string name="welcomeButton">Continuar</string>
+    <string name="welcomeButton">Package</string>
+    <string name="LoginButton">Login</string>
 
     <!--  Card -->
     <string name="cardTitle">Internet Full</string>
