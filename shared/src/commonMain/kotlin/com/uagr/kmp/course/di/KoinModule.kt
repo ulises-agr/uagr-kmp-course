@@ -1,5 +1,5 @@
 /*
- * CoreModule.kt
+ * KoinModule.kt
  * Copyright (c) 2026. All rights reserved
  */
 package com.uagr.kmp.course.di
