@@ -13,7 +13,9 @@ import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
+import org.koin.core.annotation.Factory
 
+@Factory
 class PackagesNetworkDataSourceImpl(
     private val httpClient: HttpClient,
 ) : PackagesNetworkDataSource {

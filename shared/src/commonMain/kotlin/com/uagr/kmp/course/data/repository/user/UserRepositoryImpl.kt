@@ -11,7 +11,9 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import org.koin.core.annotation.Factory
 
+@Factory
 class UserRepositoryImpl(
     private val userLocalDataSource: UserLocalDataSource,
     private val ioDispatcher: CoroutineDispatcher,

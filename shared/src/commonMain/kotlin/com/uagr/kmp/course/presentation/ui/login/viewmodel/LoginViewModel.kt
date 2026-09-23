@@ -30,7 +30,9 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.getString
+import org.koin.core.annotation.KoinViewModel
 
+@KoinViewModel
 class LoginViewModel(
     private val validateLoginFormUseCase: ValidateLoginFormUseCase,
     private val loginUseCase: LoginUseCase,

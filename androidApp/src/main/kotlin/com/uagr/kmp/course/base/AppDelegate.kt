@@ -14,9 +14,11 @@ class AppDelegate : Application() {
     override fun onCreate() {
         super.onCreate()
         // DI KMP
-        initKoin {
-            androidLogger(Level.DEBUG)
-            androidContext(this@AppDelegate)
-        }
+        initKoin(
+            config = {
+                androidLogger(Level.DEBUG)
+                androidContext(this@AppDelegate)
+            },
+        )
     }
 }

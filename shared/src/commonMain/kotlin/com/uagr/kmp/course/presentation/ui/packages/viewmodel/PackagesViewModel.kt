@@ -22,7 +22,9 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.core.annotation.KoinViewModel
 
+@KoinViewModel
 class PackagesViewModel(
     private val getNetworkPackagesUseCase: GetNetworkPackagesUseCase,
     private val clearAndInsertPackagesUseCase: ClearAndInsertPackagesUseCase,

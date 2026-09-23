@@ -8,7 +8,9 @@ import com.uagr.kmp.course.domain.model.packages.PackagesModel
 import com.uagr.kmp.course.domain.repository.packages.PackagesRepository
 import com.uagr.kmp.course.utils.network.NetworkResult
 import kotlinx.coroutines.flow.Flow
+import org.koin.core.annotation.Factory
 
+@Factory
 class GetNetworkPackagesUseCase(
     private val packagesRepository: PackagesRepository,
 ) {
