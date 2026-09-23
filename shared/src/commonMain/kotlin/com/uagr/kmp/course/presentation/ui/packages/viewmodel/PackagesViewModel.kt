@@ -6,7 +6,7 @@ package com.uagr.kmp.course.presentation.ui.packages.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.uagr.kmp.course.domain.model.packages.PackagesModel
+import com.uagr.kmp.course.domain.model.packages.PackagesDataModel
 import com.uagr.kmp.course.domain.usecase.packages.ClearAndInsertPackagesUseCase
 import com.uagr.kmp.course.domain.usecase.packages.GetLocalPackagesUseCase
 import com.uagr.kmp.course.domain.usecase.packages.GetNetworkPackagesUseCase
@@ -51,7 +51,7 @@ class PackagesViewModel(
             }.collect { result ->
                 when (result) {
                     is NetworkResult.Success -> {
-                        clearAndInsertPackages(packages = result.response)
+                        clearAndInsertPackages(packages = result.response.data.first())
                     }
                     is NetworkResult.Error -> {
                         _packagesUiState.update { state -> state.copy(isLoading = StatusLoading.DISMISS_LOADING) }
@@ -61,7 +61,7 @@ class PackagesViewModel(
             }
     }
 
-    private fun clearAndInsertPackages(packages: PackagesModel) = viewModelScope.launch {
+    private fun clearAndInsertPackages(packages: PackagesDataModel) = viewModelScope.launch {
         clearAndInsertPackagesUseCase(packages = packages)
             .catch {
                 _packagesUiState.update { state -> state.copy(isLoading = StatusLoading.DISMISS_LOADING) }

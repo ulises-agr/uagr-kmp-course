@@ -1,15 +1,11 @@
 /*
- * PackagesEntity.kt
+ * PackagesModel.kt
  * Copyright (c) 2026. All rights reserved
  */
-package com.uagr.kmp.course.data.local.model.packages
+package com.uagr.kmp.course.domain.model.packages
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
-@Entity(tableName = "packages")
-data class PackagesEntity(
-    @PrimaryKey val id: String,
+data class PackagesDataModel(
+    val id: String,
     val name: String,
     val description: String,
     val price: String,

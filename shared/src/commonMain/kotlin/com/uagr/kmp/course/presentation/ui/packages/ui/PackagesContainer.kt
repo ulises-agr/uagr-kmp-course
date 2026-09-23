@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.uagr.kmp.course.domain.model.packages.PackagesModel
+import com.uagr.kmp.course.domain.model.packages.PackagesDataModel
 import com.uagr.kmp.course.presentation.component.card.PackagesCard
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.presentation.component.text.TextBigBold
@@ -26,7 +26,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun PackagesContainer(
-    packages: PackagesModel? = null,
+    packages: PackagesDataModel? = null,
     activePackagesClick: () -> Unit = {},
 ) {
     Column(
@@ -41,12 +41,12 @@ fun PackagesContainer(
         packages?.let {
             PackagesCard(
                 onClick = activePackagesClick,
-                nameText = packages.title,
-                typeText = packages.packageDescription,
-                quantityText = packages.usedAmount,
-                unit = packages.unit,
-                renewalText = packages.renewalText,
-                buttonText = packages.buttonText,
+                nameText = packages.name,
+                typeText = packages.description,
+                quantityText = packages.price,
+                unit = packages.currency,
+                renewalText = packages.created_by,
+                buttonText = packages.created_at,
             )
         } ?: run {
             TextBigBold(
@@ -63,14 +63,15 @@ fun PackagesContainer(
 private fun PackagesContainerPreview() {
     SafeScreenContainerTest {
         PackagesContainer(
-            packages = PackagesModel(
-                title = "Internet Full",
-                packageDescription = stringResource(Res.string.example),
-                usedAmount = "580",
-                unit = "MB Usados",
-                renewalText = "Renueva en 27 Dias / 5 Abril - 4 Mayo",
-                buttonText = "Activa Paquete",
-                hasInfoIcon = true,
+            packages = PackagesDataModel(
+                id = "1",
+                name = stringResource(Res.string.example),
+                description = stringResource(Res.string.example),
+                price = stringResource(Res.string.example),
+                currency = stringResource(Res.string.example),
+                stock = stringResource(Res.string.example),
+                created_by = stringResource(Res.string.example),
+                created_at = stringResource(Res.string.example),
             )
         )
     }

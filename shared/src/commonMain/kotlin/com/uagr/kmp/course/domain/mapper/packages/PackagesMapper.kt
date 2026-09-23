@@ -5,38 +5,50 @@
 package com.uagr.kmp.course.domain.mapper.packages
 
 import com.uagr.kmp.course.data.local.model.packages.PackagesEntity
+import com.uagr.kmp.course.data.network.model.response.packages.PackagesDataResponse
 import com.uagr.kmp.course.data.network.model.response.packages.PackagesResponse
+import com.uagr.kmp.course.domain.model.packages.PackagesDataModel
 import com.uagr.kmp.course.domain.model.packages.PackagesModel
 
 fun PackagesResponse.toDomain(): PackagesModel =
     PackagesModel(
-        title = title.orEmpty(),
-        packageDescription = packageDescription.orEmpty(),
-        usedAmount = (usedAmount ?: 0.00).toString(),
-        unit = unit.orEmpty(),
-        renewalText = renewalText.orEmpty(),
-        buttonText = buttonText.orEmpty(),
-        hasInfoIcon = hasInfoIcon ?: false,
+        data = data?.map { data -> data.toDomain() } ?: emptyList(),
+        success = success ?: false,
+        message = message.orEmpty(),
     )
 
-fun PackagesEntity.toDomain(): PackagesModel =
-    PackagesModel(
-        title = title.orEmpty(),
-        packageDescription = packageDescription.orEmpty(),
-        usedAmount = (usedAmount ?: 0.00).toString(),
-        unit = unit.orEmpty(),
-        renewalText = renewalText.orEmpty(),
-        buttonText = buttonText.orEmpty(),
-        hasInfoIcon = hasInfoIcon ?: false,
+private fun PackagesDataResponse.toDomain(): PackagesDataModel =
+    PackagesDataModel(
+        id = id.orEmpty(),
+        name = name.orEmpty(),
+        description = description.orEmpty(),
+        price = (price ?: 0.00).toString(),
+        currency = currency.orEmpty(),
+        stock = (stock ?: 0).toString(),
+        created_by = created_by.orEmpty(),
+        created_at = created_at.orEmpty(),
     )
 
-fun PackagesModel.toEntity(): PackagesEntity =
+fun PackagesDataModel.toEntity(): PackagesEntity =
     PackagesEntity(
-        title = title,
-        packageDescription = packageDescription,
-        usedAmount = usedAmount,
-        unit = unit,
-        renewalText = renewalText,
-        buttonText = buttonText,
-        hasInfoIcon = hasInfoIcon,
+        id = id,
+        name = name,
+        description = description,
+        price = price,
+        currency = currency,
+        stock = stock,
+        created_by = created_by,
+        created_at = created_at,
+    )
+
+fun PackagesEntity.toDomain(): PackagesDataModel =
+    PackagesDataModel(
+        id = id,
+        name = name,
+        description = description,
+        price = price,
+        currency = currency,
+        stock = stock,
+        created_by = created_by,
+        created_at = created_at,
     )
