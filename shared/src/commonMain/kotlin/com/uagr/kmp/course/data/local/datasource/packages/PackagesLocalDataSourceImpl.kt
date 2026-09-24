@@ -15,10 +15,10 @@ class PackagesLocalDataSourceImpl(
     private val packagesDao: PackagesDao
 ) : PackagesLocalDataSource {
 
-    override suspend fun clearAndInsertPackages(packages: PackagesDataModel) {
-        packagesDao.clearAndInsertPackages(packages = packages.toEntity())
+    override suspend fun clearAndInsertPackages(packages: List<PackagesDataModel>) {
+        packagesDao.clearAndInsertPackages(packages = packages.map { data  -> data.toEntity() })
     }
 
-    override suspend fun getPackages(): PackagesDataModel? =
-        packagesDao.getPackages()?.toDomain()
+    override suspend fun getPackages(): List<PackagesDataModel> =
+        packagesDao.getPackages().map { data -> data.toDomain() }
 }

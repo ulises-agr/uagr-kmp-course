@@ -11,6 +11,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface PackagesRepository {
     suspend fun getNetworkPackages(url: String): Flow<NetworkResult<PackagesModel>>
-    suspend fun clearAndInsertPackages(packages: PackagesDataModel): Flow<Unit>
-    suspend fun getLocalPackages(): Flow<PackagesDataModel?>
+    suspend fun clearAndInsertPackages(packages: List<PackagesDataModel>): Flow<Unit>
+    suspend fun getLocalPackages(): Flow<List<PackagesDataModel>>
 }

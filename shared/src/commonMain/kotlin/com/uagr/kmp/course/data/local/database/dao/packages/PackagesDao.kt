@@ -15,16 +15,16 @@ import com.uagr.kmp.course.data.local.model.packages.PackagesEntity
 interface PackagesDao {
 
     @Transaction
-    suspend fun clearAndInsertPackages(packages: PackagesEntity) {
+    suspend fun clearAndInsertPackages(packages: List<PackagesEntity>) {
         deleteAllPackages()
         insertPackages(packages = packages)
     }
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertPackages(packages: PackagesEntity)
+    suspend fun insertPackages(packages: List<PackagesEntity>)
 
     @Query("SELECT * FROM packages")
-    suspend fun getPackages(): PackagesEntity?
+    suspend fun getPackages(): List<PackagesEntity>
 
     @Query("DELETE FROM packages")
     suspend fun deleteAllPackages()

@@ -14,6 +14,6 @@ class ClearAndInsertPackagesUseCase(
     private val packagesRepository: PackagesRepository,
 ) {
 
-    suspend operator fun invoke(packages: PackagesDataModel): Flow<Unit> =
+    suspend operator fun invoke(packages: List<PackagesDataModel>): Flow<Unit> =
         packagesRepository.clearAndInsertPackages(packages = packages)
 }

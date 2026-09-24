@@ -51,7 +51,7 @@ class PackagesViewModel(
             }.collect { result ->
                 when (result) {
                     is NetworkResult.Success -> {
-                        clearAndInsertPackages(packages = result.response.data.first())
+                        clearAndInsertPackages(packages = result.response.data)
                     }
                     is NetworkResult.Error -> {
                         _packagesUiState.update { state -> state.copy(isLoading = StatusLoading.DISMISS_LOADING) }
@@ -61,7 +61,7 @@ class PackagesViewModel(
             }
     }
 
-    private fun clearAndInsertPackages(packages: PackagesDataModel) = viewModelScope.launch {
+    private fun clearAndInsertPackages(packages: List<PackagesDataModel>) = viewModelScope.launch {
         clearAndInsertPackagesUseCase(packages = packages)
             .catch {
                 _packagesUiState.update { state -> state.copy(isLoading = StatusLoading.DISMISS_LOADING) }

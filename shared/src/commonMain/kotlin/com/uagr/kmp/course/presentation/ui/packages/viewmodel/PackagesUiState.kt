@@ -9,5 +9,5 @@ import com.uagr.kmp.course.utils.operators.StatusLoading
 
 data class PackagesUiState(
     val isLoading: StatusLoading = StatusLoading.DISMISS_LOADING,
-    val packages: PackagesDataModel? = null,
+    val packages: List<PackagesDataModel> = emptyList(),
 )

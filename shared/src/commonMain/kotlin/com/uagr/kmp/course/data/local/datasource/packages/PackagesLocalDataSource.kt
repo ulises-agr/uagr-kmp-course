@@ -7,6 +7,6 @@ package com.uagr.kmp.course.data.local.datasource.packages
 import com.uagr.kmp.course.domain.model.packages.PackagesDataModel
 
 interface PackagesLocalDataSource {
-    suspend fun clearAndInsertPackages(packages: PackagesDataModel)
-    suspend fun getPackages(): PackagesDataModel?
+    suspend fun clearAndInsertPackages(packages: List<PackagesDataModel>)
+    suspend fun getPackages(): List<PackagesDataModel>
 }

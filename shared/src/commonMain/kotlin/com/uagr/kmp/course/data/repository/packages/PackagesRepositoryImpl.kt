@@ -27,11 +27,11 @@ class PackagesRepositoryImpl(
         emit(value = packagesNetworkDataSource.getPackages(url = url))
     }.flowOn(context = dispatcher)
 
-    override suspend fun clearAndInsertPackages(packages: PackagesDataModel): Flow<Unit> = flow {
+    override suspend fun clearAndInsertPackages(packages: List<PackagesDataModel>): Flow<Unit> = flow {
         emit(value = packagesLocalDataSource.clearAndInsertPackages(packages = packages))
     }.flowOn(context = dispatcher)
 
-    override suspend fun getLocalPackages(): Flow<PackagesDataModel?> = flow {
+    override suspend fun getLocalPackages(): Flow<List<PackagesDataModel>> = flow {
         emit(value = packagesLocalDataSource.getPackages())
     }.flowOn(context = dispatcher)
 }

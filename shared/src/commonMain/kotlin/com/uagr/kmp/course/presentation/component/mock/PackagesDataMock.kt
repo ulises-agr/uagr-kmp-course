@@ -40,4 +40,14 @@ val packagesDataListMock: List<PackagesDataModel> =
             created_by = "13-03-2000",
             created_at = "13-03-2000",
         ),
+        PackagesDataModel(
+            id = "3",
+            name = "Package 3",
+            description = "Description",
+            price = "600",
+            currency = "MXN",
+            stock = "13",
+            created_by = "13-03-2000",
+            created_at = "13-03-2000",
+        ),
     )
