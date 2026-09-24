@@ -20,7 +20,7 @@ import org.koin.core.annotation.Single
 @Module
 @ComponentScan("com.uagr.kmp")
 @Configuration
-class MainModule {
+class KoinModules {
 
     @Single
     fun ioDispatcher(): CoroutineDispatcher = Dispatchers.IO
