@@ -11,6 +11,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.uagr.kmp.course.presentation.component.Loader.Loader
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainer
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
+import com.uagr.kmp.course.presentation.component.dialog.CustomDialog
 import com.uagr.kmp.course.presentation.login.viewmodel.LoginUIEvent
 import com.uagr.kmp.course.presentation.login.viewmodel.LoginViewModel
 import com.uagr.kmp.course.presentation.theme.AppTheme
@@ -19,7 +20,8 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun LoginScreen(
-    viewModel: LoginViewModel = koinViewModel()
+    viewModel: LoginViewModel = koinViewModel(),
+    onLoginSuccess: () -> Unit = {}
 ) {
     
    val loginUiState by viewModel.loginUiState.collectAsStateWithLifecycle()
@@ -31,9 +33,9 @@ fun LoginScreen(
             
             }
             is LoginUIEvent.LoginSuccess -> {
-            
+                viewModel.resetUIEvent()
+                onLoginSuccess()
             }
-            else -> {}
         }
     }
     
@@ -63,6 +65,15 @@ fun LoginScreen(
             }
         )
         Loader(currentState = loginUiState.isLoading)
+        CustomDialog(
+            errorDialogModel = loginUiState.errorDialog,
+            titleColor = AppTheme.colors.backgrounds.black,
+            descriptionColor = AppTheme.colors.backgrounds.black,
+            buttonColor = AppTheme.colors.text.link,
+            onClickButton = {
+                viewModel.dismissDialog()
+            }
+        )
     }
 }
 

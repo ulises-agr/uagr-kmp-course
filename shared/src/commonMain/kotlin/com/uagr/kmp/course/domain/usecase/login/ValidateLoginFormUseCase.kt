@@ -5,7 +5,9 @@
 package com.uagr.kmp.course.domain.usecase.login
 
 import com.uagr.kmp.course.utils.text.validateEmailFormat
+import org.koin.core.annotation.Factory
 
+@Factory
 class ValidateLoginFormUseCase {
 
     operator fun invoke(

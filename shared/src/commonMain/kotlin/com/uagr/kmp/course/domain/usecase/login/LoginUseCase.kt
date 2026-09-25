@@ -9,7 +9,9 @@ import com.uagr.kmp.course.domain.model.login.LoginModel
 import com.uagr.kmp.course.domain.repository.login.LoginRepository
 import com.uagr.kmp.course.utils.network.NetworkResult
 import kotlinx.coroutines.flow.Flow
+import org.koin.core.annotation.Factory
 
+@Factory
 class LoginUseCase(
     private val loginRepository: LoginRepository
 ) {

@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.kmp.presentation.welcome.viewmodel.PackageUiEvent
 import com.tarifchakder.ktoast.ToastDuration
 import com.tarifchakder.ktoast.ToastState
+import com.uagr.kmp.course.domain.model.packages.PackageDataModel
 import com.uagr.kmp.course.domain.model.packages.PackageModel
 import com.uagr.kmp.course.domain.usecase.packages.ClearAndInsertPackagesUseCase
 import com.uagr.kmp.course.domain.usecase.packages.GetLocalPackagesUseCase
@@ -23,11 +24,13 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.core.annotation.KoinViewModel
 
+@KoinViewModel
 class PackageViewModel(
     private val getNetworkPackagesUseCase: GetNetworkPackagesUseCase,
+    private val clearAndInsertPackagesUseCase: ClearAndInsertPackagesUseCase,
     private val getLocalPackagesUseCase: GetLocalPackagesUseCase,
-    private val clearAndInsertPackagesUseCase: ClearAndInsertPackagesUseCase
 ): ViewModel() {
     
     private var _packageUiState = MutableStateFlow(PackageUiState())
@@ -50,7 +53,7 @@ class PackageViewModel(
             }.collect { result ->
                 when(result){
                     is NetworkResult.Success -> {
-                        clearAndInsertPackages(packageModel = result.response)
+                        clearAndInsertPackages(packages = result.response.data)
                     }
                     is NetworkResult.Error -> {
                         _packageUiState.update { state -> state.copy(showLoader = StatusLoading.HIDE_LOADING) }
@@ -60,8 +63,8 @@ class PackageViewModel(
             }
     }
     
-    private fun clearAndInsertPackages(packageModel: PackageModel) = viewModelScope.launch{
-        clearAndInsertPackagesUseCase(packageModel = packageModel)
+    private fun clearAndInsertPackages(packages: List<PackageDataModel>) = viewModelScope.launch{
+        clearAndInsertPackagesUseCase(packages = packages)
             .catch {
                 _packageUiState.update { state -> state.copy(showLoader = StatusLoading.HIDE_LOADING, showToast = true) }
                 _packageUiEvent.emit(PackageUiEvent.ShowErrorDialog(message = "Error en el servicio"))

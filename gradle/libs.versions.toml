@@ -39,6 +39,7 @@ lib-composeMultiplatform = "1.11.1"
 lib-kotlin = "2.4.10"
 lib-ksp = "2.3.10"
 lib-ktoast = "1.0.5"
+lib-koin-compiler = "1.2.1"
 # Test
 junit = "1.3.0"
 espressoCore = "3.7.0"
@@ -79,6 +80,7 @@ napier = { module = "io.github.aakira:napier", version.ref = "lib-napier" }
 # Koin
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "lib-koin" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "lib-koin" }
+koin-annotations = { module = "io.insert-koin:koin-annotations", version = "4.2.2" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "lib-koin" }
 
 # KToast
@@ -135,6 +137,7 @@ sharedUI-commons-libs = [
     # Koin
     'koin-core',
     'koin-compose-viewmodel',
+    'koin-annotations',
     # Ktor
     'ktor-client-core',
     'ktor-client-logging',
@@ -188,3 +191,4 @@ kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "lib-kotlin
 androidx-room = { id = "androidx.room", version.ref = "lib-room" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "lib-kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "lib-ksp" }
+koinCompiler = { id = "io.insert-koin.compiler.plugin", version.ref = "lib-koin-compiler" }

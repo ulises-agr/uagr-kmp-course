@@ -4,6 +4,7 @@
  */
 package com.uagr.kmp.course.data.network.client
 
+import com.uagr.kmp.course.data.local.datastore.AppDataStore
 import com.uagr.kmp.course.utils.animation.constants.Constants
 import com.uagr.kmp.course.utils.constants.NetworkUrl
 import io.ktor.client.HttpClient
@@ -17,7 +18,7 @@ import io.ktor.http.ContentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
-actual fun createHttpClient(): HttpClient = HttpClient(engineFactory = Darwin) {
+actual fun createHttpClient(appDataStore: AppDataStore): HttpClient = HttpClient(engineFactory = Darwin) {
 
     install(plugin = HttpTimeout) {
         requestTimeoutMillis = Constants.REQUEST_TIMEOUT_MILLIS

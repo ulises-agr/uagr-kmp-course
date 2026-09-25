@@ -28,13 +28,13 @@ fun UserTokensResponse.toDomain() : UserTokensModel =
         token_type = token_type.orEmpty(),
         access_token = access_token.orEmpty(),
         refresh_token = refresh_token.orEmpty(),
-        expires_in = expiresIn ?: 0,
+        expires_in = expires_in ?: 0,
     )
 
 fun UserResponse.toDomain() : UserModel =
     UserModel(
         id = id.orEmpty(),
-        fullName = full_name.orEmpty(),
+        full_name = full_name.orEmpty(),
         email = email.orEmpty(),
         phone = phone.orEmpty(),
         role = role.orEmpty(),

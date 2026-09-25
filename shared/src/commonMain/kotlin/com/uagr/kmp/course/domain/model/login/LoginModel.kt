@@ -20,7 +20,7 @@ data class UserTokensModel(
 
 data class UserModel(
     val id: String,
-    val fullName : String,
+    val full_name : String,
     val email : String,
     val phone : String,
     val role : String,

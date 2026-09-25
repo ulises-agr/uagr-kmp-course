@@ -1,7 +1,9 @@
+/*
+ * LoginNetworkDataSourceImpl.kt
+ * Copyright (c) 2026. All rights reserved
+ */
 package com.uagr.kmp.course.data.network.datasource.login
 
-import androidx.compose.ui.autofill.ContentType
-import androidx.compose.ui.unit.Constraints
 import com.uagr.kmp.course.data.network.model.login.request.LoginRequest
 import com.uagr.kmp.course.data.network.model.login.response.LoginResponse
 import com.uagr.kmp.course.domain.mapper.login.toDomain
@@ -11,11 +13,14 @@ import com.uagr.kmp.course.utils.network.safeApiCall
 import io.ktor.client.HttpClient
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
+import io.ktor.http.ContentType
 import io.ktor.http.contentType
+import org.koin.core.annotation.Factory
 
+@Factory
 class LoginNetworkDataSourceImp(
     private val httpClient: HttpClient
-) : LoginNetworkDataSource{
+) : LoginNetworkDataSource {
     
     override suspend fun login(
         url: String,
@@ -23,15 +28,13 @@ class LoginNetworkDataSourceImp(
     ): NetworkResult<LoginModel> =
         safeApiCall(
             apiCall = {
-                httpClient.post(urlString = url){
-                    contentType(type = io.ktor.http.ContentType.Application.Json)
+                httpClient.post(urlString = url) {
+                    contentType(type = ContentType.Application.Json)
                     setBody(body = loginRequest)
                 }
             },
             transform = { data : LoginResponse ->
                 data.toDomain()
-            }
+            },
         )
-    
-    
 }

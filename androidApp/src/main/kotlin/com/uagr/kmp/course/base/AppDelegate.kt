@@ -5,7 +5,7 @@
 package com.uagr.kmp.course.base
 
 import android.app.Application
-import com.kmp.di.initKoin
+import com.uagr.kmp.course.di.initKoin
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.logger.Level
@@ -13,9 +13,15 @@ import org.koin.core.logger.Level
 class AppDelegate : Application() {
     override fun onCreate() {
         super.onCreate()
-        initKoin {
+        initKoin(
+            config = {
+                androidLogger(Level.DEBUG)
+                androidContext(this@AppDelegate)
+            },
+        )
+        /*initKoin {
             androidLogger(Level.DEBUG)
             androidContext(this@AppDelegate)
-        }
+        }*/
     }
 }

@@ -8,7 +8,6 @@ data class LoginResponse(
 	val data: LoginDataResponse?,
 ) : BaseResponse()
 
-
 @Serializable
 data class LoginDataResponse(
 	val tokens: UserTokensResponse?,
@@ -16,23 +15,22 @@ data class LoginDataResponse(
 )
 
 @Serializable
-data class UserResponse(
-	val id: String?,
-	val full_name: String?,
-	val email: String?,
-	val phone: String?,
-	val role: String?,
-	val status: String?,
-	val created_at: String?,
-	val updated_at: String?,
-)
-
-@Serializable
 data class UserTokensResponse(
 	val access_token: String?,
 	val refresh_token: String?,
 	val token_type: String?,
-	val expiresIn: Int?
+	val expires_in: Int?
 )
 
+@Serializable
+data class UserResponse(
+	val created_at: String?,
+	val email: String?,
+	val full_name: String?,
+	val id: String?,
+	val phone: String?,
+	val role: String?,
+	val status: String?,
+	val updated_at: String?,
+)
 

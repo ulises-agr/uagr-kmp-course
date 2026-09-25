@@ -5,13 +5,12 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "packages")
 data class PackagesEntity(
-    @PrimaryKey(autoGenerate = true)
-    val id : Int = 0,
-    val title: String?,
-    val packageDescription: String?,
-    val usedAmount: String?,
-    val unit: String?,
-    val renewalText: String?,
-    val buttonText: String?,
-    val hasInfoIcon: Boolean?,
+    @PrimaryKey val id: String,
+    val name: String,
+    val description: String,
+    val price: String,
+    val currency: String,
+    val stock: String,
+    val created_by: String,
+    val created_at: String,
 )
