@@ -1,7 +1,3 @@
-/*
- * ErrorDialogModel.kt
- * Copyright (c) 2026. All rights reserved
- */
 package com.uagr.kmp.course.domain.model.base
 
 data class ErrorDialogModel(
