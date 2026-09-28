@@ -1,0 +1,79 @@
+/*
+ * loginScreen.kt
+ * Copyright (c) 2026. All rights reserved
+ */
+package com.uagr.kmp.course.presentation.ui.login.ui
+
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.uagr.kmp.course.presentation.component.container.SafeScreenContainer
+import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
+import com.uagr.kmp.course.presentation.component.dialog.DialogCustom
+import com.uagr.kmp.course.presentation.component.loader.Loader
+import com.uagr.kmp.course.presentation.theme.AppTheme
+import com.uagr.kmp.course.presentation.ui.login.viewmodel.loginUiEvent
+import com.uagr.kmp.course.presentation.ui.login.viewmodel.loginViewModel
+import com.uagr.kmp.course.utils.flow.CollectWithLifecycle
+import org.koin.compose.viewmodel.koinViewModel
+
+@Composable
+fun loginScreen(
+    viewModel: loginViewModel = koinViewModel(),
+    onLoginSuccess: () -> Unit = {},
+) {
+    val loginUiState by viewModel.loginUiState.collectAsStateWithLifecycle()
+
+    viewModel.loginUiEvent.CollectWithLifecycle { event ->
+        when (event) {
+            is loginUiEvent.idle -> {}
+            is loginUiEvent.loginSuccess -> {
+                viewModel.resetUiEvent()
+                onLoginSuccess()
+            }
+        }
+    }
+
+    SafeScreenContainer(
+        systemColor = AppTheme.colors.background,
+        backgroundColor = AppTheme.colors.background,
+        isSystemIconsDark = true,
+    ) {
+        loginContainer(
+            email = loginUiState.email,
+            onEmailChange = { email ->
+                viewModel.updateEmail(email = email)
+            },
+            password = loginUiState.password,
+            onPasswordChange = { password ->
+                viewModel.updatePassword(password = password)
+            },
+            onLoginClick = {
+                viewModel.validateLoginForm(
+                    email = loginUiState.email,
+                    password = loginUiState.password,
+                )
+            },
+        )
+        Loader(isLoading = loginUiState.isLoading)
+        DialogCustom(
+            errorDialog = loginUiState.errorDialog,
+            titleTextColor = AppTheme.colors.text.black,
+            messageTextColor = AppTheme.colors.text.black,
+            primaryButtonBackgroundColor = AppTheme.colors.primary,
+            primaryButtonTextColor = AppTheme.colors.text.white,
+            onPrimaryButtonClick = {
+                viewModel.dismissErrorDialog()
+            },
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun loginScreenPreview() {
+    SafeScreenContainerTest {
+        loginContainer()
+    }
+}

@@ -6,10 +6,10 @@ package com.uagr.kmp.course.presentation.theme.colors
 
 import androidx.compose.ui.graphics.Color
 
-val primaryLight = Color(0xFFB52217)
+val primaryLight = Color(0xFF3F6BFF)
 val onPrimaryLight = Color(0xFFFFFFFF)
-val primaryContainerLight = Color(0xFFE6F4F4)
-val onPrimaryContainerLight = Color(0xFF637070)
+val primaryContainerLight = Color(0xFFE8F0FF)
+val onPrimaryContainerLight = Color(0xFF1A2A7A)
 val secondaryLight = Color(0xFFA3A3A3)
 val onSecondaryLight = Color(0xFFFFFFFF)
 val secondaryContainerLight = Color(0xFFDCE0E0)
@@ -54,11 +54,14 @@ val statusSuccessContainerLight = Color(0xFFEBF8F3)
 val textBlackLight = Color(0xFF000000)
 val textWhiteLight = Color(0xFFFFFFFF)
 val textLinkLight = Color(0xFF1470D1)
+val textGrayLight = Color(0xFF8E8E93)
+val textNavyLight = Color(0xFF1A3A7A)
 // --- Dark Backgrounds Colors ---
 val backgroundBlackLight = Color(0xFF000000)
 val backgroundWhiteLight = Color(0xFFFFFFFF)
 val backgroundYellowLight = Color(0xFFFFB700)
-val backgroundBlueLight = Color(0xFF0066FF)
+val backgroundBlueLight = Color(0xFF1E4DB7)
+val backgroundBlueSoftLight = Color(0xFF5B8CFF)
 val dividerLight = Color(0xFFEBEFF9)
 val backgroundProgressIndicatorLight = Color(0x80898989)
 
@@ -113,12 +116,15 @@ val lightModeAppColors = AppColors(
         black = textBlackLight,
         white = textWhiteLight,
         link = textLinkLight,
+        gray = textGrayLight,
+        navy = textNavyLight,
     ),
     backgrounds = ColorBackgrounds(
         black = backgroundBlackLight,
         white = backgroundWhiteLight,
         yellow = backgroundYellowLight,
         blue = backgroundBlueLight,
+        blueSoft = backgroundBlueSoftLight,
     ),
     divider = dividerLight,
     backgroundProgressIndicator = backgroundProgressIndicatorLight,

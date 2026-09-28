@@ -6,13 +6,16 @@
     <!-- Error -->
     <string name="error">Error</string>
     <string name="please_try_again_later">Please try again later</string>
+    <string name="invalid_credentials">Correo o contraseña incorrectos</string>
+    <string name="network_error">No se encontró conexión. Revisa tu red e intenta de nuevo</string>
+    <string name="server_error">El servicio no se encuentra disponbile. Intenta más tarde.</string>
 
     <!-- Welcome -->
     <string name="hello">¡Hello!</string>
     <string name="explore_our_multiplatform_platform">Explore our multi platform</string>
     <string name="go_to_login">Go to login</string>
 
-    <!-- Login -->
+    <!-- Login MiClaro-->
     <string name="login">Login</string>
     <string name="welcome_to_login_enter_your_credentials">Welcome to login enter your credentials</string>
     <string name="go_back">Go back</string>
@@ -20,11 +23,22 @@
     <string name="password">Password</string>
     <string name="email_example">user@gmail</string>
     <string name="password_example">Password123</string>
-    <string name="email_empty">Email empty</string>
-    <string name="password_empty">Password empty</string>
+    <string name="email_empty">Ingresa tu correo electrónico</string>
+    <string name="password_empty">Ingresa tu contraseña</string>
     <string name="go_to_packages">Go to packages</string>
-    <string name="accept">Accept</string>
-    <string name="cancel">Cancel</string>
+    <string name="accept">Aceptar</string>
+    <string name="cancel">Cancelar</string>
+
+    <!-- Login FinTrack -->
+    <string name="login_title">FinTrack</string>
+    <string name="login_description">Tus finanzas, claras incluso sin conexión.</string>
+    <string name="balance_text">$--</string>
+    <string name="available_balance">Balance disponible</string>
+    <string name="login_button_text">Iniciar sesión</string>
+    <string name="login_link_text">Crear una cuenta</string>
+    <string name="placeholder_email">rosasd@hitss.com</string>
+    <string name="placeholder_pass">••••••••</string>
+    <string name="email_invalid">Ingresa un correo electrónico válido</string>
 
     <!-- Welcome -->
     <string name="welcome">Welcome</string>

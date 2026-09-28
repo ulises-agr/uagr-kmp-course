@@ -6,10 +6,10 @@ package com.uagr.kmp.course.presentation.theme.colors
 
 import androidx.compose.ui.graphics.Color
 
-val primaryDark = Color(0xFFB52217)
-val onPrimaryDark = Color(0xFF263333)
-val primaryContainerDark = Color(0xFFD7E5E5)
-val onPrimaryContainerDark = Color(0xFF5A6767)
+val primaryDark = Color(0xFF5B8CFF)
+val onPrimaryDark = Color(0xFF0A1A3A)
+val primaryContainerDark = Color(0xFF1A3A7A)
+val onPrimaryContainerDark = Color(0xFFE8F0FF)
 val secondaryDark = Color(0xFFA3A3A3)
 val onSecondaryDark = Color(0xFF2C3131)
 val secondaryContainerDark = Color(0xFF434848)
@@ -54,11 +54,14 @@ val statusSuccessContainerDark = Color(0xFF064E3B)
 val textBlackDark = Color(0xFF000000)
 val textWhiteDark = Color(0xFFFFFFFF)
 val textLinkDark = Color(0xFF83CEF6)
+val textGrayDark = Color(0xFFAEAEB2)
+val textNavyDark = Color(0xFFB8D0FF)
 // --- Dark Backgrounds Colors ---
 val backgroundBlackDark = Color(0xFF000000)
 val backgroundWhiteDark = Color(0xFFFFFFFF)
 val backgroundYellowDark = Color(0xFFFFB700)
 val backgroundBlueDark = Color(0xFF0048FF)
+val backgroundBlueSoftDark = Color(0xFF5B8CFF)
 val dividerDark = Color(0xFFEBEFF9)
 val backgroundProgressIndicatorDark = Color(0x80898989)
 
@@ -113,12 +116,15 @@ val darkModeAppColors = AppColors(
         black = textBlackDark,
         white = textWhiteDark,
         link = textLinkDark,
+        gray = textGrayDark,
+        navy = textNavyDark,
     ),
     backgrounds = ColorBackgrounds(
         black = backgroundBlackDark,
         white = backgroundWhiteDark,
         yellow = backgroundYellowDark,
         blue = backgroundBlueDark,
+        blueSoft = backgroundBlueSoftDark,
     ),
     divider = dividerDark,
     backgroundProgressIndicator = backgroundProgressIndicatorDark,
