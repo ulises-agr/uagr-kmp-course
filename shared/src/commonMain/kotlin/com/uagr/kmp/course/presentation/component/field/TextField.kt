@@ -9,12 +9,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -44,7 +46,7 @@ import org.jetbrains.compose.resources.stringResource
 fun TextFieldCustom(
     modifier: Modifier = Modifier,
     value: String,
-    fontSize: TextUnit = Dimens.textSizeNormal,
+    fontSize: TextUnit = Dimens.textSizeMedium,
     onValueChange: (String) -> Unit,
     labelColor: Color,
     label: String,
@@ -52,13 +54,13 @@ fun TextFieldCustom(
     placeholderColor: Color,
     placeholder: String,
     placeholderTextAlign: TextAlign = TextAlign.Start,
-    leadingIcon: DrawableResource? = null,
     keyboardType: KeyboardType = KeyboardType.Text,
     imeAction: ImeAction = ImeAction.Done,
     capitalization: KeyboardCapitalization = KeyboardCapitalization.None,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
 ) {
     OutlinedTextField(
+        shape = RoundedCornerShape(Dimens.height12),
         modifier = modifier.fillMaxWidth(),
         value = value,
         onValueChange = onValueChange,
@@ -86,21 +88,15 @@ fun TextFieldCustom(
                 textAlign = placeholderTextAlign,
             )
         },
-        leadingIcon = {
-            leadingIcon?.let {
-                Icon(
-                    painter = painterResource(leadingIcon),
-                    contentDescription = null,
-                )
-            }
-        },
         singleLine = true,
-        colors = TextFieldDefaults.colors(
+        colors = OutlinedTextFieldDefaults.colors(
             focusedTextColor = MaterialTheme.colorScheme.onBackground,
             unfocusedTextColor = MaterialTheme.colorScheme.onBackground,
             focusedContainerColor = Color.Transparent,
             unfocusedContainerColor = Color.Transparent,
             disabledContainerColor = Color.Transparent,
+            focusedBorderColor = Color.Gray.copy(0.5f),
+            unfocusedBorderColor = Color.Gray.copy(0.5f),
         ),
     )
 }
@@ -119,7 +115,6 @@ fun TextFieldPassword(
     placeholderColor: Color,
     placeholder: String,
     placeholderTextAlign: TextAlign = TextAlign.Start,
-    leadingIcon: DrawableResource? = null,
     trailingIconActive: DrawableResource,
     trailingIconInActive: DrawableResource,
     keyboardType: KeyboardType = KeyboardType.Text,
@@ -128,6 +123,7 @@ fun TextFieldPassword(
     keyboardActions: KeyboardActions = KeyboardActions.Default,
 ) {
     OutlinedTextField(
+        shape = RoundedCornerShape(Dimens.height12),
         modifier = modifier.fillMaxWidth(),
         value = email,
         onValueChange = onEmailChange,
@@ -155,14 +151,6 @@ fun TextFieldPassword(
                 textAlign = placeholderTextAlign,
             )
         },
-        leadingIcon = {
-            leadingIcon?.let {
-                Icon(
-                    painter = painterResource(leadingIcon),
-                    contentDescription = null,
-                )
-            }
-        },
         visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
         trailingIcon = {
             IconButton(onClick = { onPasswordVisibleChange(!passwordVisible) }) {
@@ -173,12 +161,14 @@ fun TextFieldPassword(
             }
         },
         singleLine = true,
-        colors = TextFieldDefaults.colors(
+        colors = OutlinedTextFieldDefaults.colors(
             focusedTextColor = MaterialTheme.colorScheme.onBackground,
             unfocusedTextColor = MaterialTheme.colorScheme.onBackground,
             focusedContainerColor = Color.Transparent,
             unfocusedContainerColor = Color.Transparent,
             disabledContainerColor = Color.Transparent,
+            focusedBorderColor = Color.Gray.copy(0.5f),
+            unfocusedBorderColor = Color.Gray.copy(0.5f),
         ),
     )
 }
@@ -206,7 +196,6 @@ private fun TextFieldPreview() {
                     label = stringResource(Res.string.example),
                     placeholderColor = Color.Black,
                     placeholder = stringResource(Res.string.example),
-                    leadingIcon = Res.drawable.ic_example,
                 )
                 TextFieldPassword(
                     email = "",
@@ -217,7 +206,6 @@ private fun TextFieldPreview() {
                     label = stringResource(Res.string.example),
                     placeholderColor = Color.Black,
                     placeholder = stringResource(Res.string.example),
-                    leadingIcon = Res.drawable.ic_example,
                     trailingIconActive = Res.drawable.ic_example,
                     trailingIconInActive = Res.drawable.ic_example,
                     keyboardType = KeyboardType.Password,

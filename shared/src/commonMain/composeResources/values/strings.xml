@@ -27,6 +27,8 @@
     <string name="go_to_packages">Go to packages</string>
     <string name="accept">Accept</string>
     <string name="cancel">Cancel</string>
+    <string name="create_account">Crear una cuenta</string>
+
 
     <!-- Welcome -->
     <string name="welcome">Welcome</string>

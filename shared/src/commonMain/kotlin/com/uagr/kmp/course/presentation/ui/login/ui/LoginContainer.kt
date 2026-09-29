@@ -10,12 +10,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -27,11 +30,13 @@ import com.uagr.kmp.course.presentation.component.card.SimpleCard
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.presentation.component.field.TextFieldCustom
 import com.uagr.kmp.course.presentation.component.field.TextFieldPassword
+import com.uagr.kmp.course.presentation.component.text.AppLinkButton
 import com.uagr.kmp.course.presentation.component.text.TextBigBold
 import com.uagr.kmp.course.presentation.component.text.TextNormal
 import com.uagr.kmp.course.presentation.theme.AppTheme
 import com.uagr.kmp.course.presentation.theme.Dimens
 import course.shared.generated.resources.Res
+import course.shared.generated.resources.create_account
 import course.shared.generated.resources.email
 import course.shared.generated.resources.email_example
 import course.shared.generated.resources.ic_email
@@ -44,6 +49,7 @@ import course.shared.generated.resources.password
 import course.shared.generated.resources.password_example
 import course.shared.generated.resources.subtitle_login
 import course.shared.generated.resources.title_login
+import io.ktor.http.ContentType
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -88,16 +94,15 @@ fun LoginContainer(
             painter = painterResource(resource = Res.drawable.ic_finance_illustration),
             modifier = Modifier.fillMaxWidth()
                 .fillMaxHeight()
-                .weight(3f),
+                .weight(2f),
             contentDescription = null
         )
-        Spacer(modifier = Modifier.height(height = Dimens.height16))
+        Spacer(modifier = Modifier.height(height = Dimens.height32))
 
         Column(
-            modifier = Modifier.fillMaxWidth()
-                .padding(top = Dimens.padding16),
+            modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(
-                space = Dimens.padding16,
+                space = Dimens.padding8,
                 alignment = Alignment.CenterVertically,
             ),
         ) {
@@ -106,9 +111,8 @@ fun LoginContainer(
                 onValueChange = onEmailChange,
                 labelColor = AppTheme.colors.text.black,
                 label = stringResource(Res.string.email),
-                placeholderColor = AppTheme.colors.text.black,
+                placeholderColor = AppTheme.colors.placeHolderButton,
                 placeholder = stringResource(Res.string.email_example),
-                leadingIcon = Res.drawable.ic_email,
                 keyboardType = KeyboardType.Email,
                 imeAction = ImeAction.Next,
             )
@@ -117,11 +121,10 @@ fun LoginContainer(
                 onEmailChange = onPasswordChange,
                 passwordVisible = passwordVisible,
                 onPasswordVisibleChange = onPasswordVisibleChange,
-                labelColor = AppTheme.colors.text.black,
+                labelColor = AppTheme.colors.placeHolderButton,
                 label = stringResource(Res.string.password),
                 placeholderColor = AppTheme.colors.text.black,
                 placeholder = stringResource(Res.string.password_example),
-                leadingIcon = Res.drawable.ic_password,
                 trailingIconActive = Res.drawable.ic_visibility_on,
                 trailingIconInActive = Res.drawable.ic_visibility_off,
                 keyboardType = KeyboardType.Password,
@@ -140,6 +143,18 @@ fun LoginContainer(
                 text = stringResource(Res.string.login),
             )
             Spacer(modifier = Modifier.height(height = Dimens.height8))
+
+            AppLinkButton(
+                normalText = "",
+                clickableText = stringResource(Res.string.create_account),
+                fontSize = Dimens.textSizeExtraSmall ,
+                tag = "Register",
+                modifier = Modifier.fillMaxWidth(),
+                onNavigate = {
+                    println("Ir a registro")
+                },
+            )
+
         }
 
         Spacer(modifier = Modifier.fillMaxWidth().weight(2f))

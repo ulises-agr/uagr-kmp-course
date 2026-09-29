@@ -18,6 +18,7 @@ import androidx.compose.ui.text.TextLinkStyles
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withLink
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
@@ -285,6 +286,45 @@ fun TextUrlLink(
             fontWeight = FontWeight.Normal,
             textAlign = textAlign,
         ),
+    )
+}
+
+@Composable
+fun AppLinkButton(
+    normalText: String,
+    clickableText: String,
+    fontSize: TextUnit = Dimens.textSizeNormal,
+    textAlign: TextAlign = TextAlign.Center,
+    tag: String,
+    modifier: Modifier = Modifier,
+    linkColor: Color = AppTheme.colors.backgroundButton,
+    onNavigate: () -> Unit
+) {
+    val annotatedString = buildAnnotatedString {
+        append(normalText)
+
+        withLink(
+            LinkAnnotation.Clickable(
+                tag = tag,
+                styles = TextLinkStyles(
+                    style = SpanStyle(
+                        color = linkColor,
+                        fontWeight = FontWeight.Bold,
+                    )
+                ),
+                linkInteractionListener = { _ -> onNavigate() }
+            )
+        ) {
+            append(clickableText)
+        }
+    }
+    Text(
+        text = annotatedString,
+        modifier = modifier,
+        style = AppTheme.typography.bodyNormal.copy(
+            fontSize = fontSize,
+            textAlign = textAlign,
+            ),
     )
 }
 

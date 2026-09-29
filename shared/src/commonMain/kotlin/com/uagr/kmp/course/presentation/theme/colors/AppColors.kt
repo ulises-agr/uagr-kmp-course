@@ -53,8 +53,10 @@ data class AppColors(
     val divider: Color = Color.Unspecified,
     val backgroundProgressIndicator: Color = Color.Unspecified,
 
-    //LOGIN
+    //Components
     val backgroundButton: Color = Color.Unspecified,
+    val placeHolderButton: Color = Color.Unspecified,
+    //LOGIN
 
     val subtitleGray: Color = Color.Unspecified
 

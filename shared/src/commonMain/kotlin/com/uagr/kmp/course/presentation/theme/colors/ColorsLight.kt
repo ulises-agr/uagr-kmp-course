@@ -65,6 +65,7 @@ val backgroundProgressIndicatorLight = Color(0x80898989)
 // --- Add fintrack ----
 val buttonMainLigth = Color(0XFF1A70ED)
 val subtitleGrayLight = Color(0XFF7A8291)
+val placeHolderButtonLight = Color(0XFF1F242E)
 
 // --- Light color group ---
 val lightModeAppColors = AppColors(
@@ -127,5 +128,6 @@ val lightModeAppColors = AppColors(
     divider = dividerLight,
     backgroundProgressIndicator = backgroundProgressIndicatorLight,
     backgroundButton = buttonMainLigth,
-    subtitleGray = subtitleGrayLight
+    subtitleGray = subtitleGrayLight,
+    placeHolderButton = placeHolderButtonLight,
 )
