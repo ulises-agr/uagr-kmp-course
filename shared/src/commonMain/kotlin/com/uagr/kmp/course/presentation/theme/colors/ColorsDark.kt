@@ -62,6 +62,10 @@ val backgroundBlueDark = Color(0xFF0048FF)
 val dividerDark = Color(0xFFEBEFF9)
 val backgroundProgressIndicatorDark = Color(0x80898989)
 
+// --- Add fintrack ----
+val buttonMainDark = Color(0XFF1A70ED)
+val subtitleGrayDark = Color(0XFF7A8291)
+
 // --- Dark color group ---
 val darkModeAppColors = AppColors(
     primary = primaryDark,
@@ -122,4 +126,6 @@ val darkModeAppColors = AppColors(
     ),
     divider = dividerDark,
     backgroundProgressIndicator = backgroundProgressIndicatorDark,
+    backgroundButton = buttonMainDark,
+    subtitleGray = subtitleGrayDark
 )

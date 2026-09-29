@@ -27,6 +27,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
@@ -44,18 +45,22 @@ fun ButtonCustom(
     onClick: () -> Unit = {},
     modifier: Modifier = Modifier,
     backgroundButton: Color = Color.Black,
-    height: Dp = Dimens.height40,
+    height: Dp = Dimens.height52,
     enabled: Boolean = true,
-    shape: Shape = RoundedCornerShape(size = Dimens.corner20),
+    shape: Shape = RoundedCornerShape(size = Dimens.corner12),
     textColor: Color = Color.White,
     text: String = "",
+    alignment: TextAlign = TextAlign.Left,
 ) {
     Button(
         onClick = onClick,
         modifier = modifier
             .fillMaxWidth()
             .height(height = height),
-        colors = ButtonDefaults.buttonColors(contentColor = backgroundButton),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = backgroundButton,
+            contentColor = textColor,
+        ),
         enabled = enabled,
         shape = shape,
     ) {
@@ -63,6 +68,7 @@ fun ButtonCustom(
             modifier = Modifier.fillMaxWidth(),
             color = textColor,
             text = text,
+            textAlign = alignment
         )
     }
 }

@@ -14,7 +14,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.io.IOException
+import org.koin.core.annotation.Single
 
+@Single
 class AppDataStore(
     private val dataStore: DataStore<Preferences>,
 ) {

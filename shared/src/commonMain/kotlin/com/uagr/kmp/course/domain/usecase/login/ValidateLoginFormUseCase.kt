@@ -1,0 +1,17 @@
+package com.uagr.kmp.course.domain.usecase.login
+
+import org.koin.core.annotation.Factory
+
+@Factory
+class ValidateLoginFormUseCase {
+
+    operator fun invoke(
+        email: String,
+        password: String,
+    ): LoginValidationResult =
+        when {
+            email.isBlank() -> LoginValidationResult.EmailEmpty
+            password.isBlank() -> LoginValidationResult.PasswordEmpty
+            else -> LoginValidationResult.Success
+        }
+}

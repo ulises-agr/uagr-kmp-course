@@ -13,7 +13,9 @@
     <string name="go_to_login">Go to login</string>
 
     <!-- Login -->
-    <string name="login">Login</string>
+    <string name="title_login">FinTrack</string>
+    <string name="subtitle_login">Tus finanzas, claras incluso sin conexión.</string>
+    <string name="login">Iniciar sesión</string>
     <string name="welcome_to_login_enter_your_credentials">Welcome to login enter your credentials</string>
     <string name="go_back">Go back</string>
     <string name="email">Email</string>
