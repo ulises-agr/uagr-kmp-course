@@ -46,8 +46,8 @@ class loginViewModel(
     private var _loginUiState = MutableStateFlow(loginUiState())
     val loginUiState: StateFlow<loginUiState> = _loginUiState.asStateFlow()
 
-    private var _loginUiEvent = MutableStateFlow<loginUiEvent>(loginUiEvent.idle)
-    val loginUiEvent: StateFlow<loginUiEvent> = _loginUiEvent.asStateFlow()
+    private var _loginUiEvent = MutableStateFlow<LoginUiEvent>(LoginUiEvent.Idle)
+    val loginUiEvent: StateFlow<LoginUiEvent> = _loginUiEvent.asStateFlow()
 
     fun updateEmail(email: String) = viewModelScope.launch {
         _loginUiState.update { state -> state.copy(email = email) }
@@ -187,6 +187,6 @@ class loginViewModel(
     }
 
     fun resetUiEvent() = viewModelScope.launch {
-        _loginUiEvent.value = loginUiEvent.idle
+        _loginUiEvent.value = LoginUiEvent.Idle
     }
 }

@@ -33,6 +33,7 @@ lib-sqlite = "2.7.0"
 lib-okhttp-profiler = "1.1.1"
 lib-room = "2.8.4"
 lib-datastore = "1.2.1"
+lib-security-crypto = "1.0.0"
 # Plugins
 lib-agp = "9.2.1"
 lib-composeMultiplatform = "1.11.1"
@@ -102,6 +103,9 @@ okhttp-profiler = { module = "io.nerdythings:okhttp-profiler", version.ref = "li
 # Data store
 androidx-datastore = { module = "androidx.datastore:datastore-preferences", version.ref = "lib-datastore" }
 
+# Secure storage (Android Keystore-backed)
+androidx-security-crypto = { module = "androidx.security:security-crypto", version.ref = "lib-security-crypto" }
+
 # Test
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "lib-kotlin" }
 junit = { module = "junit:junit", version.ref = "lib-junit" }
@@ -159,6 +163,8 @@ sharedUI-android-libs = [
     'koin-android',
     # Ktor OkHttp
     'ktor-client-okhttp',
+    # Secure token storage
+    'androidx-security-crypto',
 ]
 sharedUI-ios-libs = [
     # Ktor Darwin

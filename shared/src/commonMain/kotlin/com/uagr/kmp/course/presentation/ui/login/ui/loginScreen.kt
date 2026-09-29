@@ -13,7 +13,7 @@ import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerT
 import com.uagr.kmp.course.presentation.component.dialog.DialogCustom
 import com.uagr.kmp.course.presentation.component.loader.Loader
 import com.uagr.kmp.course.presentation.theme.AppTheme
-import com.uagr.kmp.course.presentation.ui.login.viewmodel.loginUiEvent
+import com.uagr.kmp.course.presentation.ui.login.viewmodel.LoginUiEvent
 import com.uagr.kmp.course.presentation.ui.login.viewmodel.loginViewModel
 import com.uagr.kmp.course.utils.flow.CollectWithLifecycle
 import org.koin.compose.viewmodel.koinViewModel
@@ -27,8 +27,8 @@ fun loginScreen(
 
     viewModel.loginUiEvent.CollectWithLifecycle { event ->
         when (event) {
-            is loginUiEvent.idle -> {}
-            is loginUiEvent.loginSuccess -> {
+            is LoginUiEvent.Idle -> {}
+            is LoginUiEvent.LoginSuccess -> {
                 viewModel.resetUiEvent()
                 onLoginSuccess()
             }
