@@ -16,4 +16,9 @@ object Constants {
     // DataStore
     const val USER_TOKEN = "user_token"
     const val DATASTORE_NAME = "kmp_dataStore"
+    const val SECURE_PREFS_NAME = "fintrack_secure_prefs"
+
+    // Device id (UUID persisted locally)
+    const val DEVICE_ID_KEY = "device_id"
+    const val DEVICE_PREFS_NAME = "fintrack_device_prefs"
 }

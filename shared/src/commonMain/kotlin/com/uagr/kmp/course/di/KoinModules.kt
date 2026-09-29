@@ -47,8 +47,5 @@ class KoinModules {
     fun userDao(database: AppDatabase) = database.userDao()
 
     @Single
-    fun packagesDao(database: AppDatabase) = database.packagesDao()
-
-    @Single
     fun dataStore() = createDataStore()
 }

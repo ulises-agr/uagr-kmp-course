@@ -5,6 +5,7 @@
 package com.uagr.kmp.course.utils.network
 
 import com.uagr.kmp.course.data.network.model.response.base.BaseResponse
+import com.uagr.kmp.course.data.network.model.response.base.ValidationErrorResponse
 import io.ktor.client.call.body
 import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.plugins.ServerResponseException
@@ -63,4 +64,77 @@ suspend inline fun <reified Response : BaseResponse, Domain> safeApiCall(
                 errorType = NetworkErrorType.UNKNOWN,
             )
         }
+    }
+
+/**
+ * For endpoints that return a plain DTO (no BaseResponse wrapper), e.g. OAuth login.
+ * Also maps HTTP 422 validation payloads (`detail[].msg`) to a friendly error message.
+ */
+suspend inline fun <reified Response, Domain> safeApiCallDirect(
+    crossinline apiCall: suspend () -> HttpResponse,
+    crossinline transform: (Response) -> Domain,
+): NetworkResult<Domain> =
+    try {
+        val response = apiCall()
+        val status = response.status.value
+        if (response.status.isSuccess()) {
+            NetworkResult.Success(response = transform(response.body()))
+        } else {
+            val validationMessage = parseValidationMessage(response = response)
+            NetworkResult.Error(
+                message = validationMessage ?: "Error HTTP: $status",
+                code = status,
+                errorType = NetworkErrorType.HTTP,
+            )
+        }
+    } catch (exception: Exception) {
+        exception.printStackTrace()
+        when (exception) {
+            is ClientRequestException -> {
+                val status = exception.response.status.value
+                val validationMessage = parseValidationMessage(response = exception.response)
+                NetworkResult.Error(
+                    message = validationMessage
+                        ?: "Error client ($status): ${exception.message}",
+                    code = status,
+                    errorType = NetworkErrorType.HTTP,
+                )
+            }
+            else -> mapExceptionToNetworkResult(exception = exception)
+        }
+    }
+
+suspend fun parseValidationMessage(response: HttpResponse): String? =
+    runCatching {
+        response.body<ValidationErrorResponse>()
+            .detail
+            ?.mapNotNull { detail -> detail.msg?.takeIf { msg -> msg.isNotBlank() } }
+            ?.joinToString(separator = "\n")
+            ?.takeIf { message -> message.isNotBlank() }
+    }.getOrNull()
+
+fun mapExceptionToNetworkResult(exception: Exception): NetworkResult.Error =
+    when (exception) {
+        is TimeoutCancellationException -> NetworkResult.Error(
+            message = "Error timeout: ${exception.message}",
+            errorType = NetworkErrorType.TIMEOUT,
+        )
+        is IOException -> NetworkResult.Error(
+            message = "Error red: ${exception.message}",
+            errorType = NetworkErrorType.NETWORK,
+        )
+        is ClientRequestException -> NetworkResult.Error(
+            message = "Error client (${exception.response.status.value}): ${exception.message}",
+            code = exception.response.status.value,
+            errorType = NetworkErrorType.HTTP,
+        )
+        is ServerResponseException -> NetworkResult.Error(
+            message = "Error server (${exception.response.status.value}): ${exception.message}",
+            code = exception.response.status.value,
+            errorType = NetworkErrorType.HTTP,
+        )
+        else -> NetworkResult.Error(
+            message = "Error unknown: ${exception.message}",
+            errorType = NetworkErrorType.UNKNOWN,
+        )
     }

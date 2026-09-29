@@ -7,11 +7,9 @@ package com.uagr.kmp.course.presentation.ui.login.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uagr.kmp.course.domain.model.base.ErrorDialogModel
-import com.uagr.kmp.course.domain.model.user.userTokensModel
 import com.uagr.kmp.course.domain.usecase.login.loginUseCase
 import com.uagr.kmp.course.domain.usecase.login.loginValidationResult
 import com.uagr.kmp.course.domain.usecase.login.validateLoginFormUseCase
-import com.uagr.kmp.course.domain.usecase.user.saveUserTokenUseCase
 import com.uagr.kmp.course.utils.constant.NetworkUrl
 import com.uagr.kmp.course.utils.network.NetworkErrorType
 import com.uagr.kmp.course.utils.network.NetworkResult
@@ -40,7 +38,7 @@ import org.koin.core.annotation.KoinViewModel
 class loginViewModel(
     private val validateLoginFormUseCase: validateLoginFormUseCase,
     private val loginUseCase: loginUseCase,
-    private val saveUserTokenUseCase: saveUserTokenUseCase,
+    //private val saveUserTokenUseCase: saveUserTokenUseCase,
 ) : ViewModel() {
 
     private var _loginUiState = MutableStateFlow(loginUiState())

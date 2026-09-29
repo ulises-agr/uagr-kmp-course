@@ -27,9 +27,9 @@ class AppDataStore(
             if (exception is IOException) emit(emptyPreferences()) else throw exception
         }.map { data -> data[KEY.USER_TOKEN] }
 
-    suspend fun saveUserToken(token: String) {
-        dataStore.edit { data -> data[KEY.USER_TOKEN] = token }
-    }
+//    suspend fun saveUserToken(token: String) {
+//        dataStore.edit { data -> data[KEY.USER_TOKEN] = token }
+//    }
 }
 
 expect fun createDataStore(): DataStore<Preferences>
