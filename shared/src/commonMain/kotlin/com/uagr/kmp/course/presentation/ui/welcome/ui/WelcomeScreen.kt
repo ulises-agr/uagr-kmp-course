@@ -12,11 +12,11 @@ import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerT
 
 @Composable
 fun WelcomeScreen(
-    navigateToPackages: () -> Unit = {},
+    navigateToLogin: () -> Unit = {},
 ) {
     SafeScreenContainer {
         WelcomeContainer(
-            navigateToPackages = navigateToPackages,
+            navigateToLogin = navigateToLogin,
         )
     }
 }

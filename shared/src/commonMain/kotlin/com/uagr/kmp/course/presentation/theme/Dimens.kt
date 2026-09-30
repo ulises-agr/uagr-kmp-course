@@ -36,6 +36,7 @@ object Dimens {
     val height80: Dp = 80.dp
     val height96: Dp = 96.dp
     val height128: Dp = 128.dp
+    val height196: Dp = 196.dp
 
     // ------ Width ------
     val widthNome: Dp = 0.dp

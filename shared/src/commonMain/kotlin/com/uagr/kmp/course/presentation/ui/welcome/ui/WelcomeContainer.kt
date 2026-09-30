@@ -31,7 +31,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun WelcomeContainer(
-    navigateToPackages: () -> Unit = {},
+    navigateToLogin: () -> Unit = {},
 ) {
     val scrollState = rememberScrollState()
 
@@ -58,7 +58,7 @@ fun WelcomeContainer(
         )
         Spacer(modifier = Modifier.height(Dimens.height16))
         ButtonCustom(
-            onClick = navigateToPackages,
+            onClick = navigateToLogin,
             modifier = Modifier.fillMaxWidth(),
             backgroundButton = AppTheme.colors.primary,
             textColor = AppTheme.colors.backgrounds.white,
