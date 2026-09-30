@@ -4,9 +4,9 @@
  */
 package com.uagr.kmp.course.data.local.database
 
-import androidx.room.RoomDatabaseConstructor
+import androidx.room3.RoomDatabaseConstructor
 
 @Suppress("NO_ACTUAL_FOR_EXPECT")
-expect object AppDatabaseConstructor: RoomDatabaseConstructor<AppDatabase>{
+expect object AppDatabaseConstructor: RoomDatabaseConstructor<AppDatabase> {
     override fun initialize(): AppDatabase
 }

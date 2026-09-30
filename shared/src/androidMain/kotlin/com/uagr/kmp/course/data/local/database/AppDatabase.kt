@@ -5,8 +5,8 @@
 package com.uagr.kmp.course.data.local.database
 
 import android.content.Context
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room3.Room
+import androidx.room3.RoomDatabase
 import com.uagr.kmp.course.utils.constant.Constants
 import org.koin.mp.KoinPlatform.getKoin
 
