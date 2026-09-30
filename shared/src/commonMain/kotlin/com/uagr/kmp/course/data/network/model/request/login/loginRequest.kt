@@ -1,8 +1,4 @@
-/*
- * loginRequest.kt
- * Copyright (c) 2026. All rights reserved
- */
-package com.uagr.kmp.course.data.network.model.request
+package com.uagr.kmp.course.data.network.model.request.login
 
 import kotlinx.serialization.Serializable
 

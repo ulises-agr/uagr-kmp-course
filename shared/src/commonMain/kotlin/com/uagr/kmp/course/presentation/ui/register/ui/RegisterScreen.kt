@@ -1,8 +1,8 @@
 /*
- * loginScreen.kt
+ * RegisterScreen.kt
  * Copyright (c) 2026. All rights reserved
  */
-package com.uagr.kmp.course.presentation.ui.login.ui
+package com.uagr.kmp.course.presentation.ui.register.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -13,25 +13,25 @@ import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerT
 import com.uagr.kmp.course.presentation.component.dialog.DialogCustom
 import com.uagr.kmp.course.presentation.component.loader.Loader
 import com.uagr.kmp.course.presentation.theme.AppTheme
-import com.uagr.kmp.course.presentation.ui.login.viewmodel.LoginUiEvent
-import com.uagr.kmp.course.presentation.ui.login.viewmodel.loginViewModel
+import com.uagr.kmp.course.presentation.ui.register.viewModel.RegisterUiEvent
+import com.uagr.kmp.course.presentation.ui.register.viewModel.RegisterViewModel
 import com.uagr.kmp.course.utils.flow.CollectWithLifecycle
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun loginScreen(
-    viewModel: loginViewModel = koinViewModel(),
-    onLoginSuccess: () -> Unit = {},
-    onRegisterClick: () -> Unit = {},
+fun RegisterScreen(
+    viewModel: RegisterViewModel = koinViewModel(),
+    onRegisterSuccess: () -> Unit = {},
+    onBackClick: () -> Unit = {},
 ) {
-    val loginUiState by viewModel.loginUiState.collectAsStateWithLifecycle()
+    val registerUiState by viewModel.registerUiState.collectAsStateWithLifecycle()
 
-    viewModel.loginUiEvent.CollectWithLifecycle { event ->
+    viewModel.registerUiEvent.CollectWithLifecycle { event ->
         when (event) {
-            is LoginUiEvent.Idle -> {}
-            is LoginUiEvent.LoginSuccess -> {
+            is RegisterUiEvent.Idle -> {}
+            is RegisterUiEvent.RegisterSuccess -> {
                 viewModel.resetUiEvent()
-                onLoginSuccess()
+                onRegisterSuccess()
             }
         }
     }
@@ -41,26 +41,36 @@ fun loginScreen(
         backgroundColor = AppTheme.colors.background,
         isSystemIconsDark = true,
     ) {
-        loginContainer(
-            email = loginUiState.email,
+        RegisterContainer(
+            name = registerUiState.name,
+            onNameChange = { name ->
+                viewModel.updateName(name = name)
+            },
+            email = registerUiState.email,
             onEmailChange = { email ->
                 viewModel.updateEmail(email = email)
             },
-            password = loginUiState.password,
+            password = registerUiState.password,
             onPasswordChange = { password ->
                 viewModel.updatePassword(password = password)
             },
-            onLoginClick = {
-                viewModel.validateLoginForm(
-                    email = loginUiState.email,
-                    password = loginUiState.password,
+            confirmPassword = registerUiState.confirmPassword,
+            onConfirmPasswordChange = { confirmPassword ->
+                viewModel.updateConfirmPassword(confirmPassword = confirmPassword)
+            },
+            onRegisterClick = {
+                viewModel.validateRegisterForm(
+                    name = registerUiState.name,
+                    email = registerUiState.email,
+                    password = registerUiState.password,
+                    confirmPassword = registerUiState.confirmPassword,
                 )
             },
-            onCreateAccountClick = onRegisterClick
+            onBackClick = onBackClick,
         )
-        Loader(isLoading = loginUiState.isLoading)
+        Loader(isLoading = registerUiState.isLoading)
         DialogCustom(
-            errorDialog = loginUiState.errorDialog,
+            errorDialog = registerUiState.errorDialog,
             titleTextColor = AppTheme.colors.text.black,
             messageTextColor = AppTheme.colors.text.black,
             primaryButtonBackgroundColor = AppTheme.colors.primary,
@@ -74,8 +84,8 @@ fun loginScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun loginScreenPreview() {
+fun RegisterScreenPreview() {
     SafeScreenContainerTest {
-        loginContainer()
+        RegisterContainer()
     }
 }

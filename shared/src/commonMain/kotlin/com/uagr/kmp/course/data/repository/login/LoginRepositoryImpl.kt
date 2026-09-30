@@ -5,7 +5,7 @@
 package com.uagr.kmp.course.data.repository.login
 
 import com.uagr.kmp.course.data.network.datasource.login.LoginNetworkDataSource
-import com.uagr.kmp.course.data.network.model.request.loginRequest
+import com.uagr.kmp.course.data.network.model.request.login.loginRequest
 import com.uagr.kmp.course.domain.model.login.loginModel
 import com.uagr.kmp.course.domain.repository.login.loginRepository
 import com.uagr.kmp.course.utils.network.NetworkResult
