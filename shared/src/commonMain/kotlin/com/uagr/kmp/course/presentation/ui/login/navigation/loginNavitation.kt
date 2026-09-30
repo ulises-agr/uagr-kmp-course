@@ -9,6 +9,8 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.uagr.kmp.course.presentation.ui.login.ui.loginScreen
+import com.uagr.kmp.course.presentation.ui.register.navigation.RegisterNavigation
+
 //import com.uagr.kmp.course.presentation.ui.welcome.navigation.HomeNavigation
 
 data object loginNavigation : Screen  {
@@ -17,8 +19,11 @@ data object loginNavigation : Screen  {
         val navigator = LocalNavigator.currentOrThrow
         loginScreen(
             onLoginSuccess = {
-                //navigator.replaceAll(item = HomeNavigation)
+                // navigator.replaceAll(HomeNavigation)
             },
+            onRegisterClick = {
+                navigator.push(RegisterNavigation)
+            }
         )
     }
 }
