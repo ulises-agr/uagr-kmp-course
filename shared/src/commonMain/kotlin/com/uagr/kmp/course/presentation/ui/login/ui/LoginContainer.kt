@@ -143,9 +143,7 @@ fun LoginContainer(
         OutlinedTextField(
             value = email,
             onValueChange = onEmailChanged,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(Dimens.height64),
+            modifier = Modifier.fillMaxWidth(),
             placeholder = {
                 Text(
                     text = "Correo",
@@ -159,7 +157,14 @@ fun LoginContainer(
                 fontSize = Dimens.textSizeNormal,
                 fontWeight = FontWeight.Normal
             ),
-            isError = emailError != null
+            isError = emailError != null,
+            supportingText = {
+                if (emailError != null) {
+                    Text(
+                        text = emailError
+                    )
+                }
+            }
         )
 
         Spacer(
@@ -169,9 +174,7 @@ fun LoginContainer(
         OutlinedTextField(
             value = password,
             onValueChange = onPasswordChanged,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(Dimens.height64),
+            modifier = Modifier.fillMaxWidth(),
             placeholder = {
                 Text(
                     text = "Contraseña",
@@ -186,7 +189,14 @@ fun LoginContainer(
                 fontSize = Dimens.textSizeNormal,
                 fontWeight = FontWeight.Normal
             ),
-            isError = passwordError != null
+            isError = passwordError != null,
+            supportingText = {
+                if (passwordError != null) {
+                    Text(
+                        text = passwordError
+                    )
+                }
+            }
         )
 
         if (loginError != null) {
@@ -197,6 +207,7 @@ fun LoginContainer(
 
             Text(
                 text = loginError,
+                fontSize = Dimens.textSizeNormal,
                 color = AppTheme.colors.status.error
             )
         }
