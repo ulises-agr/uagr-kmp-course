@@ -48,6 +48,7 @@ class RegisterViewModel(
         confirmPassword: String
     ) {
         viewModelScope.launch {
+            println(">>> INICIANDO REGISTRO con email: $email")
             _registerUiState.update {
                 it.copy(isLoading = StatusLoading.SHOW_LOADING, errorDialog = null)
             }
@@ -58,15 +59,19 @@ class RegisterViewModel(
                 password = password,
                 confirmPassword = confirmPassword
             ).onSuccess {
+                println(">>> REGISTRO EXITOSO")
                 _registerUiState.update { it.copy(isLoading = StatusLoading.DISMISS_LOADING) }
                 _registerUiEvent.value = RegisterUiEvent.RegisterSuccess
             }.onFailure { error ->
+                println(">>> ERROR EN REGISTRO: ${error.message}")
+                error.printStackTrace()
                 _registerUiState.update {
                     it.copy(
                         isLoading = StatusLoading.DISMISS_LOADING,
                         errorDialog = ErrorDialogModel(
                             title = "Error de Registro",
-                            message = error.message ?: "Ocurrió un error al registrar el usuario"
+                            message = error.message ?: "Ocurrió un error al registrar el usuario",
+                            primaryButtonText = "Aceptar"
                         )
                     )
                 }

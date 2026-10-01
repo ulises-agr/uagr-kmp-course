@@ -9,6 +9,8 @@ import com.uagr.kmp.course.domain.repository.register.RegisterRepository
 class RegisterUserUseCase(
     private val registerRepository: RegisterRepository
 ) {
+    val passwordRegex = Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#._-]).{10,}$")
+
     suspend operator fun invoke(
         name: String,
         email: String,
@@ -21,10 +23,15 @@ class RegisterUserUseCase(
         if (password != confirmPassword) {
             return Result.failure(IllegalArgumentException("Las contraseñas no coinciden"))
         }
+        if (!password.matches(passwordRegex)) {
+            return Result.failure(
+                IllegalArgumentException("La contraseña debe tener al menos 10 caracteres, incluir mayúscula, minúscula, número y un símbolo.")
+            )
+        }
         return registerRepository.registerUser(
             name = name.trim(),
             email = email.trim(),
-            password = password
+            password = password.trim()
         )
     }
 }

@@ -44,16 +44,11 @@ fun RegisterContainer(
             onClick = onBackClick,
             modifier = Modifier.padding(top = 16.dp)
         ) {
-            IconButton(
-                onClick = onBackClick,
-                modifier = Modifier.padding(top = 16.dp)
-            ) {
-                IconCustom(
-                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = "Regresar",
-                    tint = AppTheme.colors.text.black
-                )
-            }
+            IconCustom(
+                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                contentDescription = "Regresar",
+                tint = AppTheme.colors.text.black
+            )
         }
 
         Spacer(modifier = Modifier.height(16.dp))

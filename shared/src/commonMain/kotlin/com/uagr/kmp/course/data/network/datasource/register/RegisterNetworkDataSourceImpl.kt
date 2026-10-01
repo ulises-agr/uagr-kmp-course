@@ -19,7 +19,7 @@ class RegisterNetworkDataSourceImpl(
 ) : RegisterNetworkDataSource {
 
     override suspend fun register(request: RegisterRequest): RegisterResponse {
-        return httpClient.post("/api/v1/auth/register") {
+        return httpClient.post("https://fintrack-hitss.onrender.com/api/v1/auth/register") {
             contentType(ContentType.Application.Json)
             setBody(request)
         }.body()
