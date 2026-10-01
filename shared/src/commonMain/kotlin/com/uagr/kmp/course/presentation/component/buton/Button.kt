@@ -30,12 +30,15 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
+import com.uagr.kmp.course.presentation.component.text.TextNormal
 import com.uagr.kmp.course.presentation.component.text.TextNormalBold
 import com.uagr.kmp.course.presentation.theme.AppTheme
 import com.uagr.kmp.course.presentation.theme.Dimens
 import course.shared.generated.resources.Res
+import course.shared.generated.resources.arrow_back
 import course.shared.generated.resources.example
 import course.shared.generated.resources.ic_example
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
@@ -44,9 +47,9 @@ fun ButtonCustom(
     onClick: () -> Unit = {},
     modifier: Modifier = Modifier,
     backgroundButton: Color = Color.Black,
-    height: Dp = Dimens.height40,
+    height: Dp = Dimens.height48,
     enabled: Boolean = true,
-    shape: Shape = RoundedCornerShape(size = Dimens.corner20),
+    shape: Shape = RoundedCornerShape(size = Dimens.corner14),
     textColor: Color = Color.White,
     text: String = "",
 ) {
@@ -55,11 +58,11 @@ fun ButtonCustom(
         modifier = modifier
             .fillMaxWidth()
             .height(height = height),
-        colors = ButtonDefaults.buttonColors(contentColor = backgroundButton),
+        colors = ButtonDefaults.buttonColors(containerColor = backgroundButton),
         enabled = enabled,
         shape = shape,
     ) {
-        TextNormalBold(
+        TextNormal(
             modifier = Modifier.fillMaxWidth(),
             color = textColor,
             text = text,
@@ -100,6 +103,30 @@ fun CircularIconButtonCustom(
     }
 }
 
+@Composable
+fun BackButton(
+    onClick: () -> Unit = {},
+    modifier: Modifier = Modifier,
+    size: Dp = Dimens.height28,
+    backgroundButton: Color = Color.Transparent,
+    icon: DrawableResource,
+) {
+    Box(
+        modifier = modifier
+            .clickable(onClick = onClick)
+            .size(size)
+            .background(color = backgroundButton),
+        contentAlignment = Alignment.Center,
+    ) {
+        Icon(
+            modifier = modifier
+                .fillMaxSize(),
+            painter = painterResource(icon),
+            contentDescription = null,
+        )
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 private fun ButtonCustomPreview() {
@@ -120,6 +147,10 @@ private fun ButtonCustomPreview() {
                 borderColor = AppTheme.colors.primary,
                 iconColor = AppTheme.colors.primary,
                 icon = painterResource(Res.drawable.ic_example),
+            )
+            BackButton(
+                backgroundButton = Color.Transparent,
+                icon = Res.drawable.arrow_back,
             )
         }
     }

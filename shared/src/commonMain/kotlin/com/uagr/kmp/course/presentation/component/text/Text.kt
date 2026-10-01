@@ -293,64 +293,67 @@ fun TextUrlLink(
 )
 @Composable
 private fun TextPreview() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(all = Dimens.padding16),
-        verticalArrangement = Arrangement.spacedBy(Dimens.padding16),
-    ) {
-        // TextSmallExtra
-        TextSmallExtra(
-            color = AppTheme.colors.backgrounds.black,
-            text = stringResource(Res.string.example),
-        )
-        TextSmallExtraBold(
-            color = AppTheme.colors.backgrounds.black,
-            text = stringResource(Res.string.example),
-        )
-        // TextSmall
-        TextSmall(
-            color = AppTheme.colors.backgrounds.black,
-            text = stringResource(Res.string.example),
-        )
-        TextSmallBold(
-            color = AppTheme.colors.backgrounds.black,
-            text = stringResource(Res.string.example),
-        )
-        // TextNormal
-        TextNormal(
-            color = AppTheme.colors.backgrounds.black,
-            text = stringResource(Res.string.example),
-        )
-        TextNormalBold(
-            color = AppTheme.colors.backgrounds.black,
-            text = stringResource(Res.string.example),
-        )
-        // TextMedium
-        TextMedium(
-            color = AppTheme.colors.backgrounds.black,
-            text = stringResource(Res.string.example),
-        )
-        TextMediumBold(
-            color = AppTheme.colors.backgrounds.black,
-            text = stringResource(Res.string.example),
-        )
-        // TextBig
-        TextBig(
-            color = AppTheme.colors.backgrounds.black,
-            text = stringResource(Res.string.example),
-        )
-        TextBigBold(
-            color = AppTheme.colors.backgrounds.black,
-            text = stringResource(Res.string.example),
-        )
-        // TextUrlLink
-        TextUrlLink(
-            textColor = AppTheme.colors.backgrounds.black,
-            linkColor = AppTheme.colors.backgrounds.blue,
-            text = stringResource(Res.string.example),
-            linkText = stringResource(Res.string.example),
-            url = stringResource(Res.string.example),
-        )
+    // Wrapped with AppTheme to provide required CompositionLocals such as LocalAppTypography and LocalAppColors
+    AppTheme {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(all = Dimens.padding16),
+            verticalArrangement = Arrangement.spacedBy(Dimens.padding16),
+        ) {
+            // TextSmallExtra
+            TextSmallExtra(
+                color = AppTheme.colors.backgrounds.black,
+                text = stringResource(Res.string.example),
+            )
+            TextSmallExtraBold(
+                color = AppTheme.colors.backgrounds.black,
+                text = stringResource(Res.string.example),
+            )
+            // TextSmall
+            TextSmall(
+                color = AppTheme.colors.backgrounds.black,
+                text = stringResource(Res.string.example),
+            )
+            TextSmallBold(
+                color = AppTheme.colors.backgrounds.black,
+                text = stringResource(Res.string.example),
+            )
+            // TextNormal
+            TextNormal(
+                color = AppTheme.colors.backgrounds.black,
+                text = stringResource(Res.string.example),
+            )
+            TextNormalBold(
+                color = AppTheme.colors.backgrounds.black,
+                text = stringResource(Res.string.example),
+            )
+            // TextMedium
+            TextMedium(
+                color = AppTheme.colors.backgrounds.black,
+                text = stringResource(Res.string.example),
+            )
+            TextMediumBold(
+                color = AppTheme.colors.backgrounds.black,
+                text = stringResource(Res.string.example),
+            )
+            // TextBig
+            TextBig(
+                color = AppTheme.colors.backgrounds.black,
+                text = stringResource(Res.string.example),
+            )
+            TextBigBold(
+                color = AppTheme.colors.backgrounds.black,
+                text = stringResource(Res.string.example),
+            )
+            // TextUrlLink
+            TextUrlLink(
+                textColor = AppTheme.colors.backgrounds.black,
+                linkColor = AppTheme.colors.backgrounds.blue,
+                text = stringResource(Res.string.example),
+                linkText = stringResource(Res.string.example),
+                url = stringResource(Res.string.example),
+            )
+        }
     }
 }

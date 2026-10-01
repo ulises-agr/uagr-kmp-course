@@ -13,21 +13,23 @@
     <string name="go_to_login">Go to login</string>
 
     <!-- Login -->
-    <string name="login">Login</string>
-    <string name="welcome_to_login_enter_your_credentials">Welcome to login enter your credentials</string>
-    <string name="go_back">Go back</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="email_example">user@gmail</string>
-    <string name="password_example">Password123</string>
-    <string name="email_empty">Email empty</string>
-    <string name="password_empty">Password empty</string>
-    <string name="go_to_packages">Go to packages</string>
-    <string name="accept">Accept</string>
-    <string name="cancel">Cancel</string>
+    <string name="title">FinTrack</string>
+    <string name="subtitle">Registrate de forma gratuita y segura.</string>
+    <string name="badge">$--</string>
+    <string name="balance">Balance disponible</string>
+    <string name="name">Correo</string>
+    <string name="password">Contraseña</string>
+    <string name="login">Iniciar sesión</string>
+    <string name="new_user">Crear una cuenta</string>
 
-    <!-- Welcome -->
-    <string name="welcome">Welcome</string>
+    <!-- Register -->
+    <string name="register_title">FinTrack</string>
+    <string name="register_subtitle">Tus finanzas, claras incluso sin conexión.</string>
+    <string name="register_user">Registrar usuario</string>
+    <string name="register_name">Nombre</string>
+    <string name="register_email">Correo</string>
+    <string name="register_password">Contraseña</string>
+    <string name="register_confirm_password">Confirmar contraseña</string>
 
     <!-- Packages -->
     <string name="empty_packages">Empty packages</string>

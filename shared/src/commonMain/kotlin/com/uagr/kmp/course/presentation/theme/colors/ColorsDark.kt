@@ -54,11 +54,18 @@ val statusSuccessContainerDark = Color(0xFF064E3B)
 val textBlackDark = Color(0xFF000000)
 val textWhiteDark = Color(0xFFFFFFFF)
 val textLinkDark = Color(0xFF83CEF6)
+val textBlueDark = Color(0xFF0F459E)
+val textGrayDark = Color(0xFF7A8291)
+val textBlueLigDark = Color(0xFFC7DBFF)
 // --- Dark Backgrounds Colors ---
 val backgroundBlackDark = Color(0xFF000000)
 val backgroundWhiteDark = Color(0xFFFFFFFF)
+val backgroundCanvasDark = Color(0xFFF5F7FA)
 val backgroundYellowDark = Color(0xFFFFB700)
-val backgroundBlueDark = Color(0xFF0048FF)
+val backgroundBlueDark = Color(0xFF0F459E)
+val backgroundBlueBoxDark = Color(0xFF1A5CBF)
+val backgroundBlueBarDark = Color(0xFF73B0FF)
+val backgroundGrayDark = Color(0xFFDBE0E8)
 val dividerDark = Color(0xFFEBEFF9)
 val backgroundProgressIndicatorDark = Color(0x80898989)
 
@@ -113,12 +120,19 @@ val darkModeAppColors = AppColors(
         black = textBlackDark,
         white = textWhiteDark,
         link = textLinkDark,
+        blue = textBlueDark,
+        gray = textGrayDark,
+        blueLight = textBlueLigDark,
     ),
     backgrounds = ColorBackgrounds(
         black = backgroundBlackDark,
         white = backgroundWhiteDark,
+        canvas = backgroundCanvasDark,
         yellow = backgroundYellowDark,
         blue = backgroundBlueDark,
+        blueBox = backgroundBlueBoxDark,
+        blueBar = backgroundBlueBarDark,
+        grey = backgroundGrayDark,
     ),
     divider = dividerDark,
     backgroundProgressIndicator = backgroundProgressIndicatorDark,

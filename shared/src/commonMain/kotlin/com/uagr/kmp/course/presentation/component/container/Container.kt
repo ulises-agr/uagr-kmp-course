@@ -21,8 +21,8 @@ import com.uagr.kmp.course.presentation.theme.SystemAppearance
 @Composable
 fun SafeScreenContainer(
     modifier: Modifier = Modifier,
-    systemColor: Color = AppTheme.colors.primary,
-    backgroundColor: Color = AppTheme.colors.background,
+    systemColor: Color = AppTheme.colors.backgrounds.blue,
+    backgroundColor: Color = AppTheme.colors.backgrounds.canvas,
     isSystemIconsDark: Boolean? = null,
     contentAlignment: Alignment = Alignment.Center,
     content: @Composable BoxScope.() -> Unit,
@@ -50,8 +50,8 @@ fun SafeScreenContainer(
 @Composable
 fun SafeScreenContainerTest(
     modifier: Modifier = Modifier,
-    systemColor: Color = AppTheme.colors.primary,
-    backgroundColor: Color = AppTheme.colors.background,
+    systemColor: Color = AppTheme.colors.backgrounds.blue,
+    backgroundColor: Color = AppTheme.colors.backgrounds.canvas,
     content: @Composable BoxScope.() -> Unit,
 ) {
     AppTheme {
