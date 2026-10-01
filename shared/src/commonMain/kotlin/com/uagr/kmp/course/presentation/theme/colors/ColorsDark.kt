@@ -59,6 +59,13 @@ val backgroundBlackDark = Color(0xFF000000)
 val backgroundWhiteDark = Color(0xFFFFFFFF)
 val backgroundYellowDark = Color(0xFFFFB700)
 val backgroundBlueDark = Color(0xFF0048FF)
+
+val backgroundLightGrayDark = Color(0xFFF5F7FA)
+val backgroundDarkBlueDark = Color(0xFF174EA6)
+val backgroundMediumBlueDark = Color(0xFF2F6CC5)
+val backgroundLightBlueDark = Color(0xFF75AEF8)
+val backgroundActionBlueDark = Color(0xFF2374EA)
+
 val dividerDark = Color(0xFFEBEFF9)
 val backgroundProgressIndicatorDark = Color(0x80898989)
 
@@ -119,6 +126,11 @@ val darkModeAppColors = AppColors(
         white = backgroundWhiteDark,
         yellow = backgroundYellowDark,
         blue = backgroundBlueDark,
+        lightGray = backgroundLightGrayDark,
+        darkBlue = backgroundDarkBlueDark,
+        mediumBlue = backgroundMediumBlueDark,
+        lightBlue = backgroundLightBlueDark,
+        actionBlue = backgroundActionBlueDark,
     ),
     divider = dividerDark,
     backgroundProgressIndicator = backgroundProgressIndicatorDark,

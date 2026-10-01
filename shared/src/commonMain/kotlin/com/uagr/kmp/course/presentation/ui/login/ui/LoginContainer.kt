@@ -16,18 +16,18 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.uagr.kmp.course.presentation.theme.Dimens
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
 import com.uagr.kmp.course.presentation.component.buton.ButtonCustom
+import com.uagr.kmp.course.presentation.theme.AppTheme
 
 @Composable
 fun LoginContainer(
@@ -35,6 +35,7 @@ fun LoginContainer(
     emailError: String?,
     password: String,
     passwordError: String?,
+    loginError: String?,
     isLoading: Boolean,
     onEmailChanged: (String) -> Unit,
     onPasswordChanged: (String) -> Unit,
@@ -44,13 +45,20 @@ fun LoginContainer(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .background(AppTheme.colors.backgrounds.lightGray)
             .padding(
-                horizontal = Dimens.padding24,
-                vertical = Dimens.padding24
+                horizontal = Dimens.padding32
             )
     ) {
+        Spacer(
+            modifier = Modifier.height(Dimens.height72)
+        )
+
         Text(
-            text = "FinTrack"
+            text = "FinTrack",
+            color = AppTheme.colors.backgrounds.darkBlue,
+            fontSize = Dimens.textSizeLarge,
+            fontWeight = FontWeight.Bold
         )
 
         Spacer(
@@ -58,7 +66,9 @@ fun LoginContainer(
         )
 
         Text(
-            text = "Tus finanzas, claras incluso sin conexión."
+            text = "Tus finanzas, claras incluso sin conexión.",
+            color = AppTheme.colors.text.secondary,
+            fontSize = Dimens.textSizeNormal
         )
 
         Spacer(
@@ -68,10 +78,10 @@ fun LoginContainer(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(Dimens.height196)
+                .height(Dimens.height230)
                 .background(
-                    color = Color(0xFF174EA6),
-                    shape = RoundedCornerShape(Dimens.border24)
+                    color = AppTheme.colors.backgrounds.darkBlue,
+                    shape = RoundedCornerShape(Dimens.corner28)
                 )
         ) {
 
@@ -83,29 +93,32 @@ fun LoginContainer(
 
                 Text(
                     text = "\$--",
-                    color = Color.White
+                    color = AppTheme.colors.text.white,
+                    fontSize = Dimens.textSizeLarge,
+                    fontWeight = FontWeight.Bold
                 )
 
                 Text(
                     text = "Balance disponible",
-                    color = Color.White
+                    color = AppTheme.colors.text.white,
+                    fontSize = Dimens.textSizeNormal
                 )
 
                 Spacer(
-                    modifier = Modifier.height(Dimens.height16)
+                    modifier = Modifier.height(Dimens.height20)
                 )
 
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(Dimens.height64)
+                        .height(Dimens.height78)
                         .background(
-                            color = Color(0xFF2F6CC5),
-                            shape = RoundedCornerShape(Dimens.border16)
+                            color = AppTheme.colors.backgrounds.mediumBlue,
+                            shape = RoundedCornerShape(Dimens.corner16)
                         )
                 ) {
 
-                    val barHeights = listOf(16, 22, 28, 34, 40, 46, 52)
+                    val barHeights = listOf(22, 26, 32, 40, 46, 54, 62)
 
                     Row(
                         modifier = Modifier
@@ -124,25 +137,29 @@ fun LoginContainer(
         }
 
         Spacer(
-            modifier = Modifier.height(Dimens.height32)
+            modifier = Modifier.height(Dimens.height40)
         )
 
         OutlinedTextField(
             value = email,
-            onValueChange = { newValue ->
-                onEmailChanged(newValue)
-            },
-            modifier = Modifier.fillMaxWidth(),
+            onValueChange = onEmailChanged,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(Dimens.height64),
             placeholder = {
-                Text(text = "Correo")
+                Text(
+                    text = "Correo",
+                    fontSize = Dimens.textSizeNormal,
+                    color = AppTheme.colors.text.secondary
+                )
             },
             singleLine = true,
-            isError = emailError != null,
-            supportingText = {
-                if (emailError != null) {
-                    Text(text = emailError)
-                }
-            }
+            shape = RoundedCornerShape(Dimens.corner16),
+            textStyle = TextStyle(
+                fontSize = Dimens.textSizeNormal,
+                fontWeight = FontWeight.Normal
+            ),
+            isError = emailError != null
         )
 
         Spacer(
@@ -151,22 +168,38 @@ fun LoginContainer(
 
         OutlinedTextField(
             value = password,
-            onValueChange = { newValue ->
-                onPasswordChanged(newValue)
-            },
-            modifier = Modifier.fillMaxWidth(),
+            onValueChange = onPasswordChanged,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(Dimens.height64),
             placeholder = {
-                Text(text = "Contraseña")
+                Text(
+                    text = "Contraseña",
+                    fontSize = Dimens.textSizeNormal,
+                    color = AppTheme.colors.text.secondary
+                )
             },
             singleLine = true,
             visualTransformation = PasswordVisualTransformation(),
-            isError = passwordError != null,
-            supportingText = {
-                if (passwordError != null) {
-                    Text(text = passwordError)
-                }
-            }
+            shape = RoundedCornerShape(Dimens.corner16),
+            textStyle = TextStyle(
+                fontSize = Dimens.textSizeNormal,
+                fontWeight = FontWeight.Normal
+            ),
+            isError = passwordError != null
         )
+
+        if (loginError != null) {
+
+            Spacer(
+                modifier = Modifier.height(Dimens.height8)
+            )
+
+            Text(
+                text = loginError,
+                color = AppTheme.colors.status.error
+            )
+        }
 
         Spacer(
             modifier = Modifier.height(Dimens.height24)
@@ -177,14 +210,17 @@ fun LoginContainer(
                 onLoginClicked()
             },
             modifier = Modifier.fillMaxWidth(),
-            backgroundButton = Color(0xFF2374EA),
-            textColor = Color.White,
+            backgroundButton = AppTheme.colors.backgrounds.actionBlue,
+            height = Dimens.height56,
+            shape = RoundedCornerShape(Dimens.corner16),
+            textColor = AppTheme.colors.text.white,
             text = if (isLoading) "Cargando..." else "Iniciar sesión",
+            textAlign = TextAlign.Start,
             enabled = !isLoading
         )
 
         Spacer(
-            modifier = Modifier.height(Dimens.height16)
+            modifier = Modifier.height(Dimens.height28)
         )
 
         Text(
@@ -192,9 +228,10 @@ fun LoginContainer(
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .clickable {
-
                 },
-            color = Color(0xFF2374EA)
+            color = AppTheme.colors.backgrounds.actionBlue,
+            fontSize = Dimens.textSizeSmall,
+            fontWeight = FontWeight.SemiBold
         )
     }
 }
@@ -203,11 +240,11 @@ fun LoginContainer(
 private fun BalanceBar(height: Int) {
     Box(
         modifier = Modifier
-            .width(16.dp)
+            .width(Dimens.width16)
             .height(height.dp)
             .background(
-                color = Color(0xFF75AEF8),
-                shape = RoundedCornerShape(Dimens.height4)
+                color = AppTheme.colors.backgrounds.lightBlue,
+                shape = RoundedCornerShape(Dimens.corner4)
             )
     )
 }
@@ -220,6 +257,7 @@ private fun LoginContainerPreview() {
         emailError = null,
         password = "",
         passwordError = null,
+        loginError = null,
         isLoading = false,
         onEmailChanged = {},
         onPasswordChanged = {},

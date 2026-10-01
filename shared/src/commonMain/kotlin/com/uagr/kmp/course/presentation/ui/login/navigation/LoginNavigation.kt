@@ -1,7 +1,7 @@
 package com.uagr.kmp.course.presentation.ui.login.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import org.koin.compose.viewmodel.koinViewModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
@@ -16,9 +16,7 @@ data object LoginNavigation : Screen {
 
         val navigator = LocalNavigator.currentOrThrow
 
-        val viewModel = remember {
-            LoginViewModel()
-        }
+        val viewModel = koinViewModel<LoginViewModel>()
 
         LoginScreen(
             viewModel = viewModel,

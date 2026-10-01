@@ -38,6 +38,7 @@ import course.shared.generated.resources.example
 import course.shared.generated.resources.ic_example
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import androidx.compose.ui.text.style.TextAlign
 
 @Composable
 fun ButtonCustom(
@@ -49,13 +50,19 @@ fun ButtonCustom(
     shape: Shape = RoundedCornerShape(size = Dimens.corner20),
     textColor: Color = Color.White,
     text: String = "",
+    textAlign: TextAlign = TextAlign.Center,
 ) {
     Button(
         onClick = onClick,
         modifier = modifier
             .fillMaxWidth()
-            .height(height = height),
-        colors = ButtonDefaults.buttonColors(contentColor = backgroundButton),
+            .height(height),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = backgroundButton,
+            contentColor = textColor,
+            disabledContainerColor = backgroundButton.copy(alpha = 0.5f),
+            disabledContentColor = textColor.copy(alpha = 0.7f)
+        ),
         enabled = enabled,
         shape = shape,
     ) {
@@ -63,6 +70,7 @@ fun ButtonCustom(
             modifier = Modifier.fillMaxWidth(),
             color = textColor,
             text = text,
+            textAlign = textAlign,
         )
     }
 }

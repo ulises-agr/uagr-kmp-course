@@ -13,6 +13,7 @@ fun LoginScreen(viewModel: LoginViewModel, navigateToHome: () -> Unit) {
     val password by viewModel.password.collectAsState()
     val emailError by viewModel.emailError.collectAsState()
     val passwordError by viewModel.passwordError.collectAsState()
+    val loginError by viewModel.loginError.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
 
     LaunchedEffect(Unit) {
@@ -21,6 +22,10 @@ fun LoginScreen(viewModel: LoginViewModel, navigateToHome: () -> Unit) {
             when (event) {
                 LoginUIEvent.LoginSuccess -> {
                     navigateToHome()
+                }
+
+                LoginUIEvent.InvalidCredentials -> {
+                    println("LOGIN -> Credenciales incorrectas")
                 }
             }
         }
@@ -31,6 +36,7 @@ fun LoginScreen(viewModel: LoginViewModel, navigateToHome: () -> Unit) {
         emailError = emailError,
         password = password,
         passwordError = passwordError,
+        loginError = loginError,
         isLoading = isLoading,
         onEmailChanged = viewModel::onEmailChanged,
         onPasswordChanged = viewModel::onPasswordChanged,

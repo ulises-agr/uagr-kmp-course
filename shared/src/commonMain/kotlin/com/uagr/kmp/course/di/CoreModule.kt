@@ -11,6 +11,10 @@ import com.uagr.kmp.course.data.local.database.getDatabaseBuilder
 import com.uagr.kmp.course.data.local.datastore.AppDataStore
 import com.uagr.kmp.course.data.local.datastore.createDataStore
 import com.uagr.kmp.course.data.network.client.createHttpClient
+import com.uagr.kmp.course.data.repository.login.LoginRepositoryImpl
+import com.uagr.kmp.course.domain.repository.login.LoginRepository
+import com.uagr.kmp.course.domain.usecase.login.LoginUseCase
+import com.uagr.kmp.course.presentation.ui.login.viewmodel.LoginViewModel
 import com.uagr.kmp.course.presentation.ui.welcome.viewmodel.WelcomeViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -57,15 +61,15 @@ val dataSourceLocalModule = module {
 }
 
 val repositoryModule = module {
-
+    singleOf(::LoginRepositoryImpl) bind LoginRepository::class
 }
 
 val useCaseModule = module {
-
+    factoryOf(::LoginUseCase)
 }
 
 val viewmodelModule = module {
-
+    viewModelOf(::LoginViewModel)
 }
 
 fun initKoin(config: KoinAppDeclaration? = null) {

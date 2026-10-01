@@ -12,4 +12,5 @@ data class ColorTexts(
     val black: Color = Color.Unspecified,
     val white: Color = Color.Unspecified,
     val link: Color = Color.Unspecified,
+    val secondary: Color = Color.Unspecified,
 )
