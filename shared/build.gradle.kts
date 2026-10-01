@@ -5,7 +5,7 @@ plugins {
     alias(libs.plugins.androidMultiplatformLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
-    alias(libs.plugins.androidx.room)
+    alias(libs.plugins.androidx.room3)
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.ksp)
 }
@@ -67,12 +67,12 @@ dependencies {
 }
 
 dependencies {
-    add(configurationName = "kspCommonMainMetadata", dependencyNotation = libs.androidx.room.compiler)
-    add(configurationName = "kspIosArm64", dependencyNotation = libs.androidx.room.compiler)
-    add(configurationName = "kspIosSimulatorArm64", dependencyNotation = libs.androidx.room.compiler)
-    add(configurationName = "kspAndroid", dependencyNotation = libs.androidx.room.compiler)
+    add(configurationName = "kspAndroid", dependencyNotation = libs.androidx.room3.compiler)
+    add(configurationName = "kspIosSimulatorArm64", dependencyNotation = libs.androidx.room3.compiler)
+    add(configurationName = "kspIosArm64", dependencyNotation = libs.androidx.room3.compiler)
+    add(configurationName = "kspCommonMainMetadata", dependencyNotation = libs.androidx.room3.compiler)
 }
 
-room {
+room3 {
     schemaDirectory(path = "$projectDir/schemas")
 }

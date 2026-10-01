@@ -4,9 +4,9 @@
  */
 package com.uagr.kmp.course.data.local.database
 
-import androidx.room.ConstructedBy
-import androidx.room.Database
-import androidx.room.RoomDatabase
+import androidx.room3.ConstructedBy
+import androidx.room3.Database
+import androidx.room3.RoomDatabase
 import com.uagr.kmp.course.data.local.model.bone.BoneEntity
 
 @Database(
