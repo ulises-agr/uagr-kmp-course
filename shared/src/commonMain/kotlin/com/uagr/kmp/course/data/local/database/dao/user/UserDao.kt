@@ -12,17 +12,17 @@ import androidx.room.Transaction
 import com.uagr.kmp.course.data.local.model.user.UserEntity
 
 @Dao
-interface UserDao {
+abstract class UserDao {
 
     @Transaction
-    suspend fun insertUserAndDeleteOld(user: UserEntity) {
+    open suspend fun insertUserAndDeleteOld(user: UserEntity) {
         deleteAllUsers()
         insertUser(user)
     }
 
     @Query("DELETE FROM users")
-    suspend fun deleteAllUsers()
+    abstract suspend fun deleteAllUsers()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertUser(user: UserEntity): Long
+    abstract suspend fun insertUser(user: UserEntity): Long
 }

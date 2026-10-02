@@ -121,7 +121,7 @@ class LoginViewModel(
                     _loginUiState.update { state ->
                         state.copy(
                             isLoading = StatusLoading.DISMISS_LOADING,
-                            errorDialog = setErrorDialog(),
+                            errorDialog = setErrorDialog(message = result.message),
                         )
                     }
                 }

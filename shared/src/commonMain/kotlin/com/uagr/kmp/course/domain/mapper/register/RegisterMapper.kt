@@ -5,9 +5,9 @@
 
 package com.uagr.kmp.course.domain.mapper.register
 
-import com.uagr.kmp.course.data.network.model.response.register.UserTokenResponse
 import com.uagr.kmp.course.data.network.model.response.register.RegisterResponse
 import com.uagr.kmp.course.data.network.model.response.register.RegisterUserResponse
+import com.uagr.kmp.course.data.network.model.response.register.UserTokenResponse
 import com.uagr.kmp.course.domain.model.register.RegisterDataModel
 import com.uagr.kmp.course.domain.model.register.RegisterModel
 import com.uagr.kmp.course.domain.model.user.UserModel
@@ -15,7 +15,7 @@ import com.uagr.kmp.course.domain.model.user.UserTokenModel
 
 fun RegisterResponse.toDomain(): RegisterModel =
     RegisterModel(
-        success = success ?: false,
+        success = (success ?: false),
         message = message.orEmpty(),
         data = RegisterDataModel(
             user = user?.toDomain(),

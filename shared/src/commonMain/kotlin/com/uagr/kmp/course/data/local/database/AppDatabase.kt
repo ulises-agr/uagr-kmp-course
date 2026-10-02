@@ -14,7 +14,7 @@ import com.uagr.kmp.course.data.local.model.user.UserEntity
     entities = [
         UserEntity::class,
     ],
-    version = 1,
+    version = 2,
     exportSchema = false,
 )
 @ConstructedBy(AppDatabaseConstructor::class)

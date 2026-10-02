@@ -16,7 +16,7 @@ class ValidateRegisterFormUseCase {
             email.isBlank() -> RegisterValidationResult.EmailEmpty
             password.isBlank() -> RegisterValidationResult.PasswordEmpty
             confirmPassword.isBlank() -> RegisterValidationResult.ConfirmPasswordEmpty
-            password.equals(confirmPassword) -> RegisterValidationResult.DifferentPasswords
+            !password.equals(confirmPassword) -> RegisterValidationResult.DifferentPasswords
             else -> RegisterValidationResult.Success
         }
 }

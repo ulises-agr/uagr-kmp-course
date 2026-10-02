@@ -145,7 +145,7 @@ class RegisterViewModel(
                     _registerUiState.update { state ->
                         state.copy(
                             isLoading = StatusLoading.DISMISS_LOADING,
-                            errorDialog = setErrorDialog(),
+                            errorDialog = setErrorDialog(message = result.message),
                         )
                     }
                 }
@@ -155,11 +155,12 @@ class RegisterViewModel(
 
     private fun insertUserAndDelete(registerData: RegisterDataModel) = viewModelScope.launch {
         insertUserAndDeleteUseCase(user = registerData.user)
-            .catch {
+            .catch { exception ->
+                exception.printStackTrace()
                 _registerUiState.update { state ->
                     state.copy(
                         isLoading = StatusLoading.DISMISS_LOADING,
-                        errorDialog = setErrorDialog(),
+                        errorDialog = setErrorDialog(message = exception.message),
                     )
                 }
             }.collect {
@@ -169,11 +170,12 @@ class RegisterViewModel(
 
     private fun saveUserToken(registerData: RegisterDataModel) = viewModelScope.launch {
         saveUserTokenUseCase(token = registerData.tokens)
-            .catch {
+            .catch { exception ->
+                exception.printStackTrace()
                 _registerUiState.update { state ->
                     state.copy(
                         isLoading = StatusLoading.DISMISS_LOADING,
-                        errorDialog = setErrorDialog(),
+                        errorDialog = setErrorDialog(message = exception.message),
                     )
                 }
             }.collect {

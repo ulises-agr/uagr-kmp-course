@@ -4,6 +4,7 @@
  */
 package com.uagr.kmp.course.utils.network
 
+import com.uagr.kmp.course.data.network.model.response.base.ApiErrorResponse
 import com.uagr.kmp.course.data.network.model.response.base.BaseResponse
 import io.ktor.client.call.body
 import io.ktor.client.plugins.ClientRequestException
@@ -22,17 +23,11 @@ suspend inline fun <reified Response : BaseResponse, Domain> safeApiCall(
         val status = response.status.value
         if (response.status.isSuccess()) {
             val body = response.body<Response>()
-            if (body.success == true) {
-                NetworkResult.Success(response = transform(body))
-            } else {
-                NetworkResult.Error(
-                    message = body.message?.takeIf { message -> message.isNotBlank() } ?: "Error unknown",
-                    errorType = NetworkErrorType.UNKNOWN,
-                )
-            }
+            NetworkResult.Success(response = transform(body))
         } else {
+            val errorMessage = parseApiErrorMessage(response)
             NetworkResult.Error(
-                message = "Error HTTP: $status",
+                message = errorMessage,
                 code = status,
                 errorType = NetworkErrorType.HTTP,
             )
@@ -48,19 +43,34 @@ suspend inline fun <reified Response : BaseResponse, Domain> safeApiCall(
                 message = "Error red: ${exception.message}",
                 errorType = NetworkErrorType.NETWORK,
             )
-            is ClientRequestException -> NetworkResult.Error(
-                message = "Error client (${exception.response.status.value}): ${exception.message}",
-                code = exception.response.status.value,
-                errorType = NetworkErrorType.HTTP,
-            )
-            is ServerResponseException -> NetworkResult.Error(
-                message = "Error server (${exception.response.status.value}): ${exception.message}",
-                code = exception.response.status.value,
-                errorType = NetworkErrorType.HTTP,
-            )
+            is ClientRequestException -> {
+                val errorMessage = parseApiErrorMessage(exception.response)
+                NetworkResult.Error(
+                    message = errorMessage,
+                    code = exception.response.status.value,
+                    errorType = NetworkErrorType.HTTP,
+                )
+            }
+            is ServerResponseException -> {
+                val errorMessage = parseApiErrorMessage(exception.response)
+                NetworkResult.Error(
+                    message = errorMessage,
+                    code = exception.response.status.value,
+                    errorType = NetworkErrorType.HTTP,
+                )
+            }
             else -> NetworkResult.Error(
                 message = "Error unknown: ${exception.message}",
                 errorType = NetworkErrorType.UNKNOWN,
             )
         }
     }
+
+suspend fun parseApiErrorMessage(response: HttpResponse): String {
+    return try {
+        val errorResponse = response.body<ApiErrorResponse>()
+        errorResponse.parseErrorMessage() ?: "Error HTTP: ${response.status.value}"
+    } catch (e: Exception) {
+        "Error HTTP: ${response.status.value}"
+    }
+}
