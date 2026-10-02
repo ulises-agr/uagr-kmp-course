@@ -51,7 +51,7 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun TextFieldCustom(
     modifier: Modifier = Modifier,
-    email: String,
+    value: String,
     fontSize: TextUnit = Dimens.textSizeSmall,
     onValueChange: (String) -> Unit,
     labelColor: Color,
@@ -74,7 +74,7 @@ fun TextFieldCustom(
             .onFocusChanged {
                 isFocused = it.isFocused
             },
-        value = email,
+        value = value,
         onValueChange = onValueChange,
         textStyle = TextStyle(
             fontSize = fontSize,
@@ -86,7 +86,7 @@ fun TextFieldCustom(
             capitalization = capitalization
         ),
         keyboardActions = keyboardActions,
-        label = { if (isFocused || email.isNotEmpty()) {
+        label = { if (isFocused || value.isNotEmpty()) {
             TextSmall(
                 color = labelColor,
                 text = label,
@@ -123,7 +123,7 @@ fun TextFieldCustom(
 @Composable
 fun TextFieldPassword(
     modifier: Modifier = Modifier,
-    password: String,
+    value: String,
     onEmailChange: (String) -> Unit,
     passwordVisible: Boolean,
     onPasswordVisibleChange: (Boolean) -> Unit,
@@ -149,7 +149,7 @@ fun TextFieldPassword(
             .onFocusChanged {
                 isFocused = it.isFocused
             },
-        value = password,
+        value = value,
         onValueChange = onEmailChange,
         textStyle = TextStyle(
             fontSize = fontSize,
@@ -161,7 +161,7 @@ fun TextFieldPassword(
             capitalization = capitalization
         ),
         keyboardActions = keyboardActions,
-        label = { if (isFocused || password.isNotEmpty()) {
+        label = { if (isFocused || value.isNotEmpty()) {
             TextSmall(
                 color = labelColor,
                 text = label,
@@ -221,7 +221,7 @@ private fun TextFieldPreview() {
                 verticalArrangement = Arrangement.spacedBy(Dimens.padding16),
             ) {
                 TextFieldCustom(
-                    email = "",
+                    value = "",
                     onValueChange = {},
                     labelColor = Color.Black,
                     label = stringResource(Res.string.example),
@@ -229,7 +229,7 @@ private fun TextFieldPreview() {
                     placeholder = stringResource(Res.string.example),
                 )
                 TextFieldPassword(
-                    password = "",
+                    value = "",
                     onEmailChange = {},
                     passwordVisible = false,
                     onPasswordVisibleChange = {},

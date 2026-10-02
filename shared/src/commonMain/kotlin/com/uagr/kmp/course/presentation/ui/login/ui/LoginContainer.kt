@@ -55,14 +55,16 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun LoginContainer(
+    email: String = "",
+    password: String = "",
+    passwordVisible: Boolean = false,
+    onEmailChange: (String) -> Unit = {},
+    onPasswordChange: (String) -> Unit = {},
+    onPasswordVisibleChange: (Boolean) -> Unit = {},
     navigateToHome: () -> Unit = {},
     navigateToRegister: () -> Unit = {},
 ) {
     val scrollState = rememberScrollState()
-
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var passwordVisible by remember { mutableStateOf(false) }
     val focusManager = LocalFocusManager.current
 
     Column(
@@ -98,26 +100,21 @@ fun LoginContainer(
         LoginCard()
         Spacer(modifier = Modifier.height(Dimens.height48))
         TextFieldCustom(
-            email = email,
-            onValueChange = { email = it },
-            labelColor = AppTheme.colors.text.black,
+            value = email,
+            onValueChange = onEmailChange,
+            labelColor = AppTheme.colors.text.gray,
             label = stringResource(Res.string.name),
-            placeholderColor = AppTheme.colors.text.black,
+            placeholderColor = AppTheme.colors.text.gray,
             placeholder = stringResource(Res.string.name),
             imeAction = ImeAction.Next,
-            keyboardActions = KeyboardActions(
-                onNext = {
-                    focusManager.moveFocus(FocusDirection.Next)
-                }
-            )
         )
         Spacer(modifier = Modifier.height(Dimens.height12))
         TextFieldPassword(
-            password = password,
-            onEmailChange = { password = it },
+            value = password,
+            onEmailChange = onPasswordChange,
             passwordVisible = passwordVisible,
             onPasswordVisibleChange = {
-                passwordVisible = !passwordVisible
+                onPasswordVisibleChange(!passwordVisible)
             },
             labelColor = AppTheme.colors.text.gray,
             label = stringResource(Res.string.password),
@@ -129,10 +126,10 @@ fun LoginContainer(
             capitalization = KeyboardCapitalization.None,
             imeAction = ImeAction.Done,
             keyboardActions = KeyboardActions(
-                onDone = {
-                    focusManager.clearFocus(force = true)
-                }
-            )
+                onAny = {
+                    focusManager.clearFocus()
+                },
+            ),
         )
         Spacer(modifier = Modifier.height(Dimens.height40))
         ButtonCustom(

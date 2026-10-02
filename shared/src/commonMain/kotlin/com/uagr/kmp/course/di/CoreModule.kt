@@ -11,6 +11,15 @@ import com.uagr.kmp.course.data.local.database.getDatabaseBuilder
 import com.uagr.kmp.course.data.local.datastore.AppDataStore
 import com.uagr.kmp.course.data.local.datastore.createDataStore
 import com.uagr.kmp.course.data.network.client.createHttpClient
+import com.uagr.kmp.course.data.network.datasource.register.RegisterNetworkDataSource
+import com.uagr.kmp.course.data.network.datasource.register.RegisterNetworkDataSourceImpl
+import com.uagr.kmp.course.data.repository.register.RegisterRepositoryImpl
+import com.uagr.kmp.course.domain.repository.register.RegisterRepository
+import com.uagr.kmp.course.domain.usecase.register.RegisterUseCase
+import com.uagr.kmp.course.domain.usecase.register.ValidateRegisterFormUseCase
+import com.uagr.kmp.course.presentation.ui.register.viewmodel.RegisterViewModel
+import com.uagr.kmp.course.domain.usecase.login.LoginUseCase
+import com.uagr.kmp.course.presentation.ui.login.viewmodel.LoginViewModel
 import com.uagr.kmp.course.presentation.ui.welcome.viewmodel.WelcomeViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -49,7 +58,7 @@ val networkModule = module {
 }
 
 val dataSourceRemoteModule = module {
-
+    factoryOf(constructor = ::RegisterNetworkDataSourceImpl) bind RegisterNetworkDataSource::class
 }
 
 val dataSourceLocalModule = module {
@@ -57,15 +66,19 @@ val dataSourceLocalModule = module {
 }
 
 val repositoryModule = module {
-
+    factoryOf(constructor = ::RegisterRepositoryImpl) bind RegisterRepository::class
 }
 
 val useCaseModule = module {
-
+    factoryOf(constructor = ::LoginUseCase)
+    factoryOf(constructor = ::RegisterUseCase)
+    factoryOf(constructor = ::ValidateRegisterFormUseCase)
 }
 
 val viewmodelModule = module {
-
+    viewModelOf(constructor = ::LoginViewModel)
+    viewModelOf(constructor = ::RegisterViewModel)
+    viewModelOf(constructor = ::WelcomeViewModel)
 }
 
 fun initKoin(config: KoinAppDeclaration? = null) {

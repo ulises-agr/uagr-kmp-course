@@ -5,6 +5,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.uagr.kmp.course.presentation.ui.login.ui.LoginScreen
+import com.uagr.kmp.course.presentation.ui.register.navigation.RegisterNavigation
 
 /*
 // LoginNavigation.kt
@@ -20,9 +21,8 @@ data object LoginNavigation : Screen {
             navigateToHome = {
                 //navigator.push(item = HomeNavigation)
             },
-            navigateToRegister = {
-               // navigator.push(item = RegisterNavigation)
-            },
-        )
+        ) {
+            navigator.push(item = RegisterNavigation)
+        }
     }
 }

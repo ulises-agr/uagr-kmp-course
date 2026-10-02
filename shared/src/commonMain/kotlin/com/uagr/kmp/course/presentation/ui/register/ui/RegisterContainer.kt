@@ -64,17 +64,23 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun RegisterContainer(
-    navigateToHome: () -> Unit = {},
-    navigateToLogin: () -> Unit = {},
+    name: String = "",
+    email: String = "",
+    password: String = "",
+    confirmPassword: String = "",
+    passwordVisible: Boolean = false,
+    confirmPasswordVisible: Boolean = false,
+    onNameChange: (String) -> Unit = {},
+    onEmailChange: (String) -> Unit = {},
+    onPasswordChange: (String) -> Unit = {},
+    onConfirmPasswordChange: (String) -> Unit = {},
+    onPasswordVisibleChange: (Boolean) -> Unit = {},
+    onConfirmPasswordVisibleChange: (Boolean) -> Unit = {},
+    onCreateRegister: (String, String, String, String) -> Unit = { _, _, _, _ -> },
+    navigateToBack: () -> Unit = {},
+    isLoading: Boolean = false,
 ) {
     val scrollState = rememberScrollState()
-
-    var name by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var confirmPassword by remember { mutableStateOf("") }
-    var passwordVisible by remember { mutableStateOf(false) }
-    var confirmPasswordVisible by remember { mutableStateOf(false) }
     val focusManager = LocalFocusManager.current
 
     Column(
@@ -92,7 +98,7 @@ fun RegisterContainer(
     ) {
         Spacer(modifier = Modifier.height(Dimens.height80))
         BackButton(
-            onClick = navigateToLogin,
+            onClick = navigateToBack,
             icon = Res.drawable.arrow_back,
         )
         Spacer(modifier = Modifier.height(Dimens.height12))
@@ -113,8 +119,8 @@ fun RegisterContainer(
         )
         Spacer(modifier = Modifier.height(Dimens.height32))
         TextFieldCustom(
-            email = name,
-            onValueChange = { name = it },
+            value = name,
+            onValueChange = onNameChange,
             labelColor = AppTheme.colors.text.black,
             label = stringResource(Res.string.register_name),
             placeholderColor = AppTheme.colors.text.black,
@@ -128,8 +134,8 @@ fun RegisterContainer(
         )
         Spacer(modifier = Modifier.height(Dimens.height24))
         TextFieldCustom(
-            email = email,
-            onValueChange = { email = it },
+            value = email,
+            onValueChange = onEmailChange,
             labelColor = AppTheme.colors.text.black,
             label = stringResource(Res.string.register_email),
             placeholderColor = AppTheme.colors.text.black,
@@ -143,12 +149,10 @@ fun RegisterContainer(
         )
         Spacer(modifier = Modifier.height(Dimens.height24))
         TextFieldPassword(
-            password = password,
-            onEmailChange = { password = it },
+            value = password,
+            onEmailChange = onPasswordChange,
             passwordVisible = passwordVisible,
-            onPasswordVisibleChange = {
-                passwordVisible = !passwordVisible
-            },
+            onPasswordVisibleChange = onPasswordVisibleChange,
             labelColor = AppTheme.colors.text.gray,
             label = stringResource(Res.string.register_password),
             placeholderColor = AppTheme.colors.text.gray,
@@ -166,12 +170,10 @@ fun RegisterContainer(
         )
         Spacer(modifier = Modifier.height(Dimens.height24))
         TextFieldPassword(
-            password = confirmPassword,
-            onEmailChange = { confirmPassword = it },
+            value = confirmPassword,
+            onEmailChange = onConfirmPasswordChange,
             passwordVisible = confirmPasswordVisible,
-            onPasswordVisibleChange = {
-                confirmPasswordVisible = !confirmPasswordVisible
-            },
+            onPasswordVisibleChange = onConfirmPasswordVisibleChange,
             labelColor = AppTheme.colors.text.gray,
             label = stringResource(Res.string.register_confirm_password),
             placeholderColor = AppTheme.colors.text.gray,
@@ -189,7 +191,11 @@ fun RegisterContainer(
         )
         Spacer(modifier = Modifier.height(Dimens.height128))
         ButtonCustom(
-            onClick = navigateToHome,
+            onClick = {
+                focusManager.clearFocus(force = true)
+                onCreateRegister(name, email, password, confirmPassword)
+            },
+            enabled = !isLoading,
             modifier = Modifier.fillMaxWidth(),
             backgroundButton = AppTheme.colors.backgrounds.blue,
             textColor = AppTheme.colors.text.white,
