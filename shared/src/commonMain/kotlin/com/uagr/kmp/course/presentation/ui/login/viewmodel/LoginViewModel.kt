@@ -27,6 +27,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.getString
 import org.koin.core.annotation.KoinViewModel
+import kotlin.uuid.Uuid
 
 @KoinViewModel
 class LoginViewModel(
@@ -54,9 +55,14 @@ class LoginViewModel(
         _loginUiState.update { state -> state.copy(passwordVisible = passwordVisible) }
     }
 
+    fun getIdDevice(): String{
+        return Uuid.toString()
+    }
+
     fun validateLoginForm(
         email: String,
         password: String,
+        deviceId: String,
     ) = viewModelScope.launch {
         when (validateLoginFormUseCase(
             email = email,
@@ -72,6 +78,7 @@ class LoginViewModel(
                 login(
                     email = email,
                     password = password,
+                    deviceId = deviceId,
                 )
             }
         }
@@ -80,11 +87,13 @@ class LoginViewModel(
     private fun login(
         email: String,
         password: String,
+        deviceId: String,
     ) = viewModelScope.launch {
         loginUseCase.login(
             url = NetworkUrl.LOGIN_ENDPOINT,
             email = email,
             password = password,
+            deviceId = deviceId,
         ).onStart {
             _loginUiState.update { state -> state.copy(isLoading = StatusLoading.SHOW_LOADING) }
         }.catch {
@@ -157,6 +166,10 @@ class LoginViewModel(
 
     fun dismissErrorDialog() = viewModelScope.launch {
         _loginUiState.update { state -> state.copy(errorDialog = null) }
+    }
+
+    fun goToRegister() = viewModelScope.launch {
+        _loginUiEvent.emit(LoginUiEvent.GoToRegister)
     }
 
     fun resetUiEvent() = viewModelScope.launch  {

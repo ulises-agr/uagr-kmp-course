@@ -25,6 +25,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import com.uagr.kmp.course.presentation.component.Header.BigHeader
 import com.uagr.kmp.course.presentation.component.buton.ButtonCustom
 import com.uagr.kmp.course.presentation.component.card.SimpleCard
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
@@ -47,6 +48,8 @@ import course.shared.generated.resources.ic_visibility_on
 import course.shared.generated.resources.login
 import course.shared.generated.resources.password
 import course.shared.generated.resources.password_example
+import course.shared.generated.resources.register_subtitle
+import course.shared.generated.resources.register_title
 import course.shared.generated.resources.subtitle_login
 import course.shared.generated.resources.title_login
 import io.ktor.http.ContentType
@@ -62,6 +65,7 @@ fun LoginContainer(
     passwordVisible: Boolean = false,
     onPasswordVisibleChange: (Boolean) -> Unit = {},
     onLoginClick: () -> Unit = {},
+    onRegisterClick: () -> Unit = {},
 ) {
     val scrollState = rememberScrollState()
     val focusManager = LocalFocusManager.current
@@ -74,21 +78,8 @@ fun LoginContainer(
             .verticalScroll(state = scrollState),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        TextBigBold(
-            modifier = Modifier.fillMaxWidth()
-                .padding(top = Dimens.padding16),
-            color = AppTheme.colors.backgroundButton,
-            text = stringResource(Res.string.title_login),
-            textAlign = TextAlign.Left,
-        )
-        TextNormal(
-            modifier = Modifier.fillMaxWidth()
-                .padding(top = Dimens.padding16),
-            fontSize = Dimens.textSizeNormal,
-            color = AppTheme.colors.subtitleGray,
-            text = stringResource(Res.string.subtitle_login),
-            textAlign = TextAlign.Left,
-        )
+        BigHeader(title = stringResource(Res.string.title_login),
+            subtitle = stringResource(Res.string.subtitle_login))
         Spacer(modifier = Modifier.height(height = Dimens.height32))
         Image(
             painter = painterResource(resource = Res.drawable.ic_finance_illustration),
@@ -150,9 +141,7 @@ fun LoginContainer(
                 fontSize = Dimens.textSizeExtraSmall ,
                 tag = "Register",
                 modifier = Modifier.fillMaxWidth(),
-                onNavigate = {
-                    println("Ir a registro")
-                },
+                onNavigate = onRegisterClick,
             )
 
         }

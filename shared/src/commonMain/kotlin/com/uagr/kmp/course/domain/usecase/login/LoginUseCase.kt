@@ -16,12 +16,14 @@ class LoginUseCase(
         url: String,
         email: String,
         password: String,
+        deviceId: String,
     ): Flow<NetworkResult<LoginModel>> =
         loginRepository.login(
             url = url,
             loginRequest = LoginRequest(
                 email = email,
                 password = password,
+                device_id = deviceId,
             ),
         )
 }

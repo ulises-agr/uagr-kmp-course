@@ -1,4 +1,4 @@
-package com.uagr.kmp.course.data.network.model.response.login
+package com.uagr.kmp.course.data.network.model.response.register
 
 import kotlinx.serialization.Serializable
 

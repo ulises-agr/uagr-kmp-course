@@ -18,6 +18,7 @@ import org.koin.compose.viewmodel.koinViewModel
 fun LoginScreen(
     viewModel: LoginViewModel = koinViewModel(),
     onLoginSuccess: () -> Unit = {},
+    onRegisterEnter: () -> Unit = {},
 ) {
     val loginUiState by viewModel.loginUiState.collectAsStateWithLifecycle()
 
@@ -27,6 +28,10 @@ fun LoginScreen(
             is LoginUiEvent.LoginSuccess -> {
                 viewModel.resetUiEvent()
                 onLoginSuccess()
+            }
+            is LoginUiEvent.GoToRegister -> {
+                viewModel.resetUiEvent()
+                onRegisterEnter()
             }
         }
     }
@@ -48,8 +53,12 @@ fun LoginScreen(
             onLoginClick = {
                 viewModel.validateLoginForm(
                     email = loginUiState.email,
-                    password = loginUiState.password
+                    password = loginUiState.password,
+                    deviceId = viewModel.getIdDevice()
                 )
+            },
+            onRegisterClick = {
+                viewModel.goToRegister()
             },
         )
         Loader()
