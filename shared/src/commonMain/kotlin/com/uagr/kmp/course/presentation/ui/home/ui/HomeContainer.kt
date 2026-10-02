@@ -1,3 +1,7 @@
+/*
+ * HomeContainer.kt
+ * Copyright (c) 2026. All rights reserved
+ */
 package com.uagr.kmp.course.presentation.ui.home.ui
 
 import androidx.compose.foundation.background
@@ -16,10 +20,20 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -35,8 +49,11 @@ fun HomeContainer(
     incomes: String = "+$18,500",
     expenses: String = "-$8,460",
     monthlyExpenses: String = "$8,460",
-    monthlySavings: String = "$3,120"
+    monthlySavings: String = "$3,120",
+    onLogoutClick: () -> Unit = {}
 ) {
+    var showMenu by remember { mutableStateOf(false) }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -46,18 +63,56 @@ fun HomeContainer(
     ) {
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Encabezado
-        Text(
-            text = "Hola, $userName",
-            fontSize = 16.sp,
-            color = AppTheme.colors.text.gray
-        )
-        Text(
-            text = "Tu panorama financiero",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            color = AppTheme.colors.text.navy
-        )
+        // Encabezado y Menú
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column {
+                Text(
+                    text = "Hola, $userName",
+                    fontSize = 16.sp,
+                    color = AppTheme.colors.text.gray
+                )
+                Text(
+                    text = "Tu panorama financiero",
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = AppTheme.colors.text.navy
+                )
+            }
+
+            // Menú desplegable
+            Box {
+                IconButton(onClick = { showMenu = true }) {
+                    Icon(
+                        imageVector = Icons.Default.MoreVert,
+                        contentDescription = "Opciones",
+                        tint = AppTheme.colors.text.black
+                    )
+                }
+
+                DropdownMenu(
+                    expanded = showMenu,
+                    onDismissRequest = { showMenu = false }
+                ) {
+                    DropdownMenuItem(
+                        text = {
+                            Text(
+                                text = "Cerrar sesión",
+                                color = AppTheme.colors.status.info,
+                                fontWeight = FontWeight.SemiBold
+                            )
+                        },
+                        onClick = {
+                            showMenu = false
+                            onLogoutClick()
+                        }
+                    )
+                }
+            }
+        }
 
         Spacer(modifier = Modifier.height(20.dp))
 

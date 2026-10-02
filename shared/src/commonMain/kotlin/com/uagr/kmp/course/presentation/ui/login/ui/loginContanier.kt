@@ -49,9 +49,9 @@ import course.shared.generated.resources.available_balance
 import course.shared.generated.resources.balance_text
 import course.shared.generated.resources.login_link_text
 import course.shared.generated.resources.email_example
+import course.shared.generated.resources.password_example
 import course.shared.generated.resources.login_description
 import course.shared.generated.resources.login
-import course.shared.generated.resources.placeholder_email
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -111,7 +111,7 @@ fun loginContainer(
         LoginTextField(
             value = password,
             onValueChange = onPasswordChange,
-            placeholder = stringResource(Res.string.placeholder_email),
+            placeholder = stringResource(Res.string.password_example),
             keyboardType = KeyboardType.Password,
             imeAction = ImeAction.Done,
             visualTransformation = if (passwordVisible) {
@@ -169,7 +169,6 @@ fun loginContainer(
 @Composable
 private fun FinTrackBalanceCard() {
     val cardShape = RoundedCornerShape(size = Dimens.corner24)
-    val chartHeights = listOf(0.28f, 0.36f, 0.42f, 0.50f, 0.58f, 0.68f, 0.78f, 0.92f)
 
     Column(
         modifier = Modifier

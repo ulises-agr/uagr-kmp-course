@@ -7,6 +7,7 @@ package com.uagr.kmp.course.data.repository.register
 import com.uagr.kmp.course.data.network.datasource.register.RegisterNetworkDataSource
 import com.uagr.kmp.course.data.network.model.request.register.RegisterRequest
 import com.uagr.kmp.course.data.network.model.response.register.RegisterResponse
+import com.uagr.kmp.course.utils.constant.NetworkUrl
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.post
@@ -19,7 +20,7 @@ class RegisterNetworkDataSourceImpl(
 ) : RegisterNetworkDataSource {
 
     override suspend fun register(request: RegisterRequest): RegisterResponse {
-        return httpClient.post("https://fintrack-hitss.onrender.com/api/v1/auth/register") {
+        return httpClient.post(NetworkUrl.REGISTER_ENDPOINT) {
             contentType(ContentType.Application.Json)
             setBody(request)
         }.body()

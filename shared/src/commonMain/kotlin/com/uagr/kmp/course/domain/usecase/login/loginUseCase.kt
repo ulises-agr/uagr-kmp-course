@@ -24,9 +24,9 @@ class loginUseCase(
         loginRepository.login(
             url = url,
             loginRequest = loginRequest(
-                email = email,
-                password = password,
-                device_id = "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                email = email.trim(),
+                password = password.trim(),
+                //device_id = "3fa85f64-5717-4562-b3fc-2c963f66afa6",
             ),
         )
 }

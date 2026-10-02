@@ -118,6 +118,10 @@ class loginViewModel(
                     val tokens = result.response.tokens
                     if (tokens.access_token.isNotBlank()) {
                         //saveUserToken(tokens = tokens)
+                        _loginUiState.update { state ->
+                            state.copy(isLoading = StatusLoading.DISMISS_LOADING)
+                        }
+                        _loginUiEvent.emit(LoginUiEvent.LoginSuccess)
                     } else {
                         showFriendlyError(errorType = NetworkErrorType.UNKNOWN)
                     }

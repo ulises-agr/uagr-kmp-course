@@ -1,19 +1,19 @@
 <resources>
 
     <!-- None -->
-    <string name="example">Example</string>
+    <string name="example">Ejemplo</string>
 
     <!-- Error -->
     <string name="error">Error</string>
-    <string name="please_try_again_later">Please try again later</string>
+    <string name="please_try_again_later">Porfavor intenta más tarde</string>
     <string name="invalid_credentials">Correo o contraseña incorrectos</string>
     <string name="network_error">No se encontró conexión. Revisa tu red e intenta de nuevo</string>
     <string name="server_error">El servicio no se encuentra disponbile. Intenta más tarde.</string>
 
     <!-- Welcome -->
-    <string name="hello">¡Hello!</string>
-    <string name="explore_our_multiplatform_platform">Explore our multi platform</string>
-    <string name="go_to_login">Go to login</string>
+    <string name="hello">¡Hola!</string>
+    <string name="explore_our_multiplatform_platform">Explora la app multiplataforma del Chetez</string>
+    <string name="go_to_login">Ir a login de FinTrack</string>
 
     <!-- Login MiClaro-->
     <string name="login">Login</string>
@@ -22,7 +22,7 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="email_example">user@gmail</string>
-    <string name="password_example">Password123</string>
+    <string name="password_example">Pas$word123</string>
     <string name="email_empty">Ingresa tu correo electrónico</string>
     <string name="password_empty">Ingresa tu contraseña</string>
     <string name="go_to_packages">Go to packages</string>
