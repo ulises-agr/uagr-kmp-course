@@ -1,3 +1,8 @@
+/*
+// LoginScreen.kt
+// Created by Karla Judith Cervantes Higareda on 29/09/26.
+// Copyright (c) 2026. All rights reserved.
+*/
 package com.uagr.kmp.course.presentation.ui.login.ui
 
 import androidx.compose.runtime.Composable
@@ -8,12 +13,6 @@ import com.uagr.kmp.course.presentation.component.container.SafeScreenContainer
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.presentation.ui.login.viewmodel.LoginViewModel
 import org.koin.compose.viewmodel.koinViewModel
-
-/*
-// LoginScreen.kt
-// Created by Karla Judith Cervantes Higareda on 29/09/26.
-// Copyright (c) 2026. All rights reserved.
-*/
 
 @Composable
 fun LoginScreen(

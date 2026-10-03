@@ -1,3 +1,8 @@
+/*
+// LoginCardExample.kt
+// Created by Karla Judith Cervantes Higareda on 29/09/26.
+// Copyright (c) 2026. All rights reserved.
+*/
 package com.uagr.kmp.course.presentation.component.card
 
 import androidx.compose.foundation.background
@@ -29,12 +34,6 @@ import course.shared.generated.resources.Res
 import course.shared.generated.resources.badge
 import course.shared.generated.resources.balance
 import org.jetbrains.compose.resources.stringResource
-
-/*
-// LoginCardExample.kt
-// Created by Karla Judith Cervantes Higareda on 29/09/26.
-// Copyright (c) 2026. All rights reserved.
-*/
 
 @Composable
 fun LoginCard(

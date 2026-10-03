@@ -1,11 +1,9 @@
-package com.uagr.kmp.course.domain.usecase.register
-
 /*
 // ValidateRegisterFormUseCase.kt
 // Created by Karla Judith Cervantes Higareda on 01/10/26.
 // Copyright (c) 2026. All rights reserved.
 */
-
+package com.uagr.kmp.course.domain.usecase.register
 enum class RegisterValidationError {
     REQUIRED_FIELDS,
     INVALID_EMAIL,
@@ -27,3 +25,4 @@ class ValidateRegisterFormUseCase {
         else -> null
     }
 }
+

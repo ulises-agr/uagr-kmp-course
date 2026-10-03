@@ -1,3 +1,8 @@
+/*
+// RegisterRepositoryImpl.kt
+// Created by Karla Judith Cervantes Higareda on 29/09/26.
+// Copyright (c) 2026. All rights reserved.
+*/
 package com.uagr.kmp.course.data.repository.register
 
 import com.uagr.kmp.course.data.network.datasource.register.RegisterNetworkDataSource
@@ -10,16 +15,20 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
-/*
-// RegisterRepositoryImpl.kt
-// Created by Karla Judith Cervantes Higareda on 29/09/26.
-// Copyright (c) 2026. All rights reserved.
-*/
-
 class RegisterRepositoryImpl(
-    private val networkDataSource: RegisterNetworkDataSource,
+    private val registerNetworkDataSource: RegisterNetworkDataSource,
     private val dispatcher: CoroutineDispatcher,
 ) : RegisterRepository {
-    override suspend fun createRegister(url: String, request: RegisterRequest): Flow<NetworkResult<RegisterModel>> =
-        flow { emit(networkDataSource.createRegister(url, request)) }.flowOn(dispatcher)
+
+    override suspend fun createRegister(
+        url: String,
+        registerRequest: RegisterRequest,
+    ): Flow<NetworkResult<RegisterModel>> = flow {
+        emit(
+            registerNetworkDataSource.createRegister(
+                url = url,
+                registerRequest = registerRequest,
+            )
+        )
+    }.flowOn(context = dispatcher)
 }

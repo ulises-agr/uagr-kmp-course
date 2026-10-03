@@ -1,3 +1,8 @@
+/*
+// RegisterScreen.kt
+// Created by Karla Judith Cervantes Higareda on 29/09/26.
+// Copyright (c) 2026. All rights reserved.
+*/
 package com.uagr.kmp.course.presentation.ui.register.ui
 
 import androidx.compose.runtime.Composable
@@ -20,12 +25,6 @@ import course.shared.generated.resources.register_success_title
 import course.shared.generated.resources.register_success_message
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
-
-/*
-// RegisterScreen.kt
-// Created by Karla Judith Cervantes Higareda on 29/09/26.
-// Copyright (c) 2026. All rights reserved.
-*/
 
 @Composable
 fun RegisterScreen(
@@ -62,7 +61,14 @@ fun RegisterScreen(
             onConfirmPasswordVisibleChange = { confirmPasswordVisible ->
                 viewModel.updateConfirmPasswordVisible(confirmPasswordVisible = confirmPasswordVisible)
             },
-            onCreateRegister = viewModel::register,
+            onCreateRegister = {
+                viewModel.validateForms(
+                    name = registerUiState.name,
+                    email = registerUiState.email,
+                    password = registerUiState.password,
+                    confirmPassword = registerUiState.confirmPassword,
+                )
+            },
             navigateToBack = navigateToBack,
             isLoading = registerUiState.isLoading == StatusLoading.SHOW_LOADING,
         )

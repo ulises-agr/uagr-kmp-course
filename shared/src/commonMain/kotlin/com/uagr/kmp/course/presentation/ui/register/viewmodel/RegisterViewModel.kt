@@ -1,3 +1,8 @@
+/*
+// RegisterViewModel.kt
+// Created by Karla Judith Cervantes Higareda on 01/10/26.
+// Copyright (c) 2026. All rights reserved.
+*/
 package com.uagr.kmp.course.presentation.ui.register.viewmodel
 
 import androidx.lifecycle.ViewModel
@@ -22,12 +27,6 @@ import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-
-/*
-// RegisterViewModel.kt
-// Created by Karla Judith Cervantes Higareda on 01/10/26.
-// Copyright (c) 2026. All rights reserved.
-*/
 
 class RegisterViewModel(
     private val registerUseCase: RegisterUseCase,
@@ -57,11 +56,7 @@ class RegisterViewModel(
     fun updateConfirmPasswordVisible(confirmPasswordVisible: Boolean) = viewModelScope.launch {
         _registerUiState.update { state -> state.copy(confirmPasswordVisible = confirmPasswordVisible) }
     }
-    fun register(name: String, email: String, password: String, confirmPassword: String) {
-        if (_registerUiState.value.isLoading == StatusLoading.SHOW_LOADING ||
-            _registerUiEvent.value == RegisterUiEvent.Registered
-        ) return
-
+    fun validateForms(name: String, email: String, password: String, confirmPassword: String) {
         val validationError = validateRegisterFormUseCase(name, email, password, confirmPassword)
         if (validationError != null) {
             val message = when (validationError) {
@@ -72,10 +67,16 @@ class RegisterViewModel(
             _registerUiEvent.value = RegisterUiEvent.ShowErrorDialog(message)
             return
         }
+        register(name = name, email = email, password = password)
+    }
+    private fun register(name: String, email: String, password: String) {
+        if (_registerUiState.value.isLoading == StatusLoading.SHOW_LOADING ||
+            _registerUiEvent.value == RegisterUiEvent.Registered
+        ) return
 
         _registerUiState.update { it.copy(isLoading = StatusLoading.SHOW_LOADING) }
         viewModelScope.launch {
-            registerUseCase(url = NetworkUrl.REGISTER_ENDPOINT, name = name, email = email, password = password)
+            registerUseCase.register(url = NetworkUrl.REGISTER_ENDPOINT, name = name, email = email, password = password)
                 .onStart {
                     _registerUiEvent.value = RegisterUiEvent.Idle
                 }.catch { exception ->

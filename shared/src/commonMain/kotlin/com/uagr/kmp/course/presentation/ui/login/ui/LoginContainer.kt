@@ -1,3 +1,8 @@
+/*
+// LoginContainer.kt
+// Created by Karla Judith Cervantes Higareda on 29/09/26.
+// Copyright (c) 2026. All rights reserved.
+*/
 package com.uagr.kmp.course.presentation.ui.login.ui
 
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -46,12 +51,6 @@ import course.shared.generated.resources.password
 import course.shared.generated.resources.subtitle
 import course.shared.generated.resources.title
 import org.jetbrains.compose.resources.stringResource
-
-/*
-// LoginContainer.kt
-// Created by Karla Judith Cervantes Higareda on 29/09/26.
-// Copyright (c) 2026. All rights reserved.
-*/
 
 @Composable
 fun LoginContainer(

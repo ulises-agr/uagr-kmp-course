@@ -1,3 +1,8 @@
+/*
+// RegisterContainer.kt
+// Created by Karla Judith Cervantes Higareda on 29/09/26.
+// Copyright (c) 2026. All rights reserved.
+*/
 package com.uagr.kmp.course.presentation.ui.register.ui
 
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -56,12 +61,6 @@ import course.shared.generated.resources.title
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.stringResource
 
-/*
-// RegisterContainer.kt
-// Created by Karla Judith Cervantes Higareda on 29/09/26.
-// Copyright (c) 2026. All rights reserved.
-*/
-
 @Composable
 fun RegisterContainer(
     name: String = "",
@@ -76,7 +75,7 @@ fun RegisterContainer(
     onConfirmPasswordChange: (String) -> Unit = {},
     onPasswordVisibleChange: (Boolean) -> Unit = {},
     onConfirmPasswordVisibleChange: (Boolean) -> Unit = {},
-    onCreateRegister: (String, String, String, String) -> Unit = { _, _, _, _ -> },
+    onCreateRegister: () -> Unit = {},
     navigateToBack: () -> Unit = {},
     isLoading: Boolean = false,
 ) {
@@ -193,7 +192,7 @@ fun RegisterContainer(
         ButtonCustom(
             onClick = {
                 focusManager.clearFocus(force = true)
-                onCreateRegister(name, email, password, confirmPassword)
+                onCreateRegister()
             },
             enabled = !isLoading,
             modifier = Modifier.fillMaxWidth(),
