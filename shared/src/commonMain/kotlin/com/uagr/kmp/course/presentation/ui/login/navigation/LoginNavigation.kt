@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.uagr.kmp.course.presentation.ui.home.navigation.HomeNavigation
 import com.uagr.kmp.course.presentation.ui.login.ui.LoginScreen
 import com.uagr.kmp.course.presentation.ui.register.navigation.RegisterNavigation
 import com.uagr.kmp.course.presentation.ui.welcome.navigation.WelcomeNavigation
@@ -14,7 +15,7 @@ data object LoginNavigation : Screen  {
         val navigator = LocalNavigator.currentOrThrow
         LoginScreen(
             onLoginSuccess = {
-                navigator.replaceAll(item = WelcomeNavigation)
+                navigator.replaceAll(item = HomeNavigation)
             },
             onRegisterEnter = {
                 navigator.push(item = RegisterNavigation)

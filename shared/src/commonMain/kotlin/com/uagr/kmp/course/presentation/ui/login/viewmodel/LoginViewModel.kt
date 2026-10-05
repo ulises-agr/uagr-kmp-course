@@ -27,6 +27,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.getString
 import org.koin.core.annotation.KoinViewModel
+import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
 @KoinViewModel
@@ -55,8 +56,9 @@ class LoginViewModel(
         _loginUiState.update { state -> state.copy(passwordVisible = passwordVisible) }
     }
 
-    fun getIdDevice(): String{
-        return Uuid.toString()
+    @OptIn(ExperimentalUuidApi::class)
+    fun getIdDevice(): String {
+        return Uuid.random().toString()
     }
 
     fun validateLoginForm(

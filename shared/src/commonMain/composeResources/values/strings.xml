@@ -20,8 +20,8 @@
     <string name="go_back">Go back</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="email_example">user@gmail</string>
-    <string name="password_example">Password123</string>
+    <string name="email_example">user@mail.com</string>
+    <string name="password_example">*****</string>
     <string name="email_empty">Email empty</string>
     <string name="password_empty">Password empty</string>
     <string name="name_empty">Name empty</string>
