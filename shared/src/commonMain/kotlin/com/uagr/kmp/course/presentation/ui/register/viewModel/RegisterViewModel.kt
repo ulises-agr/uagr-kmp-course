@@ -55,6 +55,16 @@ class RegisterViewModel(
         _registerUiState.update { state -> state.copy(confirmPassword = confirmPassword) }
     }
 
+    fun togglePasswordVisibility() = viewModelScope.launch {
+        _registerUiState.update { state -> state.copy(isPasswordVisible = !state.isPasswordVisible)
+        }
+    }
+
+    fun toggleConfirmPasswordVisibility() = viewModelScope.launch {
+        _registerUiState.update { state -> state.copy(isConfirmPasswordVisible = !state.isConfirmPasswordVisible)
+        }
+    }
+
     fun validateRegisterForm(
         name: String,
         email: String,

@@ -12,8 +12,6 @@ import com.uagr.kmp.course.presentation.ui.home.navigation.HomeNavigation
 import com.uagr.kmp.course.presentation.ui.login.ui.LoginScreen
 import com.uagr.kmp.course.presentation.ui.register.navigation.RegisterNavigation
 
-//import com.uagr.kmp.course.presentation.ui.welcome.navigation.HomeNavigation
-
 data object loginNavigation : Screen  {
     @Composable
     override fun Content() {

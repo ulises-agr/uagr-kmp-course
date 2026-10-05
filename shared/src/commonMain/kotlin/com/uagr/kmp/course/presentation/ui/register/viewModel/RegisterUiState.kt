@@ -13,5 +13,7 @@ data class RegisterUiState(
     val password: String = "",
     val confirmPassword: String = "",
     val isLoading: StatusLoading = StatusLoading.DISMISS_LOADING,
+    val isPasswordVisible: Boolean = false,
+    val isConfirmPasswordVisible: Boolean = false,
     val errorDialog: ErrorDialogModel? = null
 )

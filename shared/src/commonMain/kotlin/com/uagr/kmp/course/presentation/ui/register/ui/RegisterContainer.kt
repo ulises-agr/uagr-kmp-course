@@ -4,6 +4,7 @@
  */
 package com.uagr.kmp.course.presentation.ui.register.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -15,8 +16,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.presentation.component.icon.IconCustom
 import com.uagr.kmp.course.presentation.theme.AppTheme
 
@@ -31,6 +35,10 @@ fun RegisterContainer(
     onPasswordChange: (String) -> Unit = {},
     confirmPassword: String = "",
     onConfirmPasswordChange: (String) -> Unit = {},
+    isPasswordVisible: Boolean = false,
+    onPasswordVisibleChange: () -> Unit = {},
+    isConfirmPasswordVisible: Boolean = false,
+    onConfirmPasswordVisibleChange: () -> Unit = {},
     onRegisterClick: () -> Unit = {},
     onBackClick: () -> Unit = {},
 ) {
@@ -88,8 +96,19 @@ fun RegisterContainer(
             value = password,
             onValueChange = onPasswordChange,
             label = { Text("Contraseña") },
-            visualTransformation = PasswordVisualTransformation(),
+            visualTransformation = if (isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            trailingIcon = {
+                Text(
+                    text = if (isPasswordVisible) "Ocultar" else "Ver",
+                    color = AppTheme.colors.text.link,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Medium,
+                    modifier = Modifier
+                        .clickable { onPasswordVisibleChange() }
+                        .padding(end = 12.dp)
+                )
+            },
             modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
             singleLine = true
         )
@@ -98,8 +117,19 @@ fun RegisterContainer(
             value = confirmPassword,
             onValueChange = onConfirmPasswordChange,
             label = { Text("Confirmar contraseña") },
-            visualTransformation = PasswordVisualTransformation(),
+            visualTransformation = if (isConfirmPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            trailingIcon = {
+                Text(
+                    text = if (isConfirmPasswordVisible) "Ocultar" else "Ver",
+                    color = AppTheme.colors.text.link,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Medium,
+                    modifier = Modifier
+                        .clickable { onConfirmPasswordVisibleChange() }
+                        .padding(end = 12.dp)
+                )
+            },
             modifier = Modifier.fillMaxWidth().padding(bottom = 32.dp),
             singleLine = true
         )
@@ -113,5 +143,13 @@ fun RegisterContainer(
         ) {
             Text(text = "Registrar usuario", fontSize = 16.sp, color = AppTheme.colors.text.white)
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun RegisterContainerPreview() {
+    SafeScreenContainerTest {
+        RegisterContainer()
     }
 }

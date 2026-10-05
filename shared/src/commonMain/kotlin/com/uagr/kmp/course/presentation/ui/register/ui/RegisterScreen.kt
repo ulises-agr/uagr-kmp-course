@@ -58,6 +58,14 @@ fun RegisterScreen(
             onConfirmPasswordChange = { confirmPassword ->
                 viewModel.updateConfirmPassword(confirmPassword = confirmPassword)
             },
+            isPasswordVisible = registerUiState.isPasswordVisible,
+            onPasswordVisibleChange = {
+                viewModel.togglePasswordVisibility()
+            },
+            isConfirmPasswordVisible = registerUiState.isConfirmPasswordVisible,
+            onConfirmPasswordVisibleChange = {
+                viewModel.toggleConfirmPasswordVisibility()
+            },
             onRegisterClick = {
                 viewModel.validateRegisterForm(
                     name = registerUiState.name,
