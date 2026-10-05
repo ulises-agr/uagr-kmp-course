@@ -50,4 +50,20 @@
     <string name="empty_packages">Empty packages</string>
     <string name="active_packages">Active packages</string>
 
+    <!-- Home -->
+    <string name="home_title">Hola, @name</string>
+    <string name="home_subtitle">Tu panorama financiero</string>
+
+    <!-- Movements -->
+    <string name="movements_title">Movimientos</string>
+    <string name="movements_subtitle">Septiembre 2026</string>
+
+    <!-- Budget -->
+    <string name="budget_title">Presupuestos</string>
+    <string name="budget_subtitle">Septiembre</string>
+
+    <!-- Goals -->
+    <string name="goals_title">Metas de ahorro</string>
+    <string name="goals_subtitle">Convierte objetivos en progreso visible.</string>
+
 </resources>

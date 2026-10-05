@@ -35,7 +35,28 @@ fun BigHeader(
         text = subtitle,
         textAlign = TextAlign.Left,
     )
+}
 
+@Composable
+fun BigHeaderInverted(
+    title: String = "",
+    subtitle: String = "",
+) {
+    TextNormal(
+        modifier = Modifier.fillMaxWidth()
+            .padding(top = Dimens.padding8),
+        fontSize = Dimens.textSizeNormal,
+        color = AppTheme.colors.subtitleGray,
+        text = title,
+        textAlign = TextAlign.Left,
+    )
+    TextBigBold(
+        modifier = Modifier.fillMaxWidth()
+            .padding(top = Dimens.padding16),
+        color = AppTheme.colors.backgroundButton,
+        text = subtitle,
+        textAlign = TextAlign.Left,
+    )
 }
 
 @Preview(showBackground = true)
@@ -48,6 +69,11 @@ private fun BigHeaderPreview() {
                 .padding(all = Dimens.padding16),
         ) {
             BigHeader(
+                title = "Title",
+                subtitle = "subtitle"
+            )
+
+            BigHeaderInverted(
                 title = "Title",
                 subtitle = "subtitle"
             )

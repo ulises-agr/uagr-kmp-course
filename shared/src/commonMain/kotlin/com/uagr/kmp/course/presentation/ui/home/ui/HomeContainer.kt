@@ -16,21 +16,22 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.uagr.kmp.course.domain.model.home.HomeDataModel
 import com.uagr.kmp.course.presentation.component.Header.BigHeader
+import com.uagr.kmp.course.presentation.component.Header.BigHeaderInverted
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.presentation.component.text.TextNormal
 import com.uagr.kmp.course.presentation.theme.AppTheme
 import com.uagr.kmp.course.presentation.theme.Dimens
+import course.shared.generated.resources.Res
+import course.shared.generated.resources.budget_title
+import course.shared.generated.resources.home_subtitle
+import course.shared.generated.resources.home_title
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun HomeContainer(
     homeData: HomeDataModel? = null,
 ) {
     val scrollState = rememberScrollState()
-    Scaffold (
-        modifier = Modifier.fillMaxWidth()
-    ){ paddingValues ->
-
-    }
 
     Column(
         modifier = Modifier
@@ -40,9 +41,9 @@ fun HomeContainer(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(modifier = Modifier.fillMaxWidth())
-        BigHeader(
-            title = "Home",
-            subtitle = "Bienvenido a FinTrack",
+        BigHeaderInverted(
+            title = stringResource(Res.string.home_title),
+            subtitle = stringResource(Res.string.home_subtitle),
         )
         Spacer(modifier = Modifier.height(height = Dimens.height32))
 
