@@ -8,6 +8,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.uagr.kmp.course.presentation.ui.home.navigation.HomeNavigation
 import com.uagr.kmp.course.presentation.ui.login.ui.LoginScreen
 import com.uagr.kmp.course.presentation.ui.login.viewmodel.LoginViewModel
+import com.uagr.kmp.course.presentation.ui.register.navigation.RegisterNavigation
 
 data object LoginNavigation : Screen {
 
@@ -22,6 +23,9 @@ data object LoginNavigation : Screen {
             viewModel = viewModel,
             navigateToHome = {
                 navigator.push(HomeNavigation)
+            },
+            navigateToRegister = {
+                navigator.push(RegisterNavigation)
             }
         )
     }

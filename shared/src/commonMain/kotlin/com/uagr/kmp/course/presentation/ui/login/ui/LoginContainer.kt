@@ -39,7 +39,8 @@ fun LoginContainer(
     isLoading: Boolean,
     onEmailChanged: (String) -> Unit,
     onPasswordChanged: (String) -> Unit,
-    onLoginClicked: () -> Unit
+    onLoginClicked: () -> Unit,
+    onCreateAccountClicked: () -> Unit
 ) {
 
     Column(
@@ -239,6 +240,7 @@ fun LoginContainer(
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .clickable {
+                    onCreateAccountClicked()
                 },
             color = AppTheme.colors.backgrounds.actionBlue,
             fontSize = Dimens.textSizeSmall,
@@ -272,6 +274,7 @@ private fun LoginContainerPreview() {
         isLoading = false,
         onEmailChanged = {},
         onPasswordChanged = {},
-        onLoginClicked = {}
+        onLoginClicked = {},
+        onCreateAccountClicked = {}
     )
 }

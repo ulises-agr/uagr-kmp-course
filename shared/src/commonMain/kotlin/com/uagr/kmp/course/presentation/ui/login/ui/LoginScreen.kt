@@ -8,7 +8,7 @@ import com.uagr.kmp.course.presentation.ui.login.viewmodel.LoginUIEvent
 import com.uagr.kmp.course.presentation.ui.login.viewmodel.LoginViewModel
 
 @Composable
-fun LoginScreen(viewModel: LoginViewModel, navigateToHome: () -> Unit) {
+fun LoginScreen(viewModel: LoginViewModel, navigateToHome: () -> Unit, navigateToRegister: () -> Unit) {
     val email by viewModel.email.collectAsState()
     val password by viewModel.password.collectAsState()
     val emailError by viewModel.emailError.collectAsState()
@@ -40,6 +40,7 @@ fun LoginScreen(viewModel: LoginViewModel, navigateToHome: () -> Unit) {
         isLoading = isLoading,
         onEmailChanged = viewModel::onEmailChanged,
         onPasswordChanged = viewModel::onPasswordChanged,
-        onLoginClicked = viewModel::onLoginClicked
+        onLoginClicked = viewModel::onLoginClicked,
+        onCreateAccountClicked = navigateToRegister
     )
 }

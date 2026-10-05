@@ -15,6 +15,7 @@ import com.uagr.kmp.course.data.repository.login.LoginRepositoryImpl
 import com.uagr.kmp.course.domain.repository.login.LoginRepository
 import com.uagr.kmp.course.domain.usecase.login.LoginUseCase
 import com.uagr.kmp.course.presentation.ui.login.viewmodel.LoginViewModel
+import com.uagr.kmp.course.presentation.ui.register.viewmodel.RegisterViewModel
 import com.uagr.kmp.course.presentation.ui.welcome.viewmodel.WelcomeViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -26,6 +27,9 @@ import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.bind
 import org.koin.dsl.module
+import com.uagr.kmp.course.data.repository.register.RegisterRepositoryImpl
+import com.uagr.kmp.course.domain.repository.register.RegisterRepository
+import com.uagr.kmp.course.domain.usecase.register.RegisterUseCase
 
 val dispatcherModule = module {
     single<CoroutineDispatcher> { Dispatchers.IO }
@@ -62,14 +66,17 @@ val dataSourceLocalModule = module {
 
 val repositoryModule = module {
     singleOf(::LoginRepositoryImpl) bind LoginRepository::class
+    singleOf(::RegisterRepositoryImpl) bind RegisterRepository::class
 }
 
 val useCaseModule = module {
     factoryOf(::LoginUseCase)
+    factoryOf(::RegisterUseCase)
 }
 
 val viewmodelModule = module {
     viewModelOf(::LoginViewModel)
+    viewModelOf(::RegisterViewModel)
 }
 
 fun initKoin(config: KoinAppDeclaration? = null) {
