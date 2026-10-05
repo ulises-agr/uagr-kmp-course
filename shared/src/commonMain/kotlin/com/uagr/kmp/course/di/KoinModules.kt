@@ -7,8 +7,6 @@ package com.uagr.kmp.course.di
 import com.uagr.kmp.course.data.local.database.AppDatabase
 import com.uagr.kmp.course.data.local.database.getDatabaseBuilder
 import com.uagr.kmp.course.data.local.datastore.createDataStore
-import com.uagr.kmp.course.data.local.device.DeviceIdProvider
-import com.uagr.kmp.course.data.local.device.createDeviceIdProvider
 import com.uagr.kmp.course.data.local.secure.SecureTokenStorage
 import com.uagr.kmp.course.data.local.secure.createSecureTokenStorage
 import com.uagr.kmp.course.data.network.client.createHttpClient
@@ -39,9 +37,6 @@ class KoinModules {
 
     @Single
     fun secureTokenStorage(): SecureTokenStorage = createSecureTokenStorage()
-
-    @Single
-    fun deviceIdProvider(): DeviceIdProvider = createDeviceIdProvider()
 
     @Single
     fun httpClient(secureTokenStorage: SecureTokenStorage) =

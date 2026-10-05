@@ -9,7 +9,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.uagr.kmp.course.presentation.ui.home.navigation.HomeNavigation
-import com.uagr.kmp.course.presentation.ui.login.ui.loginScreen
+import com.uagr.kmp.course.presentation.ui.login.ui.LoginScreen
 import com.uagr.kmp.course.presentation.ui.register.navigation.RegisterNavigation
 
 //import com.uagr.kmp.course.presentation.ui.welcome.navigation.HomeNavigation
@@ -18,7 +18,7 @@ data object loginNavigation : Screen  {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        loginScreen(
+        LoginScreen(
             onLoginSuccess = {
                 navigator.replaceAll(HomeNavigation)
             },

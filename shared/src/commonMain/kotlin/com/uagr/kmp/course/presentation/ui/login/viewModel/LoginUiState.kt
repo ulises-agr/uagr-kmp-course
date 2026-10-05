@@ -11,5 +11,6 @@ data class LoginUiState(
     val isLoading: StatusLoading = StatusLoading.DISMISS_LOADING,
     val email: String = "",
     val password: String = "",
+    val isPasswordVisible: Boolean = false,
     val errorDialog: ErrorDialogModel? = null,
 )

@@ -1,5 +1,5 @@
 /*
- * loginScreen.kt
+ * LoginScreen.kt
  * Copyright (c) 2026. All rights reserved
  */
 package com.uagr.kmp.course.presentation.ui.login.ui
@@ -19,7 +19,7 @@ import com.uagr.kmp.course.utils.flow.CollectWithLifecycle
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun loginScreen(
+fun LoginScreen(
     viewModel: LoginViewModel = koinViewModel(),
     onLoginSuccess: () -> Unit = {},
     onRegisterClick: () -> Unit = {},
@@ -50,6 +50,10 @@ fun loginScreen(
             onPasswordChange = { password ->
                 viewModel.updatePassword(password = password)
             },
+            passwordVisible = loginUiState.isPasswordVisible,
+            onPasswordVisibleChange = {
+                viewModel.togglePasswordVisibility()
+            },
             onLoginClick = {
                 viewModel.validateLoginForm(
                     email = loginUiState.email,
@@ -74,7 +78,7 @@ fun loginScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun loginScreenPreview() {
+fun LoginScreenPreview() {
     SafeScreenContainerTest {
         loginContainer()
     }

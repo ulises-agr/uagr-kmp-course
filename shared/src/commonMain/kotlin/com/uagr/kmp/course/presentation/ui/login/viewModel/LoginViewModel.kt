@@ -57,6 +57,12 @@ class LoginViewModel(
         _loginUiState.update { state -> state.copy(password = password) }
     }
 
+    fun togglePasswordVisibility() = viewModelScope.launch {
+        _loginUiState.update { state ->
+            state.copy(isPasswordVisible = !state.isPasswordVisible)
+        }
+    }
+
     fun validateLoginForm(
         email: String,
         password: String,

@@ -5,7 +5,9 @@
 package com.uagr.kmp.course.presentation.ui.home.ui
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainer
+import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.presentation.theme.AppTheme
 
 @Composable
@@ -20,5 +22,13 @@ fun HomeScreen(
         HomeContainer(
             onLogoutClick = onLogoutClick
         )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun HomeScreenPreview() {
+    SafeScreenContainerTest {
+        HomeContainer()
     }
 }
