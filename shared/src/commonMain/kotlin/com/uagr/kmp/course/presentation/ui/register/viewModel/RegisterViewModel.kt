@@ -7,83 +7,152 @@ package com.uagr.kmp.course.presentation.ui.register.viewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uagr.kmp.course.domain.model.base.ErrorDialogModel
+import com.uagr.kmp.course.domain.model.user.userTokensModel
 import com.uagr.kmp.course.domain.usecase.register.RegisterUserUseCase
+import com.uagr.kmp.course.domain.usecase.user.SaveUserTokenUseCase
+import com.uagr.kmp.course.utils.network.NetworkErrorType
+import com.uagr.kmp.course.utils.network.NetworkResult
 import com.uagr.kmp.course.utils.operators.StatusLoading
+import course.shared.generated.resources.Res
+import course.shared.generated.resources.accept
+import course.shared.generated.resources.error
+import course.shared.generated.resources.network_error
+import course.shared.generated.resources.please_try_again_later
+import course.shared.generated.resources.server_error
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.getString
 
 class RegisterViewModel(
-    private val registerUserUseCase: RegisterUserUseCase
+    private val registerUserUseCase: RegisterUserUseCase,
+    private val saveUserTokenUseCase: SaveUserTokenUseCase,
 ) : ViewModel() {
 
-    private val _registerUiState = MutableStateFlow(RegisterUiState())
+    private var _registerUiState = MutableStateFlow(RegisterUiState())
     val registerUiState: StateFlow<RegisterUiState> = _registerUiState.asStateFlow()
 
-    private val _registerUiEvent = MutableStateFlow<RegisterUiEvent>(RegisterUiEvent.Idle)
+    private var _registerUiEvent = MutableStateFlow<RegisterUiEvent>(RegisterUiEvent.Idle)
     val registerUiEvent: StateFlow<RegisterUiEvent> = _registerUiEvent.asStateFlow()
 
-    fun updateName(name: String) {
-        _registerUiState.update { it.copy(name = name) }
+    fun updateName(name: String) = viewModelScope.launch {
+        _registerUiState.update { state -> state.copy(name = name) }
     }
 
-    fun updateEmail(email: String) {
-        _registerUiState.update { it.copy(email = email) }
+    fun updateEmail(email: String) = viewModelScope.launch {
+        _registerUiState.update { state -> state.copy(email = email) }
     }
 
-    fun updatePassword(password: String) {
-        _registerUiState.update { it.copy(password = password) }
+    fun updatePassword(password: String) = viewModelScope.launch {
+        _registerUiState.update { state -> state.copy(password = password) }
     }
 
-    fun updateConfirmPassword(confirmPassword: String) {
-        _registerUiState.update { it.copy(confirmPassword = confirmPassword) }
+    fun updateConfirmPassword(confirmPassword: String) = viewModelScope.launch {
+        _registerUiState.update { state -> state.copy(confirmPassword = confirmPassword) }
     }
 
     fun validateRegisterForm(
         name: String,
         email: String,
         password: String,
-        confirmPassword: String
-    ) {
-        viewModelScope.launch {
-            println(">>> INICIANDO REGISTRO con email: $email")
-            _registerUiState.update {
-                it.copy(isLoading = StatusLoading.SHOW_LOADING, errorDialog = null)
+        confirmPassword: String,
+    ) = viewModelScope.launch {
+        registerUserUseCase(
+            name = name,
+            email = email,
+            password = password,
+            confirmPassword = confirmPassword,
+        ).onStart {
+            _registerUiState.update { state ->
+                state.copy(
+                    isLoading = StatusLoading.SHOW_LOADING,
+                    errorDialog = null,
+                )
             }
-
-            registerUserUseCase(
-                name = name,
-                email = email,
-                password = password,
-                confirmPassword = confirmPassword
-            ).onSuccess {
-                println(">>> REGISTRO EXITOSO")
-                _registerUiState.update { it.copy(isLoading = StatusLoading.DISMISS_LOADING) }
-                _registerUiEvent.value = RegisterUiEvent.RegisterSuccess
-            }.onFailure { error ->
-                println(">>> ERROR EN REGISTRO: ${error.message}")
-                error.printStackTrace()
-                _registerUiState.update {
-                    it.copy(
-                        isLoading = StatusLoading.DISMISS_LOADING,
-                        errorDialog = ErrorDialogModel(
-                            title = "Error de Registro",
-                            message = error.message ?: "Ocurrió un error al registrar el usuario",
-                            primaryButtonText = "Aceptar"
-                        )
+        }.catch {
+            _registerUiState.update { state ->
+                state.copy(
+                    isLoading = StatusLoading.DISMISS_LOADING,
+                    errorDialog = setErrorDialog(message = getString(Res.string.network_error)),
+                )
+            }
+        }.collect { result ->
+            when (result) {
+                is NetworkResult.Success -> {
+                    val tokens = result.response.tokens
+                    if (tokens != null && tokens.access_token.isNotBlank()) {
+                        saveUserToken(tokens = tokens)
+                    } else {
+                        _registerUiState.update { state ->
+                            state.copy(isLoading = StatusLoading.DISMISS_LOADING)
+                        }
+                        _registerUiEvent.emit(RegisterUiEvent.RegisterSuccess)
+                    }
+                }
+                is NetworkResult.Error -> {
+                    showFriendlyError(
+                        errorType = result.errorType,
+                        httpCode = result.code,
+                        serverMessage = result.message,
                     )
                 }
             }
         }
     }
 
-    fun dismissErrorDialog() {
-        _registerUiState.update { it.copy(errorDialog = null) }
+    private fun saveUserToken(tokens: userTokensModel?) = viewModelScope.launch {
+        saveUserTokenUseCase(token = tokens)
+            .catch {
+                _registerUiState.update { state ->
+                    state.copy(isLoading = StatusLoading.DISMISS_LOADING)
+                }
+                _registerUiEvent.emit(RegisterUiEvent.RegisterSuccess)
+            }.collect {
+                _registerUiState.update { state ->
+                    state.copy(isLoading = StatusLoading.DISMISS_LOADING)
+                }
+                _registerUiEvent.emit(RegisterUiEvent.RegisterSuccess)
+            }
     }
 
-    fun resetUiEvent() {
+    private suspend fun showFriendlyError(
+        errorType: NetworkErrorType,
+        httpCode: Int? = null,
+        serverMessage: String? = null,
+    ) {
+        val message = when {
+            httpCode == 409 -> "El correo ya se encuentra registrado."
+            httpCode == 422 -> serverMessage ?: getString(Res.string.please_try_again_later)
+            errorType == NetworkErrorType.NETWORK || errorType == NetworkErrorType.TIMEOUT ->
+                getString(Res.string.network_error)
+            errorType == NetworkErrorType.HTTP && (httpCode != null && httpCode >= 500) ->
+                getString(Res.string.server_error)
+            else -> serverMessage ?: getString(Res.string.please_try_again_later)
+        }
+        _registerUiState.update { state ->
+            state.copy(
+                isLoading = StatusLoading.DISMISS_LOADING,
+                errorDialog = setErrorDialog(message = message),
+            )
+        }
+    }
+
+    private suspend fun setErrorDialog(message: String? = null): ErrorDialogModel =
+        ErrorDialogModel(
+            title = getString(resource = Res.string.error),
+            message = message ?: getString(resource = Res.string.please_try_again_later),
+            primaryButtonText = getString(resource = Res.string.accept),
+        )
+
+    fun dismissErrorDialog() = viewModelScope.launch {
+        _registerUiState.update { state -> state.copy(errorDialog = null) }
+    }
+
+    fun resetUiEvent() = viewModelScope.launch {
         _registerUiEvent.value = RegisterUiEvent.Idle
     }
 }

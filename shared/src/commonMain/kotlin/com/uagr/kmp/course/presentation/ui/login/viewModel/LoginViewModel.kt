@@ -7,9 +7,11 @@ package com.uagr.kmp.course.presentation.ui.login.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uagr.kmp.course.domain.model.base.ErrorDialogModel
-import com.uagr.kmp.course.domain.usecase.login.loginUseCase
+import com.uagr.kmp.course.domain.model.user.userTokensModel
+import com.uagr.kmp.course.domain.usecase.login.LoginUseCase
 import com.uagr.kmp.course.domain.usecase.login.loginValidationResult
-import com.uagr.kmp.course.domain.usecase.login.validateLoginFormUseCase
+import com.uagr.kmp.course.domain.usecase.login.ValidateLoginUseCase
+import com.uagr.kmp.course.domain.usecase.user.SaveUserTokenUseCase
 import com.uagr.kmp.course.utils.constant.NetworkUrl
 import com.uagr.kmp.course.utils.network.NetworkErrorType
 import com.uagr.kmp.course.utils.network.NetworkResult
@@ -35,14 +37,14 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.getString
 import org.koin.core.annotation.KoinViewModel
 @KoinViewModel
-class loginViewModel(
-    private val validateLoginFormUseCase: validateLoginFormUseCase,
-    private val loginUseCase: loginUseCase,
-    //private val saveUserTokenUseCase: saveUserTokenUseCase,
+class LoginViewModel(
+    private val validateLoginFormUseCase: ValidateLoginUseCase,
+    private val loginUseCase: LoginUseCase,
+    private val saveUserTokenUseCase: SaveUserTokenUseCase,
 ) : ViewModel() {
 
-    private var _loginUiState = MutableStateFlow(loginUiState())
-    val loginUiState: StateFlow<loginUiState> = _loginUiState.asStateFlow()
+    private var _loginUiState = MutableStateFlow(LoginUiState())
+    val loginUiState: StateFlow<LoginUiState> = _loginUiState.asStateFlow()
 
     private var _loginUiEvent = MutableStateFlow<LoginUiEvent>(LoginUiEvent.Idle)
     val loginUiEvent: StateFlow<LoginUiEvent> = _loginUiEvent.asStateFlow()
@@ -117,7 +119,7 @@ class loginViewModel(
                     Napier.d("Success")
                     val tokens = result.response.tokens
                     if (tokens.access_token.isNotBlank()) {
-                        //saveUserToken(tokens = tokens)
+                        saveUserToken(tokens = tokens)
                         _loginUiState.update { state ->
                             state.copy(isLoading = StatusLoading.DISMISS_LOADING)
                         }
@@ -138,17 +140,17 @@ class loginViewModel(
         }
     }
 
-//    private fun saveUserToken(tokens: userTokensModel) = viewModelScope.launch {
-//        saveUserTokenUseCase(token = tokens)
-//            .catch {
-//                showFriendlyError(errorType = NetworkErrorType.UNKNOWN)
-//            }.collect {
-//                _loginUiState.update { state ->
-//                    state.copy(isLoading = StatusLoading.DISMISS_LOADING)
-//                }
-//                _loginUiEvent.emit(loginUiEvent.loginSuccess)
-//            }
-//    }
+    private fun saveUserToken(tokens: userTokensModel) = viewModelScope.launch {
+        saveUserTokenUseCase(token = tokens)
+            .catch {
+                showFriendlyError(errorType = NetworkErrorType.UNKNOWN)
+            }.collect {
+                _loginUiState.update { state ->
+                    state.copy(isLoading = StatusLoading.DISMISS_LOADING)
+                }
+                _loginUiEvent.emit(LoginUiEvent.LoginSuccess)
+            }
+    }
 
     private suspend fun showFriendlyError(
         errorType: NetworkErrorType,

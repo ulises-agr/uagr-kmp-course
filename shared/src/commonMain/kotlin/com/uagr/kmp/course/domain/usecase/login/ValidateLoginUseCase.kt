@@ -1,5 +1,5 @@
 /*
- * validateLoginFormUseCase.kt
+ * ValidateLoginUseCase.kt
  * Copyright (c) 2026. All rights reserved
  */
 package com.uagr.kmp.course.domain.usecase.login
@@ -7,7 +7,7 @@ package com.uagr.kmp.course.domain.usecase.login
 import org.koin.core.annotation.Factory
 
 @Factory
-class validateLoginFormUseCase {
+class ValidateLoginUseCase {
 
     operator fun invoke(
         email: String,

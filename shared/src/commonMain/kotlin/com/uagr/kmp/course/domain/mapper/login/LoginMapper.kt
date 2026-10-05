@@ -5,11 +5,11 @@
 package com.uagr.kmp.course.domain.mapper.login
 
 import com.uagr.kmp.course.data.network.model.response.login.loginResponse
-import com.uagr.kmp.course.domain.model.login.loginModel
+import com.uagr.kmp.course.domain.model.login.LoginModel
 import com.uagr.kmp.course.domain.model.user.userTokensModel
 
-fun loginResponse.toDomain(): loginModel =
-    loginModel(
+fun loginResponse.toDomain(): LoginModel =
+    LoginModel(
         tokens = userTokensModel(
             token_type = token_type.orEmpty(),
             access_token = access_token.orEmpty(),

@@ -5,9 +5,9 @@
 package com.uagr.kmp.course.data.repository.login
 
 import com.uagr.kmp.course.data.network.datasource.login.LoginNetworkDataSource
-import com.uagr.kmp.course.data.network.model.request.login.loginRequest
-import com.uagr.kmp.course.domain.model.login.loginModel
-import com.uagr.kmp.course.domain.repository.login.loginRepository
+import com.uagr.kmp.course.data.network.model.request.login.LoginRequest
+import com.uagr.kmp.course.domain.model.login.LoginModel
+import com.uagr.kmp.course.domain.repository.login.LoginRepository
 import com.uagr.kmp.course.utils.network.NetworkResult
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
@@ -19,12 +19,12 @@ import org.koin.core.annotation.Factory
 class LoginRepositoryImpl(
     private val loginNetworkDataSource: LoginNetworkDataSource,
     private val dispatcher: CoroutineDispatcher,
-): loginRepository {
+): LoginRepository {
 
     override suspend fun login(
         url: String,
-        loginRequest: loginRequest,
-    ): Flow<NetworkResult<loginModel>> = flow {
+        loginRequest: LoginRequest,
+    ): Flow<NetworkResult<LoginModel>> = flow {
         emit(
             loginNetworkDataSource.login(
                 url = url,

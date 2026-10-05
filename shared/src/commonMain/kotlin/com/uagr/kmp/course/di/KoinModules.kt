@@ -17,6 +17,7 @@ import com.uagr.kmp.course.data.repository.register.RegisterNetworkDataSourceImp
 import com.uagr.kmp.course.data.repository.register.RegisterRepositoryImpl
 import com.uagr.kmp.course.domain.repository.register.RegisterRepository
 import com.uagr.kmp.course.domain.usecase.register.RegisterUserUseCase
+import com.uagr.kmp.course.domain.usecase.user.SaveUserTokenUseCase
 import com.uagr.kmp.course.presentation.ui.register.viewModel.RegisterViewModel
 import io.ktor.client.HttpClient
 import kotlinx.coroutines.CoroutineDispatcher
@@ -62,14 +63,26 @@ class KoinModules {
         RegisterNetworkDataSourceImpl(networkClient)
 
     @Single
-    fun registerRepository(registerNetworkDataSource: RegisterNetworkDataSource): RegisterRepository =
-        RegisterRepositoryImpl(registerNetworkDataSource)
+    fun registerRepository(
+        registerNetworkDataSource: RegisterNetworkDataSource,
+        ioDispatcher: CoroutineDispatcher,
+    ): RegisterRepository =
+        RegisterRepositoryImpl(
+            registerNetworkDataSource = registerNetworkDataSource,
+            ioDispatcher = ioDispatcher,
+        )
 
     @Factory
     fun registerUserUseCase(registerRepository: RegisterRepository): RegisterUserUseCase =
         RegisterUserUseCase(registerRepository)
 
     @Factory
-    fun registerViewModel(registerUserUseCase: RegisterUserUseCase): RegisterViewModel =
-        RegisterViewModel(registerUserUseCase)
+    fun registerViewModel(
+        registerUserUseCase: RegisterUserUseCase,
+        saveUserTokenUseCase: SaveUserTokenUseCase,
+    ): RegisterViewModel =
+        RegisterViewModel(
+            registerUserUseCase = registerUserUseCase,
+            saveUserTokenUseCase = saveUserTokenUseCase,
+        )
 }

@@ -14,13 +14,13 @@ import com.uagr.kmp.course.presentation.component.dialog.DialogCustom
 import com.uagr.kmp.course.presentation.component.loader.Loader
 import com.uagr.kmp.course.presentation.theme.AppTheme
 import com.uagr.kmp.course.presentation.ui.login.viewmodel.LoginUiEvent
-import com.uagr.kmp.course.presentation.ui.login.viewmodel.loginViewModel
+import com.uagr.kmp.course.presentation.ui.login.viewmodel.LoginViewModel
 import com.uagr.kmp.course.utils.flow.CollectWithLifecycle
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun loginScreen(
-    viewModel: loginViewModel = koinViewModel(),
+    viewModel: LoginViewModel = koinViewModel(),
     onLoginSuccess: () -> Unit = {},
     onRegisterClick: () -> Unit = {},
 ) {

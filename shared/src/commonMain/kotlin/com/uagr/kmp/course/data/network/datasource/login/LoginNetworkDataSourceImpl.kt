@@ -4,12 +4,12 @@
  */
 package com.uagr.kmp.course.data.network.datasource.login
 
-import com.uagr.kmp.course.data.network.model.request.login.loginRequest
+import com.uagr.kmp.course.data.network.model.request.login.LoginRequest
 import com.uagr.kmp.course.data.network.model.response.login.loginResponse
 import com.uagr.kmp.course.domain.mapper.login.toDomain
-import com.uagr.kmp.course.domain.model.login.loginModel
+import com.uagr.kmp.course.domain.model.login.LoginModel
 import com.uagr.kmp.course.utils.network.NetworkResult
-import com.uagr.kmp.course.utils.network.safeApiCallDirect
+import com.uagr.kmp.course.utils.network.safeApiCall
 import io.ktor.client.HttpClient
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
@@ -24,9 +24,9 @@ class LoginNetworkDataSourceImpl(
 
     override suspend fun login(
         url: String,
-        loginRequest: loginRequest,
-    ): NetworkResult<loginModel> =
-        safeApiCallDirect(
+        loginRequest: LoginRequest,
+    ): NetworkResult<LoginModel> =
+        safeApiCall(
             apiCall = {
                 httpClient.post(urlString = url) {
                     contentType(type = ContentType.Application.Json)

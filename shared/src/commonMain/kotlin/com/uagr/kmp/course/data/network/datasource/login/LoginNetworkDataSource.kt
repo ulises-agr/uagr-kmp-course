@@ -4,13 +4,13 @@
  */
 package com.uagr.kmp.course.data.network.datasource.login
 
-import com.uagr.kmp.course.data.network.model.request.login.loginRequest
-import com.uagr.kmp.course.domain.model.login.loginModel
+import com.uagr.kmp.course.data.network.model.request.login.LoginRequest
+import com.uagr.kmp.course.domain.model.login.LoginModel
 import com.uagr.kmp.course.utils.network.NetworkResult
 
 interface LoginNetworkDataSource {
     suspend fun login(
         url: String,
-        loginRequest: loginRequest,
-    ): NetworkResult<loginModel>
+        loginRequest: LoginRequest,
+    ): NetworkResult<LoginModel>
 }
