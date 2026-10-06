@@ -8,21 +8,21 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.uagr.kmp.course.presentation.component.buton.ButtonCustom
 import com.uagr.kmp.course.presentation.theme.AppTheme
 import com.uagr.kmp.course.presentation.theme.Dimens
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
+import com.uagr.kmp.course.presentation.component.field.TextFieldCustom
+import com.uagr.kmp.course.presentation.component.field.TextFieldPassword
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 
@@ -44,6 +44,14 @@ fun RegisterContainer(
     onRegisterClicked: () -> Unit,
     onBackClicked: () -> Unit
 ) {
+
+    var passwordVisible by remember {
+        mutableStateOf(false)
+    }
+
+    var confirmPasswordVisible by remember {
+        mutableStateOf(false)
+    }
 
     Column(
         modifier = Modifier
@@ -89,46 +97,70 @@ fun RegisterContainer(
             modifier = Modifier.height(Dimens.height32)
         )
 
-        RegisterTextField(
+        TextFieldCustom(
             value = name,
-            placeholder = "Nombre",
-            error = nameError,
-            onValueChange = onNameChanged
+            onValueChange = onNameChanged,
+            labelColor = AppTheme.colors.text.secondary,
+            label = "Nombre",
+            placeholderColor = AppTheme.colors.text.secondary,
+            placeholder = "",
+            error = nameError
         )
 
         Spacer(
             modifier = Modifier.height(Dimens.height16)
         )
 
-        RegisterTextField(
+        TextFieldCustom(
             value = email,
-            placeholder = "Correo",
-            error = emailError,
-            onValueChange = onEmailChanged
+            onValueChange = onEmailChanged,
+            labelColor = AppTheme.colors.text.secondary,
+            label = "Correo",
+            placeholderColor = AppTheme.colors.text.secondary,
+            placeholder = "",
+            keyboardType = KeyboardType.Email,
+            capitalization = KeyboardCapitalization.None,
+            error = emailError
         )
 
         Spacer(
             modifier = Modifier.height(Dimens.height16)
         )
 
-        RegisterTextField(
+        TextFieldPassword(
             value = password,
-            placeholder = "Contraseña",
-            error = passwordError,
-            isPassword = true,
-            onValueChange = onPasswordChanged
+            onValueChange = onPasswordChanged,
+            passwordVisible = passwordVisible,
+            onPasswordVisibleChange = {
+                passwordVisible = it
+            },
+            labelColor = AppTheme.colors.text.secondary,
+            label = "Contraseña",
+            placeholderColor = AppTheme.colors.text.secondary,
+            placeholder = "",
+            keyboardType = KeyboardType.Password,
+            capitalization = KeyboardCapitalization.None,
+            error = passwordError
         )
 
         Spacer(
             modifier = Modifier.height(Dimens.height16)
         )
 
-        RegisterTextField(
+        TextFieldPassword(
             value = confirmPassword,
-            placeholder = "Confirmar contraseña",
-            error = confirmPasswordError,
-            isPassword = true,
-            onValueChange = onConfirmPasswordChanged
+            onValueChange = onConfirmPasswordChanged,
+            passwordVisible = confirmPasswordVisible,
+            onPasswordVisibleChange = {
+                confirmPasswordVisible = it
+            },
+            labelColor = AppTheme.colors.text.secondary,
+            label = "Confirmar contraseña",
+            placeholderColor = AppTheme.colors.text.secondary,
+            placeholder = "",
+            keyboardType = KeyboardType.Password,
+            capitalization = KeyboardCapitalization.None,
+            error = confirmPasswordError
         )
 
         Spacer(
@@ -145,73 +177,6 @@ fun RegisterContainer(
             text = if (isLoading) "Registrando..." else "Registrar usuario",
             enabled = !isLoading,
             textAlign = TextAlign.Start,
-        )
-    }
-}
-
-@Composable
-private fun RegisterTextField(
-    value: String,
-    placeholder: String,
-    error: String?,
-    isPassword: Boolean = false,
-    onValueChange: (String) -> Unit
-) {
-
-    var passwordVisible by remember {
-        mutableStateOf(false)
-    }
-
-    OutlinedTextField(
-        value = value,
-        onValueChange = onValueChange,
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(Dimens.height64),
-        placeholder = {
-            Text(
-                text = placeholder,
-                fontSize = Dimens.textSizeMedium
-            )
-        },
-        singleLine = true,
-        shape = RoundedCornerShape(Dimens.corner16),
-        visualTransformation = if (isPassword && !passwordVisible) {
-            PasswordVisualTransformation()
-        } else {
-            VisualTransformation.None
-        },
-
-        trailingIcon = {
-            if (isPassword) {
-                Text(
-                    text = if (passwordVisible) "Ocultar" else "Ver",
-                    fontSize = Dimens.textSizeSmall,
-                    color = AppTheme.colors.backgrounds.actionBlue,
-                    modifier = Modifier
-                        .padding(end = Dimens.padding12)
-                        .clickable {
-                            passwordVisible = !passwordVisible
-                        }
-                )
-            }
-        },
-
-        isError = error != null,
-        colors = OutlinedTextFieldDefaults.colors(
-            focusedBorderColor = AppTheme.colors.backgrounds.actionBlue
-        )
-    )
-
-    if (error != null) {
-        Text(
-            text = error,
-            color = AppTheme.colors.error,
-            fontSize = Dimens.textSizeExtraSmall,
-            modifier = Modifier.padding(
-                start = Dimens.padding12,
-                top = Dimens.padding4
-            )
         )
     }
 }
