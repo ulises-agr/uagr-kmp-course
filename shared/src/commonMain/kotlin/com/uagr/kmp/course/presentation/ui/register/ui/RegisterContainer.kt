@@ -12,14 +12,19 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.uagr.kmp.course.presentation.component.buton.ButtonCustom
 import com.uagr.kmp.course.presentation.theme.AppTheme
 import com.uagr.kmp.course.presentation.theme.Dimens
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 
 @Composable
 fun RegisterContainer(
@@ -153,6 +158,10 @@ private fun RegisterTextField(
     onValueChange: (String) -> Unit
 ) {
 
+    var passwordVisible by remember {
+        mutableStateOf(false)
+    }
+
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
@@ -167,11 +176,27 @@ private fun RegisterTextField(
         },
         singleLine = true,
         shape = RoundedCornerShape(Dimens.corner16),
-        visualTransformation = if (isPassword) {
+        visualTransformation = if (isPassword && !passwordVisible) {
             PasswordVisualTransformation()
         } else {
-            androidx.compose.ui.text.input.VisualTransformation.None
+            VisualTransformation.None
         },
+
+        trailingIcon = {
+            if (isPassword) {
+                Text(
+                    text = if (passwordVisible) "Ocultar" else "Ver",
+                    fontSize = Dimens.textSizeSmall,
+                    color = AppTheme.colors.backgrounds.actionBlue,
+                    modifier = Modifier
+                        .padding(end = Dimens.padding12)
+                        .clickable {
+                            passwordVisible = !passwordVisible
+                        }
+                )
+            }
+        },
+
         isError = error != null,
         colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = AppTheme.colors.backgrounds.actionBlue
@@ -195,21 +220,25 @@ private fun RegisterTextField(
 @Composable
 private fun RegisterContainerPreview() {
 
-    RegisterContainer(
-        name = "",
-        email = "",
-        password = "",
-        confirmPassword = "",
-        nameError = null,
-        emailError = null,
-        passwordError = null,
-        confirmPasswordError = null,
-        isLoading = false,
-        onNameChanged = {},
-        onEmailChanged = {},
-        onPasswordChanged = {},
-        onConfirmPasswordChanged = {},
-        onRegisterClicked = {},
-        onBackClicked = {}
-    )
+    AppTheme(
+        isDarkMode = false
+    ) {
+        RegisterContainer(
+            name = "",
+            email = "",
+            password = "",
+            confirmPassword = "",
+            nameError = null,
+            emailError = null,
+            passwordError = null,
+            confirmPasswordError = null,
+            isLoading = false,
+            onNameChanged = {},
+            onEmailChanged = {},
+            onPasswordChanged = {},
+            onConfirmPasswordChanged = {},
+            onRegisterClicked = {},
+            onBackClicked = {}
+        )
+    }
 }

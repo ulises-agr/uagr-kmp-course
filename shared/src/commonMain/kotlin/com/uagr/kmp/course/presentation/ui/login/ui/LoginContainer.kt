@@ -28,6 +28,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.uagr.kmp.course.presentation.component.buton.ButtonCustom
 import com.uagr.kmp.course.presentation.theme.AppTheme
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.VisualTransformation
+import com.uagr.kmp.course.presentation.component.field.TextFieldCustom
+import com.uagr.kmp.course.presentation.component.field.TextFieldPassword
 
 @Composable
 fun LoginContainer(
@@ -42,6 +51,10 @@ fun LoginContainer(
     onLoginClicked: () -> Unit,
     onCreateAccountClicked: () -> Unit
 ) {
+
+    var passwordVisible by remember {
+        mutableStateOf(false)
+    }
 
     Column(
         modifier = Modifier
@@ -141,63 +154,32 @@ fun LoginContainer(
             modifier = Modifier.height(Dimens.height40)
         )
 
-        OutlinedTextField(
+        TextFieldCustom(
             value = email,
             onValueChange = onEmailChanged,
-            modifier = Modifier.fillMaxWidth(),
-            placeholder = {
-                Text(
-                    text = "Correo",
-                    fontSize = Dimens.textSizeNormal,
-                    color = AppTheme.colors.text.secondary
-                )
-            },
-            singleLine = true,
-            shape = RoundedCornerShape(Dimens.corner16),
-            textStyle = TextStyle(
-                fontSize = Dimens.textSizeNormal,
-                fontWeight = FontWeight.Normal
-            ),
-            isError = emailError != null,
-            supportingText = {
-                if (emailError != null) {
-                    Text(
-                        text = emailError
-                    )
-                }
-            }
+            labelColor = AppTheme.colors.text.secondary,
+            label = "Correo",
+            placeholderColor = AppTheme.colors.text.secondary,
+            placeholder = "",
+            error = emailError
         )
 
         Spacer(
             modifier = Modifier.height(Dimens.height16)
         )
 
-        OutlinedTextField(
+        TextFieldPassword(
             value = password,
             onValueChange = onPasswordChanged,
-            modifier = Modifier.fillMaxWidth(),
-            placeholder = {
-                Text(
-                    text = "Contraseña",
-                    fontSize = Dimens.textSizeNormal,
-                    color = AppTheme.colors.text.secondary
-                )
-            },
-            singleLine = true,
-            visualTransformation = PasswordVisualTransformation(),
-            shape = RoundedCornerShape(Dimens.corner16),
-            textStyle = TextStyle(
-                fontSize = Dimens.textSizeNormal,
-                fontWeight = FontWeight.Normal
-            ),
-            isError = passwordError != null,
-            supportingText = {
-                if (passwordError != null) {
-                    Text(
-                        text = passwordError
-                    )
-                }
-            }
+            passwordVisible = passwordVisible,
+            onPasswordVisibleChange = { passwordVisible = it },
+            labelColor = AppTheme.colors.text.secondary,
+            label = "Contraseña",
+            placeholderColor = AppTheme.colors.text.secondary,
+            placeholder = "",
+            keyboardType = KeyboardType.Password,
+            capitalization = KeyboardCapitalization.None,
+            error = passwordError
         )
 
         if (loginError != null) {
@@ -265,16 +247,20 @@ private fun BalanceBar(height: Int) {
 @Preview(showBackground = true)
 @Composable
 private fun LoginContainerPreview() {
-    LoginContainer(
-        email = "",
-        emailError = null,
-        password = "",
-        passwordError = null,
-        loginError = null,
-        isLoading = false,
-        onEmailChanged = {},
-        onPasswordChanged = {},
-        onLoginClicked = {},
-        onCreateAccountClicked = {}
-    )
+    AppTheme(
+        isDarkMode = false
+    ) {
+        LoginContainer(
+            email = "",
+            emailError = null,
+            password = "",
+            passwordError = null,
+            loginError = null,
+            isLoading = false,
+            onEmailChanged = {},
+            onPasswordChanged = {},
+            onLoginClicked = {},
+            onCreateAccountClicked = {}
+        )
+    }
 }

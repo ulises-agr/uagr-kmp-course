@@ -4,6 +4,7 @@
  */
 package com.uagr.kmp.course.presentation.component.field
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,6 +16,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -32,6 +34,8 @@ import androidx.compose.ui.unit.TextUnit
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.presentation.component.text.TextMedium
 import com.uagr.kmp.course.presentation.component.text.TextMediumBold
+import com.uagr.kmp.course.presentation.component.text.TextSmallExtra
+import com.uagr.kmp.course.presentation.theme.AppTheme
 import com.uagr.kmp.course.presentation.theme.Dimens
 import course.shared.generated.resources.Res
 import course.shared.generated.resources.example
@@ -57,6 +61,7 @@ fun TextFieldCustom(
     imeAction: ImeAction = ImeAction.Done,
     capitalization: KeyboardCapitalization = KeyboardCapitalization.None,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
+    error: String? = null,
 ) {
     OutlinedTextField(
         modifier = modifier.fillMaxWidth(),
@@ -86,11 +91,22 @@ fun TextFieldCustom(
                 textAlign = placeholderTextAlign,
             )
         },
-        leadingIcon = {
-            leadingIcon?.let {
+        leadingIcon = leadingIcon?.let {
+            {
                 Icon(
-                    painter = painterResource(leadingIcon),
+                    painter = painterResource(it),
                     contentDescription = null,
+                )
+            }
+        },
+        isError = error != null,
+
+        supportingText = {
+            if (error != null) {
+                TextSmallExtra(
+                    text = error,
+                    color = MaterialTheme.colorScheme.error,
+                    textAlign = TextAlign.Start
                 )
             }
         },
@@ -108,8 +124,8 @@ fun TextFieldCustom(
 @Composable
 fun TextFieldPassword(
     modifier: Modifier = Modifier,
-    email: String,
-    onEmailChange: (String) -> Unit,
+    value: String,
+    onValueChange: (String) -> Unit,
     passwordVisible: Boolean,
     onPasswordVisibleChange: (Boolean) -> Unit,
     fontSize: TextUnit = Dimens.textSizeNormal,
@@ -120,17 +136,16 @@ fun TextFieldPassword(
     placeholder: String,
     placeholderTextAlign: TextAlign = TextAlign.Start,
     leadingIcon: DrawableResource? = null,
-    trailingIconActive: DrawableResource,
-    trailingIconInActive: DrawableResource,
     keyboardType: KeyboardType = KeyboardType.Text,
     imeAction: ImeAction = ImeAction.Done,
     capitalization: KeyboardCapitalization = KeyboardCapitalization.Words,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
+    error: String? = null
 ) {
     OutlinedTextField(
         modifier = modifier.fillMaxWidth(),
-        value = email,
-        onValueChange = onEmailChange,
+        value = value,
+        onValueChange = onValueChange,
         textStyle = TextStyle(
             fontSize = fontSize,
             fontWeight = FontWeight.Normal,
@@ -155,20 +170,37 @@ fun TextFieldPassword(
                 textAlign = placeholderTextAlign,
             )
         },
-        leadingIcon = {
-            leadingIcon?.let {
+        leadingIcon = leadingIcon?.let {
+            {
                 Icon(
-                    painter = painterResource(leadingIcon),
+                    painter = painterResource(it),
                     contentDescription = null,
                 )
             }
         },
         visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
         trailingIcon = {
-            IconButton(onClick = { onPasswordVisibleChange(!passwordVisible) }) {
-                Icon(
-                    painter = painterResource(if (passwordVisible) trailingIconActive else trailingIconInActive),
-                    contentDescription = null,
+            Text(
+                text = if (passwordVisible) "Ocultar" else "Ver",
+                modifier = Modifier
+                    .clickable {
+                        onPasswordVisibleChange(!passwordVisible)
+                    }
+                    .padding(end = Dimens.padding16),
+                color = AppTheme.colors.backgrounds.actionBlue,
+                fontSize = Dimens.textSizeSmall,
+                fontWeight = FontWeight.SemiBold,
+                maxLines = 1
+            )
+        },
+        isError = error != null,
+
+        supportingText = {
+            if (error != null) {
+                TextSmallExtra(
+                    text = error,
+                    color = MaterialTheme.colorScheme.error,
+                    textAlign = TextAlign.Start
                 )
             }
         },
@@ -209,8 +241,8 @@ private fun TextFieldPreview() {
                     leadingIcon = Res.drawable.ic_example,
                 )
                 TextFieldPassword(
-                    email = "",
-                    onEmailChange = {},
+                    value = "",
+                    onValueChange = {},
                     passwordVisible = false,
                     onPasswordVisibleChange = {},
                     labelColor = Color.Black,
@@ -218,8 +250,6 @@ private fun TextFieldPreview() {
                     placeholderColor = Color.Black,
                     placeholder = stringResource(Res.string.example),
                     leadingIcon = Res.drawable.ic_example,
-                    trailingIconActive = Res.drawable.ic_example,
-                    trailingIconInActive = Res.drawable.ic_example,
                     keyboardType = KeyboardType.Password,
                     capitalization = KeyboardCapitalization.None,
                 )
