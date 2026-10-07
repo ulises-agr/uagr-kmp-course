@@ -170,14 +170,14 @@ fun RegisterContainer(
 
         if (registerError != null) {
 
-            Spacer(
-                modifier = Modifier.height(Dimens.height8)
-            )
-
             Text(
                 text = registerError,
                 fontSize = Dimens.textSizeNormal,
                 color = AppTheme.colors.status.error
+            )
+
+            Spacer(
+                modifier = Modifier.height(Dimens.height16)
             )
         }
 
