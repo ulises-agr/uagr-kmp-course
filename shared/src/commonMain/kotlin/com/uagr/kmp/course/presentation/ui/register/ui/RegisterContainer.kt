@@ -36,6 +36,7 @@ fun RegisterContainer(
     emailError: String?,
     passwordError: String?,
     confirmPasswordError: String?,
+    registerError: String?,
     isLoading: Boolean,
     onNameChanged: (String) -> Unit,
     onEmailChanged: (String) -> Unit,
@@ -167,6 +168,19 @@ fun RegisterContainer(
             modifier = Modifier.height(Dimens.height128)
         )
 
+        if (registerError != null) {
+
+            Spacer(
+                modifier = Modifier.height(Dimens.height8)
+            )
+
+            Text(
+                text = registerError,
+                fontSize = Dimens.textSizeNormal,
+                color = AppTheme.colors.status.error
+            )
+        }
+
         ButtonCustom(
             onClick = onRegisterClicked,
             modifier = Modifier.fillMaxWidth(),
@@ -197,6 +211,7 @@ private fun RegisterContainerPreview() {
             emailError = null,
             passwordError = null,
             confirmPasswordError = null,
+            registerError = null,
             isLoading = false,
             onNameChanged = {},
             onEmailChanged = {},

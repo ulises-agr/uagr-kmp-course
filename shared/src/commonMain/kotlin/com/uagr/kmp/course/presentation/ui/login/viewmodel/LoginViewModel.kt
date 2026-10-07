@@ -9,89 +9,88 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import com.uagr.kmp.course.domain.usecase.login.LoginResult
 
 class LoginViewModel(private val loginUseCase: LoginUseCase) : ViewModel() {
 
-    private val _email = MutableStateFlow("")
-    private val _password = MutableStateFlow("")
-    private val _emailError = MutableStateFlow<String?>(null)
-    private val _passwordError = MutableStateFlow<String?>(null)
-    private val _loginError = MutableStateFlow<String?>(null)
+    private val _uiState = MutableStateFlow(LoginUiState())
+    val uiState: StateFlow<LoginUiState> = _uiState.asStateFlow()
 
-    val email: StateFlow<String> = _email.asStateFlow()
-    val password: StateFlow<String> = _password.asStateFlow()
-    val emailError: StateFlow<String?> = _emailError.asStateFlow()
-    val passwordError: StateFlow<String?> = _passwordError.asStateFlow()
-    val loginError: StateFlow<String?> = _loginError.asStateFlow()
-    private val _isLoading = MutableStateFlow(false)
-    val isLoading = _isLoading.asStateFlow()
+
     private val _uiEvent = Channel<LoginUIEvent>()
 
     val uiEvent = _uiEvent.receiveAsFlow()
 
     fun onEmailChanged(newValue: String) {
-        _email.value = newValue
-
-        if (newValue.isNotBlank()) {
-            _emailError.value = null
-        }
-
-        _loginError.value = null
+        _uiState.value = _uiState.value.copy(
+            email = newValue,
+            emailError = if (newValue.isNotBlank()) null else _uiState.value.emailError,
+            loginError = null
+        )
     }
 
     fun onPasswordChanged(newValue: String) {
-        _password.value = newValue
-
-        if (newValue.isNotBlank()) {
-            _passwordError.value = null
-        }
-
-        _loginError.value = null
+        _uiState.value = _uiState.value.copy(
+            password = newValue,
+            passwordError = if (newValue.isNotBlank()) null else _uiState.value.passwordError,
+            loginError = null
+        )
     }
 
     fun onLoginClicked() {
 
-        _emailError.value = null
-        _passwordError.value = null
-
-        if (_email.value.isBlank()) {
-            _emailError.value = "Ingresa tu correo"
-        }
-
-        if (_password.value.isBlank()) {
-            _passwordError.value = "Ingresa tu contraseña"
-        }
-
-        if (_emailError.value != null || _passwordError.value != null) {
-            return
-        }
-
-        _isLoading.value = true
+        _uiState.value = _uiState.value.copy(
+            emailError = null,
+            passwordError = null,
+            loginError = null,
+            isLoading = true
+        )
 
         viewModelScope.launch {
-
             try {
 
-                val success = loginUseCase(
-                    email = _email.value,
-                    password = _password.value
+                val result = loginUseCase(
+                    email = _uiState.value.email,
+                    password = _uiState.value.password
                 )
 
-                if (success) {
-                    _loginError.value = null
-                    _uiEvent.send(LoginUIEvent.LoginSuccess)
-                } else {
-                    _loginError.value = "Correo o contraseña incorrectos"
-                    _uiEvent.send(LoginUIEvent.InvalidCredentials)
+                when (result) {
+                    LoginResult.Success -> {
+                        _uiEvent.send(LoginUIEvent.LoginSuccess)
+                    }
+
+                    LoginResult.InvalidCredentials -> {
+                        _uiState.value = _uiState.value.copy(
+                            loginError = "Correo o contraseña incorrectos"
+                        )
+                    }
+
+                    LoginResult.EmptyEmail -> {
+                        _uiState.value = _uiState.value.copy(
+                            emailError = "Ingresa tu correo"
+                        )
+                    }
+
+                    LoginResult.EmptyPassword -> {
+                        _uiState.value = _uiState.value.copy(
+                            passwordError = "Ingresa tu contraseña"
+                        )
+                    }
+
+                    LoginResult.EmptyEmailAndPassword -> {
+                        _uiState.value = _uiState.value.copy(
+                            emailError = "Ingresa tu correo",
+                            passwordError = "Ingresa tu contraseña"
+                        )
+                    }
                 }
 
             } catch (exception: Exception) {
-
                 println("LOGIN ERROR -> ${exception.message}")
-
             } finally {
-
-                _isLoading.value = false
+                _uiState.value = _uiState.value.copy(
+                    isLoading = false
+                )
             }
         }
     }

@@ -4,5 +4,4 @@ sealed interface LoginUIEvent {
 
     data object LoginSuccess : LoginUIEvent
 
-    data object InvalidCredentials : LoginUIEvent
 }
