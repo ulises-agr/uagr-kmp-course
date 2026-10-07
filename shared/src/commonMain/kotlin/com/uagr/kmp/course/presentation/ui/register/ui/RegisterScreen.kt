@@ -66,7 +66,7 @@ fun RegisterScreen(
                 )
             },
         )
-        Loader()
+        Loader(isLoading = registerUiState.isLoading)
         DialogCustom(
             errorDialog = registerUiState.errorDialog,
             titleTextColor = AppTheme.colors.text.black,

@@ -8,5 +8,5 @@ data class MasterUiState(
     //val data: MasterDataModel? = null,
     val errorDialog: ErrorDialogModel? = null,
     val currentTab: MasterTabs = MasterTabs.HOME,
-    val tabs: List<MasterTabs> = MasterTabs.entries,
+    //val navigationItems: List<NavigationBarItemModel<T>>
 )

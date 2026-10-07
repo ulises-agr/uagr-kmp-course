@@ -61,7 +61,7 @@ fun LoginScreen(
                 viewModel.goToRegister()
             },
         )
-        Loader()
+        Loader(isLoading = loginUiState.isLoading)
         DialogCustom(
             errorDialog = loginUiState.errorDialog,
             titleTextColor = AppTheme.colors.text.black,

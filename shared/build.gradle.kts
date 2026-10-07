@@ -45,6 +45,8 @@ kotlin {
         commonMain.dependencies {
             // Bundle
             implementation(dependencyNotation = libs.bundles.sharedUI.commons.libs)
+            implementation("org.jetbrains.compose.material:material-icons-extended:1.7.3")
+            implementation("org.jetbrains.compose.material3:material3:1.7.3")
         }
         // Android
         androidMain.dependencies {

@@ -3,6 +3,7 @@ package com.uagr.kmp.course.presentation.ui.master.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uagr.kmp.course.domain.model.base.ErrorDialogModel
+import com.uagr.kmp.course.presentation.component.bottomBar.NavigationBarItemModel
 import course.shared.generated.resources.Res
 import course.shared.generated.resources.accept
 import course.shared.generated.resources.error
@@ -17,16 +18,12 @@ import org.koin.core.annotation.KoinViewModel
 
 @KoinViewModel
 class MasterViewModel : ViewModel() {
-
     private var _masterUiState = MutableStateFlow(MasterUiState())
     val masterUiState: StateFlow<MasterUiState> = _masterUiState.asStateFlow()
 
     private var _masterUiEvent = MutableStateFlow<MasterUiEvent>(MasterUiEvent.Idle)
     val masterUiEvent: StateFlow<MasterUiEvent> = _masterUiEvent.asStateFlow()
 
-    fun updateCurrentTab(tab: MasterTabs) = viewModelScope.launch {
-        _masterUiState.update { state -> state.copy(currentTab = tab) }
-    }
 
     private suspend fun setErrorDialog(message: String? = null): ErrorDialogModel =
         ErrorDialogModel(
