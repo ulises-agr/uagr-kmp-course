@@ -33,34 +33,12 @@ fun MasterScreen(
 ) {
     val masterUiState by viewModel.masterUiState.collectAsStateWithLifecycle()
 
-    val navigationItems = listOf(
-        NavigationBarItemModel(
-            id = MasterTabs.HOME,
-            label = "Home",
-            icon = Icons.Default.Home,
-        ),
-        NavigationBarItemModel(
-            id = MasterTabs.MOVEMENTS,
-            label = "Movimientos",
-            icon = Icons.Default.Payments,
-        ),
-        NavigationBarItemModel(
-            id = MasterTabs.BUDGET,
-            label = "Presupuestos",
-            icon = Icons.Default.AccountBalanceWallet,
-        ),
-        NavigationBarItemModel(
-            id = MasterTabs.GOALS,
-            label = "Metas",
-            icon = Icons.Default.Flag,
-        )
-    )
-
     viewModel.masterUiEvent.CollectWithLifecycle { event ->
         when (event) {
             is MasterUiEvent.Idle -> {
                 viewModel.resetUiEvent()
             }
+
             is MasterUiEvent.Success -> {
                 viewModel.resetUiEvent()
             }
@@ -69,21 +47,23 @@ fun MasterScreen(
 
     val tabNavigator = LocalTabNavigator.current
     SafeScreenContainer {
-
         MasterContainer(
-            uiState = masterUiState,
-            navigationItems = navigationItems,
+            masterTab = masterUiState.currentTab,
+            navigationItems = masterUiState.navigationItems,
             updateCurrentTab = { tab ->
                 when (tab) {
                     MasterTabs.HOME -> {
                         tabNavigator.current = HomeTab
                     }
+
                     MasterTabs.MOVEMENTS -> {
                         tabNavigator.current = MovementsTab
                     }
+
                     MasterTabs.BUDGET -> {
                         tabNavigator.current = BudgetTab
                     }
+
                     MasterTabs.GOALS -> {
                         tabNavigator.current = GoalsTab
                     }
@@ -113,6 +93,50 @@ fun MasterScreen(
 @Composable
 fun MasterScreenPreview() {
     SafeScreenContainerTest {
+        val tabNavigator = LocalTabNavigator.current
+        val items = listOf(
+            NavigationBarItemModel(
+                id = MasterTabs.HOME,
+                label = "Home",
+                icon = Icons.Default.Home,
+            ),
+            NavigationBarItemModel(
+                id = MasterTabs.MOVEMENTS,
+                label = "Movimientos",
+                icon = Icons.Default.Payments,
+            ),
+            NavigationBarItemModel(
+                id = MasterTabs.BUDGET,
+                label = "Presupuestos",
+                icon = Icons.Default.AccountBalanceWallet,
+            ),
+            NavigationBarItemModel(
+                id = MasterTabs.GOALS,
+                label = "Metas",
+                icon = Icons.Default.Flag,
+            )
+        )
+        MasterContainer(
+            navigationItems = items,
+            updateCurrentTab = { tab ->
+                when (tab) {
+                    MasterTabs.HOME -> {
+                        tabNavigator.current = HomeTab
+                    }
 
+                    MasterTabs.MOVEMENTS -> {
+                        tabNavigator.current = MovementsTab
+                    }
+
+                    MasterTabs.BUDGET -> {
+                        tabNavigator.current = BudgetTab
+                    }
+
+                    MasterTabs.GOALS -> {
+                        tabNavigator.current = GoalsTab
+                    }
+                }
+            },
+            content = { CurrentTab() })
     }
 }

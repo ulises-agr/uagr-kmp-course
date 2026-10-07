@@ -297,7 +297,7 @@ fun AppLinkButton(
     textAlign: TextAlign = TextAlign.Center,
     tag: String,
     modifier: Modifier = Modifier,
-    linkColor: Color = AppTheme.colors.backgroundButton,
+    linkColor: Color = AppTheme.colors.text.blue,
     onNavigate: () -> Unit
 ) {
     val annotatedString = buildAnnotatedString {

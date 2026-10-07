@@ -1,5 +1,10 @@
 package com.uagr.kmp.course.presentation.ui.master.viewmodel
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBalanceWallet
+import androidx.compose.material.icons.filled.Flag
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Payments
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uagr.kmp.course.domain.model.base.ErrorDialogModel
@@ -24,6 +29,13 @@ class MasterViewModel : ViewModel() {
     private var _masterUiEvent = MutableStateFlow<MasterUiEvent>(MasterUiEvent.Idle)
     val masterUiEvent: StateFlow<MasterUiEvent> = _masterUiEvent.asStateFlow()
 
+    init {
+        getNavigationItems<MasterTabs>()
+    }
+
+    fun updateNavigationItems(list: List<NavigationBarItemModel<MasterTabs>>) = viewModelScope.launch {
+        _masterUiState.update { state -> state.copy(navigationItems = list) }
+    }
 
     private suspend fun setErrorDialog(message: String? = null): ErrorDialogModel =
         ErrorDialogModel(
@@ -39,4 +51,30 @@ class MasterViewModel : ViewModel() {
     fun resetUiEvent() = viewModelScope.launch {
         _masterUiEvent.value = MasterUiEvent.Idle
     }
+}
+
+fun <T>MasterViewModel.getNavigationItems() {
+    val items = listOf(
+        NavigationBarItemModel(
+            id = MasterTabs.HOME,
+            label = "Home",
+            icon = Icons.Default.Home,
+        ),
+        NavigationBarItemModel(
+            id = MasterTabs.MOVEMENTS,
+            label = "Movimientos",
+            icon = Icons.Default.Payments,
+        ),
+        NavigationBarItemModel(
+            id = MasterTabs.BUDGET,
+            label = "Presupuestos",
+            icon = Icons.Default.AccountBalanceWallet,
+        ),
+        NavigationBarItemModel(
+            id = MasterTabs.GOALS,
+            label = "Metas",
+            icon = Icons.Default.Flag,
+        )
+    )
+    updateNavigationItems(items)
 }

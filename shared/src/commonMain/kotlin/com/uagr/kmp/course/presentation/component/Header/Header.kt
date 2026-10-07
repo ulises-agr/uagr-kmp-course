@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
@@ -19,11 +20,12 @@ import com.uagr.kmp.course.presentation.theme.Dimens
 fun BigHeader(
     title: String = "",
     subtitle: String = "",
+    colorTitle: Color = AppTheme.colors.text.blue,
 ) {
     TextBigBold(
         modifier = Modifier.fillMaxWidth()
             .padding(top = Dimens.padding16),
-        color = AppTheme.colors.backgroundButton,
+        color = colorTitle,
         text = title,
         textAlign = TextAlign.Left,
     )
@@ -31,7 +33,7 @@ fun BigHeader(
         modifier = Modifier.fillMaxWidth()
             .padding(top = Dimens.padding8),
         fontSize = Dimens.textSizeNormal,
-        color = AppTheme.colors.subtitleGray,
+        color = AppTheme.colors.text.gray,
         text = subtitle,
         textAlign = TextAlign.Left,
     )

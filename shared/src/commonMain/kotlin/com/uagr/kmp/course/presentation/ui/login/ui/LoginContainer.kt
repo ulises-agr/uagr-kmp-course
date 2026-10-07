@@ -73,13 +73,18 @@ fun LoginContainer(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(start = Dimens.padding28,
-                end = Dimens.padding28)
+            .padding(
+                start = Dimens.padding28,
+                end = Dimens.padding28
+            )
             .verticalScroll(state = scrollState),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        BigHeader(title = stringResource(Res.string.title_login),
-            subtitle = stringResource(Res.string.subtitle_login))
+        BigHeader(
+            title = stringResource(Res.string.title_login),
+            subtitle = stringResource(Res.string.subtitle_login),
+            colorTitle = AppTheme.colors.text.blueHard
+        )
         Spacer(modifier = Modifier.height(height = Dimens.height32))
         Image(
             painter = painterResource(resource = Res.drawable.ic_finance_illustration),
@@ -138,7 +143,7 @@ fun LoginContainer(
             AppLinkButton(
                 normalText = "",
                 clickableText = stringResource(Res.string.create_account),
-                fontSize = Dimens.textSizeExtraSmall ,
+                fontSize = Dimens.textSizeExtraSmall,
                 tag = "Register",
                 modifier = Modifier.fillMaxWidth(),
                 onNavigate = onRegisterClick,

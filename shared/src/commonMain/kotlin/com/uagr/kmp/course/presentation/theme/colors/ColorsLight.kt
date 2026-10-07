@@ -54,13 +54,23 @@ val statusSuccessContainerLight = Color(0xFFEBF8F3)
 val textBlackLight = Color(0xFF000000)
 val textWhiteLight = Color(0xFFFFFFFF)
 val textLinkLight = Color(0xFF1470D1)
+val textGrayLight = Color(0XFF7A8291)
+val textWhiteSoftLight = Color(0XFFC2D6FA)
+val textBlueLight = Color(0XFF1A70ED)
+val textBlueHardLight= Color(0XFF0F459E)
+val textGreenLight = Color(0XFF17A36E)
+val textRedLight = Color(0XFFE5454D)
 // --- Dark Backgrounds Colors ---
 val backgroundBlackLight = Color(0xFF000000)
 val backgroundWhiteLight = Color(0xFFFFFFFF)
 val backgroundYellowLight = Color(0xFFFFB700)
-val backgroundBlueLight = Color(0xFF0066FF)
+val backgroundBlueLight = Color(0xFF0F459E)
 val dividerLight = Color(0xFFEBEFF9)
 val backgroundProgressIndicatorLight = Color(0x80898989)
+
+val backgroundRedSoftLight = Color(0xFFFFEDF0)
+val backgroundGreenSoftLight = Color(0xFFE5FAF2)
+val backgroundBlueSoftLight = Color(0xFFE8F0FC)
 
 // --- Add fintrack ----
 val buttonMainLigth = Color(0XFF1A70ED)
@@ -118,12 +128,21 @@ val lightModeAppColors = AppColors(
         black = textBlackLight,
         white = textWhiteLight,
         link = textLinkLight,
+        gray = textGrayLight,
+        whiteSoft = textWhiteSoftLight,
+        blue = textBlueLight,
+        blueHard = textBlueHardLight,
+        green = textGreenLight,
+        red = textRedLight,
     ),
     backgrounds = ColorBackgrounds(
         black = backgroundBlackLight,
         white = backgroundWhiteLight,
         yellow = backgroundYellowLight,
         blue = backgroundBlueLight,
+        redSoft = backgroundRedSoftLight,
+        greenSoft = backgroundGreenSoftLight,
+        blueSoft = backgroundBlueSoftLight,
     ),
     divider = dividerLight,
     backgroundProgressIndicator = backgroundProgressIndicatorLight,

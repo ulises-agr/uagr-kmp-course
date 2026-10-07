@@ -44,11 +44,11 @@ import org.jetbrains.compose.resources.stringResource
 fun ButtonCustom(
     onClick: () -> Unit = {},
     modifier: Modifier = Modifier,
-    backgroundButton: Color = Color.Black,
+    backgroundButton: Color = AppTheme.colors.backgroundButton,
     height: Dp = Dimens.height52,
     enabled: Boolean = true,
     shape: Shape = RoundedCornerShape(size = Dimens.corner12),
-    textColor: Color = Color.White,
+    textColor: Color = AppTheme.colors.text.white,
     text: String = "",
     alignment: TextAlign = TextAlign.Left,
 ) {
@@ -117,8 +117,6 @@ private fun ButtonCustomPreview() {
             verticalArrangement = Arrangement.spacedBy(Dimens.padding16),
         ) {
             ButtonCustom(
-                backgroundButton = AppTheme.colors.primary,
-                textColor = AppTheme.colors.backgrounds.white,
                 text = stringResource(Res.string.example),
             )
             CircularIconButtonCustom(

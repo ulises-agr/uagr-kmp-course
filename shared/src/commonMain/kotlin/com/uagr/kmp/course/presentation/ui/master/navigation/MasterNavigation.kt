@@ -11,8 +11,6 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.uagr.kmp.course.presentation.ui.home.navigation.HomeTab
 import com.uagr.kmp.course.presentation.ui.master.ui.MasterScreen
-import com.uagr.kmp.course.presentation.ui.master.viewmodel.MasterTabs
-import com.uagr.kmp.course.presentation.ui.welcome.navigation.WelcomeNavigation
 
 data object MasterNavigation : Screen {
     @Composable

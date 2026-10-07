@@ -1,6 +1,7 @@
 package com.uagr.kmp.course.presentation.ui.master.viewmodel
 
 import com.uagr.kmp.course.domain.model.base.ErrorDialogModel
+import com.uagr.kmp.course.presentation.component.bottomBar.NavigationBarItemModel
 import com.uagr.kmp.course.utils.operators.StatusLoading
 
 data class MasterUiState(
@@ -8,5 +9,5 @@ data class MasterUiState(
     //val data: MasterDataModel? = null,
     val errorDialog: ErrorDialogModel? = null,
     val currentTab: MasterTabs = MasterTabs.HOME,
-    //val navigationItems: List<NavigationBarItemModel<T>>
+    val navigationItems: List<NavigationBarItemModel<MasterTabs>> = emptyList()
 )
