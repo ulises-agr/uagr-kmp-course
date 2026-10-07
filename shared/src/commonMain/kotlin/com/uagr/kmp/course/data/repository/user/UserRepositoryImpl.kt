@@ -27,4 +27,10 @@ class UserRepositoryImpl(
     override suspend fun saveUserToken(token: String): Flow<Unit> = flow {
         emit(userLocalDataSource.saveUserToken(token = token))
     }.flowOn(context = ioDispatcher)
+
+    override suspend fun getUser(): Flow<UserModel> = flow {
+        emit(value = userLocalDataSource.getUser())
+    }.flowOn(ioDispatcher)
+
+
 }

@@ -25,4 +25,7 @@ abstract class UserDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertUser(user: UserEntity): Long
+
+    @Query("SELECT * FROM users")
+    abstract suspend fun getUser(): UserEntity
 }

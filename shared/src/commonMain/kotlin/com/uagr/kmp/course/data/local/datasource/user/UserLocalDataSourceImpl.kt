@@ -6,6 +6,8 @@ package com.uagr.kmp.course.data.local.datasource.user
 
 import com.uagr.kmp.course.data.local.database.dao.user.UserDao
 import com.uagr.kmp.course.data.local.datastore.AppDataStore
+import com.uagr.kmp.course.data.local.model.user.UserEntity
+import com.uagr.kmp.course.domain.mapper.user.toDomain
 import com.uagr.kmp.course.domain.mapper.user.toEntity
 import com.uagr.kmp.course.domain.model.user.UserModel
 import org.koin.core.annotation.Factory
@@ -23,4 +25,7 @@ class UserLocalDataSourceImpl(
     override suspend fun saveUserToken(token: String) {
         appDataStore.saveUserToken(token = token)
     }
+
+    override suspend fun getUser(): UserModel =
+        userDao.getUser().toDomain()
 }

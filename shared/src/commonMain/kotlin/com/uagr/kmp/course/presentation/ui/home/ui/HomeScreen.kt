@@ -33,6 +33,7 @@ fun HomeScreen(
     SafeScreenContainer {
         HomeContainer(
             homeData = uiState.data,
+            name = uiState.name,
         )
         Loader()
         DialogCustom(

@@ -4,10 +4,12 @@
  */
 package com.uagr.kmp.course.data.local.datasource.user
 
+import com.uagr.kmp.course.data.local.model.user.UserEntity
 import com.uagr.kmp.course.domain.model.user.UserModel
 
 
 interface UserLocalDataSource {
     suspend fun insertUserAndDelete(user: UserModel)
     suspend fun saveUserToken(token: String)
+    suspend fun getUser(): UserModel
 }

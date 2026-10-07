@@ -29,6 +29,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun HomeContainer(
+    name: String = "",
     homeData: HomeDataModel? = null,
 ) {
     val scrollState = rememberScrollState()
@@ -40,9 +41,11 @@ fun HomeContainer(
             .verticalScroll(state = scrollState),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        val title: String = stringResource(Res.string.home_title).replace(oldValue = "@name",
+            newValue = name)
         Spacer(modifier = Modifier.fillMaxWidth())
         BigHeaderInverted(
-            title = stringResource(Res.string.home_title),
+            title = title,
             subtitle = stringResource(Res.string.home_subtitle),
         )
         Spacer(modifier = Modifier.height(height = Dimens.height32))

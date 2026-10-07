@@ -8,4 +8,5 @@ data class HomeUiState(
     val isLoading: StatusLoading = StatusLoading.DISMISS_LOADING,
     val data: HomeDataModel? = null,
     val errorDialog: ErrorDialogModel? = null,
+    val name: String = "",
 )
