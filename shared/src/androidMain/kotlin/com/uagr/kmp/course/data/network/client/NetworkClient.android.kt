@@ -15,11 +15,8 @@ import io.ktor.client.plugins.auth.providers.BearerTokens
 import io.ktor.client.plugins.auth.providers.bearer
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
-import io.ktor.client.plugins.logging.LogLevel
-import io.ktor.client.plugins.logging.Logging
 import io.ktor.http.ContentType
 import io.ktor.serialization.kotlinx.json.json
-import io.nerdythings.okhttp.profiler.OkHttpProfilerInterceptor
 import kotlinx.coroutines.flow.first
 import kotlinx.serialization.json.Json
 
@@ -47,10 +44,6 @@ actual fun createHttpClient(appDataStore: AppDataStore): HttpClient = HttpClient
         }
     }
 
-    install(plugin = Logging) {
-        level = LogLevel.BODY
-    }
-
     install(plugin = ContentNegotiation) {
         json(
             json = Json { ignoreUnknownKeys = true },
@@ -62,7 +55,4 @@ actual fun createHttpClient(appDataStore: AppDataStore): HttpClient = HttpClient
         url(urlString = NetworkUrl.BASE_URL)
     }
 
-    engine {
-        addInterceptor(interceptor = OkHttpProfilerInterceptor())
-    }
 }

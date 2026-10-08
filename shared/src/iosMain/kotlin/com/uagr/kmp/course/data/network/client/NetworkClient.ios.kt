@@ -15,8 +15,6 @@ import io.ktor.client.plugins.auth.providers.BearerTokens
 import io.ktor.client.plugins.auth.providers.bearer
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
-import io.ktor.client.plugins.logging.LogLevel
-import io.ktor.client.plugins.logging.Logging
 import io.ktor.http.ContentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.flow.first
@@ -44,10 +42,6 @@ actual fun createHttpClient(appDataStore: AppDataStore): HttpClient = HttpClient
                 }
             }
         }
-    }
-
-    install(plugin = Logging) {
-        level = LogLevel.BODY
     }
 
     install(plugin = ContentNegotiation) {

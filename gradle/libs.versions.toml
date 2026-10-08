@@ -26,6 +26,7 @@ lib-voyager = "2.2.21-1.10.3"
 lib-napier = "2.7.1"
 lib-koin = "4.2.2"
 lib-koin-compiler = "1.2.1"
+lib-coroutines-test = "1.11.0"
 lib-ktor = "3.5.2"
 lib-ktor-okhttp = "3.5.2"
 lib-ktor-darwin = "3.5.2"
@@ -110,6 +111,7 @@ kmp-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref 
 
 # Test
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "lib-kotlin" }
+coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "lib-coroutines-test" }
 junit = { module = "junit:junit", version.ref = "lib-junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junit" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }

@@ -24,12 +24,12 @@ class RegisterRepositoryImpl(
 
     override suspend fun createRegister(
         url: String,
-        registerRequest: RegisterRequest,
+        request: RegisterRequest,
     ): Flow<NetworkResult<RegisterModel>> = flow {
         emit(
             registerNetworkDataSource.createRegister(
                 url = url,
-                registerRequest = registerRequest,
+                registerRequest = request,
             )
         )
     }.flowOn(context = dispatcher)

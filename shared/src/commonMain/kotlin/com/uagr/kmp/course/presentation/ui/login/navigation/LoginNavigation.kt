@@ -17,11 +17,9 @@ data object LoginNavigation : Screen {
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
         LoginScreen(
-            navigateToHome = {
-                //navigator.push(item = HomeNavigation)
+            navigateToRegister = {
+                navigator.push(item = RegisterNavigation)
             },
-        ) {
-            navigator.push(item = RegisterNavigation)
-        }
+        )
     }
 }

@@ -60,6 +60,7 @@ kotlin {
         commonTest.dependencies {
             implementation(dependencyNotation = libs.bundles.sharedUI.commonsTest.libs)
             implementation(libs.ktor.client.mock)
+            implementation(libs.coroutines.test)
         }
     }
 }

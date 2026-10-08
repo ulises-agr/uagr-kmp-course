@@ -21,6 +21,11 @@
     <string name="password">Contraseña</string>
     <string name="login">Iniciar sesión</string>
     <string name="new_user">Crear una cuenta</string>
+    <string name="login_required_fields">Completa todos los campos.</string>
+    <string name="login_invalid_email">Ingresa un correo válido.</string>
+    <string name="login_accept">Aceptar</string>
+    <string name="login_success_title">Login exitoso</string>
+    <string name="login_success_message">Ingresaste a tu cuenta</string>
 
     <!-- Register -->
     <string name="register_title">FinTrack</string>

@@ -11,16 +11,28 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainer
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
+import com.uagr.kmp.course.presentation.component.loader.Loader
+import com.uagr.kmp.course.presentation.component.dialog.DialogCustom
+import com.uagr.kmp.course.domain.model.base.ErrorDialogModel
+import com.uagr.kmp.course.presentation.theme.AppTheme
+import com.uagr.kmp.course.presentation.ui.login.viewmodel.LoginUiEvent
 import com.uagr.kmp.course.presentation.ui.login.viewmodel.LoginViewModel
+import com.uagr.kmp.course.utils.operators.StatusLoading
 import org.koin.compose.viewmodel.koinViewModel
+import course.shared.generated.resources.Res
+import course.shared.generated.resources.error
+import course.shared.generated.resources.login_accept
+import course.shared.generated.resources.login_success_title
+import course.shared.generated.resources.login_success_message
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun LoginScreen(
     viewModel: LoginViewModel = koinViewModel(),
-    navigateToHome: () -> Unit = {},
     navigateToRegister: () -> Unit = {},
 ) {
     val loginUiState by viewModel.loginUiState.collectAsStateWithLifecycle()
+    val loginUiEvent by viewModel.loginUiEvent.collectAsStateWithLifecycle()
 
     SafeScreenContainer {
         LoginContainer(
@@ -36,8 +48,40 @@ fun LoginScreen(
             onPasswordVisibleChange = { passwordVisible ->
                 viewModel.updatePasswordVisible(passwordVisible = passwordVisible)
             },
-            navigateToHome = navigateToHome,
+            onLoginClick = {
+                viewModel.validateForms(
+                    email = loginUiState.email,
+                    password = loginUiState.password,
+                )
+            },
             navigateToRegister = navigateToRegister,
+            isLoading = loginUiState.isLoading == StatusLoading.SHOW_LOADING,
+        )
+        Loader(isLoading = loginUiState.isLoading)
+    }
+
+    val message = when (val event = loginUiEvent) {
+        LoginUiEvent.Idle -> null
+        LoginUiEvent.LoginSuccess -> stringResource(Res.string.login_success_message)
+        is LoginUiEvent.ShowErrorDialog -> stringResource(event.message)
+        is LoginUiEvent.ShowErrorStringDialog -> event.message
+    }
+    if (message != null) {
+        DialogCustom(
+            errorDialog = ErrorDialogModel(
+                title = stringResource(
+                    if (loginUiEvent == LoginUiEvent.LoginSuccess) Res.string.login_success_title else Res.string.error
+                ),
+                message = message,
+                primaryButtonText = stringResource(Res.string.login_accept),
+            ),
+            titleTextColor = AppTheme.colors.text.black,
+            messageTextColor = AppTheme.colors.text.black,
+            primaryButtonBackgroundColor = AppTheme.colors.backgrounds.blue,
+            primaryButtonTextColor = AppTheme.colors.text.white,
+            onPrimaryButtonClick = {
+                viewModel.clearEvent()
+            },
         )
     }
 }
@@ -48,6 +92,6 @@ fun LoginScreen(
 @Composable
 private fun LoginScreenPreview() {
     SafeScreenContainerTest {
-        LoginScreen()
+        LoginContainer()
     }
 }

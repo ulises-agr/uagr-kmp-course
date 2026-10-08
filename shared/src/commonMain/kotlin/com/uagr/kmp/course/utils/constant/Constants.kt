@@ -15,5 +15,6 @@ object Constants {
 
     // DataStore
     const val USER_TOKEN = "user_token"
+    const val DEVICE_ID = "device_id"
     const val DATASTORE_NAME = "kmp_dataStore"
 }

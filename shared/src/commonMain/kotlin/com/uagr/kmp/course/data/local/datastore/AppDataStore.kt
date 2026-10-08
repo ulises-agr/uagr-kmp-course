@@ -15,6 +15,8 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.io.IOException
 import org.koin.core.annotation.Single
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 
 @Single
 class AppDataStore(
@@ -22,6 +24,7 @@ class AppDataStore(
 ) {
     object KEY {
         val USER_TOKEN = stringPreferencesKey(name = Constants.USER_TOKEN)
+        val DEVICE_ID = stringPreferencesKey(name = Constants.DEVICE_ID)
     }
 
     val userToken: Flow<String?> = dataStore.data
@@ -31,6 +34,16 @@ class AppDataStore(
 
     suspend fun saveUserToken(token: String) {
         dataStore.edit { data -> data[KEY.USER_TOKEN] = token }
+    }
+
+    @OptIn(ExperimentalUuidApi::class)
+    suspend fun getOrCreateDeviceId(): String {
+        val preferences = dataStore.edit { data ->
+            if (data[KEY.DEVICE_ID].isNullOrBlank()) {
+                data[KEY.DEVICE_ID] = Uuid.random().toString()
+            }
+        }
+        return requireNotNull(preferences[KEY.DEVICE_ID])
     }
 }
 

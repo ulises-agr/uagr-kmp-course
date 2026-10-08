@@ -60,8 +60,9 @@ fun LoginContainer(
     onEmailChange: (String) -> Unit = {},
     onPasswordChange: (String) -> Unit = {},
     onPasswordVisibleChange: (Boolean) -> Unit = {},
-    navigateToHome: () -> Unit = {},
+    onLoginClick: () -> Unit = {},
     navigateToRegister: () -> Unit = {},
+    isLoading: Boolean = false,
 ) {
     val scrollState = rememberScrollState()
     val focusManager = LocalFocusManager.current
@@ -112,9 +113,7 @@ fun LoginContainer(
             value = password,
             onEmailChange = onPasswordChange,
             passwordVisible = passwordVisible,
-            onPasswordVisibleChange = {
-                onPasswordVisibleChange(!passwordVisible)
-            },
+            onPasswordVisibleChange = onPasswordVisibleChange,
             labelColor = AppTheme.colors.text.gray,
             label = stringResource(Res.string.password),
             placeholderColor = AppTheme.colors.text.gray,
@@ -132,7 +131,11 @@ fun LoginContainer(
         )
         Spacer(modifier = Modifier.height(Dimens.height40))
         ButtonCustom(
-            onClick = navigateToHome,
+            onClick = {
+                focusManager.clearFocus(force = true)
+                onLoginClick()
+            },
+            enabled = !isLoading,
             modifier = Modifier.fillMaxWidth(),
             backgroundButton = AppTheme.colors.backgrounds.blue,
             textColor = AppTheme.colors.text.white,
@@ -141,6 +144,7 @@ fun LoginContainer(
         Spacer(modifier = Modifier.height(Dimens.height12))
         ButtonCustom(
             onClick = navigateToRegister,
+            enabled = !isLoading,
             modifier = Modifier.fillMaxWidth(),
             backgroundButton = Color.Transparent,
             textColor = AppTheme.colors.text.blue,
