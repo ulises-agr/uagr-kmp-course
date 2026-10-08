@@ -15,26 +15,30 @@ class RegisterUseCase(
     ): RegisterResult {
 
         val nameError = if (name.isBlank()) {
-            "Ingresa tu nombre"
+            RegisterValidationError.NAME_EMPTY
         } else {
             null
         }
 
         val emailError = when {
-            email.isBlank() -> "Ingresa tu correo"
-            !isValidEmail(email) -> "Ingresa un correo valido"
+            email.isBlank() -> RegisterValidationError.EMAIL_EMPTY
+            !isValidEmail(email) -> RegisterValidationError.EMAIL_INVALID
             else -> null
         }
 
         val passwordError = if (password.isBlank()) {
-            "Ingresa tu contraseña"
+            RegisterValidationError.PASSWORD_EMPTY
         } else {
             null
         }
 
         val confirmPasswordError = when {
-            confirmPassword.isBlank() -> "Confirma tu contraseña"
-            password != confirmPassword -> "Las contraseñas no coinciden"
+            confirmPassword.isBlank() ->
+                RegisterValidationError.CONFIRM_PASSWORD_EMPTY
+
+            password != confirmPassword ->
+                RegisterValidationError.PASSWORD_MISMATCH
+
             else -> null
         }
 

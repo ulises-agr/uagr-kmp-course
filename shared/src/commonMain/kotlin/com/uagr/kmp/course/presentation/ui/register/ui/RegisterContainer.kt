@@ -10,21 +10,32 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.uagr.kmp.course.presentation.component.buton.ButtonCustom
-import com.uagr.kmp.course.presentation.theme.AppTheme
-import com.uagr.kmp.course.presentation.theme.Dimens
-import androidx.compose.ui.text.input.KeyboardCapitalization
-import androidx.compose.ui.text.input.KeyboardType
+import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.presentation.component.field.TextFieldCustom
 import com.uagr.kmp.course.presentation.component.field.TextFieldPassword
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
+import com.uagr.kmp.course.presentation.theme.AppTheme
+import com.uagr.kmp.course.presentation.theme.Dimens
+import course.shared.generated.resources.Res
+import course.shared.generated.resources.app_name
+import course.shared.generated.resources.email
+import course.shared.generated.resources.password
+import course.shared.generated.resources.register_button
+import course.shared.generated.resources.register_confirm_password
+import course.shared.generated.resources.register_description
+import course.shared.generated.resources.register_loading
+import course.shared.generated.resources.register_name
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun RegisterContainer(
@@ -78,7 +89,7 @@ fun RegisterContainer(
         )
 
         Text(
-            text = "FinTrack",
+            text = stringResource(Res.string.app_name),
             fontSize = Dimens.textSizeLarge,
             fontWeight = FontWeight.Bold,
             color = AppTheme.colors.backgrounds.darkBlue
@@ -89,7 +100,7 @@ fun RegisterContainer(
         )
 
         Text(
-            text = "Regístrate de forma gratuita y segura.",
+            text = stringResource(Res.string.register_description),
             fontSize = Dimens.textSizeNormal,
             color = AppTheme.colors.outline
         )
@@ -102,7 +113,7 @@ fun RegisterContainer(
             value = name,
             onValueChange = onNameChanged,
             labelColor = AppTheme.colors.text.secondary,
-            label = "Nombre",
+            label = stringResource(Res.string.register_name),
             placeholderColor = AppTheme.colors.text.secondary,
             placeholder = "",
             error = nameError
@@ -116,7 +127,7 @@ fun RegisterContainer(
             value = email,
             onValueChange = onEmailChanged,
             labelColor = AppTheme.colors.text.secondary,
-            label = "Correo",
+            label = stringResource(Res.string.email),
             placeholderColor = AppTheme.colors.text.secondary,
             placeholder = "",
             keyboardType = KeyboardType.Email,
@@ -136,7 +147,7 @@ fun RegisterContainer(
                 passwordVisible = it
             },
             labelColor = AppTheme.colors.text.secondary,
-            label = "Contraseña",
+            label = stringResource(Res.string.password),
             placeholderColor = AppTheme.colors.text.secondary,
             placeholder = "",
             keyboardType = KeyboardType.Password,
@@ -156,7 +167,7 @@ fun RegisterContainer(
                 confirmPasswordVisible = it
             },
             labelColor = AppTheme.colors.text.secondary,
-            label = "Confirmar contraseña",
+            label = stringResource(Res.string.register_confirm_password),
             placeholderColor = AppTheme.colors.text.secondary,
             placeholder = "",
             keyboardType = KeyboardType.Password,
@@ -188,20 +199,22 @@ fun RegisterContainer(
             textColor = AppTheme.colors.text.white,
             height = Dimens.height56,
             shape = RoundedCornerShape(Dimens.corner12),
-            text = if (isLoading) "Registrando..." else "Registrar usuario",
+            text = if (isLoading) {
+                stringResource(Res.string.register_loading)
+            } else {
+                stringResource(Res.string.register_button)
+            },
             enabled = !isLoading,
             textAlign = TextAlign.Start,
         )
     }
 }
 
+
 @Preview(showBackground = true)
 @Composable
 private fun RegisterContainerPreview() {
-
-    AppTheme(
-        isDarkMode = false
-    ) {
+    SafeScreenContainerTest {
         RegisterContainer(
             name = "",
             email = "",

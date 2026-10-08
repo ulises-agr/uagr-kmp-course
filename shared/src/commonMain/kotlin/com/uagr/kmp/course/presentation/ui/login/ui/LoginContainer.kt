@@ -35,8 +35,19 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
+import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.presentation.component.field.TextFieldCustom
 import com.uagr.kmp.course.presentation.component.field.TextFieldPassword
+import course.shared.generated.resources.Res
+import course.shared.generated.resources.app_name
+import course.shared.generated.resources.email
+import course.shared.generated.resources.login_balance_available
+import course.shared.generated.resources.login_button
+import course.shared.generated.resources.login_create_account
+import course.shared.generated.resources.login_description
+import course.shared.generated.resources.login_loading
+import course.shared.generated.resources.password
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun LoginContainer(
@@ -69,7 +80,7 @@ fun LoginContainer(
         )
 
         Text(
-            text = "FinTrack",
+            text = stringResource(Res.string.app_name),
             color = AppTheme.colors.backgrounds.darkBlue,
             fontSize = Dimens.textSizeLarge,
             fontWeight = FontWeight.Bold
@@ -80,7 +91,7 @@ fun LoginContainer(
         )
 
         Text(
-            text = "Tus finanzas, claras incluso sin conexión.",
+            text = stringResource(Res.string.login_description),
             color = AppTheme.colors.text.secondary,
             fontSize = Dimens.textSizeNormal
         )
@@ -113,7 +124,7 @@ fun LoginContainer(
                 )
 
                 Text(
-                    text = "Balance disponible",
+                    text = stringResource(Res.string.login_balance_available),
                     color = AppTheme.colors.text.white,
                     fontSize = Dimens.textSizeNormal
                 )
@@ -158,7 +169,7 @@ fun LoginContainer(
             value = email,
             onValueChange = onEmailChanged,
             labelColor = AppTheme.colors.text.secondary,
-            label = "Correo",
+            label = stringResource(Res.string.email),
             placeholderColor = AppTheme.colors.text.secondary,
             placeholder = "",
             error = emailError
@@ -174,7 +185,7 @@ fun LoginContainer(
             passwordVisible = passwordVisible,
             onPasswordVisibleChange = { passwordVisible = it },
             labelColor = AppTheme.colors.text.secondary,
-            label = "Contraseña",
+            label = stringResource(Res.string.password),
             placeholderColor = AppTheme.colors.text.secondary,
             placeholder = "",
             keyboardType = KeyboardType.Password,
@@ -208,7 +219,11 @@ fun LoginContainer(
             height = Dimens.height56,
             shape = RoundedCornerShape(Dimens.corner16),
             textColor = AppTheme.colors.text.white,
-            text = if (isLoading) "Cargando..." else "Iniciar sesión",
+            text = if (isLoading) {
+                stringResource(Res.string.login_loading)
+            } else {
+                stringResource(Res.string.login_button)
+            },
             textAlign = TextAlign.Start,
             enabled = !isLoading
         )
@@ -218,7 +233,7 @@ fun LoginContainer(
         )
 
         Text(
-            text = "Crear una cuenta",
+            text = stringResource(Res.string.login_create_account),
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .clickable {
@@ -247,9 +262,7 @@ private fun BalanceBar(height: Int) {
 @Preview(showBackground = true)
 @Composable
 private fun LoginContainerPreview() {
-    AppTheme(
-        isDarkMode = false
-    ) {
+    SafeScreenContainerTest {
         LoginContainer(
             email = "",
             emailError = null,

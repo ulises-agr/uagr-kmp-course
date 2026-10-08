@@ -1,4 +1,4 @@
-package com.uagr.kmp.course.data.remote.model
+package com.uagr.kmp.course.data.network.model.request.register
 
 import kotlinx.serialization.Serializable
 

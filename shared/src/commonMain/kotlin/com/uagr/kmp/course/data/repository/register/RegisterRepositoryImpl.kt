@@ -3,8 +3,8 @@ package com.uagr.kmp.course.data.repository.register
 import com.uagr.kmp.course.data.local.datastore.AppDataStore
 import com.uagr.kmp.course.domain.repository.register.RegisterRepository
 import io.ktor.client.HttpClient
-import com.uagr.kmp.course.data.network.model.register.RegisterResponse
-import com.uagr.kmp.course.data.remote.model.RegisterRequest
+import com.uagr.kmp.course.data.network.model.response.register.RegisterResponse
+import com.uagr.kmp.course.data.network.model.request.register.RegisterRequest
 import com.uagr.kmp.course.utils.constant.NetworkUrl
 import io.ktor.client.call.body
 import io.ktor.client.request.post

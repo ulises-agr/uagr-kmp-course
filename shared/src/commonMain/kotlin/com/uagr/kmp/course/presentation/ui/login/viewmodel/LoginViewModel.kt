@@ -10,6 +10,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import com.uagr.kmp.course.domain.usecase.login.LoginResult
+import course.shared.generated.resources.Res
+import course.shared.generated.resources.login_invalid_credentials
+import course.shared.generated.resources.register_email_empty
+import course.shared.generated.resources.register_password_empty
+import org.jetbrains.compose.resources.getString
 
 class LoginViewModel(private val loginUseCase: LoginUseCase) : ViewModel() {
 
@@ -61,26 +66,26 @@ class LoginViewModel(private val loginUseCase: LoginUseCase) : ViewModel() {
 
                     LoginResult.InvalidCredentials -> {
                         _uiState.value = _uiState.value.copy(
-                            loginError = "Correo o contraseña incorrectos"
+                            loginError = getString(Res.string.login_invalid_credentials)
                         )
                     }
 
                     LoginResult.EmptyEmail -> {
                         _uiState.value = _uiState.value.copy(
-                            emailError = "Ingresa tu correo"
+                            emailError = getString(Res.string.register_email_empty)
                         )
                     }
 
                     LoginResult.EmptyPassword -> {
                         _uiState.value = _uiState.value.copy(
-                            passwordError = "Ingresa tu contraseña"
+                            passwordError = getString(Res.string.register_password_empty)
                         )
                     }
 
                     LoginResult.EmptyEmailAndPassword -> {
                         _uiState.value = _uiState.value.copy(
-                            emailError = "Ingresa tu correo",
-                            passwordError = "Ingresa tu contraseña"
+                            emailError = getString(Res.string.register_email_empty),
+                            passwordError = getString(Res.string.register_password_empty)
                         )
                     }
                 }

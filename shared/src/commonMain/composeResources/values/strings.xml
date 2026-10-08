@@ -16,8 +16,8 @@
     <string name="login">Login</string>
     <string name="welcome_to_login_enter_your_credentials">Welcome to login enter your credentials</string>
     <string name="go_back">Go back</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
+    <string name="email">Correo</string>
+    <string name="password">Contraseña</string>
     <string name="email_example">user@gmail</string>
     <string name="password_example">Password123</string>
     <string name="email_empty">Email empty</string>
@@ -32,5 +32,30 @@
     <!-- Packages -->
     <string name="empty_packages">Empty packages</string>
     <string name="active_packages">Active packages</string>
+
+    <!-- Register -->
+    <string name="app_name">FinTrack</string>
+    <string name="register_description">Regístrate de forma gratuita y segura.</string>
+    <string name="register_name">Nombre</string>
+    <string name="register_confirm_password">Confirmar contraseña</string>
+    <string name="register_loading">Registrando...</string>
+    <string name="register_button">Registrar usuario</string>
+    <string name="register_failed">No fue posible registrar al usuario</string>
+    <string name="register_unknown_error">Ocurrio un error</string>
+    <!-- Register validation -->
+    <string name="register_name_empty">Ingresa tu nombre</string>
+    <string name="register_email_empty">Ingresa tu correo</string>
+    <string name="register_email_invalid">Ingresa un correo valido</string>
+    <string name="register_password_empty">Ingresa tu contraseña</string>
+    <string name="register_confirm_password_empty">Confirma tu contraseña</string>
+    <string name="register_password_mismatch">Las contraseñas no coinciden</string>
+    <!-- Login -->
+    <string name="login_description">Tus finanzas, claras incluso sin conexión.</string>
+    <string name="login_balance_available">Balance disponible</string>
+    <string name="login_loading">Cargando...</string>
+    <string name="login_button">Iniciar sesión</string>
+    <string name="login_create_account">Crear una cuenta</string>
+    <!-- Login validation -->
+    <string name="login_invalid_credentials">Correo o contraseña incorrectos</string>
 
 </resources>

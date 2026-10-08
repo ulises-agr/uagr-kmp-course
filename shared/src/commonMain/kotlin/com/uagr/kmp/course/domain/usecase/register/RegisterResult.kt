@@ -1,12 +1,14 @@
+import com.uagr.kmp.course.domain.usecase.register.RegisterValidationError
+
 sealed class RegisterResult {
 
     data object Success : RegisterResult()
 
     data class ValidationError(
-        val nameError: String? = null,
-        val emailError: String? = null,
-        val passwordError: String? = null,
-        val confirmPasswordError: String? = null
+        val nameError: RegisterValidationError? = null,
+        val emailError: RegisterValidationError? = null,
+        val passwordError: RegisterValidationError? = null,
+        val confirmPasswordError: RegisterValidationError? = null
     ) : RegisterResult()
 
     data object RegisterFailed : RegisterResult()

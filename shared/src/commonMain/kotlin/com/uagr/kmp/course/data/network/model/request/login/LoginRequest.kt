@@ -1,4 +1,4 @@
-package com.uagr.kmp.course.data.network.model.login
+package com.uagr.kmp.course.data.network.model.request.login
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

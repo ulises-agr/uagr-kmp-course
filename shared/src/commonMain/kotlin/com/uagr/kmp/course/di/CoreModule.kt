@@ -30,6 +30,7 @@ import org.koin.dsl.module
 import com.uagr.kmp.course.data.repository.register.RegisterRepositoryImpl
 import com.uagr.kmp.course.domain.repository.register.RegisterRepository
 import com.uagr.kmp.course.domain.usecase.register.RegisterUseCase
+import com.uagr.kmp.course.data.network.datasource.login.LoginRemoteDataSource
 
 val dispatcherModule = module {
     single<CoroutineDispatcher> { Dispatchers.IO }
@@ -57,7 +58,7 @@ val networkModule = module {
 }
 
 val dataSourceRemoteModule = module {
-
+    singleOf(::LoginRemoteDataSource)
 }
 
 val dataSourceLocalModule = module {

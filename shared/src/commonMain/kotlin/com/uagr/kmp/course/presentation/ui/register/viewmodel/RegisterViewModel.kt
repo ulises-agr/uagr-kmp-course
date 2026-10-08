@@ -1,14 +1,26 @@
 package com.uagr.kmp.course.presentation.ui.register.viewmodel
 
+import RegisterResult
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uagr.kmp.course.domain.usecase.register.RegisterUseCase
+import com.uagr.kmp.course.domain.usecase.register.RegisterValidationError
+import course.shared.generated.resources.Res
+import course.shared.generated.resources.register_confirm_password_empty
+import course.shared.generated.resources.register_email_empty
+import course.shared.generated.resources.register_email_invalid
+import course.shared.generated.resources.register_failed
+import course.shared.generated.resources.register_name_empty
+import course.shared.generated.resources.register_password_empty
+import course.shared.generated.resources.register_password_mismatch
+import course.shared.generated.resources.register_unknown_error
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.getString
 
 class RegisterViewModel(
     private val registerUseCase: RegisterUseCase
@@ -99,16 +111,16 @@ class RegisterViewModel(
 
                     is RegisterResult.ValidationError -> {
                         _uiState.value = _uiState.value.copy(
-                            nameError = result.nameError,
-                            emailError = result.emailError,
-                            passwordError = result.passwordError,
-                            confirmPasswordError = result.confirmPasswordError
+                            nameError = result.nameError?.toMessage(),
+                            emailError = result.emailError?.toMessage(),
+                            passwordError = result.passwordError?.toMessage(),
+                            confirmPasswordError = result.confirmPasswordError?.toMessage()
                         )
                     }
 
                     RegisterResult.RegisterFailed -> {
                         _uiState.value = _uiState.value.copy(
-                            registerError = "No fue posible registrar al usuario"
+                            registerError = getString(Res.string.register_failed)
                         )
                     }
                 }
@@ -116,7 +128,8 @@ class RegisterViewModel(
             } catch (exception: Exception) {
 
                 _uiState.value = _uiState.value.copy(
-                    registerError = exception.message ?: "Ocurrio un error"
+                    registerError = exception.message
+                        ?: getString(Res.string.register_unknown_error)
                 )
 
             } finally {
@@ -126,5 +139,27 @@ class RegisterViewModel(
                 )
             }
         }
+    }
+}
+
+private suspend fun RegisterValidationError.toMessage(): String {
+    return when (this) {
+        RegisterValidationError.NAME_EMPTY ->
+            getString(Res.string.register_name_empty)
+
+        RegisterValidationError.EMAIL_EMPTY ->
+            getString(Res.string.register_email_empty)
+
+        RegisterValidationError.EMAIL_INVALID ->
+            getString(Res.string.register_email_invalid)
+
+        RegisterValidationError.PASSWORD_EMPTY ->
+            getString(Res.string.register_password_empty)
+
+        RegisterValidationError.CONFIRM_PASSWORD_EMPTY ->
+            getString(Res.string.register_confirm_password_empty)
+
+        RegisterValidationError.PASSWORD_MISMATCH ->
+            getString(Res.string.register_password_mismatch)
     }
 }
