@@ -1,6 +1,7 @@
 package com.uagr.kmp.course.presentation.ui.home.ui
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,6 +20,7 @@ import com.uagr.kmp.course.presentation.component.Header.BigHeader
 import com.uagr.kmp.course.presentation.component.Header.BigHeaderInverted
 import com.uagr.kmp.course.presentation.component.Header.HeaderSections
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
+import com.uagr.kmp.course.presentation.component.summaryView.SummaryChipView
 import com.uagr.kmp.course.presentation.component.summaryView.SummaryEntity
 import com.uagr.kmp.course.presentation.component.summaryView.SummaryHeadView
 import com.uagr.kmp.course.presentation.component.summaryView.SummaryView
@@ -69,9 +71,34 @@ fun HomeContainer(
             expenseEntity,
         )
         Spacer(modifier = Modifier.height(height = Dimens.height32))
-        HeaderSections(modifier = Modifier, title = "Este mes")
+        HeaderSections(
+            modifier = Modifier,
+            title = "Este mes"
+        )
+        Row(
+            modifier = Modifier.fillMaxWidth()
+                .padding(top = Dimens.padding16)
+        ) {
+            SummaryChipView(
+                modifier = Modifier.weight(1f)
+                    .padding(end = Dimens.padding12),
+                incomeEntity = SummaryEntity(title = "Gastos", amount = "$8,500"),
+                percentText = "12%",
+            )
+            SummaryChipView(
+                modifier = Modifier.weight(1f)
+                    .padding(start = Dimens.padding12),
+                incomeEntity = SummaryEntity(title = "Ahorros", amount = "$18,500"),
+                percentText = "8%",
+            )
+        }
         Spacer(modifier = Modifier.height(height = Dimens.height32))
-        HeaderSections(modifier = Modifier, title = "Últimos movimientos", subtitle = "Ver todos")
+        HeaderSections(
+            modifier = Modifier,
+            title = "Últimos movimientos",
+            subtitle = "Ver todos",
+            onClick = onSeeAllClick,
+        )
     }
 }
 
@@ -82,7 +109,7 @@ fun HomeContainerPreview() {
         HomeContainer(
             textAmount = "$0.00",
             incomeEntity = SummaryEntity("Ingresos", amount = "$0.0"),
-            expenseEntity = SummaryEntity("Gastos", amount = "$0.0")
+            expenseEntity = SummaryEntity("Gastos", amount = "$0.0"),
         )
     }
 }

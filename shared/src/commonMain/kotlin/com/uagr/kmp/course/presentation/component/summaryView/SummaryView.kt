@@ -87,8 +87,10 @@ private fun SummaryViewPreview() {
         SummaryView(
             textTitle = "Balance total",
             textAmount = "$24,860.00",
-            incomeEntity = SummaryEntity(title = "Ingresos", amount = "+$18,500"),
-            expensesEntity = SummaryEntity(title = "Gastos", amount = "-$8,460"),
+            incomeEntity = SummaryEntity(title = "Ingresos",
+                amount = "+$18,500"),
+            expensesEntity = SummaryEntity(title = "Gastos",
+                amount = "-$8,460"),
         )
     }
 }
