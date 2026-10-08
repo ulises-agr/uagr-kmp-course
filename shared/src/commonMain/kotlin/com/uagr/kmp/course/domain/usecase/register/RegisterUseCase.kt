@@ -10,7 +10,9 @@ import com.uagr.kmp.course.domain.model.register.RegisterModel
 import com.uagr.kmp.course.domain.repository.register.RegisterRepository
 import com.uagr.kmp.course.utils.network.NetworkResult
 import kotlinx.coroutines.flow.Flow
+import org.koin.core.annotation.Factory
 
+@Factory
 class RegisterUseCase(
     private val registerRepository: RegisterRepository
 ) {

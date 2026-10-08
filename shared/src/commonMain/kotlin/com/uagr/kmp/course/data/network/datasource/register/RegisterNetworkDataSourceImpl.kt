@@ -16,7 +16,9 @@ import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
+import org.koin.core.annotation.Factory
 
+@Factory
 class RegisterNetworkDataSourceImpl(
     private val httpClient: HttpClient,
 ) : RegisterNetworkDataSource {

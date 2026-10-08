@@ -14,7 +14,9 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import org.koin.core.annotation.Factory
 
+@Factory
 class RegisterRepositoryImpl(
     private val registerNetworkDataSource: RegisterNetworkDataSource,
     private val dispatcher: CoroutineDispatcher,

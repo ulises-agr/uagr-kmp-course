@@ -4,12 +4,16 @@
 // Copyright (c) 2026. All rights reserved.
 */
 package com.uagr.kmp.course.domain.usecase.register
+
+import org.koin.core.annotation.Factory
+
 enum class RegisterValidationError {
     REQUIRED_FIELDS,
     INVALID_EMAIL,
     PASSWORD_MISMATCH,
 }
 
+@Factory
 class ValidateRegisterFormUseCase {
     operator fun invoke(
         name: String,
@@ -25,4 +29,3 @@ class ValidateRegisterFormUseCase {
         else -> null
     }
 }
-

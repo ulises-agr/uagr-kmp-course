@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.androidx.room3)
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.koinCompiler)
 }
 
 kotlin {
@@ -58,6 +59,7 @@ kotlin {
         // SharedUI test
         commonTest.dependencies {
             implementation(dependencyNotation = libs.bundles.sharedUI.commonsTest.libs)
+            implementation(libs.ktor.client.mock)
         }
     }
 }

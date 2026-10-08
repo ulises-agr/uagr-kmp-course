@@ -27,7 +27,9 @@ import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.core.annotation.KoinViewModel
 
+@KoinViewModel
 class RegisterViewModel(
     private val registerUseCase: RegisterUseCase,
     private val validateRegisterFormUseCase: ValidateRegisterFormUseCase,
