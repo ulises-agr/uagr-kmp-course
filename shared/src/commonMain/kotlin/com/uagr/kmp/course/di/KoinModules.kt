@@ -17,6 +17,7 @@ import com.uagr.kmp.course.domain.repository.register.RegisterRepository
 import com.uagr.kmp.course.domain.usecase.register.RegisterUserUseCase
 import com.uagr.kmp.course.domain.usecase.user.SaveUserTokenUseCase
 import com.uagr.kmp.course.presentation.ui.register.viewModel.RegisterViewModel
+import com.uagr.kmp.course.utils.network.NetworkErrorHandler
 import io.ktor.client.HttpClient
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -75,9 +76,12 @@ class KoinModules {
     fun registerViewModel(
         registerUserUseCase: RegisterUserUseCase,
         saveUserTokenUseCase: SaveUserTokenUseCase,
-    ): RegisterViewModel =
-        RegisterViewModel(
+        networErrorHandler: NetworkErrorHandler,
+    ): RegisterViewModel {
+        return RegisterViewModel(
             registerUserUseCase = registerUserUseCase,
             saveUserTokenUseCase = saveUserTokenUseCase,
+            networkErrorHandler = networErrorHandler,
         )
+    }
 }

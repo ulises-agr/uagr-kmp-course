@@ -7,12 +7,12 @@ package com.uagr.kmp.course.presentation.ui.login.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uagr.kmp.course.domain.model.base.ErrorDialogModel
-import com.uagr.kmp.course.domain.model.user.userTokensModel
 import com.uagr.kmp.course.domain.usecase.login.LoginUseCase
 import com.uagr.kmp.course.domain.usecase.login.loginValidationResult
 import com.uagr.kmp.course.domain.usecase.login.ValidateLoginUseCase
 import com.uagr.kmp.course.domain.usecase.user.SaveUserTokenUseCase
 import com.uagr.kmp.course.utils.constant.NetworkUrl
+import com.uagr.kmp.course.utils.network.NetworkErrorHandler
 import com.uagr.kmp.course.utils.network.NetworkErrorType
 import com.uagr.kmp.course.utils.network.NetworkResult
 import com.uagr.kmp.course.utils.operators.StatusLoading
@@ -21,11 +21,9 @@ import course.shared.generated.resources.accept
 import course.shared.generated.resources.email_empty
 import course.shared.generated.resources.email_invalid
 import course.shared.generated.resources.error
-import course.shared.generated.resources.invalid_credentials
 import course.shared.generated.resources.network_error
 import course.shared.generated.resources.password_empty
 import course.shared.generated.resources.please_try_again_later
-import course.shared.generated.resources.server_error
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -41,6 +39,7 @@ class LoginViewModel(
     private val validateLoginFormUseCase: ValidateLoginUseCase,
     private val loginUseCase: LoginUseCase,
     private val saveUserTokenUseCase: SaveUserTokenUseCase,
+    private val networkErrorHandler: NetworkErrorHandler,
 ) : ViewModel() {
 
     private var _loginUiState = MutableStateFlow(LoginUiState())
@@ -123,33 +122,51 @@ class LoginViewModel(
             when (result) {
                 is NetworkResult.Success -> {
                     Napier.d("Success")
-                    val tokens = result.response.tokens
-                    if (tokens.access_token.isNotBlank()) {
-                        saveUserToken(tokens = tokens)
+                    val loginData = result.response
+                    if (loginData.accessToken.isNotBlank()) {
+                        saveUserToken(token = loginData.accessToken)
                         _loginUiState.update { state ->
                             state.copy(isLoading = StatusLoading.DISMISS_LOADING)
                         }
                         _loginUiEvent.emit(LoginUiEvent.LoginSuccess)
                     } else {
-                        showFriendlyError(errorType = NetworkErrorType.UNKNOWN)
+                        val errorDialog = networkErrorHandler.buildErrorDialogModel(
+                            errorType = NetworkErrorType.UNKNOWN
+                        )
+                        _loginUiState.update { state ->
+                            state.copy(
+                                isLoading = StatusLoading.DISMISS_LOADING,
+                                errorDialog = errorDialog,
+                            )
+                        }
                     }
                 }
                 is NetworkResult.Error -> {
                     Napier.d("Error")
-                    showFriendlyError(
+                    var errorDialog = networkErrorHandler.buildErrorDialogModel(
                         errorType = result.errorType,
                         httpCode = result.code,
                         serverMessage = result.message,
                     )
+                    _loginUiState.update {
+                        state -> state.copy(isLoading = StatusLoading.DISMISS_LOADING, errorDialog = errorDialog) }
                 }
             }
         }
     }
 
-    private fun saveUserToken(tokens: userTokensModel) = viewModelScope.launch {
-        saveUserTokenUseCase(token = tokens)
+    private fun saveUserToken(token: String) = viewModelScope.launch {
+        saveUserTokenUseCase(token = token)
             .catch {
-                showFriendlyError(errorType = NetworkErrorType.UNKNOWN)
+                val errorDialog = networkErrorHandler.buildErrorDialogModel(
+                    errorType = NetworkErrorType.UNKNOWN
+                )
+                _loginUiState.update { state ->
+                    state.copy(
+                        isLoading = StatusLoading.DISMISS_LOADING,
+                        errorDialog = errorDialog,
+                    )
+                }
             }.collect {
                 _loginUiState.update { state ->
                     state.copy(isLoading = StatusLoading.DISMISS_LOADING)
@@ -157,34 +174,6 @@ class LoginViewModel(
                 _loginUiEvent.emit(LoginUiEvent.LoginSuccess)
             }
     }
-
-    private suspend fun showFriendlyError(
-        errorType: NetworkErrorType,
-        httpCode: Int? = null,
-        serverMessage: String? = null,
-    ) {
-        val message = when {
-            errorType == NetworkErrorType.NETWORK || errorType == NetworkErrorType.TIMEOUT ->
-                getString(Res.string.network_error)
-            httpCode == 401 || httpCode == 403 ->
-                getString(Res.string.invalid_credentials)
-            httpCode == 422 ->
-                serverMessage
-                    ?.takeIf { msg -> msg.isNotBlank() && !msg.startsWith("Error HTTP") && !msg.startsWith("Error client") }
-                    ?: getString(Res.string.invalid_credentials)
-            errorType == NetworkErrorType.HTTP && (httpCode != null && httpCode >= 500) ->
-                getString(Res.string.server_error)
-            else ->
-                getString(Res.string.please_try_again_later)
-        }
-        _loginUiState.update { state ->
-            state.copy(
-                isLoading = StatusLoading.DISMISS_LOADING,
-                errorDialog = setErrorDialog(message = message),
-            )
-        }
-    }
-
     private suspend fun setErrorDialog(message: String? = null): ErrorDialogModel =
         ErrorDialogModel(
             title = getString(resource = Res.string.error),

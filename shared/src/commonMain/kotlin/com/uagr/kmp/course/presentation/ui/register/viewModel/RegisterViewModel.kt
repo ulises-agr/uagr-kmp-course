@@ -7,9 +7,9 @@ package com.uagr.kmp.course.presentation.ui.register.viewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uagr.kmp.course.domain.model.base.ErrorDialogModel
-import com.uagr.kmp.course.domain.model.user.userTokensModel
 import com.uagr.kmp.course.domain.usecase.register.RegisterUserUseCase
 import com.uagr.kmp.course.domain.usecase.user.SaveUserTokenUseCase
+import com.uagr.kmp.course.utils.network.NetworkErrorHandler
 import com.uagr.kmp.course.utils.network.NetworkErrorType
 import com.uagr.kmp.course.utils.network.NetworkResult
 import com.uagr.kmp.course.utils.operators.StatusLoading
@@ -31,6 +31,7 @@ import org.jetbrains.compose.resources.getString
 class RegisterViewModel(
     private val registerUserUseCase: RegisterUserUseCase,
     private val saveUserTokenUseCase: SaveUserTokenUseCase,
+    private val networkErrorHandler: NetworkErrorHandler,
 ) : ViewModel() {
 
     private var _registerUiState = MutableStateFlow(RegisterUiState())
@@ -95,7 +96,7 @@ class RegisterViewModel(
                 is NetworkResult.Success -> {
                     val tokens = result.response.tokens
                     if (tokens != null && tokens.access_token.isNotBlank()) {
-                        saveUserToken(tokens = tokens)
+                        saveUserToken(token = tokens.access_token)
                     } else {
                         _registerUiState.update { state ->
                             state.copy(isLoading = StatusLoading.DISMISS_LOADING)
@@ -104,18 +105,21 @@ class RegisterViewModel(
                     }
                 }
                 is NetworkResult.Error -> {
-                    showFriendlyError(
+                    val errorDialog = networkErrorHandler.buildErrorDialogModel(
                         errorType = result.errorType,
                         httpCode = result.code,
                         serverMessage = result.message,
                     )
+                    _registerUiState.update {
+                        state -> state.copy(isLoading = StatusLoading.DISMISS_LOADING, errorDialog = errorDialog)
+                    }
                 }
             }
         }
     }
 
-    private fun saveUserToken(tokens: userTokensModel?) = viewModelScope.launch {
-        saveUserTokenUseCase(token = tokens)
+    private fun saveUserToken(token: String) = viewModelScope.launch {
+        saveUserTokenUseCase(token = token)
             .catch {
                 _registerUiState.update { state ->
                     state.copy(isLoading = StatusLoading.DISMISS_LOADING)
@@ -127,28 +131,6 @@ class RegisterViewModel(
                 }
                 _registerUiEvent.emit(RegisterUiEvent.RegisterSuccess)
             }
-    }
-
-    private suspend fun showFriendlyError(
-        errorType: NetworkErrorType,
-        httpCode: Int? = null,
-        serverMessage: String? = null,
-    ) {
-        val message = when {
-            httpCode == 409 -> "El correo ya se encuentra registrado."
-            httpCode == 422 -> serverMessage ?: getString(Res.string.please_try_again_later)
-            errorType == NetworkErrorType.NETWORK || errorType == NetworkErrorType.TIMEOUT ->
-                getString(Res.string.network_error)
-            errorType == NetworkErrorType.HTTP && (httpCode != null && httpCode >= 500) ->
-                getString(Res.string.server_error)
-            else -> serverMessage ?: getString(Res.string.please_try_again_later)
-        }
-        _registerUiState.update { state ->
-            state.copy(
-                isLoading = StatusLoading.DISMISS_LOADING,
-                errorDialog = setErrorDialog(message = message),
-            )
-        }
     }
 
     private suspend fun setErrorDialog(message: String? = null): ErrorDialogModel =

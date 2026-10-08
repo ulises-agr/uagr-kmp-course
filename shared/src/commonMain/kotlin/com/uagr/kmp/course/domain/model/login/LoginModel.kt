@@ -7,5 +7,8 @@ package com.uagr.kmp.course.domain.model.login
 import com.uagr.kmp.course.domain.model.user.userTokensModel
 
 data class LoginModel(
-    val tokens: userTokensModel,
+    val tokenType: String = "",
+    val accessToken: String = "",
+    val refreshToken: String = "",
+    val expiresIn: Int = 0,
 )
