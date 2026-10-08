@@ -7,10 +7,14 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Payments
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
+import cafe.adriel.voyager.navigator.tab.TabNavigator
 import com.uagr.kmp.course.presentation.component.bottomBar.NavigationBarItemModel
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainer
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
@@ -25,6 +29,12 @@ import com.uagr.kmp.course.presentation.ui.master.viewmodel.MasterUiEvent
 import com.uagr.kmp.course.presentation.ui.master.viewmodel.MasterViewModel
 import com.uagr.kmp.course.presentation.ui.movements.navigation.MovementsTab
 import com.uagr.kmp.course.utils.flow.CollectWithLifecycle
+import course.shared.generated.resources.Res
+import course.shared.generated.resources.navigationBar_Budget
+import course.shared.generated.resources.navigationBar_Goals
+import course.shared.generated.resources.navigationBar_Home
+import course.shared.generated.resources.navigationBar_Movements
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -93,50 +103,56 @@ fun MasterScreen(
 @Composable
 fun MasterScreenPreview() {
     SafeScreenContainerTest {
-        val tabNavigator = LocalTabNavigator.current
-        val items = listOf(
-            NavigationBarItemModel(
-                id = MasterTabs.HOME,
-                label = "Home",
-                icon = Icons.Default.Home,
-            ),
-            NavigationBarItemModel(
-                id = MasterTabs.MOVEMENTS,
-                label = "Movimientos",
-                icon = Icons.Default.Payments,
-            ),
-            NavigationBarItemModel(
-                id = MasterTabs.BUDGET,
-                label = "Presupuestos",
-                icon = Icons.Default.AccountBalanceWallet,
-            ),
-            NavigationBarItemModel(
-                id = MasterTabs.GOALS,
-                label = "Metas",
-                icon = Icons.Default.Flag,
+        TabNavigator(HomeTab) {
+            val tabNavigator = LocalTabNavigator.current
+            val items = listOf(
+                NavigationBarItemModel(
+                    id = MasterTabs.HOME,
+                    label = stringResource(Res.string.navigationBar_Home),
+                    icon = Icons.Default.Home,
+                ),
+                NavigationBarItemModel(
+                    id = MasterTabs.MOVEMENTS,
+                    label = stringResource(Res.string.navigationBar_Movements),
+                    icon = Icons.Default.Payments,
+                ),
+                NavigationBarItemModel(
+                    id = MasterTabs.BUDGET,
+                    label = stringResource(Res.string.navigationBar_Budget),
+                    icon = Icons.Default.AccountBalanceWallet,
+                ),
+                NavigationBarItemModel(
+                    id = MasterTabs.GOALS,
+                    label = stringResource(Res.string.navigationBar_Goals),
+                    icon = Icons.Default.Flag,
+                ),
             )
-        )
-        MasterContainer(
-            navigationItems = items,
-            updateCurrentTab = { tab ->
-                when (tab) {
-                    MasterTabs.HOME -> {
-                        tabNavigator.current = HomeTab
-                    }
+            var selectedTab by remember { mutableStateOf(MasterTabs.HOME) }
+            MasterContainer(
+                masterTab = selectedTab,
+                navigationItems = items,
+                updateCurrentTab = { tab ->
+                    selectedTab = tab
+                    when (tab) {
+                        MasterTabs.HOME -> {
+                            tabNavigator.current = HomeTab
+                        }
 
-                    MasterTabs.MOVEMENTS -> {
-                        tabNavigator.current = MovementsTab
-                    }
+                        MasterTabs.MOVEMENTS -> {
+                            tabNavigator.current = MovementsTab
+                        }
 
-                    MasterTabs.BUDGET -> {
-                        tabNavigator.current = BudgetTab
-                    }
+                        MasterTabs.BUDGET -> {
+                            tabNavigator.current = BudgetTab
+                        }
 
-                    MasterTabs.GOALS -> {
-                        tabNavigator.current = GoalsTab
+                        MasterTabs.GOALS -> {
+                            tabNavigator.current = GoalsTab
+                        }
                     }
-                }
-            },
-            content = { CurrentTab() })
+                },
+                content = { CurrentTab() },
+            )
+        }
     }
 }

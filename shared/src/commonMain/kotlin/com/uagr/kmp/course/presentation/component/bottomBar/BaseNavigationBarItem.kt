@@ -25,11 +25,11 @@ fun <T> RowScope.BaseNavigationBarItem(
     selected: Boolean,
     onClick: () -> Unit,
 ) {
-    val colorIndicator: Color = if (selected) Color.Cyan else Color.Transparent
-    val colorText: Color = if (selected) Color.Cyan else Color.Black
+    val colorIndicator: Color = if (selected) AppTheme.colors.backgrounds.blueSoft else Color.Transparent
+    val colorText: Color = if (selected) AppTheme.colors.text.blue else Color.Black
     NavigationBarItem(
         colors = NavigationBarItemDefaults.colors(
-            selectedIconColor = Color.Unspecified,
+            selectedIconColor = colorText,
             selectedTextColor = colorText,
             indicatorColor = colorIndicator,
             unselectedIconColor = Color.Unspecified,

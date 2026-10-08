@@ -17,7 +17,8 @@ object Dimens {
     val textSizeNormal: TextUnit = 16.sp
     val textSizeMedium: TextUnit = 20.sp
     val textSizeBig: TextUnit = 24.sp
-    val textSizeBigExtra: TextUnit = 40.sp
+    val textSizeBigExtra: TextUnit = 34.sp
+    val textSizeBigUltra: TextUnit = 40.sp
 
     // ------ Height ------
     val heightNome: Dp = 0.dp
@@ -61,6 +62,8 @@ object Dimens {
     val padding8: Dp = 8.dp
     val padding12: Dp = 12.dp
     val padding16: Dp = 16.dp
+    val padding20: Dp = 20.dp
+    val padding22: Dp = 22.dp
     val padding24: Dp = 24.dp
     val padding28: Dp = 28.dp
     val padding31: Dp = 31.dp

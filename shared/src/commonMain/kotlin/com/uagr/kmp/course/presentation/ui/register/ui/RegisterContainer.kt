@@ -75,7 +75,6 @@ fun RegisterContainer(
             .verticalScroll(state = scrollState),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.fillMaxWidth())
         BigHeader(title = stringResource(Res.string.register_title),
             subtitle = stringResource(Res.string.register_subtitle))
         Spacer(modifier = Modifier.height(height = Dimens.height32))

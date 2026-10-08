@@ -17,7 +17,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.uagr.kmp.course.domain.model.home.HomeDataModel
 import com.uagr.kmp.course.presentation.component.Header.BigHeader
 import com.uagr.kmp.course.presentation.component.Header.BigHeaderInverted
+import com.uagr.kmp.course.presentation.component.Header.HeaderSections
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
+import com.uagr.kmp.course.presentation.component.summaryView.SummaryEntity
+import com.uagr.kmp.course.presentation.component.summaryView.SummaryHeadView
+import com.uagr.kmp.course.presentation.component.summaryView.SummaryView
 import com.uagr.kmp.course.presentation.component.text.TextNormal
 import com.uagr.kmp.course.presentation.theme.AppTheme
 import com.uagr.kmp.course.presentation.theme.Dimens
@@ -31,6 +35,10 @@ import org.jetbrains.compose.resources.stringResource
 fun HomeContainer(
     name: String = "",
     homeData: HomeDataModel? = null,
+    textAmount: String = "",
+    incomeEntity: SummaryEntity = SummaryEntity(),
+    expenseEntity: SummaryEntity = SummaryEntity(),
+    onSeeAllClick: () -> Unit = {},
 ) {
     val scrollState = rememberScrollState()
 
@@ -41,21 +49,29 @@ fun HomeContainer(
             .verticalScroll(state = scrollState),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        val title: String = stringResource(Res.string.home_title).replace(oldValue = "@name",
-            newValue = name)
+        val title: String = stringResource(Res.string.home_title).replace(
+            oldValue = "@name",
+            newValue = name
+        )
         Spacer(modifier = Modifier.fillMaxWidth())
         BigHeaderInverted(
             title = title,
             subtitle = stringResource(Res.string.home_subtitle),
+            colorTitle = AppTheme.colors.text.gray,
+            colorSubtitle = AppTheme.colors.text.black,
         )
         Spacer(modifier = Modifier.height(height = Dimens.height32))
 
-        TextNormal(
-            modifier = Modifier.fillMaxWidth(),
-            color = AppTheme.colors.backgrounds.black,
-            text = homeData?.description.takeIf { !it.isNullOrBlank() } ?: "Inicio de la aplicación",
-            textAlign = TextAlign.Left,
+        SummaryView(
+            textTitle = stringResource(Res.string.home_title),
+            textAmount = textAmount,
+            incomeEntity = incomeEntity,
+            expenseEntity,
         )
+        Spacer(modifier = Modifier.height(height = Dimens.height32))
+        HeaderSections(modifier = Modifier, title = "Este mes")
+        Spacer(modifier = Modifier.height(height = Dimens.height32))
+        HeaderSections(modifier = Modifier, title = "Últimos movimientos", subtitle = "Ver todos")
     }
 }
 
@@ -63,6 +79,10 @@ fun HomeContainer(
 @Composable
 fun HomeContainerPreview() {
     SafeScreenContainerTest {
-        HomeContainer()
+        HomeContainer(
+            textAmount = "$0.00",
+            incomeEntity = SummaryEntity("Ingresos", amount = "$0.0"),
+            expenseEntity = SummaryEntity("Gastos", amount = "$0.0")
+        )
     }
 }

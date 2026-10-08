@@ -12,6 +12,10 @@ import com.uagr.kmp.course.presentation.component.bottomBar.NavigationBarItemMod
 import course.shared.generated.resources.Res
 import course.shared.generated.resources.accept
 import course.shared.generated.resources.error
+import course.shared.generated.resources.navigationBar_Budget
+import course.shared.generated.resources.navigationBar_Goals
+import course.shared.generated.resources.navigationBar_Home
+import course.shared.generated.resources.navigationBar_Movements
 import course.shared.generated.resources.please_try_again_later
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -19,6 +23,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.getString
+import org.jetbrains.compose.resources.stringResource
 import org.koin.core.annotation.KoinViewModel
 
 @KoinViewModel
@@ -52,27 +57,26 @@ class MasterViewModel : ViewModel() {
         _masterUiEvent.value = MasterUiEvent.Idle
     }
 }
-
-fun <T>MasterViewModel.getNavigationItems() {
+ fun <T>MasterViewModel.getNavigationItems() = viewModelScope.launch {
     val items = listOf(
         NavigationBarItemModel(
             id = MasterTabs.HOME,
-            label = "Home",
+            label = getString(Res.string.navigationBar_Home),
             icon = Icons.Default.Home,
         ),
         NavigationBarItemModel(
             id = MasterTabs.MOVEMENTS,
-            label = "Movimientos",
+            label = getString(Res.string.navigationBar_Movements),
             icon = Icons.Default.Payments,
         ),
         NavigationBarItemModel(
             id = MasterTabs.BUDGET,
-            label = "Presupuestos",
+            label = getString(Res.string.navigationBar_Budget),
             icon = Icons.Default.AccountBalanceWallet,
         ),
         NavigationBarItemModel(
             id = MasterTabs.GOALS,
-            label = "Metas",
+            label = getString(Res.string.navigationBar_Goals),
             icon = Icons.Default.Flag,
         )
     )

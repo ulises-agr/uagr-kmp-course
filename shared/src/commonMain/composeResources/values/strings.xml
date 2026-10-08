@@ -50,6 +50,12 @@
     <string name="empty_packages">Empty packages</string>
     <string name="active_packages">Active packages</string>
 
+    <!-- NavigationBar -->
+    <string name="navigationBar_Home">Inicio</string>
+    <string name="navigationBar_Movements">Movimientos</string>
+    <string name="navigationBar_Budget">Presupuesto</string>
+    <string name="navigationBar_Goals">Metas</string>
+
     <!-- Home -->
     <string name="home_title">Hola, @name</string>
     <string name="home_subtitle">Tu panorama financiero</string>
