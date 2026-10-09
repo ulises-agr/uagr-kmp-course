@@ -12,4 +12,5 @@ interface UserLocalDataSource {
     suspend fun insertUserAndDelete(user: UserModel)
     suspend fun saveUserToken(token: String)
     suspend fun getUser(): UserModel
+    suspend fun getUserToken(): String
 }

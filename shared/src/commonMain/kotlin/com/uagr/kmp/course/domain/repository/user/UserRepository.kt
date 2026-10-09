@@ -7,4 +7,5 @@ interface UserRepository {
     suspend fun insertUserAndDelete(user: UserModel): Flow<Unit>
     suspend fun saveUserToken(token: String): Flow<Unit>
     suspend fun getUser(): Flow<UserModel>
+    suspend fun getUserToken(): Flow<String>
 }

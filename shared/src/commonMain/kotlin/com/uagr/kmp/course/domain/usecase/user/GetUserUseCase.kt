@@ -7,7 +7,7 @@ import org.koin.core.annotation.Factory
 
 
 @Factory
-class GetLocalUserUseCase(
+class GetUserUseCase(
     private val userRepository: UserRepository,
 ) {
     suspend operator fun invoke(): Flow<UserModel> =

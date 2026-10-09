@@ -12,6 +12,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import com.uagr.kmp.course.utils.constant.Constants
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.io.IOException
 import org.koin.core.annotation.Single
@@ -32,6 +33,9 @@ class AppDataStore(
     suspend fun saveUserToken(token: String) {
         dataStore.edit { data -> data[KEY.USER_TOKEN] = token }
     }
+
+    suspend fun getUserToken(): String =
+        userToken.first() ?: ""
 }
 
 expect fun createDataStore(): DataStore<Preferences>

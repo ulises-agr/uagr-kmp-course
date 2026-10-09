@@ -28,4 +28,7 @@ class UserLocalDataSourceImpl(
 
     override suspend fun getUser(): UserModel =
         userDao.getUser().toDomain()
+
+    override suspend fun getUserToken(): String =
+        appDataStore.getUserToken()
 }

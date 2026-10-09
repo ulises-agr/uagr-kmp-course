@@ -3,8 +3,8 @@ package com.uagr.kmp.course.presentation.ui.home.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uagr.kmp.course.domain.model.base.ErrorDialogModel
-import com.uagr.kmp.course.domain.usecase.home.HomeUseCase
-import com.uagr.kmp.course.domain.usecase.user.GetLocalUserUseCase
+import com.uagr.kmp.course.domain.usecase.user.GetUserTokenUseCase
+import com.uagr.kmp.course.domain.usecase.user.GetUserUseCase
 import com.uagr.kmp.course.utils.network.NetworkResult
 import com.uagr.kmp.course.utils.operators.StatusLoading
 import course.shared.generated.resources.Res
@@ -23,8 +23,8 @@ import org.koin.core.annotation.KoinViewModel
 
 @KoinViewModel
 class HomeViewModel(
-    private val homeUseCase: HomeUseCase,
-    private val getLocalUserUseCase: GetLocalUserUseCase
+    private val getUserUseCase: GetUserUseCase,
+    private val getUserTokenUseCase : GetUserTokenUseCase,
 ) : ViewModel() {
 
     private var _homeUiState = MutableStateFlow(HomeUiState())
@@ -39,46 +39,11 @@ class HomeViewModel(
 
     fun fetchHomeData(query: String = "") = viewModelScope.launch {
         getLocalUser()
-    }
-
-    fun homeUseCase() = viewModelScope.launch {
-        homeUseCase.fetchHomeData(
-            url = "",
-            query = "",
-        ).onStart {
-            _homeUiState.update { state -> state.copy(isLoading = StatusLoading.SHOW_LOADING) }
-        }.catch { exception ->
-            exception.printStackTrace()
-            _homeUiState.update { state ->
-                state.copy(
-                    isLoading = StatusLoading.DISMISS_LOADING,
-                    errorDialog = setErrorDialog(message = exception.message),
-                )
-            }
-        }.collect { result ->
-            when (result) {
-                is NetworkResult.Success -> {
-                    _homeUiState.update { state ->
-                        state.copy(
-                            isLoading = StatusLoading.DISMISS_LOADING,
-                            data = result.response.data,
-                        )
-                    }
-                }
-                is NetworkResult.Error -> {
-                    _homeUiState.update { state ->
-                        state.copy(
-                            isLoading = StatusLoading.DISMISS_LOADING,
-                            errorDialog = setErrorDialog(message = result.message),
-                        )
-                    }
-                }
-            }
-        }
+        getUserToken()
     }
 
     fun getLocalUser() = viewModelScope.launch {
-        getLocalUserUseCase()
+        getUserUseCase()
             .catch {
                 _homeUiState.update { state -> state.copy(isLoading = StatusLoading.DISMISS_LOADING) }
                 //_homeUiEvent.emit(PackagesUiEvent.ShowErrorDialog(message = Res.string.please_try_again_later))
@@ -86,6 +51,31 @@ class HomeViewModel(
                 _homeUiState.update { state -> state.copy(isLoading = StatusLoading.DISMISS_LOADING, name = result.full_name) }
             }
     }
+
+    fun getUserToken() = viewModelScope.launch {
+        getUserTokenUseCase.invoke()
+            .catch {
+                //Try to Refresh token auth
+                //_homeUiState.update { state -> state.copy(isLoading = StatusLoading.DISMISS_LOADING) }
+                //_homeUiEvent.emit(PackagesUiEvent.ShowErrorDialog(message = Res.string.please_try_again_later))
+            }.collect { result ->
+                getDashboardData(token = result)
+                getTransactionsData(token = result)
+            }
+    }
+
+    fun getDashboardData(token: String) = viewModelScope.launch {
+
+    }
+
+    fun getTransactionsData(token: String) = viewModelScope.launch {
+
+    }
+
+
+
+
+
 
     private suspend fun setErrorDialog(message: String? = null): ErrorDialogModel =
         ErrorDialogModel(
