@@ -47,8 +47,7 @@ fun TransactionView(
             .background(
                 color = Color.Unspecified,
                 shape = roundCorner
-            )
-            .padding(top = Dimens.padding16, bottom = Dimens.padding16),
+            ),
         verticalAlignment = Alignment.CenterVertically
     ) {
         val backgroundColor = when (transactionModel.type) {
@@ -74,8 +73,7 @@ fun TransactionView(
             transactionType = transactionModel.type,
         )
         BigHeader(
-            modifier = Modifier.weight(2f)
-                .padding(bottom = Dimens.padding16),
+            modifier = Modifier.weight(2f),
             title = transactionModel.categoryId,
             subtitle = transactionModel.transactionDate,
             colorTitle = AppTheme.colors.text.black,

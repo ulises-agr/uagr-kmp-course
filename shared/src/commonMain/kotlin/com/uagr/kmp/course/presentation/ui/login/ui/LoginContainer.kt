@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardActions
@@ -81,6 +82,8 @@ fun LoginContainer(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         BigHeader(
+            modifier = Modifier
+                .padding(top = Dimens.padding16),
             title = stringResource(Res.string.title_login),
             subtitle = stringResource(Res.string.subtitle_login),
             colorTitle = AppTheme.colors.text.blueHard

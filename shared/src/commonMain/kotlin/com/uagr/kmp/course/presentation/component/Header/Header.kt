@@ -38,8 +38,7 @@ fun BigHeader(
             .fillMaxWidth(),
     ) {
         TextBigBold(
-            modifier = Modifier.fillMaxWidth()
-                .padding(top = Dimens.padding16),
+            modifier = Modifier.fillMaxWidth(),
             fontSize = fontSizeTitle,
             color = colorTitle,
             text = title,
@@ -69,8 +68,7 @@ fun BigHeaderInverted(
             .fillMaxWidth(),
     ) {
         TextNormal(
-            modifier = Modifier.fillMaxWidth()
-                .padding(top = Dimens.padding16),
+            modifier = Modifier.fillMaxWidth(),
             fontSize = Dimens.textSizeNormal,
             color = colorTitle,
             text = title,
