@@ -1,4 +1,4 @@
-package com.uagr.kmp.course.presentation.component.summaryView
+package com.uagr.kmp.course.presentation.component.summary
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer

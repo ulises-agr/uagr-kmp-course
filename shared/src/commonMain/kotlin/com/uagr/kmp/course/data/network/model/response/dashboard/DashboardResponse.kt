@@ -18,6 +18,6 @@ data class DashboardResponse(
     val savings_rate: String? = null,
     val budget_usage: String? = null,
     val recent_transactions: List<TransactionResponse>? = null,
-    val top_expense_categories: List<String>? = null,
+    val top_expense_categories: List<TopExpenseCategoryResponse>? = null,
     val goals: List<String>? = null,
 ) : BaseResponse()

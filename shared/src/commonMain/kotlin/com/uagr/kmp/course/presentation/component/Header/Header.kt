@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.presentation.component.text.AppLinkButton
 import com.uagr.kmp.course.presentation.component.text.TextBigBold
@@ -24,18 +25,22 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun BigHeader(
+    modifier: Modifier = Modifier,
     title: String = "",
     subtitle: String = "",
     colorTitle: Color = AppTheme.colors.text.blue,
     colorSubtitle: Color = AppTheme.colors.text.gray,
+    fontSizeTitle: TextUnit = Dimens.textSizeBig,
+    fontSizeSubtitle: TextUnit = Dimens.textSizeNormal,
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth(),
     ) {
         TextBigBold(
             modifier = Modifier.fillMaxWidth()
                 .padding(top = Dimens.padding16),
+            fontSize = fontSizeTitle,
             color = colorTitle,
             text = title,
             textAlign = TextAlign.Left,
@@ -43,7 +48,7 @@ fun BigHeader(
         TextNormal(
             modifier = Modifier.fillMaxWidth()
                 .padding(top = Dimens.padding8),
-            fontSize = Dimens.textSizeNormal,
+            fontSize = fontSizeSubtitle,
             color = colorSubtitle,
             text = subtitle,
             textAlign = TextAlign.Left,

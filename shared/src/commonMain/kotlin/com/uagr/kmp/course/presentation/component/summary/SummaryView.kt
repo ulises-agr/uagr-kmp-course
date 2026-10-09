@@ -1,4 +1,4 @@
-package com.uagr.kmp.course.presentation.component.summaryView
+package com.uagr.kmp.course.presentation.component.summary
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -11,26 +11,19 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
+import com.uagr.kmp.course.domain.model.summary.SummaryModel
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
-import com.uagr.kmp.course.presentation.component.text.TextBigBold
-import com.uagr.kmp.course.presentation.component.text.TextMedium
 import com.uagr.kmp.course.presentation.theme.AppTheme
 import com.uagr.kmp.course.presentation.theme.Dimens
-
-data class SummaryEntity(
-    val title: String = "",
-    val amount: String = ""
-)
 
 @Composable
 fun SummaryView(
     textTitle: String = "",
     textAmount: String = "",
-    incomeEntity: SummaryEntity = SummaryEntity(),
-    expensesEntity: SummaryEntity = SummaryEntity(),
+    incomeEntity: SummaryModel = SummaryModel(),
+    expensesEntity: SummaryModel = SummaryModel(),
     paddingBottomColumn: Dp = Dimens.padding20,
 ) {
     val roundCorner = RoundedCornerShape(size = Dimens.height16)
@@ -87,9 +80,9 @@ private fun SummaryViewPreview() {
         SummaryView(
             textTitle = "Balance total",
             textAmount = "$24,860.00",
-            incomeEntity = SummaryEntity(title = "Ingresos",
+            incomeEntity = SummaryModel(title = "Ingresos",
                 amount = "+$18,500"),
-            expensesEntity = SummaryEntity(title = "Gastos",
+            expensesEntity = SummaryModel(title = "Gastos",
                 amount = "-$8,460"),
         )
     }

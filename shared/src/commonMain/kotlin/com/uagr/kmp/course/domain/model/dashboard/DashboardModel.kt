@@ -15,6 +15,6 @@ data class DashboardModel(
     val savingsRate: String = "",
     val budgetUsage: String = "",
     val recentTransactions: List<TransactionModel> = emptyList(),
-    val topExpenseCategories: List<String> = emptyList(),
+    val topExpenseCategories: List<TopExpenseCategoryModel> = emptyList(),
     val goals: List<String> = emptyList(),
 )

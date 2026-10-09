@@ -9,26 +9,20 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.uagr.kmp.course.domain.model.dashboard.DashboardModel
-import com.uagr.kmp.course.presentation.component.Header.BigHeader
+import com.uagr.kmp.course.domain.model.summary.SummaryModel
 import com.uagr.kmp.course.presentation.component.Header.BigHeaderInverted
 import com.uagr.kmp.course.presentation.component.Header.HeaderSections
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
-import com.uagr.kmp.course.presentation.component.summaryView.SummaryChipView
-import com.uagr.kmp.course.presentation.component.summaryView.SummaryEntity
-import com.uagr.kmp.course.presentation.component.summaryView.SummaryHeadView
-import com.uagr.kmp.course.presentation.component.summaryView.SummaryView
-import com.uagr.kmp.course.presentation.component.text.TextNormal
+import com.uagr.kmp.course.presentation.component.summary.SummaryChipView
+import com.uagr.kmp.course.presentation.component.summary.SummaryView
 import com.uagr.kmp.course.presentation.theme.AppTheme
 import com.uagr.kmp.course.presentation.theme.Dimens
 import course.shared.generated.resources.Res
-import course.shared.generated.resources.budget_title
 import course.shared.generated.resources.home_subtitle
 import course.shared.generated.resources.home_title
 import org.jetbrains.compose.resources.stringResource
@@ -40,9 +34,9 @@ fun HomeContainer(
     onSeeAllClick: () -> Unit = {},
 ) {
     val scrollState = rememberScrollState()
-    val incomeEntity = SummaryEntity(title = "Ingresos",
+    val incomeEntity = SummaryModel(title = "Ingresos",
         amount = dashBoardModel.monthlyIncome)
-    val expenseEntity = SummaryEntity(title = "Gastos",
+    val expenseEntity = SummaryModel(title = "Gastos",
         amount = dashBoardModel.monthlyExpenses)
 
     Column(
@@ -83,13 +77,13 @@ fun HomeContainer(
             SummaryChipView(
                 modifier = Modifier.weight(1f)
                     .padding(end = Dimens.padding12),
-                incomeEntity = SummaryEntity(title = "Gastos", amount = dashBoardModel.monthlyExpenses),
+                incomeEntity = SummaryModel(title = "Gastos", amount = dashBoardModel.monthlyExpenses),
                 percentText = dashBoardModel.budgetUsage,
             )
             SummaryChipView(
                 modifier = Modifier.weight(1f)
                     .padding(start = Dimens.padding12),
-                incomeEntity = SummaryEntity(title = "Ahorros", amount = dashBoardModel.monthlySavings),
+                incomeEntity = SummaryModel(title = "Ahorros", amount = dashBoardModel.monthlySavings),
                 percentText = dashBoardModel.savingsRate,
             )
         }

@@ -9,7 +9,7 @@ data class TransactionModel(
     val id: String = "",
     val accountId: String = "",
     val categoryId: String = "",
-    val type: String = "",
+    val type: TransactionType = TransactionType.UNKNOWN,
     val amount: String = "",
     val currency: String = "",
     val description: String = "",

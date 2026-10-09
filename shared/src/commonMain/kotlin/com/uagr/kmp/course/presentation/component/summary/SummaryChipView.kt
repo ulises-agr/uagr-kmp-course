@@ -1,8 +1,7 @@
-package com.uagr.kmp.course.presentation.component.summaryView
+package com.uagr.kmp.course.presentation.component.summary
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -14,16 +13,16 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
+import com.uagr.kmp.course.domain.model.summary.SummaryModel
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.presentation.component.text.TextBigBold
-import com.uagr.kmp.course.presentation.component.text.TextMedium
 import com.uagr.kmp.course.presentation.theme.AppTheme
 import com.uagr.kmp.course.presentation.theme.Dimens
 
 @Composable
 fun SummaryChipView(
     modifier: Modifier = Modifier,
-    incomeEntity: SummaryEntity = SummaryEntity(),
+    incomeEntity: SummaryModel = SummaryModel(),
     percentText: String = "",
     paddingBottomColumn: Dp = Dimens.padding20,
 ) {
@@ -76,7 +75,7 @@ fun SummaryChipView(
 private fun SummaryChipViewPreview() {
     SafeScreenContainerTest {
         SummaryChipView(
-            incomeEntity = SummaryEntity(
+            incomeEntity = SummaryModel(
                 title = "Ingresos",
                 amount = "+$18,500",
             ),

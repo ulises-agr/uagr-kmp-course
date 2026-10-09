@@ -10,6 +10,7 @@ import com.uagr.kmp.course.data.network.model.response.transaction.TransactionRe
 import com.uagr.kmp.course.data.network.model.response.transaction.TransactionsResponse
 import com.uagr.kmp.course.domain.model.transaction.PaginationModel
 import com.uagr.kmp.course.domain.model.transaction.TransactionModel
+import com.uagr.kmp.course.domain.model.transaction.TransactionType
 import com.uagr.kmp.course.domain.model.transaction.TransactionsModel
 
 fun TransactionResponse.toDomain(): TransactionModel =
@@ -17,7 +18,7 @@ fun TransactionResponse.toDomain(): TransactionModel =
         id = id.orEmpty(),
         accountId = account_id.orEmpty(),
         categoryId = category_id.orEmpty(),
-        type = type.orEmpty(),
+        type = TransactionType.from(type),
         amount = amount.orEmpty(),
         currency = currency.orEmpty(),
         description = description.orEmpty(),
