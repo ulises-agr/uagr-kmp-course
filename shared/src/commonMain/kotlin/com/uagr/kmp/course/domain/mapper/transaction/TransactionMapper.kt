@@ -12,6 +12,7 @@ import com.uagr.kmp.course.domain.model.transaction.PaginationModel
 import com.uagr.kmp.course.domain.model.transaction.TransactionModel
 import com.uagr.kmp.course.domain.model.transaction.TransactionType
 import com.uagr.kmp.course.domain.model.transaction.TransactionsModel
+import com.uagr.kmp.course.utils.date.formatRelativeDate
 
 fun TransactionResponse.toDomain(): TransactionModel =
     TransactionModel(
@@ -23,7 +24,7 @@ fun TransactionResponse.toDomain(): TransactionModel =
         currency = currency.orEmpty(),
         description = description.orEmpty(),
         notes = notes.orEmpty(),
-        transactionDate = transaction_date.orEmpty(),
+        transactionDate = formatRelativeDate(transaction_date.orEmpty()),
         createdAt = created_at.orEmpty(),
         updatedAt = updated_at.orEmpty(),
         version = version ?: 0,

@@ -74,7 +74,7 @@ fun TransactionView(
         )
         BigHeader(
             modifier = Modifier.weight(2f),
-            title = transactionModel.categoryId,
+            title = transactionModel.description,
             subtitle = transactionModel.transactionDate,
             colorTitle = AppTheme.colors.text.black,
             colorSubtitle = AppTheme.colors.text.gray,

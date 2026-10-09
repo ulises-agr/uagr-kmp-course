@@ -138,13 +138,13 @@ fun HomeContainerPreview() {
                 budgetUsage = "0%",
                 recentTransactions = listOf(
                     TransactionModel(
-                        categoryId = "Category",
+                        description = "Description",
                         transactionDate = "Date",
                         amount = "Amount",
                         type = TransactionType.INCOME
                     ),
                     TransactionModel(
-                        categoryId = "Category",
+                        description = "Description",
                         transactionDate = "Date",
                         amount = "Amount",
                         type = TransactionType.EXPENSE
