@@ -32,10 +32,10 @@ fun HomeScreen(
 
     SafeScreenContainer {
         HomeContainer(
-            homeData = uiState.data,
             name = uiState.name,
+            dashBoardModel = uiState.dashBoardModel
         )
-        Loader()
+        Loader(isLoading = uiState.isLoading)
         DialogCustom(
             errorDialog = uiState.errorDialog,
             titleTextColor = AppTheme.colors.text.black,

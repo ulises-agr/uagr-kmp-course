@@ -3,6 +3,8 @@ package com.uagr.kmp.course.presentation.ui.home.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uagr.kmp.course.domain.model.base.ErrorDialogModel
+import com.uagr.kmp.course.domain.usecase.dashboard.GetDashboardUseCase
+import com.uagr.kmp.course.domain.usecase.transactions.GetTransactionsUseCase
 import com.uagr.kmp.course.domain.usecase.user.GetUserTokenUseCase
 import com.uagr.kmp.course.domain.usecase.user.GetUserUseCase
 import com.uagr.kmp.course.utils.network.NetworkResult
@@ -24,7 +26,9 @@ import org.koin.core.annotation.KoinViewModel
 @KoinViewModel
 class HomeViewModel(
     private val getUserUseCase: GetUserUseCase,
-    private val getUserTokenUseCase : GetUserTokenUseCase,
+    private val getUserTokenUseCase: GetUserTokenUseCase,
+    private val getDashboardUseCase: GetDashboardUseCase,
+    private val getTransactionsUseCase: GetTransactionsUseCase,
 ) : ViewModel() {
 
     private var _homeUiState = MutableStateFlow(HomeUiState())
@@ -56,20 +60,46 @@ class HomeViewModel(
         getUserTokenUseCase.invoke()
             .catch {
                 //Try to Refresh token auth
-                //_homeUiState.update { state -> state.copy(isLoading = StatusLoading.DISMISS_LOADING) }
-                //_homeUiEvent.emit(PackagesUiEvent.ShowErrorDialog(message = Res.string.please_try_again_later))
+                _homeUiState.update { state -> state.copy(errorDialog = setErrorDialog(message = "Error en Dashboard getUserTokenUseCase")) }
             }.collect { result ->
                 getDashboardData(token = result)
-                getTransactionsData(token = result)
+                //getTransactionsData(token = result)
             }
     }
 
     fun getDashboardData(token: String) = viewModelScope.launch {
+        getDashboardUseCase(token = token)
+            .onStart {
+                _homeUiState.update { state -> state.copy(isLoading = StatusLoading.SHOW_LOADING) }
+            }
+            .catch {
+            }.collect { result ->
+                when (result) {
+                    is NetworkResult.Success -> {
+                        _homeUiState.update { state -> state.copy(dashBoardModel = result.response) }
+                    }
 
+                    is NetworkResult.Error -> {
+                        _homeUiState.update { state -> state.copy(errorDialog = setErrorDialog(message = "Error en Dashboard")) }
+                    }
+                }
+            }
     }
 
     fun getTransactionsData(token: String) = viewModelScope.launch {
+        getTransactionsUseCase(token = token)
+            .catch {
+            }.collect { result ->
+                when (result) {
+                    is NetworkResult.Success -> {
 
+                    }
+
+                    is NetworkResult.Error -> {
+
+                    }
+                }
+            }
     }
 
 

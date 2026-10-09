@@ -15,7 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import com.uagr.kmp.course.domain.model.home.HomeDataModel
+import com.uagr.kmp.course.domain.model.dashboard.DashboardModel
 import com.uagr.kmp.course.presentation.component.Header.BigHeader
 import com.uagr.kmp.course.presentation.component.Header.BigHeaderInverted
 import com.uagr.kmp.course.presentation.component.Header.HeaderSections
@@ -36,13 +36,14 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun HomeContainer(
     name: String = "",
-    homeData: HomeDataModel? = null,
-    textAmount: String = "",
-    incomeEntity: SummaryEntity = SummaryEntity(),
-    expenseEntity: SummaryEntity = SummaryEntity(),
+    dashBoardModel: DashboardModel = DashboardModel(),
     onSeeAllClick: () -> Unit = {},
 ) {
     val scrollState = rememberScrollState()
+    val incomeEntity = SummaryEntity(title = "Ingresos",
+        amount = dashBoardModel.monthlyIncome)
+    val expenseEntity = SummaryEntity(title = "Gastos",
+        amount = dashBoardModel.monthlyExpenses)
 
     Column(
         modifier = Modifier
@@ -65,8 +66,8 @@ fun HomeContainer(
         Spacer(modifier = Modifier.height(height = Dimens.height32))
 
         SummaryView(
-            textTitle = stringResource(Res.string.home_title),
-            textAmount = textAmount,
+            textTitle = "Balance Total",
+            textAmount = dashBoardModel.totalBalance,
             incomeEntity = incomeEntity,
             expenseEntity,
         )
@@ -82,14 +83,14 @@ fun HomeContainer(
             SummaryChipView(
                 modifier = Modifier.weight(1f)
                     .padding(end = Dimens.padding12),
-                incomeEntity = SummaryEntity(title = "Gastos", amount = "$8,500"),
-                percentText = "12%",
+                incomeEntity = SummaryEntity(title = "Gastos", amount = dashBoardModel.monthlyExpenses),
+                percentText = dashBoardModel.budgetUsage,
             )
             SummaryChipView(
                 modifier = Modifier.weight(1f)
                     .padding(start = Dimens.padding12),
-                incomeEntity = SummaryEntity(title = "Ahorros", amount = "$18,500"),
-                percentText = "8%",
+                incomeEntity = SummaryEntity(title = "Ahorros", amount = dashBoardModel.monthlySavings),
+                percentText = dashBoardModel.savingsRate,
             )
         }
         Spacer(modifier = Modifier.height(height = Dimens.height32))
@@ -107,9 +108,15 @@ fun HomeContainer(
 fun HomeContainerPreview() {
     SafeScreenContainerTest {
         HomeContainer(
-            textAmount = "$0.00",
-            incomeEntity = SummaryEntity("Ingresos", amount = "$0.0"),
-            expenseEntity = SummaryEntity("Gastos", amount = "$0.0"),
+            name = "NAME",
+            dashBoardModel = DashboardModel(
+                totalBalance = "$100.0",
+                monthlyIncome = "+$1.0",
+                monthlyExpenses = "$2.0",
+                monthlySavings = "$3.0",
+                savingsRate = "2%",
+                budgetUsage = "0%"
+            )
         )
     }
 }
