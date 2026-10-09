@@ -9,7 +9,6 @@ import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.uagr.kmp.course.presentation.ui.login.navigation.LoginNavigation
 import com.uagr.kmp.course.presentation.ui.register.ui.RegisterScreen
 
 data object RegisterNavigation : Screen {
@@ -17,9 +16,6 @@ data object RegisterNavigation : Screen {
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
         RegisterScreen(
-            navigateToLogin = {
-                navigator.push(item = LoginNavigation)
-            },
             navigateToBack = {
                 navigator.pop()
             },

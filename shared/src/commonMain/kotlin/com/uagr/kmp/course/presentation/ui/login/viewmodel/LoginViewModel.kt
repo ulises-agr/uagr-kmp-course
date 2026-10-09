@@ -7,11 +7,12 @@ package com.uagr.kmp.course.presentation.ui.login.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.uagr.kmp.course.domain.model.register.TokensModel
 import com.uagr.kmp.course.domain.usecase.login.LoginUseCase
 import com.uagr.kmp.course.domain.usecase.login.GetDeviceIdUseCase
 import com.uagr.kmp.course.domain.usecase.login.LoginValidationError
 import com.uagr.kmp.course.domain.usecase.login.ValidateLoginFormUseCase
-import com.uagr.kmp.course.domain.usecase.login.SaveUserTokenUseCase
+import com.uagr.kmp.course.domain.usecase.user.SaveUserTokenUseCase
 import com.uagr.kmp.course.utils.constant.NetworkUrl
 import com.uagr.kmp.course.utils.network.NetworkResult
 import com.uagr.kmp.course.utils.operators.StatusLoading
@@ -90,7 +91,15 @@ class LoginViewModel(
                     _loginUiEvent.value = LoginUiEvent.Idle
                 }.onEach { result ->
                     if (result is NetworkResult.Success) {
-                        saveUserTokenUseCase(result.response.accessToken)
+                        val data = result.response
+                        saveUserTokenUseCase(
+                            token = TokensModel(
+                                accessToken = data.accessToken,
+                                refreshToken = data.refreshToken,
+                                tokenType = data.tokenType,
+                                expiresIn = data.expiresIn,
+                            ),
+                        ).collect {}
                     }
                 }.catch { exception ->
                     if (exception is CancellationException) throw exception

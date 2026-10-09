@@ -7,6 +7,9 @@ package com.uagr.kmp.course.presentation.ui.register.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.uagr.kmp.course.domain.model.register.RegisterModel
+import com.uagr.kmp.course.domain.usecase.user.SaveUserTokenUseCase
+import com.uagr.kmp.course.domain.usecase.user.InsertUserAndDeleteUseCase
 import com.uagr.kmp.course.domain.usecase.register.RegisterUseCase
 import com.uagr.kmp.course.domain.usecase.register.RegisterValidationError
 import com.uagr.kmp.course.domain.usecase.register.ValidateRegisterFormUseCase
@@ -24,6 +27,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -33,6 +37,8 @@ import org.koin.core.annotation.KoinViewModel
 class RegisterViewModel(
     private val registerUseCase: RegisterUseCase,
     private val validateRegisterFormUseCase: ValidateRegisterFormUseCase,
+    private val insertUserAndDeleteUseCase: InsertUserAndDeleteUseCase,
+    private val saveUserTokenUseCase: SaveUserTokenUseCase,
 ) : ViewModel() {
     private val _registerUiState = MutableStateFlow(RegisterUiState())
     val registerUiState: StateFlow<RegisterUiState> = _registerUiState.asStateFlow()
@@ -81,6 +87,10 @@ class RegisterViewModel(
             registerUseCase.register(url = NetworkUrl.REGISTER_ENDPOINT, name = name, email = email, password = password)
                 .onStart {
                     _registerUiEvent.value = RegisterUiEvent.Idle
+                }.onEach { result ->
+                    if (result is NetworkResult.Success) {
+                        insertUserAndDelete(registerData = result.response)
+                    }
                 }.catch { exception ->
                     if (exception is CancellationException) throw exception
                     _registerUiEvent.value = RegisterUiEvent.ShowErrorDialog(Res.string.please_try_again_later)
@@ -93,6 +103,16 @@ class RegisterViewModel(
                     }
                 }
         }
+    }
+
+    private suspend fun insertUserAndDelete(registerData: RegisterModel) {
+        insertUserAndDeleteUseCase(user = registerData.user).collect {
+            saveUserToken(registerData = registerData)
+        }
+    }
+
+    private suspend fun saveUserToken(registerData: RegisterModel) {
+        saveUserTokenUseCase(token = registerData.tokens).collect {}
     }
 
     fun clearEvent() {
