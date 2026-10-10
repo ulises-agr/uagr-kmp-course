@@ -17,5 +17,6 @@ data class ColorBackgrounds(
     val blue: Color = Color.Unspecified,
     val blueBox: Color = Color.Unspecified,
     val blueBar: Color = Color.Unspecified,
+    val blueMenuSelected: Color = Color.Unspecified,
     val grey: Color = Color.Unspecified,
 )

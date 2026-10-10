@@ -30,6 +30,7 @@ import org.jetbrains.compose.resources.stringResource
 fun LoginScreen(
     viewModel: LoginViewModel = koinViewModel(),
     navigateToRegister: () -> Unit = {},
+    navigateToHome: () -> Unit = {},
 ) {
     val loginUiState by viewModel.loginUiState.collectAsStateWithLifecycle()
     val loginUiEvent by viewModel.loginUiEvent.collectAsStateWithLifecycle()
@@ -80,7 +81,9 @@ fun LoginScreen(
             primaryButtonBackgroundColor = AppTheme.colors.backgrounds.blue,
             primaryButtonTextColor = AppTheme.colors.text.white,
             onPrimaryButtonClick = {
+                val loginSuccess = loginUiEvent == LoginUiEvent.LoginSuccess
                 viewModel.clearEvent()
+                if(loginSuccess) navigateToHome()
             },
         )
     }

@@ -144,6 +144,26 @@ fun TextNormal(
 }
 
 @Composable
+fun TextNormalMedium(
+    modifier: Modifier = Modifier,
+    fontSize: TextUnit = Dimens.textSizeNormal,
+    color: Color,
+    text: String,
+    textAlign: TextAlign = TextAlign.Center,
+) {
+    Text(
+        modifier = modifier,
+        text = text,
+        textAlign = textAlign,
+        style = AppTheme.typography.bodyMedium.copy(
+            fontSize = fontSize,
+            fontWeight = FontWeight.Normal,
+        ),
+        color = color,
+    )
+}
+
+@Composable
 fun TextNormalBold(
     modifier: Modifier = Modifier,
     fontSize: TextUnit = Dimens.textSizeNormal,
@@ -321,6 +341,10 @@ private fun TextPreview() {
             )
             // TextNormal
             TextNormal(
+                color = AppTheme.colors.backgrounds.black,
+                text = stringResource(Res.string.example),
+            )
+            TextNormalMedium(
                 color = AppTheme.colors.backgrounds.black,
                 text = stringResource(Res.string.example),
             )

@@ -24,6 +24,7 @@ object Dimens {
     val height2: Dp = 2.dp
     val height4: Dp = 4.dp
     val height8: Dp = 8.dp
+    val height10: Dp = 10.dp
     val height12: Dp = 12.dp
     val height16: Dp = 16.dp
     val height20: Dp = 24.dp

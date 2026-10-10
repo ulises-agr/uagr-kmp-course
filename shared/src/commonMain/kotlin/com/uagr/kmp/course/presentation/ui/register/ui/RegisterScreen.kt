@@ -30,6 +30,7 @@ import org.koin.compose.viewmodel.koinViewModel
 fun RegisterScreen(
     viewModel: RegisterViewModel = koinViewModel(),
     navigateToBack: () -> Unit = {},
+    navigateToHome: () -> Unit = {},
 ) {
     val registerUiState by viewModel.registerUiState.collectAsStateWithLifecycle()
     val registerUiEvent by viewModel.registerUiEvent.collectAsStateWithLifecycle()
@@ -94,7 +95,9 @@ fun RegisterScreen(
             primaryButtonBackgroundColor = AppTheme.colors.backgrounds.blue,
             primaryButtonTextColor = AppTheme.colors.text.white,
             onPrimaryButtonClick = {
+                val registered = registerUiEvent == RegisterUiEvent.Registered
                 viewModel.clearEvent()
+                if (registered) navigateToHome()
             },
         )
     }
