@@ -1,10 +1,11 @@
 package com.uagr.kmp.course.presentation.ui.movements.ui
 
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.uagr.kmp.course.domain.model.transaction.TransactionType
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainer
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.presentation.component.dialog.DialogCustom
@@ -32,9 +33,15 @@ fun MovementsScreen(
 
     SafeScreenContainer {
         MovementsContainer(
-            movementsData = uiState.data,
+            transactionsList = uiState.filteredTransactions,
+            selectedType = uiState.selectedType,
+            onTypeSelected = { type ->
+                viewModel.onTypeSelected(type)
+            },
+            modifier = Modifier,
+            categories = uiState.categories,
         )
-        Loader()
+        Loader(isLoading = uiState.isLoading)
         DialogCustom(
             errorDialog = uiState.errorDialog,
             titleTextColor = AppTheme.colors.text.black,
@@ -52,6 +59,6 @@ fun MovementsScreen(
 @Composable
 fun MovementsScreenPreview() {
     SafeScreenContainerTest {
-        MovementsContainer()
+
     }
 }

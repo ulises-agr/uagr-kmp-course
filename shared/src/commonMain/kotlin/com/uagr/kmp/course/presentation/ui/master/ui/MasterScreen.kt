@@ -56,11 +56,13 @@ fun MasterScreen(
     }
 
     val tabNavigator = LocalTabNavigator.current
+
     SafeScreenContainer {
         MasterContainer(
             masterTab = masterUiState.currentTab,
             navigationItems = masterUiState.navigationItems,
             updateCurrentTab = { tab ->
+                viewModel.updateCurrentTab(tab)
                 when (tab) {
                     MasterTabs.HOME -> {
                         tabNavigator.current = HomeTab

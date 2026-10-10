@@ -38,6 +38,10 @@ class MasterViewModel : ViewModel() {
         getNavigationItems<MasterTabs>()
     }
 
+    fun updateCurrentTab(tab: MasterTabs) = viewModelScope.launch {
+        _masterUiState.update { state -> state.copy(currentTab = tab) }
+    }
+
     fun updateNavigationItems(list: List<NavigationBarItemModel<MasterTabs>>) = viewModelScope.launch {
         _masterUiState.update { state -> state.copy(navigationItems = list) }
     }
