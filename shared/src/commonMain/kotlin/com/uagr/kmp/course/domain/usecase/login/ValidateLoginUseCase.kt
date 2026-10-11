@@ -12,12 +12,12 @@ class ValidateLoginUseCase {
     operator fun invoke(
         email: String,
         password: String,
-    ): loginValidationResult =
+    ): LoginValidationResult =
         when {
-            email.isBlank() -> loginValidationResult.EmailEmpty
-            !email.isValidEmail() -> loginValidationResult.EmailInvalid
-            password.isBlank() -> loginValidationResult.PasswordEmpty
-            else -> loginValidationResult.Success
+            email.isBlank() -> LoginValidationResult.EmailEmpty
+            !email.isValidEmail() -> LoginValidationResult.EmailInvalid
+            password.isBlank() -> LoginValidationResult.PasswordEmpty
+            else -> LoginValidationResult.Success
         }
 
     private fun String.isValidEmail(): Boolean {

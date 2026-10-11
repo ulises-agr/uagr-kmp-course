@@ -4,9 +4,9 @@
  */
 package com.uagr.kmp.course.domain.usecase.login
 
-sealed class loginValidationResult {
-    data object EmailEmpty : loginValidationResult()
-    data object EmailInvalid : loginValidationResult()
-    data object PasswordEmpty : loginValidationResult()
-    data object Success : loginValidationResult()
+sealed class LoginValidationResult {
+    data object EmailEmpty : LoginValidationResult()
+    data object EmailInvalid : LoginValidationResult()
+    data object PasswordEmpty : LoginValidationResult()
+    data object Success : LoginValidationResult()
 }

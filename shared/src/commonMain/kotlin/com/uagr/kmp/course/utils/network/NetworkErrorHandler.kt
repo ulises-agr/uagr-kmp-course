@@ -3,6 +3,7 @@ package com.uagr.kmp.course.utils.network
 import com.uagr.kmp.course.domain.model.base.ErrorDialogModel
 import course.shared.generated.resources.Res
 import course.shared.generated.resources.accept
+import course.shared.generated.resources.email_alredy_registered
 import course.shared.generated.resources.error
 import course.shared.generated.resources.invalid_credentials
 import course.shared.generated.resources.network_error
@@ -18,17 +19,29 @@ class NetworkErrorHandler {
         httpCode: Int? = null,
         serverMessage: String? = null,
     ): String {
-        return when {
-            httpCode == 409 -> "El correo ya se encuentra registrado."
-            httpCode == 401 || httpCode == 403 -> getString(Res.string.invalid_credentials)
-            httpCode == 422 -> serverMessage
-                ?.takeIf { msg -> msg.isNotBlank() && !msg.startsWith("Error HTTP") && !msg.startsWith("Error client") }
-                ?: getString(Res.string.invalid_credentials)
-            errorType == NetworkErrorType.NETWORK || errorType == NetworkErrorType.TIMEOUT ->
-                getString(Res.string.network_error)
-            errorType == NetworkErrorType.HTTP && (httpCode != null && httpCode >= 500) ->
+        val status = HttpErrorStatus.fromCode(httpCode)
+
+        return when (status) {
+            HttpErrorStatus.REGISTERED_MAIL ->
+                getString(resource = Res.string.email_alredy_registered)
+
+            HttpErrorStatus.UNAUTHORIZED ->
+                getString(Res.string.invalid_credentials)
+
+            HttpErrorStatus.VALIDATION_ERROR ->
+                serverMessage?.takeIf { it.isNotBlank() && !it.startsWith("Error HTTP") }
+                    ?: getString(Res.string.invalid_credentials)
+
+            HttpErrorStatus.SERVER_ERROR ->
                 getString(Res.string.server_error)
-            else -> serverMessage ?: getString(Res.string.please_try_again_later)
+
+            HttpErrorStatus.UNKNOWN -> {
+                if (errorType == NetworkErrorType.NETWORK || errorType == NetworkErrorType.TIMEOUT) {
+                    getString(Res.string.network_error)
+                } else {
+                    serverMessage ?: getString(Res.string.please_try_again_later)
+                }
+            }
         }
     }
     suspend fun buildErrorDialogModel(

@@ -76,12 +76,12 @@ class KoinModules {
     fun registerViewModel(
         registerUserUseCase: RegisterUserUseCase,
         saveUserTokenUseCase: SaveUserTokenUseCase,
-        networErrorHandler: NetworkErrorHandler,
+        networkErrorHandler: NetworkErrorHandler,
     ): RegisterViewModel {
         return RegisterViewModel(
             registerUserUseCase = registerUserUseCase,
             saveUserTokenUseCase = saveUserTokenUseCase,
-            networkErrorHandler = networErrorHandler,
+            networkErrorHandler = networkErrorHandler,
         )
     }
 }

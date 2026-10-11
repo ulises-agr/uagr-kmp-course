@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uagr.kmp.course.domain.model.base.ErrorDialogModel
 import com.uagr.kmp.course.domain.usecase.login.LoginUseCase
-import com.uagr.kmp.course.domain.usecase.login.loginValidationResult
+import com.uagr.kmp.course.domain.usecase.login.LoginValidationResult
 import com.uagr.kmp.course.domain.usecase.login.ValidateLoginUseCase
 import com.uagr.kmp.course.domain.usecase.user.SaveUserTokenUseCase
 import com.uagr.kmp.course.utils.constant.NetworkUrl
@@ -70,28 +70,37 @@ class LoginViewModel(
             email = email,
             password = password,
         )) {
-            is loginValidationResult.EmailEmpty -> {
+            is LoginValidationResult.EmailEmpty -> {
                 _loginUiState.update { state ->
                     state.copy(errorDialog = setErrorDialog(message = getString(Res.string.email_empty)))
                 }
             }
-            is loginValidationResult.EmailInvalid -> {
+            is LoginValidationResult.EmailInvalid -> {
                 _loginUiState.update { state ->
                     state.copy(errorDialog = setErrorDialog(message = getString(Res.string.email_invalid)))
                 }
             }
-            is loginValidationResult.PasswordEmpty -> {
+            is LoginValidationResult.PasswordEmpty -> {
                 _loginUiState.update { state ->
                     state.copy(errorDialog = setErrorDialog(message = getString(Res.string.password_empty)))
                 }
             }
-            is loginValidationResult.Success -> {
+            is LoginValidationResult.Success -> {
                 login(
                     email = email,
                     password = password,
                 )
             }
         }
+//        when{
+//            email.isNotEmpty() -> {}
+//            password.isNotEmpty() -> {}
+//            else -> login(
+//                    email = email,
+//                    password = password,
+//                )
+//
+//        }
     }
 
     private fun login(

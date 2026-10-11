@@ -7,6 +7,7 @@
     <string name="error">Error</string>
     <string name="please_try_again_later">Porfavor intenta más tarde</string>
     <string name="invalid_credentials">Correo o contraseña incorrectos</string>
+    <string name="email_alredy_registered">El correo ya se encuentra registrado</string>
     <string name="network_error">No se encontró conexión. Revisa tu red e intenta de nuevo</string>
     <string name="server_error">El servicio no se encuentra disponbile. Intenta más tarde.</string>
 
