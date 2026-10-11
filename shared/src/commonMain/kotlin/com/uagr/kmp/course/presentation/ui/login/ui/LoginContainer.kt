@@ -2,46 +2,36 @@ package com.uagr.kmp.course.presentation.ui.login.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import com.uagr.kmp.course.presentation.theme.Dimens
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.sp
-import com.uagr.kmp.course.presentation.component.buton.ButtonCustom
-import com.uagr.kmp.course.presentation.theme.AppTheme
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import com.uagr.kmp.course.presentation.component.buton.ButtonCustom
+import com.uagr.kmp.course.presentation.component.card.LoginBalanceCard
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.presentation.component.field.TextFieldCustom
 import com.uagr.kmp.course.presentation.component.field.TextFieldPassword
+import com.uagr.kmp.course.presentation.theme.AppTheme
+import com.uagr.kmp.course.presentation.theme.Dimens
 import course.shared.generated.resources.Res
 import course.shared.generated.resources.app_name
 import course.shared.generated.resources.email
-import course.shared.generated.resources.login_balance_available
 import course.shared.generated.resources.login_button
 import course.shared.generated.resources.login_create_account
 import course.shared.generated.resources.login_description
@@ -100,66 +90,9 @@ fun LoginContainer(
             modifier = Modifier.height(Dimens.height32)
         )
 
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(Dimens.height230)
-                .background(
-                    color = AppTheme.colors.backgrounds.darkBlue,
-                    shape = RoundedCornerShape(Dimens.corner28)
-                )
-        ) {
-
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(Dimens.padding24)
-            ) {
-
-                Text(
-                    text = "\$--",
-                    color = AppTheme.colors.text.white,
-                    fontSize = Dimens.textSizeLarge,
-                    fontWeight = FontWeight.Bold
-                )
-
-                Text(
-                    text = stringResource(Res.string.login_balance_available),
-                    color = AppTheme.colors.text.white,
-                    fontSize = Dimens.textSizeNormal
-                )
-
-                Spacer(
-                    modifier = Modifier.height(Dimens.height20)
-                )
-
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(Dimens.height78)
-                        .background(
-                            color = AppTheme.colors.backgrounds.mediumBlue,
-                            shape = RoundedCornerShape(Dimens.corner16)
-                        )
-                ) {
-
-                    val barHeights = listOf(22, 26, 32, 40, 46, 54, 62)
-
-                    Row(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(horizontal = Dimens.padding16),
-                        horizontalArrangement = Arrangement.SpaceEvenly,
-                        verticalAlignment = Alignment.Bottom
-                    ) {
-
-                        barHeights.forEach { height ->
-                            BalanceBar(height = height)
-                        }
-                    }
-                }
-            }
-        }
+        LoginBalanceCard(
+            modifier = Modifier.height(Dimens.height230)
+        )
 
         Spacer(
             modifier = Modifier.height(Dimens.height40)
@@ -244,19 +177,6 @@ fun LoginContainer(
             fontWeight = FontWeight.SemiBold
         )
     }
-}
-
-@Composable
-private fun BalanceBar(height: Int) {
-    Box(
-        modifier = Modifier
-            .width(Dimens.width16)
-            .height(height.dp)
-            .background(
-                color = AppTheme.colors.backgrounds.lightBlue,
-                shape = RoundedCornerShape(Dimens.corner4)
-            )
-    )
 }
 
 @Preview(showBackground = true)

@@ -1,19 +1,11 @@
 package com.uagr.kmp.course.data.network.model.response.login
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class LoginResponse(
-    @SerialName("access_token")
-    val accessToken: String? = null,
-
-    @SerialName("refresh_token")
-    val refreshToken: String? = null,
-
-    @SerialName("token_type")
-    val tokenType: String? = null,
-
-    @SerialName("expires_in")
-    val expiresIn: Int? = null
+    val access_token: String? = null,
+    val refresh_token: String? = null,
+    val token_type: String? = null,
+    val expires_in: Int? = null
 )

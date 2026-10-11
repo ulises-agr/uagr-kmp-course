@@ -31,6 +31,9 @@ import com.uagr.kmp.course.data.repository.register.RegisterRepositoryImpl
 import com.uagr.kmp.course.domain.repository.register.RegisterRepository
 import com.uagr.kmp.course.domain.usecase.register.RegisterUseCase
 import com.uagr.kmp.course.data.network.datasource.login.LoginRemoteDataSource
+import com.uagr.kmp.course.data.network.datasource.register.RegisterRemoteDataSource
+import com.uagr.kmp.course.domain.usecase.login.ValidateLoginUseCase
+import com.uagr.kmp.course.domain.usecase.register.ValidateRegisterUseCase
 
 val dispatcherModule = module {
     single<CoroutineDispatcher> { Dispatchers.IO }
@@ -59,6 +62,7 @@ val networkModule = module {
 
 val dataSourceRemoteModule = module {
     singleOf(::LoginRemoteDataSource)
+    singleOf(::RegisterRemoteDataSource)
 }
 
 val dataSourceLocalModule = module {
@@ -72,7 +76,9 @@ val repositoryModule = module {
 
 val useCaseModule = module {
     factoryOf(::LoginUseCase)
+    factoryOf(::ValidateLoginUseCase)
     factoryOf(::RegisterUseCase)
+    factoryOf(::ValidateRegisterUseCase)
 }
 
 val viewmodelModule = module {

@@ -11,18 +11,6 @@ class LoginUseCase(
         password: String
     ): LoginResult {
 
-        if (email.isBlank() && password.isBlank()) {
-            return LoginResult.EmptyEmailAndPassword
-        }
-
-        if (email.isBlank()) {
-            return LoginResult.EmptyEmail
-        }
-
-        if (password.isBlank()) {
-            return LoginResult.EmptyPassword
-        }
-
         val success = loginRepository.login(
             email = email,
             password = password

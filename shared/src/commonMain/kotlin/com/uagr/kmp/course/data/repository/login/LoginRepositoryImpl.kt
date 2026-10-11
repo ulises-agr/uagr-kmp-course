@@ -40,8 +40,14 @@ class LoginRepositoryImpl(
 
         return when (result) {
             is NetworkResult.Success -> {
-                appDataStore.saveUserToken(result.response.accessToken)
-                true
+                val token = result.response.accessToken
+
+                if (token.isNotBlank()) {
+                    appDataStore.saveUserToken(token)
+                    true
+                } else {
+                    false
+                }
             }
 
             is NetworkResult.Error -> {

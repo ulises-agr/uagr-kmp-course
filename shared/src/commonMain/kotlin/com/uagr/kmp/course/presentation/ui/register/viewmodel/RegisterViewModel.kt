@@ -1,10 +1,12 @@
 package com.uagr.kmp.course.presentation.ui.register.viewmodel
 
-import RegisterResult
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.uagr.kmp.course.domain.usecase.register.RegisterResult
 import com.uagr.kmp.course.domain.usecase.register.RegisterUseCase
 import com.uagr.kmp.course.domain.usecase.register.RegisterValidationError
+import com.uagr.kmp.course.domain.usecase.register.RegisterValidationResult
+import com.uagr.kmp.course.domain.usecase.register.ValidateRegisterUseCase
 import course.shared.generated.resources.Res
 import course.shared.generated.resources.register_confirm_password_empty
 import course.shared.generated.resources.register_email_empty
@@ -21,8 +23,10 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.getString
+import kotlin.coroutines.cancellation.CancellationException
 
 class RegisterViewModel(
+    private val validateRegisterUseCase: ValidateRegisterUseCase,
     private val registerUseCase: RegisterUseCase
 ) : ViewModel() {
 
@@ -87,56 +91,76 @@ class RegisterViewModel(
             emailError = null,
             passwordError = null,
             confirmPasswordError = null,
-            registerError = null,
-            isLoading = true
+            registerError = null
         )
 
         viewModelScope.launch {
-            try {
 
-                val state = _uiState.value
+            val state = _uiState.value
 
-                val result = registerUseCase(
-                    name = state.name,
-                    email = state.email,
-                    password = state.password,
-                    confirmPassword = state.confirmPassword
-                )
+            val validationResult = validateRegisterUseCase(
+                name = state.name,
+                email = state.email,
+                password = state.password,
+                confirmPassword = state.confirmPassword
+            )
 
-                when (result) {
+            when (validationResult) {
 
-                    RegisterResult.Success -> {
-                        _uiEvent.send(RegisterUIEvent.RegisterSuccess)
-                    }
+                is RegisterValidationResult.ValidationError -> {
+                    _uiState.value = _uiState.value.copy(
+                        nameError = validationResult.nameError?.toMessage(),
+                        emailError = validationResult.emailError?.toMessage(),
+                        passwordError = validationResult.passwordError?.toMessage(),
+                        confirmPasswordError = validationResult.confirmPasswordError?.toMessage()
+                    )
+                }
 
-                    is RegisterResult.ValidationError -> {
-                        _uiState.value = _uiState.value.copy(
-                            nameError = result.nameError?.toMessage(),
-                            emailError = result.emailError?.toMessage(),
-                            passwordError = result.passwordError?.toMessage(),
-                            confirmPasswordError = result.confirmPasswordError?.toMessage()
+                RegisterValidationResult.ValidationPassed -> {
+
+                    _uiState.value = _uiState.value.copy(
+                        isLoading = true
+                    )
+
+                    try {
+
+                        val result = registerUseCase(
+                            name = state.name,
+                            email = state.email,
+                            password = state.password
                         )
-                    }
 
-                    RegisterResult.RegisterFailed -> {
+                        when (result) {
+
+                            RegisterResult.Success -> {
+                                _uiEvent.send(RegisterUIEvent.RegisterSuccess)
+                            }
+
+                            RegisterResult.RegisterFailed -> {
+                                _uiState.value = _uiState.value.copy(
+                                    registerError = getString(Res.string.register_failed)
+                                )
+                            }
+                        }
+
+                    } catch (exception: Exception) {
+
+                        if (exception is CancellationException) {
+                            throw exception
+                        }
+
                         _uiState.value = _uiState.value.copy(
-                            registerError = getString(Res.string.register_failed)
+                            registerError = exception.message
+                                ?: getString(Res.string.register_unknown_error)
+                        )
+
+                    } finally {
+
+                        _uiState.value = _uiState.value.copy(
+                            isLoading = false
                         )
                     }
                 }
-
-            } catch (exception: Exception) {
-
-                _uiState.value = _uiState.value.copy(
-                    registerError = exception.message
-                        ?: getString(Res.string.register_unknown_error)
-                )
-
-            } finally {
-
-                _uiState.value = _uiState.value.copy(
-                    isLoading = false
-                )
             }
         }
     }

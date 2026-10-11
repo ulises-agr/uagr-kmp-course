@@ -10,13 +10,20 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import com.uagr.kmp.course.domain.usecase.login.LoginResult
+import com.uagr.kmp.course.domain.usecase.login.LoginValidationResult
+import com.uagr.kmp.course.domain.usecase.login.ValidateLoginUseCase
 import course.shared.generated.resources.Res
 import course.shared.generated.resources.login_invalid_credentials
 import course.shared.generated.resources.register_email_empty
+import course.shared.generated.resources.register_email_invalid
 import course.shared.generated.resources.register_password_empty
 import org.jetbrains.compose.resources.getString
+import kotlin.coroutines.cancellation.CancellationException
 
-class LoginViewModel(private val loginUseCase: LoginUseCase) : ViewModel() {
+class LoginViewModel(
+    private val validateLoginUseCase: ValidateLoginUseCase,
+    private val loginUseCase: LoginUseCase
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow(LoginUiState())
     val uiState: StateFlow<LoginUiState> = _uiState.asStateFlow()
@@ -47,55 +54,87 @@ class LoginViewModel(private val loginUseCase: LoginUseCase) : ViewModel() {
         _uiState.value = _uiState.value.copy(
             emailError = null,
             passwordError = null,
-            loginError = null,
-            isLoading = true
+            loginError = null
         )
 
         viewModelScope.launch {
-            try {
 
-                val result = loginUseCase(
-                    email = _uiState.value.email,
-                    password = _uiState.value.password
-                )
+            val email = _uiState.value.email
+            val password = _uiState.value.password
 
-                when (result) {
-                    LoginResult.Success -> {
-                        _uiEvent.send(LoginUIEvent.LoginSuccess)
-                    }
+            val validationResult = validateLoginUseCase(
+                email = email,
+                password = password
+            )
 
-                    LoginResult.InvalidCredentials -> {
-                        _uiState.value = _uiState.value.copy(
-                            loginError = getString(Res.string.login_invalid_credentials)
+            when (validationResult) {
+
+                LoginValidationResult.EmptyEmail -> {
+                    _uiState.value = _uiState.value.copy(
+                        emailError = getString(Res.string.register_email_empty)
+                    )
+                }
+
+                LoginValidationResult.InvalidEmail -> {
+                    _uiState.value = _uiState.value.copy(
+                        emailError = getString(Res.string.register_email_invalid)
+                    )
+                }
+
+                LoginValidationResult.EmptyPassword -> {
+                    _uiState.value = _uiState.value.copy(
+                        passwordError = getString(Res.string.register_password_empty)
+                    )
+                }
+
+                LoginValidationResult.EmptyEmailAndPassword -> {
+                    _uiState.value = _uiState.value.copy(
+                        emailError = getString(Res.string.register_email_empty),
+                        passwordError = getString(Res.string.register_password_empty)
+                    )
+                }
+
+                LoginValidationResult.ValidationPassed -> {
+
+                    _uiState.value = _uiState.value.copy(
+                        isLoading = true
+                    )
+
+                    try {
+                        val result = loginUseCase(
+                            email = email,
+                            password = password
                         )
-                    }
 
-                    LoginResult.EmptyEmail -> {
-                        _uiState.value = _uiState.value.copy(
-                            emailError = getString(Res.string.register_email_empty)
-                        )
-                    }
+                        when (result) {
 
-                    LoginResult.EmptyPassword -> {
-                        _uiState.value = _uiState.value.copy(
-                            passwordError = getString(Res.string.register_password_empty)
-                        )
-                    }
+                            LoginResult.Success -> {
+                                _uiEvent.send(LoginUIEvent.LoginSuccess)
+                            }
 
-                    LoginResult.EmptyEmailAndPassword -> {
+                            LoginResult.InvalidCredentials -> {
+                                _uiState.value = _uiState.value.copy(
+                                    loginError = getString(
+                                        Res.string.login_invalid_credentials
+                                    )
+                                )
+                            }
+                        }
+
+                    } catch (exception: Exception) {
+
+                        if (exception is CancellationException) {
+                            throw exception
+                        }
+
+                        println("LOGIN ERROR -> ${exception.message}")
+
+                    } finally {
                         _uiState.value = _uiState.value.copy(
-                            emailError = getString(Res.string.register_email_empty),
-                            passwordError = getString(Res.string.register_password_empty)
+                            isLoading = false
                         )
                     }
                 }
-
-            } catch (exception: Exception) {
-                println("LOGIN ERROR -> ${exception.message}")
-            } finally {
-                _uiState.value = _uiState.value.copy(
-                    isLoading = false
-                )
             }
         }
     }
