@@ -3,7 +3,6 @@ package com.uagr.kmp.course.presentation.ui.goals.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uagr.kmp.course.domain.model.base.ErrorDialogModel
-import com.uagr.kmp.course.domain.usecase.goals.GoalsUseCase
 import com.uagr.kmp.course.utils.network.NetworkResult
 import com.uagr.kmp.course.utils.operators.StatusLoading
 import course.shared.generated.resources.Res
@@ -22,7 +21,6 @@ import org.koin.core.annotation.KoinViewModel
 
 @KoinViewModel
 class GoalsViewModel(
-    private val goalsUseCase: GoalsUseCase,
 ) : ViewModel() {
 
     private var _goalsUiState = MutableStateFlow(GoalsUiState())
@@ -30,42 +28,6 @@ class GoalsViewModel(
 
     private var _goalsUiEvent = MutableStateFlow<GoalsUiEvent>(GoalsUiEvent.Idle)
     val goalsUiEvent: StateFlow<GoalsUiEvent> = _goalsUiEvent.asStateFlow()
-
-    fun fetchGoalsData(query: String = "") = viewModelScope.launch {
-        goalsUseCase.fetchGoalsData(
-            url = "",
-            query = query,
-        ).onStart {
-            _goalsUiState.update { state -> state.copy(isLoading = StatusLoading.SHOW_LOADING) }
-        }.catch { exception ->
-            exception.printStackTrace()
-            _goalsUiState.update { state ->
-                state.copy(
-                    isLoading = StatusLoading.DISMISS_LOADING,
-                    errorDialog = setErrorDialog(message = exception.message),
-                )
-            }
-        }.collect { result ->
-            when (result) {
-                is NetworkResult.Success -> {
-                    _goalsUiState.update { state ->
-                        state.copy(
-                            isLoading = StatusLoading.DISMISS_LOADING,
-                            data = result.response.data,
-                        )
-                    }
-                }
-                is NetworkResult.Error -> {
-                    _goalsUiState.update { state ->
-                        state.copy(
-                            isLoading = StatusLoading.DISMISS_LOADING,
-                            errorDialog = setErrorDialog(message = result.message),
-                        )
-                    }
-                }
-            }
-        }
-    }
 
     private suspend fun setErrorDialog(message: String? = null): ErrorDialogModel =
         ErrorDialogModel(

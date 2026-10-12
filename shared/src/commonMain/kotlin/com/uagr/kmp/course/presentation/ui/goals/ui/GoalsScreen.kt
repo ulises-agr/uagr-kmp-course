@@ -32,7 +32,6 @@ fun GoalsScreen(
 
     SafeScreenContainer {
         GoalsContainer(
-            goalsData = uiState.data,
         )
         Loader()
         DialogCustom(

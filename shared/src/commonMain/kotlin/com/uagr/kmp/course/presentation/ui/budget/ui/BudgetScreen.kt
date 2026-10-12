@@ -32,7 +32,6 @@ fun BudgetScreen(
 
     SafeScreenContainer {
         BudgetContainer(
-            budgetData = uiState.data,
         )
         Loader()
         DialogCustom(

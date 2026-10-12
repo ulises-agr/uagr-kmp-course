@@ -14,7 +14,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import com.uagr.kmp.course.domain.model.budget.BudgetDataModel
 import com.uagr.kmp.course.presentation.component.Header.BigHeader
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.presentation.component.text.TextNormal
@@ -27,7 +26,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun BudgetContainer(
-    budgetData: BudgetDataModel? = null,
+
 ) {
     val scrollState = rememberScrollState()
 
@@ -45,12 +44,6 @@ fun BudgetContainer(
         )
         Spacer(modifier = Modifier.height(height = Dimens.height32))
 
-        TextNormal(
-            modifier = Modifier.fillMaxWidth(),
-            color = AppTheme.colors.backgrounds.black,
-            text = budgetData?.description.takeIf { !it.isNullOrBlank() } ?: "Presupuesto de la aplicación",
-            textAlign = TextAlign.Left,
-        )
     }
 }
 
