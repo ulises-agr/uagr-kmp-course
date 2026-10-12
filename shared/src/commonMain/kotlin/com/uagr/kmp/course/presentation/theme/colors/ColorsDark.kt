@@ -68,6 +68,12 @@ val backgroundActionBlueDark = Color(0xFF2374EA)
 
 val dividerDark = Color(0xFFEBEFF9)
 val backgroundProgressIndicatorDark = Color(0x80898989)
+// --- FinTrack Home Colors ---
+val finTrackExpenseDark = Color(0xFFF87171)
+val finTrackExpenseBackgroundDark = Color(0xFF450A0A)
+
+val finTrackIncomeDark = Color(0xFF34D399)
+val finTrackIncomeBackgroundDark = Color(0xFF064E3B)
 
 // --- Dark color group ---
 val darkModeAppColors = AppColors(
@@ -106,6 +112,10 @@ val darkModeAppColors = AppColors(
     surfaceContainer = surfaceContainerDark,
     surfaceContainerHigh = surfaceContainerHighDark,
     surfaceContainerHighest = surfaceContainerHighestDark,
+    finTrackExpense = finTrackExpenseDark,
+    finTrackExpenseBackground = finTrackExpenseBackgroundDark,
+    finTrackIncome = finTrackIncomeDark,
+    finTrackIncomeBackground = finTrackIncomeBackgroundDark,
     status = ColorStatus(
         error = statusErrorDark,
         errorContainer = statusErrorContainerDark,

@@ -67,6 +67,13 @@ val backgroundLightBlueLight = Color(0xFF75AEF8)
 val dividerLight = Color(0xFFEBEFF9)
 val backgroundProgressIndicatorLight = Color(0x80898989)
 
+// --- FinTrack Home Colors ---
+val finTrackExpenseLight = Color(0xFFEF4444)
+val finTrackExpenseBackgroundLight = Color(0xFFFDEBED)
+
+val finTrackIncomeLight = Color(0xFF10A779)
+val finTrackIncomeBackgroundLight = Color(0xFFE3F7F0)
+
 // --- Light color group ---
 val lightModeAppColors = AppColors(
     primary = primaryLight,
@@ -104,6 +111,10 @@ val lightModeAppColors = AppColors(
     surfaceContainer = surfaceContainerLight,
     surfaceContainerHigh = surfaceContainerHighLight,
     surfaceContainerHighest = surfaceContainerHighestLight,
+    finTrackExpense = finTrackExpenseLight,
+    finTrackExpenseBackground = finTrackExpenseBackgroundLight,
+    finTrackIncome = finTrackIncomeLight,
+    finTrackIncomeBackground = finTrackIncomeBackgroundLight,
     status = ColorStatus(
         error = statusErrorLight,
         errorContainer = statusErrorContainerLight,
