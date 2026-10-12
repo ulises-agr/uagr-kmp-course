@@ -164,6 +164,21 @@ class LoginViewModel(
         }
     }
 
+    fun onEmailFocusLost() = viewModelScope.launch {
+        val email = _loginUiState.value.email
+        val error = when {
+            email.isBlank() -> getString(Res.string.email_empty)
+            !email.contains("@") -> getString(Res.string.email_invalid)
+            else -> null
+        }
+        _loginUiState.update { state -> state.copy(emailError = error) }
+    }
+
+    fun onPasswordFocusLost() = viewModelScope.launch {
+        val password = _loginUiState.value.password
+        val error = if (password.isBlank()) getString(Res.string.password_empty) else null
+        _loginUiState.update { state -> state.copy(passwordError = error) }
+    }
     private fun saveUserToken(token: String) = viewModelScope.launch {
         saveUserTokenUseCase(token = token)
             .catch {

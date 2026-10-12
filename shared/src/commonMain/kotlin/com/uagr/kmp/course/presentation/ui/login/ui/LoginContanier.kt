@@ -21,9 +21,14 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.TextStyle
@@ -57,9 +62,13 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun loginContainer(
     email: String = "",
+    emailError: String? = null,
     onEmailChange: (String) -> Unit = {},
+    onEmailFocusLost: () -> Unit = {},
     password: String = "",
+    passwordError: String? = null,
     onPasswordChange: (String) -> Unit = {},
+    onPasswordFocusLost: () -> Unit = {},
     passwordVisible: Boolean = false,
     onPasswordVisibleChange: (Boolean) -> Unit = {},
     onLoginClick: () -> Unit = {},
@@ -100,6 +109,8 @@ fun loginContainer(
         LoginTextField(
             value = email,
             onValueChange = onEmailChange,
+            errorMessage = emailError,
+            onFocusLost = onEmailFocusLost,
             placeholder = stringResource(Res.string.email_example),
             keyboardType = KeyboardType.Email,
             imeAction = ImeAction.Next,
@@ -111,6 +122,8 @@ fun loginContainer(
         LoginTextField(
             value = password,
             onValueChange = onPasswordChange,
+            errorMessage = passwordError,
+            onFocusLost = onPasswordFocusLost,
             placeholder = stringResource(Res.string.password_example),
             keyboardType = KeyboardType.Password,
             imeAction = ImeAction.Done,
@@ -206,11 +219,14 @@ private fun LoginTextField(
     keyboardType: KeyboardType,
     imeAction: ImeAction,
     shape: RoundedCornerShape,
+    errorMessage: String? = null,
+    onFocusLost: () -> Unit = {},
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     trailingContent: (@Composable () -> Unit)? = null,
 ) {
     val borderColor = AppTheme.colors.outlineVariant
+    var hasBeenFocused by remember { mutableStateOf(false) }
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -252,10 +268,26 @@ private fun LoginTextField(
                     imeAction = imeAction,
                 ),
                 keyboardActions = keyboardActions,
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .onFocusChanged { focusState ->
+                        if (focusState.isFocused) {
+                            hasBeenFocused = true
+                        } else if (hasBeenFocused) {
+                            onFocusLost()
+                        }
+                    },
             )
         }
         trailingContent?.invoke()
+    }
+    if (errorMessage != null) {
+        Spacer(modifier = Modifier.height(Dimens.height4))
+        TextSmall(
+            text = errorMessage,
+            color = AppTheme.colors.error,
+            textAlign = TextAlign.Start,
+        )
     }
 }
 

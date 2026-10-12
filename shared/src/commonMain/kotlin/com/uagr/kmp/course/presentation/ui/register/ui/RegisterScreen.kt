@@ -43,21 +43,29 @@ fun RegisterScreen(
     ) {
         RegisterContainer(
             name = registerUiState.name,
+            nameError = registerUiState.nameError,
             onNameChange = { name ->
                 viewModel.updateName(name = name)
             },
+            onNameFocusLost = viewModel::onNameFocusLost,
             email = registerUiState.email,
+            emailError = registerUiState.emailError,
             onEmailChange = { email ->
                 viewModel.updateEmail(email = email)
             },
+            onEmailFocusLost = viewModel::onEmailFocusLost,
             password = registerUiState.password,
+            passwordError = registerUiState.passwordError,
             onPasswordChange = { password ->
                 viewModel.updatePassword(password = password)
             },
+            onPasswordFocusLost = viewModel::onPasswordFocusLost,
             confirmPassword = registerUiState.confirmPassword,
+            confirmPasswordError = registerUiState.confirmPasswordError,
             onConfirmPasswordChange = { confirmPassword ->
                 viewModel.updateConfirmPassword(confirmPassword = confirmPassword)
             },
+            onConfirmPasswordFocusLost = viewModel::onConfirmPasswordFocusLost,
             isPasswordVisible = registerUiState.isPasswordVisible,
             onPasswordVisibleChange = {
                 viewModel.togglePasswordVisibility()

@@ -43,13 +43,17 @@ fun LoginScreen(
     ) {
         loginContainer(
             email = loginUiState.email,
+            emailError = loginUiState.emailError,
             onEmailChange = { email ->
                 viewModel.updateEmail(email = email)
             },
+            onEmailFocusLost = viewModel::onEmailFocusLost,
             password = loginUiState.password,
+            passwordError = loginUiState.passwordError,
             onPasswordChange = { password ->
                 viewModel.updatePassword(password = password)
             },
+            onPasswordFocusLost = viewModel::onPasswordFocusLost,
             passwordVisible = loginUiState.isPasswordVisible,
             onPasswordVisibleChange = {
                 viewModel.togglePasswordVisibility()

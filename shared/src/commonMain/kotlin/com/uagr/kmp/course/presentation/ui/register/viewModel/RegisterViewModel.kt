@@ -15,8 +15,14 @@ import com.uagr.kmp.course.utils.network.NetworkResult
 import com.uagr.kmp.course.utils.operators.StatusLoading
 import course.shared.generated.resources.Res
 import course.shared.generated.resources.accept
+import course.shared.generated.resources.confirm_password
+import course.shared.generated.resources.email_empty
+import course.shared.generated.resources.email_invalid
 import course.shared.generated.resources.error
+import course.shared.generated.resources.name_invalid
 import course.shared.generated.resources.network_error
+import course.shared.generated.resources.password_empty
+import course.shared.generated.resources.passwords_notEquals
 import course.shared.generated.resources.please_try_again_later
 import course.shared.generated.resources.server_error
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -116,6 +122,38 @@ class RegisterViewModel(
                 }
             }
         }
+    }
+
+    fun onNameFocusLost() = viewModelScope.launch {
+        val name = _registerUiState.value.name
+        val error = if (name.isBlank()) getString(Res.string.name_invalid) else null
+        _registerUiState.update { state -> state.copy(nameError = error) }
+    }
+
+    fun onEmailFocusLost() = viewModelScope.launch {
+        val email = _registerUiState.value.email
+        val error = when {
+            email.isBlank() -> getString(Res.string.email_empty)
+            !email.contains("@") -> getString(Res.string.email_invalid)
+            else -> null
+        }
+        _registerUiState.update { state -> state.copy(emailError = error) }
+    }
+
+    fun onPasswordFocusLost() = viewModelScope.launch {
+        val password = _registerUiState.value.password
+        val error = if (password.isBlank()) getString(Res.string.password_empty) else null
+        _registerUiState.update { state -> state.copy(passwordError = error) }
+    }
+
+    fun onConfirmPasswordFocusLost() = viewModelScope.launch {
+        val state = _registerUiState.value
+        val error = when {
+            state.confirmPassword.isBlank() -> getString(Res.string.confirm_password)
+            state.confirmPassword != state.password -> getString(Res.string.passwords_notEquals)
+            else -> null
+        }
+        _registerUiState.update { state -> state.copy(confirmPasswordError = error) }
     }
 
     private fun saveUserToken(token: String) = viewModelScope.launch {

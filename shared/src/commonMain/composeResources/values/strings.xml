@@ -3,7 +3,7 @@
     <!-- None -->
     <string name="example">Ejemplo</string>
 
-    <!-- Error -->
+    <!-- Http Errors -->
     <string name="error">Error</string>
     <string name="please_try_again_later">Porfavor intenta más tarde</string>
     <string name="invalid_credentials">Correo o contraseña incorrectos</string>
@@ -11,10 +11,8 @@
     <string name="network_error">No se encontró conexión. Revisa tu red e intenta de nuevo</string>
     <string name="server_error">El servicio no se encuentra disponbile. Intenta más tarde.</string>
 
-    <!-- Welcome -->
-    <string name="hello">¡Hola!</string>
-    <string name="explore_our_multiplatform_platform">Explora la app multiplataforma del Chetez</string>
-    <string name="go_to_login">Ir a login de FinTrack</string>
+    <!-- Welcome MiClaro-->
+    <string name="welcome">Welcome</string>
 
     <!-- Login MiClaro-->
     <string name="login">Login</string>
@@ -30,6 +28,15 @@
     <string name="accept">Aceptar</string>
     <string name="cancel">Cancelar</string>
 
+    <!-- Packages MiClaro-->
+    <string name="empty_packages">Empty packages</string>
+    <string name="active_packages">Active packages</string>
+
+    <!-- Welcome FinTrack-->
+    <string name="hello">¡Hola!</string>
+    <string name="explore_our_multiplatform_platform">Explora la app multiplataforma del Chetez</string>
+    <string name="go_to_login">Ir a login de FinTrack</string>
+
     <!-- Login FinTrack -->
     <string name="login_title">FinTrack</string>
     <string name="login_description">Tus finanzas, claras incluso sin conexión.</string>
@@ -41,11 +48,19 @@
     <string name="placeholder_pass">••••••••</string>
     <string name="email_invalid">Ingresa un correo electrónico válido</string>
 
-    <!-- Welcome -->
-    <string name="welcome">Welcome</string>
-
-    <!-- Packages -->
-    <string name="empty_packages">Empty packages</string>
-    <string name="active_packages">Active packages</string>
+    <!-- Registro FinTrack-->
+    <string name="backText">Regresar</string>
+    <string name="register_title">FinTrack</string>
+    <string name="register_description">"Regístrate de forma gratuita y segura.</string>
+    <string name="nameRegister">Nombre</string>
+    <string name="emailRegister">Correo</string>
+    <string name="passwordRegister">Contraseña</string>
+    <string name="hidePassword">Ocultar</string>
+    <string name="showPassword">Ver</string>
+    <string name="confirmPassword_PlaceHolder">Confirmar contraseña</string>
+    <string name="userRegister">Registrar usuario</string>
+    <string name="name_invalid">El nombre no puede estar vacío</string>
+    <string name="confirm_password">Confirma tu contraseña</string>
+    <string name="passwords_notEquals">Las contraseñas no coinciden</string>
 
 </resources>

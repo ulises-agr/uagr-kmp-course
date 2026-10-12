@@ -31,5 +31,16 @@ class LoginRepositoryImpl(
                 loginRequest = loginRequest,
             )
         )
+        //Hardcode para simular una respuesta exitoda
+//        emit(
+//            NetworkResult.Success(
+//                response = LoginModel(
+//                    tokenType = "bearer",
+//                    accessToken = "mock_access_token_fintrack_2026",
+//                    refreshToken = "mock_refresh_token_fintrack_2026",
+//                    expiresIn = 7200
+//                )
+//            )
+//        )
     }.flowOn(context = dispatcher)
 }
