@@ -2,7 +2,7 @@
  * LoginContainer.kt
  * Copyright (c) 2026. All rights reserved
  */
-package com.uagr.kmp.course.presentation.ui.login.ui
+package com.uagr.kmp.course.presentation.feature.login.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

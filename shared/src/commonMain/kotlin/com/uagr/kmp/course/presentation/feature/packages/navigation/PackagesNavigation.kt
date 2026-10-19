@@ -2,11 +2,11 @@
  * PackagesNavigation.kt
  * Copyright (c) 2026. All rights reserved
  */
-package com.uagr.kmp.course.presentation.ui.packages.navigation
+package com.uagr.kmp.course.presentation.feature.packages.navigation
 
 import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.core.screen.Screen
-import com.uagr.kmp.course.presentation.ui.packages.ui.PackagesScreen
+import com.uagr.kmp.course.presentation.feature.packages.ui.PackagesScreen
 
 data object PackagesNavigation : Screen {
     @Composable

@@ -2,7 +2,7 @@
  * PackagesUiEvent.kt
  * Copyright (c) 2026. All rights reserved
  */
-package com.uagr.kmp.course.presentation.ui.packages.viewmodel
+package com.uagr.kmp.course.presentation.feature.packages.viewmodel
 
 import org.jetbrains.compose.resources.StringResource
 

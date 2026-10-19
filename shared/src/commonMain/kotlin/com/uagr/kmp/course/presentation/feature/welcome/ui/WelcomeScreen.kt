@@ -2,7 +2,7 @@
  * HeatScreen.kt
  * Copyright (c) 2026. All rights reserved
  */
-package com.uagr.kmp.course.presentation.ui.welcome.ui
+package com.uagr.kmp.course.presentation.feature.welcome.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Devices

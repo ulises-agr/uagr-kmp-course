@@ -2,7 +2,7 @@
  * PackagesUiState.kt
  * Copyright (c) 2026. All rights reserved
  */
-package com.uagr.kmp.course.presentation.ui.packages.viewmodel
+package com.uagr.kmp.course.presentation.feature.packages.viewmodel
 
 import com.uagr.kmp.course.domain.model.packages.PackagesDataModel
 import com.uagr.kmp.course.utils.operators.StatusLoading

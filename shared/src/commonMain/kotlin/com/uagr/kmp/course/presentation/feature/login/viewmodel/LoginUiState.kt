@@ -2,7 +2,7 @@
  * LoginUiState.kt
  * Copyright (c) 2026. All rights reserved
  */
-package com.uagr.kmp.course.presentation.ui.login.viewmodel
+package com.uagr.kmp.course.presentation.feature.login.viewmodel
 
 import com.uagr.kmp.course.domain.model.base.ErrorDialogModel
 import com.uagr.kmp.course.utils.operators.StatusLoading

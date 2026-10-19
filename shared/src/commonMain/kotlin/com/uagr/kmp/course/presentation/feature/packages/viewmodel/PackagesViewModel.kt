@@ -2,7 +2,7 @@
  * PackagesViewModel.kt
  * Copyright (c) 2026. All rights reserved
  */
-package com.uagr.kmp.course.presentation.ui.packages.viewmodel
+package com.uagr.kmp.course.presentation.feature.packages.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

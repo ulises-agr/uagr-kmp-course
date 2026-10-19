@@ -2,7 +2,7 @@
  * LoginScreen.kt
  * Copyright (c) 2026. All rights reserved
  */
-package com.uagr.kmp.course.presentation.ui.login.ui
+package com.uagr.kmp.course.presentation.feature.login.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -12,9 +12,9 @@ import com.uagr.kmp.course.presentation.component.container.SafeScreenContainer
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.presentation.component.dialog.DialogCustom
 import com.uagr.kmp.course.presentation.component.loader.Loader
+import com.uagr.kmp.course.presentation.feature.login.viewmodel.LoginUiEvent
+import com.uagr.kmp.course.presentation.feature.login.viewmodel.LoginViewModel
 import com.uagr.kmp.course.presentation.theme.AppTheme
-import com.uagr.kmp.course.presentation.ui.login.viewmodel.LoginUiEvent
-import com.uagr.kmp.course.presentation.ui.login.viewmodel.LoginViewModel
 import com.uagr.kmp.course.utils.flow.CollectWithLifecycle
 import org.koin.compose.viewmodel.koinViewModel
 
