@@ -10,7 +10,6 @@ import com.uagr.kmp.course.domain.model.base.ErrorDialogModel
 import com.uagr.kmp.course.domain.usecase.register.RegisterUserUseCase
 import com.uagr.kmp.course.domain.usecase.user.SaveUserTokenUseCase
 import com.uagr.kmp.course.utils.network.NetworkErrorHandler
-import com.uagr.kmp.course.utils.network.NetworkErrorType
 import com.uagr.kmp.course.utils.network.NetworkResult
 import com.uagr.kmp.course.utils.operators.StatusLoading
 import course.shared.generated.resources.Res
@@ -24,7 +23,6 @@ import course.shared.generated.resources.network_error
 import course.shared.generated.resources.password_empty
 import course.shared.generated.resources.passwords_notEquals
 import course.shared.generated.resources.please_try_again_later
-import course.shared.generated.resources.server_error
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

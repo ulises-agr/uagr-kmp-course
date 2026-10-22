@@ -47,11 +47,11 @@ import com.uagr.kmp.course.presentation.theme.AppTheme
 @Composable
 fun HomeContainer(
     userName: String = "Jorge",
-    totalBalance: String = "$24,860.00",
-    incomes: String = "+$18,500",
-    expenses: String = "-$8,460",
-    monthlyExpenses: String = "$8,460",
-    monthlySavings: String = "$3,120",
+    totalBalance: String = "$20,000.00",
+    incomes: String = "+$18,000",
+    expenses: String = "-$8,000",
+    monthlyExpenses: String = "$5,500",
+    monthlySavings: String = "$3,000",
     onLogoutClick: () -> Unit = {}
 ) {
     var showMenu by remember { mutableStateOf(false) }
@@ -118,7 +118,7 @@ fun HomeContainer(
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        // Tarjeta Principal (Balance Total)
+        // Tarjeta Principal
         Card(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(24.dp),
@@ -178,7 +178,7 @@ fun HomeContainer(
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Sección Este Mes
+        // Sección Mes
         Text(
             text = "Este mes",
             fontSize = 18.sp,
@@ -192,7 +192,7 @@ fun HomeContainer(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Tarjeta Gastos
+            // Contenedor Gastos
             Card(
                 modifier = Modifier.weight(1f),
                 shape = RoundedCornerShape(16.dp),
@@ -220,7 +220,7 @@ fun HomeContainer(
                 }
             }
 
-            // Tarjeta Ahorro
+            // Contenedor Ahorro
             Card(
                 modifier = Modifier.weight(1f),
                 shape = RoundedCornerShape(16.dp),
@@ -273,7 +273,7 @@ fun HomeContainer(
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        // Items de ejemplo
+        // Listado de movimientos
         TransactionItem("Supermercado", "Hoy · Alimentación", "-$860", isExpense = true)
         TransactionItem("Nómina", "Ayer · Ingreso", "+$15,500", isExpense = false)
         TransactionItem("Internet", "18 sep · Servicios", "-$599", isExpense = true)

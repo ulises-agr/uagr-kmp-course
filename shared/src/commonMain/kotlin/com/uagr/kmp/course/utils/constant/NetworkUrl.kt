@@ -12,5 +12,6 @@ object NetworkUrl {
     // Endpoints
     const val LOGIN_ENDPOINT = "$BASE_URL/api/v1/auth/login"
     const val REGISTER_ENDPOINT = "$BASE_URL/api/v1/auth/register"
+    const val DASHBOARD_ENDPOINT = "$BASE_URL/api/v1/dashboard"
     const val GET_PACKAGES_ENDPOINT = "$BASE_URL/api/v1/products"
 }

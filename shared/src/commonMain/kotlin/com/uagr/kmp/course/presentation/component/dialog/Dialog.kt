@@ -4,10 +4,8 @@
  */
 package com.uagr.kmp.course.presentation.component.dialog
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.AlertDialog
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -15,12 +13,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.uagr.kmp.course.domain.model.base.ErrorDialogModel
 import com.uagr.kmp.course.presentation.component.buton.ButtonCustom
+import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
 import com.uagr.kmp.course.presentation.component.text.TextNormalBold
 import com.uagr.kmp.course.presentation.component.text.TextSmall
-import com.uagr.kmp.course.presentation.theme.Dimens
-import course.shared.generated.resources.Res
-import course.shared.generated.resources.example
-import org.jetbrains.compose.resources.stringResource
+import com.uagr.kmp.course.presentation.theme.AppTheme
 
 @Composable
 fun DialogCustom(
@@ -77,27 +73,27 @@ fun DialogCustom(
 
 @Preview(
     showBackground = true,
+    widthDp = 360,
+    heightDp = 640
 )
 @Composable
 private fun ErrorDialogPreview() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(all = Dimens.padding16),
-        verticalArrangement = Arrangement.spacedBy(Dimens.padding16),
-    ) {
-        DialogCustom(
-            errorDialog = ErrorDialogModel(
-                title = stringResource(Res.string.example),
-                message = stringResource(Res.string.example),
-                primaryButtonText = stringResource(Res.string.example),
-            ),
-            titleTextColor = Color.Black,
-            messageTextColor = Color.Black,
-            primaryButtonBackgroundColor = Color.Black,
-            primaryButtonTextColor = Color.White,
-            secondaryButtonBackgroundColor = Color.Black,
-            secondaryButtonTextColor = Color.White,
-        )
+    SafeScreenContainerTest {
+        Box(modifier = Modifier.fillMaxSize()) {
+            DialogCustom(
+                errorDialog = ErrorDialogModel(
+                    title = "Prueba",
+                    message = "Este es un mensaje de error.",
+                    primaryButtonText = "Aceptar",
+                    secondaryButtonText = "",
+                ),
+                titleTextColor = AppTheme.colors.text.black,
+                messageTextColor = AppTheme.colors.text.black,
+                primaryButtonBackgroundColor = AppTheme.colors.primary,
+                primaryButtonTextColor = AppTheme.colors.text.white,
+                secondaryButtonBackgroundColor = AppTheme.colors.text.gray,
+                secondaryButtonTextColor = AppTheme.colors.text.white,
+            )
+        }
     }
 }

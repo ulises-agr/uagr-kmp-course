@@ -5,7 +5,7 @@
 package com.uagr.kmp.course.data.network.datasource.login
 
 import com.uagr.kmp.course.data.network.model.request.login.LoginRequest
-import com.uagr.kmp.course.data.network.model.response.login.loginResponse
+import com.uagr.kmp.course.data.network.model.response.login.LoginResponse
 import com.uagr.kmp.course.domain.mapper.login.toDomain
 import com.uagr.kmp.course.domain.model.login.LoginModel
 import com.uagr.kmp.course.utils.network.NetworkResult
@@ -33,7 +33,7 @@ class LoginNetworkDataSourceImpl(
                     setBody(body = loginRequest)
                 }
             },
-            transform = { data: loginResponse ->
+            transform = { data: LoginResponse ->
                 data.toDomain()
             },
         )

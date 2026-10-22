@@ -51,7 +51,7 @@
     <!-- Registro FinTrack-->
     <string name="backText">Regresar</string>
     <string name="register_title">FinTrack</string>
-    <string name="register_description">"Regístrate de forma gratuita y segura.</string>
+    <string name="register_description">Regístrate de forma gratuita y segura.</string>
     <string name="nameRegister">Nombre</string>
     <string name="emailRegister">Correo</string>
     <string name="passwordRegister">Contraseña</string>
