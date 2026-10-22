@@ -1,4 +1,4 @@
-package com.uagr.kmp.course.presentation.ui.home.ui
+package com.uagr.kmp.course.presentation.ui.goals.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -122,7 +122,7 @@ fun GoalsContent() {
 
         Button(
             onClick = {
-                
+
             },
             modifier = Modifier
                 .fillMaxWidth()

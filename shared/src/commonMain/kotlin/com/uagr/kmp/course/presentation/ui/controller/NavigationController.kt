@@ -16,7 +16,7 @@ import com.uagr.kmp.course.presentation.ui.welcome.navigation.WelcomeNavigation
 fun NavigationController() {
     AppTheme {
         // TODO: Cambiar a false
-        val previewHome = true
+        val previewHome = false
 
         val initialScreen = if (previewHome) {
             HomeNavigation

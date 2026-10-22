@@ -1,4 +1,4 @@
-package com.uagr.kmp.course.presentation.ui.home.ui
+package com.uagr.kmp.course.presentation.ui.budget.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
