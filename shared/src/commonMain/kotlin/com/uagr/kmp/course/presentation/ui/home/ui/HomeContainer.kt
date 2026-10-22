@@ -18,17 +18,11 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.uagr.kmp.course.presentation.component.container.SafeScreenContainerTest
-import com.uagr.kmp.course.presentation.component.card.HomeMenuOption
-import com.uagr.kmp.course.presentation.component.card.MenuCard
 import com.uagr.kmp.course.presentation.component.card.CardMainBalance
 import com.uagr.kmp.course.presentation.component.card.CardTypeBalance
 import com.uagr.kmp.course.domain.model.base.TransactionItemModel
@@ -41,9 +35,12 @@ import com.uagr.kmp.course.presentation.theme.AppTheme
 import com.uagr.kmp.course.presentation.theme.Dimens
 import com.uagr.kmp.course.presentation.component.mock.homeDataMock
 import com.uagr.kmp.course.presentation.ui.home.viewmodel.HomeUiState
+import com.uagr.kmp.course.presentation.ui.menu.ui.MenuContainer
+import com.uagr.kmp.course.presentation.ui.menu.viewmodel.MenuUiState
 import course.shared.generated.resources.Res
 import course.shared.generated.resources.home_title
 import course.shared.generated.resources.home_welcome
+import course.shared.generated.resources.home_welcome_user
 import course.shared.generated.resources.home_balance_total
 import course.shared.generated.resources.home_income
 import course.shared.generated.resources.home_expenses
@@ -52,13 +49,13 @@ import course.shared.generated.resources.home_period
 import course.shared.generated.resources.home_transactions
 import course.shared.generated.resources.home_view_all
 import course.shared.generated.resources.home_empty_transactions
+import course.shared.generated.resources.home_budget_usage
+import course.shared.generated.resources.home_savings_rate
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun HomeContainer(
-    selectedMenu: HomeMenuOption = HomeMenuOption.HOME,
-    onMenuSelected: (HomeMenuOption) -> Unit = {},
-    uiState: HomeUiState = homeDataMock,
+    uiState: HomeUiState,
     onViewAllClick: () -> Unit = {},
     onOptionsClick: (() -> Unit)? = null,
     onTransactionClick: ((TransactionItemModel) -> Unit)? = null,
@@ -84,7 +81,11 @@ fun HomeContainer(
                 TextNormalMedium(
                     modifier = Modifier.weight(1f),
                     color = AppTheme.colors.text.gray,
-                    text = stringResource(Res.string.home_welcome),
+                    text = if (uiState.userName.isBlank()) {
+                        stringResource(Res.string.home_welcome)
+                    } else {
+                        stringResource(Res.string.home_welcome_user, uiState.userName)
+                    },
                     textAlign = TextAlign.Start,
                 )
             }
@@ -119,17 +120,19 @@ fun HomeContainer(
                     modifier = Modifier.weight(1f),
                     title = stringResource(Res.string.home_expenses),
                     amount = uiState.monthlyExpensesAmount,
-                    changeText = uiState.expensesChange,
+                    changeText = stringResource(Res.string.home_budget_usage, uiState.expensesChange),
                     isIncreasing = uiState.expensesIncreasing,
                     isPositiveChange = uiState.expensesPositiveChange,
+                    showChangeDirection = false,
                 )
                 CardTypeBalance(
                     modifier = Modifier.weight(1f),
                     title = stringResource(Res.string.home_savings),
                     amount = uiState.savingsAmount,
-                    changeText = uiState.savingsChange,
+                    changeText = stringResource(Res.string.home_savings_rate, uiState.savingsChange),
                     isIncreasing = uiState.savingsIncreasing,
                     isPositiveChange = uiState.savingsPositiveChange,
+                    showChangeDirection = false,
                 )
             }
             Spacer(Modifier.height(Dimens.height24))
@@ -168,14 +171,6 @@ fun HomeContainer(
             }
             Spacer(Modifier.height(Dimens.height16))
         }
-        MenuCard(
-            modifier = Modifier.padding(
-                horizontal = Dimens.padding8,
-                vertical = Dimens.padding16,
-            ),
-            selectedOption = selectedMenu,
-            onOptionSelected = onMenuSelected,
-        )
     }
 }
 
@@ -183,10 +178,8 @@ fun HomeContainer(
 @Composable
 private fun HomeContainerPreview() {
     SafeScreenContainerTest {
-        var selectedMenu by remember { mutableStateOf(HomeMenuOption.HOME) }
-        HomeContainer(
-            selectedMenu = selectedMenu,
-            onMenuSelected = { selectedMenu = it },
-        )
+        MenuContainer(uiState = MenuUiState(), onMenuSelected = {}) {
+            HomeContainer(uiState = homeDataMock)
+        }
     }
 }

@@ -16,6 +16,8 @@ import io.ktor.client.plugins.auth.providers.bearer
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.http.ContentType
+import io.ktor.http.Url
+import io.ktor.http.encodedPath
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.flow.first
 import kotlinx.serialization.json.Json
@@ -30,6 +32,11 @@ actual fun createHttpClient(appDataStore: AppDataStore): HttpClient = HttpClient
 
     install(plugin = Auth) {
         bearer {
+            cacheTokens = false
+            sendWithoutRequest { request ->
+                request.url.host == Url(NetworkUrl.BASE_URL).host &&
+                    request.url.encodedPath !in listOf("/api/v1/auth/login", "/api/v1/auth/register")
+            }
             loadTokens {
                 val token = appDataStore.userToken.first()
                 if (!token.isNullOrBlank()) {

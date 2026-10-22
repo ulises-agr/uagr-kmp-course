@@ -9,6 +9,7 @@ import com.uagr.kmp.course.domain.model.register.UserModel
 import kotlinx.coroutines.flow.Flow
 
 interface UserRepository {
+    fun getUser(): Flow<UserModel?>
     suspend fun insertUserAndDelete(user: UserModel): Flow<Unit>
     suspend fun saveUserToken(token: String): Flow<Unit>
 }

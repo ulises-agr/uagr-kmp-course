@@ -68,15 +68,12 @@ class LoginViewModel(
                 LoginValidationError.INVALID_EMAIL -> Res.string.login_invalid_email
             }
             _loginUiEvent.value = LoginUiEvent.ShowErrorDialog(message)
-            return
+        } else {
+            login(email = email, password = password)
         }
-        login(email = email, password = password)
     }
 
     private fun login(email: String, password: String) {
-        if (_loginUiState.value.isLoading == StatusLoading.SHOW_LOADING) return
-
-        _loginUiState.update { it.copy(isLoading = StatusLoading.SHOW_LOADING) }
         viewModelScope.launch {
             flow {
                 val deviceId = getDeviceIdUseCase()
@@ -88,6 +85,7 @@ class LoginViewModel(
                 ))
             }
                 .onStart {
+                    _loginUiState.update { it.copy(isLoading = StatusLoading.SHOW_LOADING) }
                     _loginUiEvent.value = LoginUiEvent.Idle
                 }.onEach { result ->
                     if (result is NetworkResult.Success) {
@@ -102,7 +100,7 @@ class LoginViewModel(
                         ).collect {}
                     }
                 }.catch { exception ->
-                    if (exception is CancellationException) throw exception
+                    exception.printStackTrace()
                     _loginUiEvent.value = LoginUiEvent.ShowErrorDialog(Res.string.please_try_again_later)
                 }.onCompletion {
                     _loginUiState.update { it.copy(isLoading = StatusLoading.DISMISS_LOADING) }

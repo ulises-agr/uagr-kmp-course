@@ -39,6 +39,7 @@ fun CardTypeBalance(
     modifier: Modifier = Modifier,
     positiveColor: Color = AppTheme.colors.status.success,
     negativeColor: Color = AppTheme.colors.status.error,
+    showChangeDirection: Boolean = true,
 ) {
     Card(
         modifier = modifier,
@@ -61,10 +62,10 @@ fun CardTypeBalance(
                 textAlign = TextAlign.Start,
             )
             TextSmallExtra(
-                text = stringResource(
+                text = if (showChangeDirection) stringResource(
                     if (isIncreasing) Res.string.home_change_up else Res.string.home_change_down,
                     changeText,
-                ),
+                ) else changeText,
                 color = if (isPositiveChange) positiveColor else negativeColor,
                 textAlign = TextAlign.Start,
             )

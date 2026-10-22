@@ -6,6 +6,7 @@
 package com.uagr.kmp.course.presentation.ui.login.ui
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -22,8 +23,6 @@ import org.koin.compose.viewmodel.koinViewModel
 import course.shared.generated.resources.Res
 import course.shared.generated.resources.error
 import course.shared.generated.resources.login_accept
-import course.shared.generated.resources.login_success_title
-import course.shared.generated.resources.login_success_message
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -34,6 +33,13 @@ fun LoginScreen(
 ) {
     val loginUiState by viewModel.loginUiState.collectAsStateWithLifecycle()
     val loginUiEvent by viewModel.loginUiEvent.collectAsStateWithLifecycle()
+
+    LaunchedEffect(loginUiEvent) {
+        if (loginUiEvent == LoginUiEvent.LoginSuccess) {
+            viewModel.clearEvent()
+            navigateToHome()
+        }
+    }
 
     SafeScreenContainer {
         LoginContainer(
@@ -63,16 +69,14 @@ fun LoginScreen(
 
     val message = when (val event = loginUiEvent) {
         LoginUiEvent.Idle -> null
-        LoginUiEvent.LoginSuccess -> stringResource(Res.string.login_success_message)
+        LoginUiEvent.LoginSuccess -> null
         is LoginUiEvent.ShowErrorDialog -> stringResource(event.message)
         is LoginUiEvent.ShowErrorStringDialog -> event.message
     }
     if (message != null) {
         DialogCustom(
             errorDialog = ErrorDialogModel(
-                title = stringResource(
-                    if (loginUiEvent == LoginUiEvent.LoginSuccess) Res.string.login_success_title else Res.string.error
-                ),
+                title = stringResource(Res.string.error),
                 message = message,
                 primaryButtonText = stringResource(Res.string.login_accept),
             ),
@@ -81,9 +85,7 @@ fun LoginScreen(
             primaryButtonBackgroundColor = AppTheme.colors.backgrounds.blue,
             primaryButtonTextColor = AppTheme.colors.text.white,
             onPrimaryButtonClick = {
-                val loginSuccess = loginUiEvent == LoginUiEvent.LoginSuccess
                 viewModel.clearEvent()
-                if(loginSuccess) navigateToHome()
             },
         )
     }

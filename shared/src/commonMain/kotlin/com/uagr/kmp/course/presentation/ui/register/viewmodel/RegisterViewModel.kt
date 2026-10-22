@@ -73,26 +73,22 @@ class RegisterViewModel(
                 RegisterValidationError.PASSWORD_MISMATCH -> Res.string.register_password_mismatch
             }
             _registerUiEvent.value = RegisterUiEvent.ShowErrorDialog(message)
-            return
+        } else {
+            register(name = name, email = email, password = password)
         }
-        register(name = name, email = email, password = password)
     }
     private fun register(name: String, email: String, password: String) {
-        if (_registerUiState.value.isLoading == StatusLoading.SHOW_LOADING ||
-            _registerUiEvent.value == RegisterUiEvent.Registered
-        ) return
-
-        _registerUiState.update { it.copy(isLoading = StatusLoading.SHOW_LOADING) }
         viewModelScope.launch {
             registerUseCase.register(url = NetworkUrl.REGISTER_ENDPOINT, name = name, email = email, password = password)
                 .onStart {
+                    _registerUiState.update { it.copy(isLoading = StatusLoading.SHOW_LOADING) }
                     _registerUiEvent.value = RegisterUiEvent.Idle
                 }.onEach { result ->
                     if (result is NetworkResult.Success) {
                         insertUserAndDelete(registerData = result.response)
                     }
                 }.catch { exception ->
-                    if (exception is CancellationException) throw exception
+                    exception.printStackTrace()
                     _registerUiEvent.value = RegisterUiEvent.ShowErrorDialog(Res.string.please_try_again_later)
                 }.onCompletion {
                     _registerUiState.update { it.copy(isLoading = StatusLoading.DISMISS_LOADING) }

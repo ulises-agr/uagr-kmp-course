@@ -19,6 +19,9 @@ class UserRepositoryImpl(
     private val userLocalDataSource: UserLocalDataSource,
     private val ioDispatcher: CoroutineDispatcher,
 ) : UserRepository {
+    override fun getUser(): Flow<UserModel?> =
+        userLocalDataSource.getUser().flowOn(context = ioDispatcher)
+
     override suspend fun insertUserAndDelete(user: UserModel): Flow<Unit> = flow {
         emit(userLocalDataSource.insertUserAndDelete(user = user))
     }.flowOn(context = ioDispatcher)

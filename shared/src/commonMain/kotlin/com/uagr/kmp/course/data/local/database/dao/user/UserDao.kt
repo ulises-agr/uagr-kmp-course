@@ -11,9 +11,13 @@ import androidx.room3.OnConflictStrategy
 import androidx.room3.Query
 import androidx.room3.Transaction
 import com.uagr.kmp.course.data.local.model.user.UserEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface UserDao {
+    @Query("SELECT * FROM users LIMIT 1")
+    fun getUser(): Flow<UserEntity?>
+
     @Transaction
     suspend fun insertUserAndDeleteOld(user: UserEntity) {
         deleteAllUsers()

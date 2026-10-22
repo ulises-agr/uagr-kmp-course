@@ -89,16 +89,13 @@ fun MenuButton(
 @Composable
 private fun MenuButtonPreview() {
     SafeScreenContainerTest {
-        Column(
+        Box(
             modifier = Modifier
-                .fillMaxSize()
                 .padding(all = Dimens.padding16),
-            verticalArrangement = Arrangement.spacedBy(Dimens.padding16),
         ) {
             MenuButton(
                 text = stringResource(Res.string.example),
                 icon = Res.drawable.arrow_back,
-
             )
         }
     }

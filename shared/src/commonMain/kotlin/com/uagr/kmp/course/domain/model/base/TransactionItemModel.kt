@@ -8,7 +8,7 @@ package com.uagr.kmp.course.domain.model.base
 import com.uagr.kmp.course.presentation.component.list.TransactionType
 
 data class TransactionItemModel(
-    val id: String,
+    val id: String?,
     val title: String,
     val subtitle: String,
     val amount: String,
