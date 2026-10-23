@@ -8,12 +8,12 @@ import androidx.compose.runtime.Composable
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.transitions.ScaleTransition
 import com.uagr.kmp.course.presentation.theme.AppTheme
-import com.uagr.kmp.course.presentation.ui.welcome.navigation.WelcomeNavigation
+import com.uagr.kmp.course.presentation.ui.login.navigation.LoginNavigation
 
 @Composable
 fun NavigationController() {
     AppTheme {
-        Navigator(screen = WelcomeNavigation) { navigator ->
+        Navigator(screen = LoginNavigation) { navigator ->
             ScaleTransition(navigator)
         }
     }

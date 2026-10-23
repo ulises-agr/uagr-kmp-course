@@ -4,8 +4,8 @@
  */
 package com.uagr.kmp.course.data.local.database
 
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room3.Room
+import androidx.room3.RoomDatabase
 import com.uagr.kmp.course.utils.constant.Constants
 import kotlinx.cinterop.ExperimentalForeignApi
 import platform.Foundation.NSApplicationSupportDirectory
@@ -23,7 +23,7 @@ private fun applicationSupportDirectory(): String {
         directory = NSApplicationSupportDirectory,
         inDomain = NSUserDomainMask,
         appropriateForURL = null,
-        create = false,
+        create = true,
         error = null,
     )
     return requireNotNull(documentDirectory?.path)

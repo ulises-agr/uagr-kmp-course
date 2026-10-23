@@ -6,7 +6,7 @@ package com.uagr.kmp.course.presentation.theme.colors
 
 import androidx.compose.ui.graphics.Color
 
-val primaryLight = Color(0xFFB52217)
+val primaryLight = Color(0xFF0F459E)
 val onPrimaryLight = Color(0xFFFFFFFF)
 val primaryContainerLight = Color(0xFFE6F4F4)
 val onPrimaryContainerLight = Color(0xFF637070)

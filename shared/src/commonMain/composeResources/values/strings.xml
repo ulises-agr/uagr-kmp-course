@@ -22,7 +22,9 @@
     <string name="password_example">Password123</string>
     <string name="email_empty">Email empty</string>
     <string name="password_empty">Password empty</string>
-    <string name="go_to_packages">Go to packages</string>
+    <string name="confirm_password_empty">Confirm Password empty</string>
+    <string name="name_empty">Name empty</string>
+    <string name="pasword_not_same">Password Not Same</string>
     <string name="accept">Accept</string>
     <string name="cancel">Cancel</string>
 
@@ -33,4 +35,51 @@
     <string name="empty_packages">Empty packages</string>
     <string name="active_packages">Active packages</string>
 
+    <!-- Tab Navigator -->
+    <string name="home_tab">Inicio</string>
+    <string name="budget_tab">Presupuesto</string>
+    <string name="transaction_tab">Movimientos</string>
+    <string name="goals_tab">Metas</string>
+
+    <!-- Home -->
+    <string name="home_name">Hola, %1$s</string>
+    <string name="home_title">Tu panorama financiero</string>
+    <string name="this_month">Este Mes</string>
+    <string name="last_translations">Ultimos Movimientos</string>
+    <string name="everything">Ver todos</string>
+
+    <string name="home_card_title">Balance total</string>
+    <string name="home_card_ingreso">Ingresos</string>
+    <string name="home_card_gastos">Gastos</string>
+    <string name="home_card_ahorro">Ahorro</string>
+    <string name="home_card_subtitle">Balance disponible</string>
+
+    <string name="transactions_title">Movimientos</string>
+    <string name="transactions_textfield">Buscar movimiento...</string>
+
+    <!-- Register -->
+    <string name="register-title">FinkTrack</string>
+    <string name="register_subtitle">Registrate de forma gratuita y segura.</string>
+    <string name="register_name">Nombre</string>
+    <string name="register-email">Correo electronico</string>
+    <string name="register-pass">Contraseña</string>
+    <string name="register-confipass">Confirmar Contraseña</string>
+    <string name="register-button">Registrar usuario</string>
+
+    <!-- Login -->
+    <string name="login_title">FinkTrack</string>
+    <string name="login_subtitle">Tus finanzas, claras incluso sin conexión.</string>
+    <string name="login_balance">Balance disponible</string>
+    <string name="login_email">Email</string>
+    <string name="login_pass">Contraseña</string>
+    <string name="login_button">Iniciar Sesion</string>
+    <string name="login_newAccount">Crea una cuenta</string>
+    <!-- Goals -->
+    <string name="goals_title">Metas de ahorro</string>
+    <string name="goals_subtitle">Convierte objetivos en progreso visible.</string>
+    <string name="goals_others">Otras metas</string>
+
+    <!-- Budget -->
+    <string name="budget_title">Presupuestos</string>
+    <string name="budget_subtitle">Por Categoria</string>
 </resources>

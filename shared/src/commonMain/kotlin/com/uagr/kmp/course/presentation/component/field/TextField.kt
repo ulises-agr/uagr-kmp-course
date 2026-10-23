@@ -46,6 +46,53 @@ fun TextFieldCustom(
     value: String,
     fontSize: TextUnit = Dimens.textSizeNormal,
     onValueChange: (String) -> Unit,
+    labelTextAlign: TextAlign = TextAlign.Start,
+    placeholderColor: Color,
+    placeholder: String,
+    placeholderTextAlign: TextAlign = TextAlign.Start,
+    keyboardType: KeyboardType = KeyboardType.Text,
+    imeAction: ImeAction = ImeAction.Done,
+    capitalization: KeyboardCapitalization = KeyboardCapitalization.None,
+    keyboardActions: KeyboardActions = KeyboardActions.Default,
+) {
+    OutlinedTextField(
+        modifier = modifier.fillMaxWidth(),
+        value = value,
+        onValueChange = onValueChange,
+        textStyle = TextStyle(
+            fontSize = fontSize,
+            fontWeight = FontWeight.Normal,
+        ),
+        keyboardOptions = KeyboardOptions(
+            keyboardType = keyboardType,
+            imeAction = imeAction,
+            capitalization = capitalization
+        ),
+        keyboardActions = keyboardActions,
+        placeholder = {
+            TextMedium(
+                color = placeholderColor,
+                text = placeholder,
+                textAlign = placeholderTextAlign,
+            )
+        },
+        singleLine = true,
+        colors = TextFieldDefaults.colors(
+            focusedTextColor = MaterialTheme.colorScheme.onBackground,
+            unfocusedTextColor = MaterialTheme.colorScheme.onBackground,
+            focusedContainerColor = Color.Transparent,
+            unfocusedContainerColor = Color.Transparent,
+            disabledContainerColor = Color.Transparent,
+        ),
+    )
+}
+
+@Composable
+fun TextFieldPassword(
+    modifier: Modifier = Modifier,
+    value: String,
+    onValueChange: (String) -> Unit,
+    fontSize: TextUnit = Dimens.textSizeNormal,
     labelColor: Color,
     label: String,
     labelTextAlign: TextAlign = TextAlign.Start,
@@ -55,7 +102,7 @@ fun TextFieldCustom(
     leadingIcon: DrawableResource? = null,
     keyboardType: KeyboardType = KeyboardType.Text,
     imeAction: ImeAction = ImeAction.Done,
-    capitalization: KeyboardCapitalization = KeyboardCapitalization.None,
+    capitalization: KeyboardCapitalization = KeyboardCapitalization.Words,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
 ) {
     OutlinedTextField(
@@ -105,84 +152,6 @@ fun TextFieldCustom(
     )
 }
 
-@Composable
-fun TextFieldPassword(
-    modifier: Modifier = Modifier,
-    email: String,
-    onEmailChange: (String) -> Unit,
-    passwordVisible: Boolean,
-    onPasswordVisibleChange: (Boolean) -> Unit,
-    fontSize: TextUnit = Dimens.textSizeNormal,
-    labelColor: Color,
-    label: String,
-    labelTextAlign: TextAlign = TextAlign.Start,
-    placeholderColor: Color,
-    placeholder: String,
-    placeholderTextAlign: TextAlign = TextAlign.Start,
-    leadingIcon: DrawableResource? = null,
-    trailingIconActive: DrawableResource,
-    trailingIconInActive: DrawableResource,
-    keyboardType: KeyboardType = KeyboardType.Text,
-    imeAction: ImeAction = ImeAction.Done,
-    capitalization: KeyboardCapitalization = KeyboardCapitalization.Words,
-    keyboardActions: KeyboardActions = KeyboardActions.Default,
-) {
-    OutlinedTextField(
-        modifier = modifier.fillMaxWidth(),
-        value = email,
-        onValueChange = onEmailChange,
-        textStyle = TextStyle(
-            fontSize = fontSize,
-            fontWeight = FontWeight.Normal,
-        ),
-        keyboardOptions = KeyboardOptions(
-            keyboardType = keyboardType,
-            imeAction = imeAction,
-            capitalization = capitalization
-        ),
-        keyboardActions = keyboardActions,
-        label = {
-            TextMediumBold(
-                color = labelColor,
-                text = label,
-                textAlign = labelTextAlign,
-            )
-        },
-        placeholder = {
-            TextMedium(
-                color = placeholderColor,
-                text = placeholder,
-                textAlign = placeholderTextAlign,
-            )
-        },
-        leadingIcon = {
-            leadingIcon?.let {
-                Icon(
-                    painter = painterResource(leadingIcon),
-                    contentDescription = null,
-                )
-            }
-        },
-        visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-        trailingIcon = {
-            IconButton(onClick = { onPasswordVisibleChange(!passwordVisible) }) {
-                Icon(
-                    painter = painterResource(if (passwordVisible) trailingIconActive else trailingIconInActive),
-                    contentDescription = null,
-                )
-            }
-        },
-        singleLine = true,
-        colors = TextFieldDefaults.colors(
-            focusedTextColor = MaterialTheme.colorScheme.onBackground,
-            unfocusedTextColor = MaterialTheme.colorScheme.onBackground,
-            focusedContainerColor = Color.Transparent,
-            unfocusedContainerColor = Color.Transparent,
-            disabledContainerColor = Color.Transparent,
-        ),
-    )
-}
-
 @Preview(
     showBackground = true,
 )
@@ -202,24 +171,17 @@ private fun TextFieldPreview() {
                 TextFieldCustom(
                     value = "",
                     onValueChange = {},
-                    labelColor = Color.Black,
-                    label = stringResource(Res.string.example),
                     placeholderColor = Color.Black,
                     placeholder = stringResource(Res.string.example),
-                    leadingIcon = Res.drawable.ic_example,
                 )
                 TextFieldPassword(
-                    email = "",
-                    onEmailChange = {},
-                    passwordVisible = false,
-                    onPasswordVisibleChange = {},
+                    value = "",
+                    onValueChange = {},
                     labelColor = Color.Black,
                     label = stringResource(Res.string.example),
                     placeholderColor = Color.Black,
                     placeholder = stringResource(Res.string.example),
                     leadingIcon = Res.drawable.ic_example,
-                    trailingIconActive = Res.drawable.ic_example,
-                    trailingIconInActive = Res.drawable.ic_example,
                     keyboardType = KeyboardType.Password,
                     capitalization = KeyboardCapitalization.None,
                 )

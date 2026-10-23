@@ -30,6 +30,7 @@ suspend inline fun <reified Response : BaseResponse, Domain> safeApiCall(
                     errorType = NetworkErrorType.UNKNOWN,
                 )
             }
+
         } else {
             NetworkResult.Error(
                 message = "Error HTTP: $status",
