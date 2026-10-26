@@ -10,12 +10,12 @@ interface BudgetNetworkDataSource {
     suspend fun getBudget(
         url: String,
         access_token: String,
+        dateStart: String,
+        dateEnd: String
     ): NetworkResult<BudgetResumeModel>
 
     suspend fun getListBuget(
         url: String,
-        access_token: String,
-        dateStart: String,
-        dateEnd: String
+        access_token: String
     ): NetworkResult<BudgetListResultModel>
 }

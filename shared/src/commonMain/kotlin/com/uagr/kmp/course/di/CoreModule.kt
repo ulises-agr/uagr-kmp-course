@@ -43,7 +43,8 @@ import com.uagr.kmp.course.domain.repository.dashboard.DashBoardRepository
 import com.uagr.kmp.course.domain.repository.repository.RegisterRepository
 import com.uagr.kmp.course.domain.repository.transactions.TransactionsRepository
 import com.uagr.kmp.course.domain.usecase.dashboard.GetDashboardUseCase
-//import com.uagr.kmp.course.domain.usecase.goals.GetBugetsUseCase
+import com.uagr.kmp.course.domain.usecase.goals.GetBudgetResumeUseCase
+import com.uagr.kmp.course.domain.usecase.goals.GetBugetsUseCase
 import com.uagr.kmp.course.domain.usecase.login.ValidateLoginFormUseCase
 import com.uagr.kmp.course.domain.usecase.user.LoginUseCase
 import com.uagr.kmp.course.domain.usecase.user.SaveTokenUseCase
@@ -101,7 +102,7 @@ val dataSourceRemoteModule = module {
     singleOf(constructor = ::TransactionsNetworkDataSourceImpl) bind TransactionsNetworkDataSource::class
     singleOf(constructor = ::DashboardNetworkDataSourceImpl) bind DashboardNetworkDataSource::class
     //singleOf(constructor = ::CategoriesNetworkDataSourceImpl) bind CategoriesNetworkDataSource::class
-    //singleOf(constructor = ::BudgetNetworkDataSourceImpl) bind BudgetNetworkDataSource::class
+    singleOf(constructor = ::BudgetNetworkDataSourceImpl) bind BudgetNetworkDataSource::class
 }
 
 val dataSourceLocalModule = module {
@@ -117,7 +118,7 @@ val repositoryModule = module {
     singleOf(constructor = ::TransactionsRepositoryImpl) bind TransactionsRepository::class
     singleOf(constructor = ::DashboardRepositoryImpl) bind DashBoardRepository::class
    // singleOf(constructor = ::CategoriesRepositoryImpl) bind CategoriesRepository::class
-   // singleOf(constructor = ::BudgetReposirotyImpl) bind BudgetRepository::class
+    singleOf(constructor = ::BudgetReposirotyImpl) bind BudgetRepository::class
 }
 
 val useCaseModule = module {
@@ -132,14 +133,15 @@ val useCaseModule = module {
     factoryOf(constructor = ::GetDashboardUseCase)
     factoryOf(constructor = ::GetUserTokenCase)
     //factoryOf(constructor = ::GetCategoriesUseCase)
-    //factoryOf(constructor = ::GetBugetsUseCase)
+    factoryOf(constructor = ::GetBugetsUseCase)
+    factoryOf(constructor = ::GetBudgetResumeUseCase)
 }
 
 val viewmodelModule = module {
     viewModelOf(constructor = ::LoginViewModel)
     viewModelOf(constructor = ::RegisterViewModel)
     viewModelOf(constructor = ::HomeViewModel)
-   // viewModelOf(constructor = ::BudgetViewModel)
+    viewModelOf(constructor = ::BudgetViewModel)
 }
 
 fun initKoin(config: KoinAppDeclaration? = null) {

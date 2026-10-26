@@ -14,14 +14,15 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun BudgetScreen(
-    //viewModel: BudgetViewModel = koinViewModel(),
+    viewModel: BudgetViewModel = koinViewModel(),
 ) {
-//val budgetUiState by viewModel.budgetUiState.collectAsStateWithLifecycle()
-/*
+    val budgetUiState by viewModel.budgetUiState.collectAsStateWithLifecycle()
+
     SafeScreenContainer {
         BudgetContainer(
             month = "October",
-            data = budgetUiState.data
+            data = budgetUiState.data,
+            sumaBudgets = budgetUiState.resumeModel,
         )
         Loader()
         DialogCustom(
@@ -34,10 +35,7 @@ fun BudgetScreen(
                 viewModel.dismissErrorDialog()
             }
         )
-    }*/
-    BudgetContainer(
-        month = "October",
-    )
+    }
 }
 @Preview(
     showBackground = true

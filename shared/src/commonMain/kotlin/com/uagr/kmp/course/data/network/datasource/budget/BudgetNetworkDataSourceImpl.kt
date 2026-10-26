@@ -20,12 +20,16 @@ class BudgetNetworkDataSourceImpl(
     override suspend fun getBudget(
         url: String,
         access_token: String,
+        dateStart: String,
+        dateEnd: String
     ): NetworkResult<BudgetResumeModel> =
         safeApiCall(
             apiCall = {
                 httpClient.get(url) {
                     contentType(ContentType.Application.Json)
                     header("Authorization", "Bearer $access_token")
+                    header("date_from",dateStart)
+                    header("date_to",dateEnd)
                 }
             },
             transform = { data: BudgetsResponse ->
@@ -37,16 +41,12 @@ class BudgetNetworkDataSourceImpl(
     override suspend fun getListBuget(
         url: String,
         access_token: String,
-        dateStart: String,
-        dateEnd: String
     ): NetworkResult<BudgetListResultModel> =
         safeApiCall(
             apiCall = {
                 httpClient.get(url) {
                     contentType(ContentType.Application.Json)
                     header("Authorization", "Bearer $access_token")
-                    header("date_from",dateStart)
-                    header("date_to",dateEnd)
                 }
             },
             transform = { data: BudgetListResponse ->

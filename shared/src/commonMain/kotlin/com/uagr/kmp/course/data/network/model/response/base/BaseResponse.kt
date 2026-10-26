@@ -4,6 +4,7 @@
  */
 package com.uagr.kmp.course.data.network.model.response.base
 
+import com.uagr.kmp.course.data.network.model.response.ErrorResponse.ErrorResponse
 import com.uagr.kmp.course.data.network.model.response.transactions.CategoriesResult
 import kotlinx.serialization.Serializable
 
@@ -11,4 +12,5 @@ import kotlinx.serialization.Serializable
 open class BaseResponse(
     val success: Boolean? = true,
     val message: String? = "",
+    val error: ErrorResponse? = null,
 )

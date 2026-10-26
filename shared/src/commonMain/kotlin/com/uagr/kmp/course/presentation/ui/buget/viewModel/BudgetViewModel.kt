@@ -3,6 +3,8 @@ package com.uagr.kmp.course.presentation.ui.buget.viewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uagr.kmp.course.domain.model.base.ErrorDialogModel
+import com.uagr.kmp.course.domain.usecase.goals.GetBudgetResumeUseCase
+import com.uagr.kmp.course.domain.usecase.goals.GetBugetsUseCase
 //import com.uagr.kmp.course.domain.usecase.goals.GetBugetsUseCase
 import com.uagr.kmp.course.domain.usecase.user.GetUserTokenCase
 import com.uagr.kmp.course.utils.constant.NetworkUrl
@@ -22,24 +24,25 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.getString
 
 class BudgetViewModel(
-   // val getBugetsUseCase: GetBugetsUseCase,
-    val getUserTokenCase: GetUserTokenCase
+    val getBugetsUseCase: GetBugetsUseCase,
+    val getUserTokenCase: GetUserTokenCase,
+    val getBudgetResumeUseCase: GetBudgetResumeUseCase,
 ): ViewModel(){
     private var _budgetUiState = MutableStateFlow<BudgetUiState>(BudgetUiState())
     var budgetUiState: StateFlow<BudgetUiState> = _budgetUiState.asStateFlow()
 
     private var _budgetUiEvent = MutableStateFlow<BudgetUiEvent>(BudgetUiEvent.Idle)
     var budgetUiEvent : StateFlow<BudgetUiEvent> = _budgetUiEvent.asStateFlow()
+
     init {
-        //getBudgets()
+        getBudgets()
+        getResumeBudgets()
     }
     private fun getBudgets() = viewModelScope.launch{
         val token = getUserTokenCase.invoke()
-/*
         getBugetsUseCase.invoke(
             url_Budget = NetworkUrl.LISTBUDGETS_ENDPOINT,
             access_Token = token ?: "",
-            url_Category = NetworkUrl.CATEGORIES_ENDPOINT,
         ).onStart {
             _budgetUiState.update { state -> state.copy(isLoading = StatusLoading.SHOW_LOADING) }
         }.catch {
@@ -54,7 +57,28 @@ class BudgetViewModel(
                 }
             }
 
-        }*/
+        }
+    }
+    private fun getResumeBudgets() = viewModelScope.launch{
+        val token = getUserTokenCase.invoke()
+        getBudgetResumeUseCase.invoke(
+            url_Budget = NetworkUrl.LISTBUDGETS_ENDPOINT,
+            access_Token = token ?: "",
+        ).onStart {
+            _budgetUiState.update { state -> state.copy(isLoading = StatusLoading.SHOW_LOADING) }
+        }.catch {
+            _budgetUiState.update { state -> state.copy(isLoading = StatusLoading.DISMISS_LOADING, errorDialog = setErrorDialog()) }
+        }.collect { result ->
+            when(result){
+                is NetworkResult.Success -> {
+                    _budgetUiState.update { state -> state.copy(isLoading = StatusLoading.DISMISS_LOADING,  resumeModel = result.response) }
+                }
+                is NetworkResult.Error -> {
+                    _budgetUiState.update { state -> state.copy(isLoading = StatusLoading.DISMISS_LOADING, errorDialog = setErrorDialog()) }
+                }
+            }
+
+        }
     }
 
     private suspend fun setErrorDialog(message: String? = null): ErrorDialogModel =

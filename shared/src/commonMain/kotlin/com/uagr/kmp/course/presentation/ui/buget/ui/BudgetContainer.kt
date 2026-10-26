@@ -14,6 +14,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import com.uagr.kmp.course.domain.model.budget.BudgetListResultModel
+import com.uagr.kmp.course.domain.model.budget.BudgetResumeModel
 import com.uagr.kmp.course.domain.model.budget.BudgetWithCategorytModel
 import com.uagr.kmp.course.presentation.component.card.BudgetCard
 import com.uagr.kmp.course.presentation.component.card.ProgressCard
@@ -32,7 +34,8 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun BudgetContainer(
     month: String = "",
-    data: List<BudgetWithCategorytModel> = emptyList()
+    data: BudgetListResultModel,
+    sumaBudgets: BudgetResumeModel
 ){
     LazyColumn(modifier = Modifier
         .fillMaxSize()
@@ -51,8 +54,8 @@ fun BudgetContainer(
         item {
             BudgetCard(
                 title = "Presupueto mensual",
-                subtitle ="$12000",
-                currentAmount = "Usado $3,200",
+                subtitle = sumaBudgets.budget,
+                currentAmount = "Usado ${sumaBudgets.spent}",
                 totalAmount = "$4,000",
                 progress = 0.8f ,
                 sizetitle = Dimens.textSizeSmall,
@@ -75,11 +78,11 @@ fun BudgetContainer(
         item{
             Spacer(Modifier.height(Dimens.height8))
         }
-        items(data.size){ index ->
+        items(data.data.size){ index ->
             ProgressCard(
-                subtitle = data[index].category_name,
-                currentAmount = data[index].amount,
-                totalAmount = data[index].period,
+                subtitle = data.data[index].id,
+                currentAmount = data.data[index].amount,
+                totalAmount = data.data[index].period,
                 progress = 0.0f ,
                 sizeSubtitle = Dimens.textSizeNormal,
                 currentAmountSize = Dimens.textSizeExtraSmall,
@@ -95,6 +98,17 @@ fun BudgetContainer(
 @Composable
 private fun PreviewHomeContainer(){
     SafeScreenContainerTest{
-        BudgetContainer(month = "Septiembre")
+        BudgetContainer(
+            month = "Septiembre",
+            data = BudgetListResultModel(
+                data = emptyList()
+            ),
+            sumaBudgets = BudgetResumeModel(
+                budget = "798000",
+                spent = "50.00",
+                remaining = "17500",
+                percentage = "2.78"
+            )
+        )
     }
 }

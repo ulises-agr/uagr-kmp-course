@@ -17,24 +17,24 @@ class BudgetReposirotyImpl(
     override suspend fun getResumenPresupuesto(
         url: String,
         access_token: String,
+        dateStart: String,
+        dateEnd: String,
     ): Flow<NetworkResult<BudgetResumeModel>> = flow<NetworkResult<BudgetResumeModel>> {
         emit(budgetNetworkDataSource.getBudget(
             url = url,
             access_token = access_token,
+            dateStart = dateStart,
+            dateEnd = dateEnd
         ))
     }.flowOn(dispatcher)
 
     override suspend fun getListBudgets(
         url: String,
         access_token: String,
-        dateStart: String,
-        dateEnd: String
     ): Flow<NetworkResult<BudgetListResultModel>> = flow<NetworkResult<BudgetListResultModel>> {
         emit(budgetNetworkDataSource.getListBuget(
             url = url,
             access_token = access_token,
-            dateStart = dateStart,
-            dateEnd = dateEnd
         ))
     }.flowOn(dispatcher)
 
