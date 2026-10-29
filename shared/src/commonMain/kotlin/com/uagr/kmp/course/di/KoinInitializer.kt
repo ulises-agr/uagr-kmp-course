@@ -12,5 +12,6 @@ fun initKoin(
 ) {
     startKoin<MainApp> {
         config?.invoke(this)
+        modules(packagesSdkHostModule())
     }
 }

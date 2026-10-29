@@ -23,6 +23,8 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "Shared"
             isStatic = false
+            // Expose Packages SDK types to the Shared framework (AND/iOS consumers)
+            export(project(":packages-sdk"))
         }
     }
 
@@ -45,6 +47,8 @@ kotlin {
         commonMain.dependencies {
             // Bundle
             implementation(dependencyNotation = libs.bundles.sharedUI.commons.libs)
+            // Packages feature as SDK
+            api(project(":packages-sdk"))
         }
         // Android
         androidMain.dependencies {

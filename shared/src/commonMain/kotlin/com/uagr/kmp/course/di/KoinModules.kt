@@ -30,14 +30,12 @@ class KoinModules {
 
     @Single
     fun appDatabase() = getDatabaseBuilder()
+        .fallbackToDestructiveMigration(dropAllTables = true)
         .setQueryCoroutineContext(Dispatchers.IO)
         .build()
 
     @Single
     fun userDao(database: AppDatabase) = database.userDao()
-
-    @Single
-    fun packagesDao(database: AppDatabase) = database.packagesDao()
 
     @Single
     fun dataStore() = createDataStore()

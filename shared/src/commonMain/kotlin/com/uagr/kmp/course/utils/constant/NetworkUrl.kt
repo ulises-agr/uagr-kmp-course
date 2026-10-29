@@ -6,7 +6,7 @@ package com.uagr.kmp.course.utils.constant
 
 object NetworkUrl {
 
-    // Base url
+    // Base url (injected into PackagesSdk via PackagesSdkBridge — swap per env)
     const val BASE_URL = "https://server-dummy-hitss.onrender.com"
 
     // Endpoint

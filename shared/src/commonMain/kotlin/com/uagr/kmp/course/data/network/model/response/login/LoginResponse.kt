@@ -10,4 +10,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class LoginResponse (
     val data: LoginDataResponse?,
-) : BaseResponse()
+    override val success: Boolean? = false,
+    override val message: String? = "",
+) : BaseResponse

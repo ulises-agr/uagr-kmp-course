@@ -103,7 +103,7 @@ class LoginViewModel(
             when (result) {
                 is NetworkResult.Success -> {
                     result.response.data?.let { data ->
-                        insertUserAndDelete(loginData = data)
+                        saveUserToken(loginData = data)
                     } ?: run {
                         _loginUiState.update { state ->
                             state.copy(
