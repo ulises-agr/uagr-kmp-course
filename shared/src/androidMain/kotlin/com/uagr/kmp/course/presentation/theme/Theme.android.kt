@@ -5,6 +5,8 @@
 package com.uagr.kmp.course.presentation.theme
 
 import android.app.Activity
+import android.os.Build
+import android.view.WindowInsets
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.graphics.toArgb
@@ -12,7 +14,6 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowInsetsControllerCompat
 import com.uagr.kmp.course.presentation.theme.AppTheme
 
-@Suppress("DEPRECATION")
 @Composable
 internal actual fun SystemAppearance(isDarkMode: Boolean) {
     val view = LocalView.current
@@ -24,7 +25,17 @@ internal actual fun SystemAppearance(isDarkMode: Boolean) {
             isAppearanceLightStatusBars = isDarkMode
             isAppearanceLightNavigationBars = isDarkMode
         }
-        window.statusBarColor = statusBarColor
-        window.navigationBarColor = navigationBarColor
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) { // Android 15+
+            window.decorView.setOnApplyWindowInsetsListener { view, insets ->
+                val statusBarInsets = insets.getInsets(WindowInsets.Type.statusBars())
+                view.setBackgroundColor(navigationBarColor)
+                // Adjust padding to avoid overlap
+                view.setPadding(0, statusBarInsets.top, 0, 0)
+                insets
+            }
+        } else {
+            window.statusBarColor = statusBarColor
+            window.navigationBarColor = navigationBarColor
+        }
     }
 }

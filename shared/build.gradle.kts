@@ -1,3 +1,5 @@
+import org.apache.commons.logging.LogFactory.release
+
 // build.gradle - shared
 // Copyright (c) 2026. All rights reserved
 plugins {
@@ -8,6 +10,7 @@ plugins {
     alias(libs.plugins.androidx.room3)
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.ksp)
+    `maven-publish`
 }
 
 kotlin {
@@ -75,4 +78,14 @@ dependencies {
 
 room3 {
     schemaDirectory(path = "$projectDir/schemas")
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("releaseAar") {
+            groupId = "com.github.ulises-agr"
+            artifactId = "uagr-kmp-course"
+            version = "1.0"
+        }
+    }
 }
