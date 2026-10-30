@@ -1,5 +1,7 @@
 // build.gradle - packages-sdk
 // Copyright (c) 2026. All rights reserved
+import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidMultiplatformLibrary)
@@ -13,13 +15,16 @@ plugins {
 kotlin {
     jvmToolchain(jdkVersion = 21)
 
+    val xcf = XCFramework("PackagesSdk")
+
     listOf(
         iosArm64(),
         iosSimulatorArm64(),
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
             baseName = "PackagesSdk"
-            isStatic = false
+            isStatic = true
+            xcf.add(this)
         }
     }
 

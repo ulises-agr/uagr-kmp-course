@@ -23,9 +23,4 @@ abstract class PackagesDatabase : RoomDatabase() {
     abstract fun packagesDao(): PackagesDao
 }
 
-@Suppress("NO_ACTUAL_FOR_EXPECT")
-expect object PackagesDatabaseConstructor : RoomDatabaseConstructor<PackagesDatabase> {
-    override fun initialize(): PackagesDatabase
-}
-
 expect fun getPackagesDatabaseBuilder(): RoomDatabase.Builder<PackagesDatabase>
